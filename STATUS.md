@@ -1,5 +1,17 @@
 # AeroWall 执行状态
 
+## 最新进展：2026-09-20 23:58
+
+- 固定训练依赖已安装：TensorDict 0.4.0+a8c5397、TorchRL 0.4.0+aacf134、Orbit 0.15.9、omni_drones；Torch 保持 2.0.1+cu118。上游工作树干净，项目提交 49afbf6。
+- 安装入口为 scripts/install_training_dependencies.sh；依赖选择与冻结表位于 docs/training-python-requirements.txt、docs/training-env-freeze.txt。已补齐 tomli，采用 AV 12.3.0 二进制包解决旧版源码构建失败。
+- 启动器仅为项目进程预加载独立环境的 libstdc++.so.6，修复 Torch 先导入时系统旧库造成的 SQLite/ICU CXXABI_1.3.15 缺失。未改动系统库。
+- runs/singlejuggle-smoke-02.json 已通过：16 环境、100 策略步、27 次重置；观测与控制器 NaN 清理前输出均有限。地面 USD 仍缺三项贴图，渲染未验收。
+- 10,000 步检查正在执行：runs/singlejuggle-10000-01.json / .log，PID 2123898，任务句柄 95739；最近已完成 500 步、189 次 episode 重置，进程确认存活。恢复时先核实进程与报告，不要重复启动。
+- scripts/run_probe.sh 同时核对进程退出与 JSON verdict，防止 Kit fast shutdown 将失败返回码改成 0 而误判。
+- 下一步：完成当前步进测试，再做受控球拍碰撞、选择性重置和跨环境隔离验证。随机步进不能替代完整 16 环境门槛；PPO、物理标定、WallRally、正式比较和 Demo 仍未完成。
+
+以下保留上一部署阶段记录；其中“训练依赖尚未安装”已被上述新证据更新。
+
 更新时间：2026-09-20 23:48（Asia/Shanghai）。阶段：第 1 周隔离部署与运行时门槛。完整项目目标尚未完成。
 
 ## 已验证
