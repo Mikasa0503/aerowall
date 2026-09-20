@@ -10,6 +10,7 @@ import os
 from pathlib import Path
 import time
 import traceback
+import sys
 
 
 def main():
@@ -38,6 +39,10 @@ def main():
         from omni.isaac.kit import SimulationApp
 
         experience = str(Path(os.environ["EXP_PATH"]) / "omni.isaac.sim.python.kit")
+        # 2023 SimulationApp forwards sys.argv to Kit. Keep probe-only flags out,
+        # and pin portable application data/cache/logs inside this project.
+        sys.argv = [sys.argv[0], "--portable", "--portable-root",
+                    str(Path(os.environ["AEROWALL_ROOT"]) / ".cache/kit")]
         record(status="initializing_kit", experience=experience)
         app = SimulationApp({"headless": True, "anti_aliasing": 0}, experience=experience)
         record(status="kit_initialized")
