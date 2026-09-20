@@ -10,6 +10,8 @@ from pathlib import Path
 import shlex
 import sys
 import traceback
+import hashlib
+import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
 UPSTREAM = ROOT / 'third_party/JuggleRL_train'
@@ -19,12 +21,21 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--steps', type=int, default=100)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--check-reset', action='store_true')
+    parser.add_argument('--reset-safe-controller', action='store_true')
     args = parser.parse_args()
     if args.steps < 1:
         parser.error('steps must be positive')
     report = {'status': 'starting', 'gate': 'upstream_singlejuggle_smoke', 'pid': os.getpid(),
               'time_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
               'full_16_env_gate_passed': False, 'training_gate_passed': False}
+    report['source_commit'] = subprocess.check_output(
+        ['git', '-C', str(UPSTREAM), 'rev-parse', 'HEAD'], text=True).strip()
+    report['file_hashes'] = {str(path.relative_to(ROOT)): hashlib.sha256(path.read_bytes()).hexdigest()
+                           for path in [Path(__file__), ROOT / 'scripts/python.sh',
+                                        ROOT / 'scripts/check_upstream_reset.py',
+                                        ROOT / 'scripts/runtime_adapters.py']}
+    report['reset_safe_controller'] = args.reset_safe_controller
     args.output.parent.mkdir(parents=True, exist_ok=True)
 
     def record(**values):
@@ -66,7 +77,11 @@ def main():
         def finite_controller_output(module, inputs, output):
             assert torch.isfinite(output).all(), 'Non-finite raw controller output'
         controller.register_forward_hook(finite_controller_output)
-        env = TransformedEnv(base, Compose(InitTracker(), PIDRateController_flightmare(controller))).train()
+        transform_type = PIDRateController_flightmare
+        if args.reset_safe_controller:
+            from runtime_adapters import ResetSafePIDRateController
+            transform_type = ResetSafePIDRateController
+        env = TransformedEnv(base, Compose(InitTracker(), transform_type(controller))).train()
         env.set_seed(cfg.seed)
         td = env.reset()
         resets = 0
@@ -90,6 +105,12 @@ def main():
                 td = nxt
             if (step + 1) % 100 == 0:
                 record(completed_steps=step + 1, reset_episodes=resets)
+        if args.check_reset:
+            from check_upstream_reset import check_selective_reset, scene_inventory
+            checks = check_selective_reset(env, base, controller, td)
+            record(reset_checks=checks, scene_inventory=scene_inventory())
+            assert checks['physics_reset_passed'], 'Selective physics reset failed'
+            assert checks['controller_reset_passed'], 'Controller retained prior episode state'
         record(status='passed', completed_steps=args.steps, reset_episodes=resets,
                scope='upstream initialization and finite stepping only; controlled contacts and isolation remain untested')
         return 0

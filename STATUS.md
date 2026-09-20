@@ -1,5 +1,15 @@
 # AeroWall 执行状态
 
+## 当前状态：2026-09-21 00:06（以下旧时间段为阶段记录）
+
+- 原始上游 16 环境已完成 10,000 策略步、3,888 次 episode 重置，有限数值检查通过。证据 runs/singlejuggle-10000-01.json 及 .exit.json。
+- 选择性重置实测发现 PID 历史泄漏：重置后 done=false、is_init=true，而上游根据 done 清空历史；与全新控制器的电机输出相差 0.01747644。物理位置、速度、计数器等选择性重置检查通过。失败证据 runs/singlejuggle-reset-01.json。
+- 项目适配 scripts/runtime_adapters.py 在实际 reset 回调仅清空选中环境的积分和滤波历史；没有改动上游源码、控制参数或动作接口。设计见 docs/plans/2026-09-21-controller-reset-design.md。
+- 修复实测通过：runs/singlejuggle-reset-02.json 中控制器输出差异为 0；其余环境的物理状态、积分和滤波历史均未改变。
+- 修复后 10,000 步复测已启动：runs/singlejuggle-10000-reset-safe-01.json / .log，PID 2135733 已核实存活，任务句柄 44514，启动时间 00:06:04。恢复时先查该进程及 JSON verdict，避免重复启动。
+- 接触对象与跨环境碰撞隔离仍待受控试验，完整 16 环境门槛尚未通过；短 PPO、碰撞标定、WallRally、三方法三种子、公平评测和 Demo 全部仍在原目标范围内。
+- 附带的 scene_inventory 仅是 USD authored 数据，不能当作 GPU 物理实时位置或质量；首版不可见碰撞体的空 bounds 已在后续检查脚本中修正并标明范围。
+
 ## 最新进展：2026-09-20 23:58
 
 - 固定训练依赖已安装：TensorDict 0.4.0+a8c5397、TorchRL 0.4.0+aacf134、Orbit 0.15.9、omni_drones；Torch 保持 2.0.1+cu118。上游工作树干净，项目提交 49afbf6。
