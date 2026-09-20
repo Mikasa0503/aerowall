@@ -25,6 +25,7 @@ def main():
     parser.add_argument('--check-reset', action='store_true')
     parser.add_argument('--reset-safe-controller', action='store_true')
     parser.add_argument('--check-contacts', action='store_true')
+    parser.add_argument('--check-reaction', action='store_true')
     parser.add_argument('--check-ppo', action='store_true')
     parser.add_argument('--check-render', action='store_true')
     args = parser.parse_args()
@@ -44,6 +45,7 @@ def main():
                                         ROOT / 'scripts/check_upstream_reset.py',
                                         ROOT / 'scripts/runtime_adapters.py',
                                         ROOT / 'scripts/check_upstream_contacts.py',
+                                        ROOT / 'scripts/check_upstream_reaction.py',
                                         ROOT / 'scripts/check_upstream_ppo.py',
                                         ROOT / 'scripts/check_upstream_render.py']}
     report['reset_safe_controller'] = args.reset_safe_controller
@@ -82,7 +84,7 @@ def main():
         from omni_drones.controllers import PID_controller_flightmare
         from omni_drones.utils.torchrl.transforms import PIDRateController_flightmare
         from torchrl.envs.transforms import TransformedEnv, Compose, InitTracker
-        if args.check_contacts:
+        if args.check_contacts or args.check_reaction:
             from check_upstream_contacts import contact_reporting_before_initialization
             with contact_reporting_before_initialization():
                 base = IsaacEnv.REGISTRY[cfg.task.name](cfg, headless=True)
@@ -136,6 +138,11 @@ def main():
             with torch.no_grad():
                 contact_checks = check_contacts(env, base, record)
             assert contact_checks['passed'], 'Controlled contact/isolation checks failed'
+        if args.check_reaction:
+            from check_upstream_reaction import check_reaction
+            with torch.no_grad():
+                checks = check_reaction(env, base, record)
+            assert checks['passed'], 'Ball-bat reaction momentum check failed'
         if args.check_ppo:
             from check_upstream_ppo import check_ppo
             checkpoint = ROOT / 'checkpoints' / (args.output.stem + '.pt')
