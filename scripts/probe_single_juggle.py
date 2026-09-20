@@ -26,6 +26,8 @@ def main():
     parser.add_argument('--reset-safe-controller', action='store_true')
     parser.add_argument('--check-contacts', action='store_true')
     parser.add_argument('--check-reaction', action='store_true')
+    parser.add_argument('--check-contact-geometry', action='store_true')
+    parser.add_argument('--enable-body-collisions', action='store_true')
     parser.add_argument('--check-ppo', action='store_true')
     parser.add_argument('--check-render', action='store_true')
     args = parser.parse_args()
@@ -35,6 +37,8 @@ def main():
         parser.error('deployment probes currently support 16 to 512 environments')
     if args.check_ppo and not args.reset_safe_controller:
         parser.error('PPO gate requires the verified reset-safe controller adapter')
+    if args.enable_body_collisions and not args.check_contact_geometry:
+        parser.error('Body-collision override is currently restricted to geometry validation')
     report = {'status': 'starting', 'gate': 'upstream_singlejuggle_smoke', 'pid': os.getpid(),
               'time_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
               'full_16_env_gate_passed': False, 'training_gate_passed': False}
@@ -46,9 +50,12 @@ def main():
                                         ROOT / 'scripts/runtime_adapters.py',
                                         ROOT / 'scripts/check_upstream_contacts.py',
                                         ROOT / 'scripts/check_upstream_reaction.py',
+                                        ROOT / 'scripts/check_contact_geometry.py',
+                                        ROOT / 'scripts/contact_geometry.py',
                                         ROOT / 'scripts/check_upstream_ppo.py',
                                         ROOT / 'scripts/check_upstream_render.py']}
     report['reset_safe_controller'] = args.reset_safe_controller
+    report['body_collisions_override'] = args.enable_body_collisions
     args.output.parent.mkdir(parents=True, exist_ok=True)
 
     def record(**values):
@@ -84,9 +91,9 @@ def main():
         from omni_drones.controllers import PID_controller_flightmare
         from omni_drones.utils.torchrl.transforms import PIDRateController_flightmare
         from torchrl.envs.transforms import TransformedEnv, Compose, InitTracker
-        if args.check_contacts or args.check_reaction:
+        if args.check_contacts or args.check_reaction or args.check_contact_geometry:
             from check_upstream_contacts import contact_reporting_before_initialization
-            with contact_reporting_before_initialization():
+            with contact_reporting_before_initialization(enable_body_collisions=args.enable_body_collisions):
                 base = IsaacEnv.REGISTRY[cfg.task.name](cfg, headless=True)
         else:
             base = IsaacEnv.REGISTRY[cfg.task.name](cfg, headless=True)
@@ -143,6 +150,11 @@ def main():
             with torch.no_grad():
                 checks = check_reaction(env, base, record)
             assert checks['passed'], 'Ball-bat reaction momentum check failed'
+        if args.check_contact_geometry:
+            from check_contact_geometry import check_geometry
+            with torch.no_grad():
+                checks = check_geometry(env, base, record)
+            assert checks['passed'], 'Physical contact geometry checks failed'
         if args.check_ppo:
             from check_upstream_ppo import check_ppo
             checkpoint = ROOT / 'checkpoints' / (args.output.stem + '.pt')

@@ -73,3 +73,9 @@ flowchart LR
 3. 导出接触点平移/转动速度贡献，验证坐标系和 COM 定义。
 4. 对正常垫球、偏球救回、单次击墙接回分别统计恢复耗时与失败。
 5. 区分论文描述、源码证据、AeroWall 实测和设计推断；当前本文只有前两类证据和测量设计。
+
+## Early real-policy evidence (not completion of the action-analysis gate)
+
+The 3,276,800-transition SingleJuggle checkpoint has been replayed on 100 fixed development scenarios (runs/singlejuggle-eval-003.json, raw events and NPZ beside it). None reaches five cap impacts. artifacts/early-policy-trajectory-v2.png/.json selects the upper-median episode by duration (scenario 84), not a best clip. Its first real cap impulse occurs at 0.42 s, ball vertical velocity changes from -3.924 to +3.510 m/s; it reaches the post-hit apex near 0.78 s and fails with the ball too low at 1.34 s. No successful recovery time is established. The exported contact-point velocity includes translational and rotational contributions.
+
+The diagram's windows are analyst-defined approach/contact/outgoing-to-apex/recovery observation, not a hand-coded policy. Further learned-policy improvement and HCSP skill replay remain necessary before WallRally reward/attitude decisions. Original body collision flags and visual/collider geometry mismatch are documented separately; no assumption of a 20 cm physical bat radius is justified.

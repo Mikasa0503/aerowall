@@ -10,7 +10,7 @@ from contextlib import contextmanager
 
 
 @contextmanager
-def contact_reporting_before_initialization():
+def contact_reporting_before_initialization(enable_body_collisions=False):
     """Attach contact instrumentation before PhysX parses the upstream stage."""
     import omni.usd
     from pxr import PhysxSchema, UsdPhysics
@@ -19,6 +19,9 @@ def contact_reporting_before_initialization():
 
     def reset_with_reports(context, *args, **kwargs):
         for prim in omni.usd.get_context().get_stage().Traverse():
+            path = str(prim.GetPath())
+            if enable_body_collisions and path.startswith('/World/envs/') and '/Air_0/' in path and prim.HasAPI(UsdPhysics.CollisionAPI):
+                UsdPhysics.CollisionAPI(prim).GetCollisionEnabledAttr().Set(True)
             if str(prim.GetPath()).startswith('/World/envs/') and prim.HasAPI(UsdPhysics.RigidBodyAPI):
                 PhysxSchema.PhysxContactReportAPI.Apply(prim).CreateThresholdAttr().Set(0.0)
         return original(context, *args, **kwargs)

@@ -13,3 +13,19 @@ Command:
 Resume with --resume PATH starts a new output/run directory and adds the checkpoint's prior frames to the new frames. It checks that the resolved learning configuration is unchanged apart from execution budget/log intervals. It restores learning and RNG state but initializes fresh simulator episodes; it does not claim exact trajectory continuation. Resume requires a real runtime verification before being described as tested.
 
 Next evaluation must replay an unchanged checkpoint on 100 fixed development initial states, count legal ball/bat contact entries rather than upstream cooldown hits, and export real state/contact/action trajectories for the four-phase action analysis. Do not declare 80% five-juggle success from a training reward or averaged upstream hit count. WallRally reward design and attitude constraints remain downstream of that analysis.
+
+## First completed batch
+
+singlejuggle-dev-001 completed 100 updates / 3,276,800 transitions in 295.432 training-loop seconds (11,091.6 transitions/second). The last checkpoint is checkpoints/singlejuggle-dev-001/frames-000003276800.pt. The final batch's mean upstream hit proxy was 0.579, not evidence of five-juggle competence. Fixed first-episode evaluation and policy improvement remain required.
+
+The raw air.usd bat collider is a Z cylinder with radius 0.05 m and height 0.11 m, identity local transform. The visual mesh uses a different shape/offset. Evaluation reads collider dimensions from the composed runtime stage rather than assuming the visible mesh or upstream reward proximity radius describes collision geometry.
+
+Evaluator command (use a new report name on retries):
+
+```sh
+./scripts/run_probe.sh scripts/evaluate_single_juggle.py runs/singlejuggle-eval-002.json --checkpoint checkpoints/singlejuggle-dev-001/frames-000003276800.pt --config runs/singlejuggle-dev-001.yaml --scenarios artifacts/singlejuggle-development-scenarios-100.json >runs/singlejuggle-eval-002.log 2>&1
+```
+
+The first run writes a seeded 100-scenario initial-state roster; subsequent runs require an exact roster match. Evaluation counts only the first episode of each scenario. Physics contact FOUND/LOST events maintain pair state to deduplicate entries; the top-cap classifier remains provisional until physical side/bottom/rotor fixtures are checked. It exports all scenarios' actual states/actions as NPZ and contact evidence as JSONL, including ball velocities before/after impact and bat contact-point velocity with angular contribution. These are development results, not the final 200-scenario wall-task test suite.
+
+Resume verification: singlejuggle-dev-002 resumes frames-000003276800.pt and successfully trains from total update 100 to 110 with cumulative frames 3,604,480. Both optimizer states and configuration compatibility are loaded by the runner. The run adds 900 updates (29,491,200 transitions), targeting 32,768,000 cumulative transitions; it is ongoing, not completed. First resumed-update checkpoint frames-000003309568.pt is saved.
