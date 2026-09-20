@@ -20,14 +20,18 @@ UPSTREAM = ROOT / 'third_party/JuggleRL_train'
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--steps', type=int, default=100)
+    parser.add_argument('--num-envs', type=int, default=16)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--check-reset', action='store_true')
     parser.add_argument('--reset-safe-controller', action='store_true')
     parser.add_argument('--check-contacts', action='store_true')
     parser.add_argument('--check-ppo', action='store_true')
+    parser.add_argument('--check-render', action='store_true')
     args = parser.parse_args()
     if args.steps < 1:
         parser.error('steps must be positive')
+    if not 16 <= args.num_envs <= 512:
+        parser.error('deployment probes currently support 16 to 512 environments')
     if args.check_ppo and not args.reset_safe_controller:
         parser.error('PPO gate requires the verified reset-safe controller adapter')
     report = {'status': 'starting', 'gate': 'upstream_singlejuggle_smoke', 'pid': os.getpid(),
@@ -40,7 +44,8 @@ def main():
                                         ROOT / 'scripts/check_upstream_reset.py',
                                         ROOT / 'scripts/runtime_adapters.py',
                                         ROOT / 'scripts/check_upstream_contacts.py',
-                                        ROOT / 'scripts/check_upstream_ppo.py']}
+                                        ROOT / 'scripts/check_upstream_ppo.py',
+                                        ROOT / 'scripts/check_upstream_render.py']}
     report['reset_safe_controller'] = args.reset_safe_controller
     args.output.parent.mkdir(parents=True, exist_ok=True)
 
@@ -60,7 +65,7 @@ def main():
         source = (UPSTREAM / 'scripts/shell/singlejuggle_sim2real.sh').read_text()
         tokens = shlex.split(source.replace('\\\n', ' '), comments=True)
         overrides = tokens[tokens.index('../train.py') + 1:]
-        replacements = {'task.env.num_envs': '16', 'wandb.mode': 'disabled', 'headless': 'true'}
+        replacements = {'task.env.num_envs': str(args.num_envs), 'wandb.mode': 'disabled', 'headless': 'true'}
         overrides = [item for item in overrides if item.split('=', 1)[0] not in replacements]
         overrides += [f'{key}={value}' for key, value in replacements.items()]
         OmegaConf.register_new_resolver('eval', eval, replace=True)
@@ -100,7 +105,7 @@ def main():
         record(status='stepping', observation_shape=list(td['agents', 'observation'].shape))
         for step in range(args.steps):
             # Seeded diagnostic excitation through the unmodified CTBR transform.
-            action = torch.randn(16, 1, 4, device=base.device) * 0.15
+            action = torch.randn(base.num_envs, 1, 4, device=base.device) * 0.15
             action[..., 3] += 0.32
             td.set(('agents', 'action'), action)
             with torch.no_grad():
@@ -136,6 +141,11 @@ def main():
             checkpoint = ROOT / 'checkpoints' / (args.output.stem + '.pt')
             checks = check_ppo(env, base, cfg, checkpoint, record)
             record(ppo_checks=checks, training_gate_passed=checks['passed'])
+        if args.check_render:
+            from check_upstream_render import check_render
+            with torch.no_grad():
+                checks = check_render(env, base, ROOT / 'artifacts' / args.output.stem, record)
+            record(render_checks=checks, rendering_tested=True)
         record(status='passed', completed_steps=args.steps, reset_episodes=resets,
                scope='Only explicitly recorded checks are claimed; no task performance or full project completion claim')
         return 0

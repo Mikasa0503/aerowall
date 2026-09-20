@@ -10,7 +10,7 @@ These are deployment checks, not juggling or wall-rally success results.
 | Actual ball/bat contact | runs/singlejuggle-contacts-03.json | All 16 environments report ball and bat actor/collider paths; relative vertical velocity reverses |
 | Cross-environment collision filtering | same report, pair_frames | Deliberately intersecting original balls from environments 0/1 pass through, with no pair contact or horizontal velocity change; not exhaustive over all 120 pairs |
 | Short PPO update/save/reload | runs/singlejuggle-ppo-02.json | Passed: 3 updates, 3,072 environment transitions, actor parameters changed; checkpoint reload action error 0; 128 evaluation steps with finite observations/rewards |
-| Rendering | not passed | Headless stepping works; upstream ground textures are missing; no rendered task video yet |
+| Rendering | runs/singlejuggle-render-02.json and docs/render-review.json | Native 960x720 RGB readback and visual inspection passed; frame changes track real motion and render-only updates preserve physics; no task demo video yet |
 
 The contact fixtures initialize states explicitly and then let PhysX evolve them. They are not policy trajectories and cannot be counted toward task performance. The controlled ball/bat check uses the original collision assets. It does not replace the later 1,000-impact, half-timestep convergence, illegal-contact, reaction-force and scoring-deduplication validation.
 
@@ -23,3 +23,7 @@ SimulationApp fast shutdown can return process code zero after a caught Python e
 The first PPO attempt failed because diagnostic warmup stepping retained autograd state. The retry performs environment stepping/reset under no_grad and explicitly asserts collected tensors do not require gradients; PPO optimization itself keeps autograd enabled. The original PPO implementation is unchanged.
 
 The first learned checkpoint is checkpoints/singlejuggle-ppo-02.pt. It includes policy and optimizer states, update/frame counts and Torch RNG states. Its source hashes and parsed configuration are linked from the report. It is a deployment artifact, not evidence of sustained juggling performance.
+
+Three missing ground textures were copied from the pinned HCSP reference into JuggleRL's expected relative asset directory. docs/asset-restoration.json records commit, hashes and copied files; scripts/prepare_assets.py reproduces the copy and refuses unexpected content. No existing upstream source, USD, physics or control file changed. The default wide camera makes the drone small; a presentation camera is still needed for the final demo.
+
+128-environment deployment benchmark: runs/singlejuggle-ppo-128-01.json passed 3 PPO updates (24,576 transitions), with collection rates 5,009 / 4,396 / 4,184 transitions per second and update times 0.656 / 0.583 / 0.583 seconds. These three batches establish initial throughput only, not sustained task learning. A 512-environment comparison is running before choosing the development training scale.

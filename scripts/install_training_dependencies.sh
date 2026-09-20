@@ -18,5 +18,6 @@ for source in \
     third_party/JuggleRL_train; do
     ./scripts/python.sh -m pip install --no-build-isolation --no-deps -e "$source"
 done
+./scripts/python.sh --plain scripts/prepare_assets.py
 ./scripts/python.sh -c 'import torch,tensordict,torchrl; print(torch.__version__,tensordict.__version__,torchrl.__version__)'
 ./scripts/python.sh --plain -m pip freeze > docs/training-env-freeze.txt

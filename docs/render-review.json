@@ -1,0 +1,15 @@
+{
+  "report": "runs/singlejuggle-render-02.json",
+  "visual_review": "passed_limited_to_render_capability",
+  "observed": [
+    "blue grid ground is visible",
+    "drone and red ball are visible",
+    "ball moves toward drone between frames",
+    "wide default camera is not demo-ready"
+  ],
+  "performance_claim": false,
+  "frames": {
+    "frame-000.png": "b759b0fc1f6d11d7e09af759b5cef39cd14ed416168d8658bf4a6df3aafab02c",
+    "frame-020.png": "b3f050dbcd13c552aa2f1e61b48bf84686824dd72e9c7790552b0beff618ddd9"
+  }
+}

@@ -2,6 +2,7 @@
 import math
 from pathlib import Path
 import torch
+import time
 
 
 def check_ppo(env, base, cfg, checkpoint, record):
@@ -19,20 +20,29 @@ def check_ppo(env, base, cfg, checkpoint, record):
                                   total_frames=4 * frames_per_batch, device=base.device,
                                   return_same_td=True)
     metrics = []
+    timings = []
+    training_started = time.monotonic()
     for batch_index, data in enumerate(collector):
         leaking = [str(key) for key, value in data.items(True, True)
                    if isinstance(value, torch.Tensor) and value.requires_grad]
         assert not leaking, f'Collected environment data retains autograd state: {leaking}'
+        torch.cuda.synchronize()
+        started = time.monotonic()
         result = policy.train_op(data.to_tensordict())
+        torch.cuda.synchronize()
+        timings.append({'rollout_fps': collector._fps,
+                        'update_seconds': time.monotonic() - started,
+                        'frames_per_batch': frames_per_batch})
         numeric = {key: float(value) for key, value in result.items()}
         assert all(math.isfinite(value) for value in numeric.values()), 'Non-finite PPO metric'
         metrics.append(numeric)
         record(ppo_progress={'updates': batch_index + 1, 'frames': collector._frames,
-                             'metrics': numeric})
+                             'metrics': numeric, 'timing': timings[-1]})
         # Upstream closes the env when total_frames is reached. Stop one batch
         # earlier so checkpoint reload evaluation can use this same live scene.
         if batch_index == 2:
             break
+    training_seconds = time.monotonic() - training_started
     delta = max(float((value.detach() - before[key]).abs().max().item())
                 for key, value in policy.actor_params.items(True, True))
     assert delta > 1e-10, 'PPO did not change actor parameters'
@@ -73,4 +83,8 @@ def check_ppo(env, base, cfg, checkpoint, record):
             'actor_parameter_max_change': delta, 'checkpoint': str(checkpoint),
             'reload_action_max_error': reload_error, 'evaluation_steps': 128,
             'evaluation_episode_ends': terminated, 'evaluation_reward_sum': reward_total,
-            'metrics': metrics, 'performance_claim': False}
+            'metrics': metrics, 'timings': timings,
+            'training_loop_seconds': training_seconds,
+            'combined_training_fps': collector._frames / training_seconds,
+            'peak_torch_allocated_bytes': torch.cuda.max_memory_allocated(),
+            'performance_claim': False}

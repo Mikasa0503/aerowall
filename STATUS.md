@@ -1,5 +1,14 @@
 # AeroWall 执行状态
 
+## 当前状态：2026-09-21 00:30（优先于下方历史记录）
+
+- 原生 A100 渲染验证通过：960×720 RGB，前后画面随真实物理状态变化，单独 render 不推进物理；两张 PNG 已实际查看。证据 runs/singlejuggle-render-02.json、docs/render-review.json，服务器图片 artifacts/singlejuggle-render-02/。
+- 已从固定 HCSP 源码复制缺失的三张地面贴图，蓝色网格恢复，缺失贴图错误消失。复制脚本 scripts/prepare_assets.py 校验固定 commit 和 SHA-256；来源清单 docs/asset-restoration.json。没有修改已有 USD、物理或控制源码。
+- 默认镜头仍较远，当前图片仅证明渲染能力，不是任务演示或持续垫球成果。
+- 128 环境短 PPO 已通过：3 轮更新、24,576 次转换，采样吞吐约 4,184–5,009 次/秒，单轮更新约 0.58–0.66 秒，保存/重载与 128 步评测通过。证据 runs/singlejuggle-ppo-128-01.json。
+- 512 环境比较正在运行：runs/singlejuggle-ppo-512-01.json / .log，PID 2165818 已核实存活，任务句柄 57472。恢复时先核实进程，不要重复启动。
+- 下一步按吞吐决定训练规模，并开展 1,000 次碰撞/时间步收敛、完整隔离覆盖与上游垫球基线训练。四阶段动作分析、WallRally、正式方法比较及 Demo 尚未完成。
+
 ## 当前状态：2026-09-21 00:21（优先于下方历史记录）
 
 - 修复后的 16 环境 10,000 步已完成：3,881 次重置，数值有限，选择性重置后控制器与全新实例输出差异为 0。证据 runs/singlejuggle-10000-reset-safe-01.json。
