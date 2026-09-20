@@ -1,0 +1,44 @@
+{
+  "recorded_date": "2026-09-20",
+  "repositories": [
+    {
+      "name": "JuggleRL_train",
+      "url": "https://github.com/thu-uav/JuggleRL_train",
+      "path": "third_party/JuggleRL_train",
+      "commit": "7ff6efb499e53b16dbaa024f2397f1101c7614ad",
+      "submodules": {
+        "third_party/orbit": "bca680a9ebdcddd8f4d70bd7c65efa94f9d45946",
+        "third_party/rl": "aacf134a1451891fc71edc05d1c1d4296a7937cd",
+        "third_party/tensordict": "a8c5397a81cf37b9b985d8a85180ab52f60af54a"
+      },
+      "runtime_dependency": true,
+      "license_file": "LICENSE"
+    },
+    {
+      "name": "VolleyBots",
+      "url": "https://github.com/thu-uav/VolleyBots",
+      "path": "third_party/VolleyBots",
+      "commit": "10e3701e480b518041c8be6a40efee7bdcb69283",
+      "submodules": {
+        "third_party/orbit": "bca680a9ebdcddd8f4d70bd7c65efa94f9d45946",
+        "third_party/rl": "aacf134a1451891fc71edc05d1c1d4296a7937cd",
+        "third_party/tensordict": "a8c5397a81cf37b9b985d8a85180ab52f60af54a"
+      },
+      "runtime_dependency": false,
+      "license_file": "LICENSE"
+    },
+    {
+      "name": "HCSP",
+      "url": "https://github.com/thu-uav/HCSP",
+      "path": "third_party/HCSP",
+      "commit": "009961b8f5702dd0c1c943cef0e01e09dfcd138d",
+      "submodules": {
+        "third-party/orbit": "bca680a9ebdcddd8f4d70bd7c65efa94f9d45946",
+        "third-party/rl": "aacf134a1451891fc71edc05d1c1d4296a7937cd",
+        "third-party/tensordict": "a8c5397a81cf37b9b985d8a85180ab52f60af54a"
+      },
+      "runtime_dependency": false,
+      "license_file": "LICENSE"
+    }
+  ]
+}
