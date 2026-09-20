@@ -28,6 +28,7 @@ def main():
     parser.add_argument('--check-reaction', action='store_true')
     parser.add_argument('--check-contact-geometry', action='store_true')
     parser.add_argument('--enable-body-collisions', action='store_true')
+    parser.add_argument('--contact-pitch-rate', type=float, default=0.)
     parser.add_argument('--check-ppo', action='store_true')
     parser.add_argument('--check-render', action='store_true')
     args = parser.parse_args()
@@ -153,7 +154,7 @@ def main():
         if args.check_contact_geometry:
             from check_contact_geometry import check_geometry
             with torch.no_grad():
-                checks = check_geometry(env, base, record)
+                checks = check_geometry(env, base, record, pitch_rate=args.contact_pitch_rate)
             assert checks['passed'], 'Physical contact geometry checks failed'
         if args.check_ppo:
             from check_upstream_ppo import check_ppo

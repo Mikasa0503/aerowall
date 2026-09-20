@@ -3,7 +3,7 @@ import re
 import torch
 
 
-def check_geometry(env, base, record):
+def check_geometry(env, base, record, pitch_rate=0.):
     import omni.usd
     import carb.settings
     from pxr import UsdGeom, UsdPhysics, PhysicsSchemaTools
@@ -34,15 +34,21 @@ def check_geometry(env, base, record):
             quat = torch.zeros(base.num_envs,1,4,device=base.device)
             quat[:,0,0] = torch.cos(angles/2); quat[:,0,2] = torch.sin(angles/2)
             base.drone.set_world_poses(pos,quat)
-            base.drone.set_velocities(torch.zeros(base.num_envs,1,6,device=base.device))
+            initial_velocity = torch.zeros(base.num_envs,1,6,device=base.device)
+            initial_velocity[:,0,4] = torch.linspace(-pitch_rate,pitch_rate,base.num_envs,device=base.device)
+            base.drone.set_velocities(initial_velocity)
             base.sim.step(render=False)
             bp,bq = bats.get_world_poses(); bp,bq = bp[bat_order].clone(),bq[bat_order].clone()
-            offsets = {'top':[0.,0.,.2],'side':[.2,0.,.025],'bottom':[0.,0.,-.2],'rotor':[0.,0.,.18]}
+            offsets = {'top':[0.,0.,.2],'side':[.14 if pitch_rate else .2,0.,.025],'bottom':[0.,0.,-.2],'rotor':[0.,0.,.18]}
             speeds = {'top':[0.,0.,-2.],'side':[-2.,0.,0.],'bottom':[0.,0.,2.],'rotor':[0.,0.,-2.]}
             center = rotors.get_world_poses()[0][rotor_order].clone() if phase == 'rotor' else bp
             offset = torch.tensor(offsets[phase],device=base.device).expand(base.num_envs,3)
             velocity = quat_rotate(bq,torch.tensor(speeds[phase],device=base.device).expand(base.num_envs,3))
-            velocity += bats.get_velocities()[bat_order,:3]
+            body_velocity = bats.get_velocities()[bat_order]
+            velocity += body_velocity[:,:3]
+            # Initialize relative incidence in the rotating body's local frame.
+            # After this fixture initialization, both bodies evolve only in PhysX.
+            velocity += torch.cross(body_velocity[:,3:],center-bp+quat_rotate(bq,offset),dim=-1)
             bv = torch.zeros(base.num_envs,1,6,device=base.device); bv[:,0,:3] = velocity
             base.ball.set_world_poses((center+quat_rotate(bq,offset))[:,None,:],quat)
             base.ball.set_velocities(bv)
@@ -68,8 +74,11 @@ def check_geometry(env, base, record):
                       'passed':len(covered)==base.num_envs and not wrong}
             trials.append(result); record(contact_geometry_progress=result)
         result = {'passed':all(t['passed'] for t in trials),'trials':trials,'tilt_range_radians':[-.7,.7],
-                  'scope':'original asset, controlled top/side/bottom/rotor contacts with zero initial angular velocity',
-                  'angular_motion_coverage':False,'collision_flags':collision_flags}
+                  'scope':'controlled top/side/bottom/rotor contact fixtures; coverage limited to specified initial tilts/rates',
+                  'pitch_rate_range':[-pitch_rate,pitch_rate],
+                  'side_initial_offset':[.14 if pitch_rate else .2,0.,.025],
+                  'incidence':'body-local approach plus initial rigid-body point velocity',
+                  'angular_motion_coverage':pitch_rate != 0.,'collision_flags':collision_flags}
         record(contact_geometry_checks=result)
         return result
     finally:

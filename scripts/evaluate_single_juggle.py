@@ -174,8 +174,9 @@ def main():
                 done = nxt['done'].flatten()
                 for index in range(100):
                     if bool(active_before[index]) and (bool(done[index]) or index in illegal or step+1 == base.max_episode_length):
-                        reason = illegal.get(index,'upstream_termination' if bool(done[index]) else 'time_limit')
-                        outcomes[index] = {'scenario_id':index,'steps':step+1,'reason':reason,
+                        is_truncated = bool(nxt['stats','truncated'][index].flatten()[0] > 0)
+                        reason = illegal.get(index,'time_limit' if is_truncated or not bool(done[index]) else 'upstream_termination')
+                        outcomes[index] = {'scenario_id':index,'steps':step+1,'reason':reason,'truncated':is_truncated,
                                            'ball_bat_entries':ball_bat_entries[index],'provisional_top_entries':top_entries[index],
                                            'upstream_stats':{k:float(nxt['stats',k][index].flatten()[0]) for k in ['num_true_hits','wrong_hit','ball_too_low','ball_too_high','ball_too_far','drone_too_low','drone_too_high','truncated']}}
                         finished[index] = True

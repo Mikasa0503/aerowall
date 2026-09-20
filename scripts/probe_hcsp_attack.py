@@ -20,6 +20,7 @@ HCSP=ROOT/'third_party/HCSP'
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output',type=Path,required=True)
+    parser.add_argument('--hover',action='store_true',help='Replay Attack_hover policy chaining, including trained recovery')
     args=parser.parse_args()
     args.output.parent.mkdir(parents=True,exist_ok=True)
     report={'status':'initializing','pid':os.getpid(),'scope':'HCSP Attack reference replay; original PRT, not CTBR',
@@ -36,21 +37,23 @@ def main():
         from hydra import compose,initialize_config_dir
         from omegaconf import OmegaConf
         from hcsp import init_simulation_app
-        source=HCSP/'scripts/shell/attack.sh'
+        mode='attack_hover' if args.hover else 'attack'
+        source=HCSP/'scripts/shell'/f'{mode}.sh'
         tokens=shlex.split(source.read_text().replace('\\\n',' '),comments=True)
-        overrides=tokens[tokens.index('../train_attack.py')+1:]
+        overrides=tokens[tokens.index(f'../train_{mode}.py')+1:]
         replacement={'task.env.num_envs':'16','headless':'true','wandb.mode':'disabled','only_eval':'true'}
         overrides=[v for v in overrides if v.split('=',1)[0] not in replacement]
         overrides += [f'{k}={v}' for k,v in replacement.items()]
         OmegaConf.register_new_resolver('eval',eval,replace=True)
         with initialize_config_dir(version_base=None,config_dir=str(HCSP/'cfg')):
-            cfg=compose(config_name='train_attack',overrides=overrides)
+            cfg=compose(config_name=f'train_{mode}',overrides=overrides)
         OmegaConf.resolve(cfg);OmegaConf.set_struct(cfg,False)
         OmegaConf.save(cfg,args.output.with_suffix('.yaml'))
         sys.argv=[sys.argv[0],'--portable','--portable-root',str(ROOT/'.cache/kit')]
         app=init_simulation_app(cfg)
         from hcsp.envs import IsaacEnv
-        from hcsp.learning import MAPPOPolicy_Attack
+        from hcsp.learning import MAPPOPolicy_Attack, MAPPOPolicy_Attack_hover
+        from hcsp.utils.torch import quat_rotate
         from torchrl.envs.transforms import TransformedEnv,Compose,InitTracker
         from check_upstream_contacts import contact_reporting_before_initialization
         from omni.physx import get_physx_simulation_interface
@@ -61,8 +64,11 @@ def main():
             base=IsaacEnv.REGISTRY[cfg.task.name](cfg,headless=True)
         env=TransformedEnv(base,Compose(InitTracker())).eval()
         players=['SecPass','SecPass_hover','Att_goto','Att']
-        policy=MAPPOPolicy_Attack(cfg.algo,agent_spec_dict={k:env.agent_spec[k] for k in players},device=base.device)
+        if args.hover:players.append('Att_hover')
+        policy_type=MAPPOPolicy_Attack_hover if args.hover else MAPPOPolicy_Attack
+        policy=policy_type(cfg.algo,agent_spec_dict={k:env.agent_spec[k] for k in players},device=base.device)
         names=['checkpoint_secpass.pt','checkpoint_secpass_hover.pt','checkpoint_goto.pt','checkpoint_att.pt']
+        if args.hover:names.append('checkpoint_att_hover.pt')
         checkpoints=[]
         audit={r['file']:r for r in json.loads((ROOT/'docs/hcsp-checkpoint-audit.json').read_text())}
         for player,name in zip(players,names):
@@ -73,24 +79,43 @@ def main():
             checkpoints.append({'player':player,'path':str(path),'sha256':digest})
         carb.settings.get_settings().set_bool(SETTING_DISABLE_CONTACT_PROCESSING,False)
         interface=get_physx_simulation_interface()
+        callback_reports=[]
+        callback_step=[-1]
+        def contact_callback(headers,data):
+            for h in headers:
+                callback_reports.append({'step':callback_step[0],'type':str(h.type),
+                    'actor0':str(PhysicsSchemaTools.intToSdfPath(h.actor0)),
+                    'actor1':str(PhysicsSchemaTools.intToSdfPath(h.actor1)),
+                    'offset':int(h.contact_data_offset),'count':int(h.num_contact_data),
+                    'points':[{'position':list(data[h.contact_data_offset+j].position),
+                               'normal':list(data[h.contact_data_offset+j].normal),
+                               'impulse':list(data[h.contact_data_offset+j].impulse)} for j in range(h.num_contact_data)]})
+        callback_subscription=interface.subscribe_contact_report_events(contact_callback)
         env.set_seed(20260921)
         with torch.no_grad():td=env.reset()
+        body_com_local=base.drone.base_link.get_coms()[0].reshape(16,2,3)
         frames=[];events=[];finished=torch.zeros(16,dtype=torch.bool,device=base.device);outcomes=[None]*16
-        record(status='replaying',checkpoints=checkpoints,num_envs=16,drone_model=cfg.task.drone_model,
+        record(status='replaying',env_origins=base.envs_positions.cpu().tolist(),task=cfg.task.name,checkpoints=checkpoints,num_envs=16,drone_model=cfg.task.drone_model,
                dt=base.dt,action_keys=[list(env.agent_spec[k].action_key) for k in players])
         with torch.no_grad():
             for step in range(base.max_episode_length):
                 active=~finished.clone()
                 policy(td,deterministic=True)
                 action_data={k:td[env.agent_spec[k].action_key].cpu().numpy().copy() for k in players}
+                phase_before={k:td['stats',k].cpu().numpy().copy() for k in ['SecPass_hit','Att_hit']}
+                callback_step[0]=step
                 nxt=env.step(td)['next']
                 drone_pos,drone_quat=base.drone.get_world_poses()
                 ball_pos,ball_quat=base.ball.get_world_poses()
-                values={'drone_position':drone_pos.clone(),'drone_quaternion_wxyz':drone_quat.clone(),
+                body_pos,body_quat=base.drone.base_link.get_world_poses()
+                body_vel=base.drone.base_link.get_velocities()
+                body_com=body_pos+quat_rotate(body_quat,body_com_local)
+                body_normal=quat_rotate(body_quat,torch.tensor([0.,0.,1.],device=base.device).expand(16,2,3))
+                values={'body_com_world':body_com.clone(),'body_velocity':body_vel.clone(),'body_normal':body_normal.clone(),'drone_position':drone_pos.clone(),'drone_quaternion_wxyz':drone_quat.clone(),
                         'drone_velocity':base.drone.get_velocities().clone(),'ball_position':ball_pos.clone(),
                         'ball_velocity':base.ball.get_velocities().clone()}
                 assert all(torch.isfinite(v).all() for v in values.values()),'Nonfinite HCSP state'
-                frames.append({**{k:v.cpu().numpy() for k,v in values.items()},**{f'action_{k}':v for k,v in action_data.items()},'active_before':active.cpu().numpy()})
+                frames.append({**{k:v.cpu().numpy() for k,v in values.items()},**{f'action_{k}':v for k,v in action_data.items()},**{f'phase_before_{k}':v for k,v in phase_before.items()},'active_before':active.cpu().numpy()})
                 headers,data=interface.get_contact_report()
                 for h in headers:
                     row={'step':step,'time':(step+1)*base.dt,'type':str(h.type),
@@ -98,6 +123,22 @@ def main():
                     row['points']=[{'position':list(data[h.contact_data_offset+j].position),
                                     'normal':list(data[h.contact_data_offset+j].normal),
                                     'impulse':list(data[h.contact_data_offset+j].impulse)} for j in range(h.num_contact_data)]
+                    import re
+                    matches=[re.search(r'/env_(\d+)/Iris_(\d+)/base_link$',row[k]) for k in ['actor0','actor1']]
+                    match=next((m for m in matches if m),None)
+                    if match:
+                        env_id,agent_id=map(int,match.groups())
+                        row.update(env_id=env_id,agent_id=agent_id,first_episode_active=bool(active[env_id]))
+                        for point in row['points']:
+                            valid=sum(x*x for x in point['normal'])>.5 and sum(x*x for x in point['impulse'])>1e-12
+                            point['valid_impulse_sample']=valid
+                            if valid:
+                                location=torch.tensor(point['position'],device=base.device)
+                                angular=torch.cross(body_vel[env_id,agent_id,3:],location-body_com[env_id,agent_id],dim=0)
+                                point.update(body_normal=body_normal[env_id,agent_id].cpu().tolist(),
+                                             translation_velocity=body_vel[env_id,agent_id,:3].cpu().tolist(),
+                                             rotational_velocity=angular.cpu().tolist(),
+                                             contact_point_velocity=(body_vel[env_id,agent_id,:3]+angular).cpu().tolist())
                     events.append(row)
                 done=nxt['done'].flatten()
                 for index in range(16):
@@ -111,6 +152,8 @@ def main():
         trajectory=args.output.with_suffix('.trajectory.npz')
         np.savez_compressed(trajectory,**{k:np.stack([v[k] for v in frames]) for k in frames[0]},dt=base.dt)
         args.output.with_suffix('.events.json').write_text(json.dumps(events,indent=2)+'\n')
+        args.output.with_suffix('.callback-events.json').write_text(json.dumps(callback_reports,indent=2)+'\n')
+        record(callback_event_count=len(callback_reports),callback_positive_impulse_points=sum(sum(x*x for x in p['impulse'])>1e-12 for e in callback_reports for p in e['points']))
         record(status='passed',outcomes=outcomes,completed_scenarios=int(finished.sum()),steps=len(frames),
                trajectory=str(trajectory),trajectory_sha256=hashlib.sha256(trajectory.read_bytes()).hexdigest(),
                contact_event_count=len(events),note='Replay completion only; no flip, recovery or task-success claim without trajectory analysis')
