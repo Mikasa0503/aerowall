@@ -69,6 +69,7 @@ def check_reaction(env, base, record):
             base.ball.set_world_poses(ball_pos, quat)
             base.ball.set_velocities(ball_vel)
             impacts, frames = [], []
+            credited=set()
             for step in range(16):
                 drone_before = drone_momentum()
                 ball_before = ball_mass * base.ball.get_velocities()[:, 0, :3]
@@ -84,12 +85,17 @@ def check_reaction(env, base, record):
                                     'background_impulse': drone_impulse.clone()})
                     continue
                 for h in headers:
-                    if h.type != ContactEventType.CONTACT_FOUND:
+                    if h.type == ContactEventType.CONTACT_LOST:
                         continue
+                    # Contact margins can report FOUND before actual impact.
+                    impulse_sum=sum(sum(float(v)*float(v) for v in data[h.contact_data_offset+j].impulse)**.5 for j in range(h.num_contact_data))
+                    if impulse_sum<=1e-6:continue
                     actors = [str(PhysicsSchemaTools.intToSdfPath(h.actor0)), str(PhysicsSchemaTools.intToSdfPath(h.actor1))]
                     if not any(p.endswith('/ball') for p in actors) or not any(p.endswith('/bat') for p in actors):
                         continue
                     index = int(re.search(r'/env_(\d+)/', next(p for p in actors if p.endswith('/ball'))).group(1))
+                    if index in credited:continue
+                    credited.add(index)
                     ball_j = ball_impulse[index]
                     raw_drone_j = drone_impulse[index]
                     background = control[step]['background_impulse'][index]

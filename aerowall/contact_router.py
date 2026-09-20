@@ -12,11 +12,12 @@ from aerowall.rally_events import Kind,RallyBatch
 
 
 class WallContactRouter:
-    def __init__(self,base):
+    def __init__(self,base,eager_gpu=True):
         import omni.usd
         from pxr import UsdPhysics,UsdGeom
         from omni.isaac.core.prims import RigidPrimView
         from omni.physx import get_physx_simulation_interface
+        self.eager_gpu=eager_gpu
         self.base=base;self.interface=get_physx_simulation_interface();self.batch=RallyBatch(base.num_envs)
         stage=omni.usd.get_context().get_stage();owners=[]
         for prim in stage.Traverse():
@@ -62,7 +63,10 @@ class WallContactRouter:
         from pxr import PhysicsSchemaTools
         from contact_geometry import classify_cylinder_cap
         from omni_drones.utils.torch import quat_rotate
-        data=[s.read() for s in self.sensors]
+        data=[s.read() for s in self.sensors] if self.eager_gpu else {}
+        def points_for(si,slot):
+            if not self.eager_gpu and si not in data:data[si]=self.sensors[si].read()
+            return data[si][slot]
         bp,bq=self.bats.get_world_poses();bp,bq=bp[self.bat_order],bq[self.bat_order]
         collision_center=bp+quat_rotate(bq,self.collider_offset.expand(self.base.num_envs,3))
         headers,cpu_data=self.interface.get_contact_report();impacts=[[] for _ in self.batch.states];events=[];observed=set()
@@ -88,7 +92,7 @@ class WallContactRouter:
                 norm=math.sqrt(sum(v*v for v in normal))
                 if magnitude_cpu>1e-6 and .99<norm<1.01 and all(math.isfinite(v) for v in position+normal+impulse):
                     cpu_samples.append({'impulse':magnitude_cpu,'impulse_vector':impulse,'point':position,'normal':normal})
-            samples=[] if edge=='lost' else cpu_samples if cpu_samples else data[si][slot]
+            samples=[] if edge=='lost' else cpu_samples if cpu_samples else points_for(si,slot)
             point_source='cpu_current_report' if cpu_samples else 'gpu_with_current_pair_header'
             magnitude=sum(s['impulse'] for s in samples)
             point=tuple(sum(s['point'][j]*s['impulse'] for s in samples)/magnitude for j in range(3)) if magnitude else None
@@ -102,6 +106,8 @@ class WallContactRouter:
             impact=self.batch.ledgers[i].observe(pair,edge,kind,magnitude,point,eligible)
             if impact is not None:impacts[i].append(impact)
             events.append({'env_id':i,'pair':pair,'edge':edge,'kind':kind.value,'points':samples,'credited':impact is not None,'target_eligible':eligible,'point_source':point_source})
-        unmatched=[(si,slot) for si,slots in enumerate(data) for slot,samples in enumerate(slots) if samples and (si,slot) not in observed]
+        unmatched=[(si,slot) for si,slots in enumerate(data) for slot,samples in enumerate(slots) if samples and (si,slot) not in observed] if self.eager_gpu else []
+        self.gpu_queries_this_step=len(data)
+        self.unmatched_gpu_scan_performed=self.eager_gpu
         self.unmatched_gpu_slots=unmatched # Diagnostic stale buffers, never score without current lifecycle headers.
         return impacts,events

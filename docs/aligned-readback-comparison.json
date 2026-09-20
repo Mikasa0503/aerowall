@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "checks": {
+    "both_passed": true,
+    "same_checkpoint": true,
+    "same_scenarios": true,
+    "same_outcomes": true,
+    "same_array_keys": true,
+    "arrays": {
+      "drone_position": true,
+      "drone_quaternion_wxyz": true,
+      "drone_velocity": true,
+      "ball_position": true,
+      "ball_velocity": true,
+      "bat_position": true,
+      "bat_quaternion_wxyz": true,
+      "bat_velocity": true,
+      "action": true,
+      "active_before": true,
+      "bat_normal": true,
+      "dt": true
+    }
+  },
+  "reports": {
+    "runs/aligned-juggle-eval-03.json": "f0604846855fb43a63c04c1cee7c4cebf62432ae0c71f495fe6cf82cf4eac117",
+    "runs/aligned-juggle-eval-lazy-01.json": "7b461b5be70ddb282b421924b7a3782f3adb9676e02c669d8caff92118434277"
+  },
+  "lazy_elapsed_seconds": 21.506159346550703,
+  "lazy_gpu_queries": 2680,
+  "scope": "100 frozen scenarios; equality of saved trajectories and outcomes, not a universal determinism claim"
+}
