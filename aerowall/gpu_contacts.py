@@ -11,6 +11,7 @@ import math
 class GPUContactReadback:
     def __init__(self, source_path, filter_paths, name, capacity=64):
         from omni.isaac.core.prims.rigid_contact_view import RigidContactView
+        self.source_path = source_path
         self.filter_paths = tuple(filter_paths)
         self.capacity = capacity
         self.view = RigidContactView(source_path, list(filter_paths), name=name,
@@ -27,20 +28,26 @@ class GPUContactReadback:
             raise RuntimeError('Expected native GPU contact tensors')
         if int(counts.sum()) >= self.capacity:
             raise RuntimeError('Contact buffer may be saturated')
+        aggregate = self.view.get_contact_force_matrix(dt=1.)
         result = [[] for _ in self.filter_paths]
         for index in range(len(self.filter_paths)):
             count, start = int(counts[0,index]), int(starts[0,index])
             if count < 0 or start < 0 or start+count > len(impulse):
                 raise RuntimeError('Invalid contact buffer interval')
+            reconstructed = torch.zeros(3,device=position.device)
             for row in range(start,start+count):
                 value = float(impulse[row].item())
                 if not math.isfinite(value):
                     raise RuntimeError('Nonfinite contact impulse')
+                reconstructed += impulse[row]*normal[row]
                 if abs(value) <= threshold:
                     continue
-                if value < 0 or not torch.isfinite(position[row]).all() or not .99 < float(normal[row].norm()) < 1.01:
-                    raise RuntimeError('Invalid positive contact point or normal')
-                result[index].append({'impulse':value, 'point':tuple(position[row].cpu().tolist()),
-                                      'normal':tuple(normal[row].cpu().tolist()),
+                if not torch.isfinite(position[row]).all() or not .99 < float(normal[row].norm()) < 1.01:
+                    raise RuntimeError(f'Invalid contact source={self.source_path} filter={self.filter_paths[index]} impulse={value} point={position[row].cpu().tolist()} normal={normal[row].cpu().tolist()} count={count} start={start}')
+                result[index].append({'impulse':abs(value), 'raw_signed_coefficient':value,
+                                      'point':tuple(position[row].cpu().tolist()),
+                                      'normal':tuple((normal[row] if value>=0 else -normal[row]).cpu().tolist()),
                                       'separation':float(separation[row].item())})
+            if not torch.allclose(reconstructed,aggregate[0,index],atol=1e-5,rtol=1e-4):
+                raise RuntimeError(f'Point impulses disagree with pair aggregate: {self.source_path} {self.filter_paths[index]}')
         return result

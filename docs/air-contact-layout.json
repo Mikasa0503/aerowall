@@ -1,0 +1,25 @@
+{
+  "asset": "third_party/JuggleRL_train/omni_drones/robots/assets/usd/air.usd",
+  "asset_sha256": "fc45d84ab623dd368e1e18d3f93de6ebc759ce24d04ecd2da5212fa8fcc80a4b",
+  "body_collision_box_min": [
+    -0.0450088455941276,
+    -0.0450088455941276,
+    -0.05999999865889549
+  ],
+  "body_collision_box_max": [
+    0.0450088455941276,
+    0.0450088455941276,
+    0.05999999865889549
+  ],
+  "bat_cylinder_radius": 0.05,
+  "bat_cylinder_height": 0.11,
+  "bat_top_center": [
+    0.0,
+    0.0,
+    0.055
+  ],
+  "base_top_above_bat_top_m": 0.004999998658895492,
+  "body_collision_enabled_in_original_asset": false,
+  "bat_collision_enabled_in_original_asset": true,
+  "scope": "Authored relative asset geometry. Physics reset pose/solver results are verified separately. Body-enabled central cap access is not established."
+}

@@ -1,0 +1,179 @@
+{
+  "reports": {
+    "wall-scene-contacts-03": {
+      "status": "failed",
+      "sha256": "5cce81b97904b92cfeebf211b1e5322719735afc07758ad28231ed42598db6b7"
+    },
+    "wall-scene-contacts-05": {
+      "status": "failed",
+      "sha256": "bd4ec347e33f4259fdd3a73f6167edd78339776f2bcc793eac322ea3659f2b9e"
+    },
+    "wall-scene-contacts-aligned-01": {
+      "status": "passed",
+      "sha256": "35af5873e417320adadb16dbedbc408a73b849bc89adf5ae122b634d54c0184e"
+    },
+    "wall-contact-events-02": {
+      "status": "passed",
+      "sha256": "68892d815adf2ed1dd65d346b5a6e8ba33e6c04c95c7c86393b9912b4eaf7b84"
+    }
+  },
+  "as_authored_trials": [
+    {
+      "phase": "cap",
+      "passed": false,
+      "covered": 0,
+      "positive_kind_counts": {
+        "ball_body": 16
+      }
+    },
+    {
+      "phase": "non_cap",
+      "passed": true,
+      "covered": 16,
+      "positive_kind_counts": {
+        "non_cap": 16
+      }
+    },
+    {
+      "phase": "ball_body",
+      "passed": true,
+      "covered": 16,
+      "positive_kind_counts": {
+        "ball_body": 16
+      }
+    },
+    {
+      "phase": "wall",
+      "passed": true,
+      "covered": 16,
+      "positive_kind_counts": {
+        "wall": 16
+      }
+    },
+    {
+      "phase": "ball_ground",
+      "passed": true,
+      "covered": 16,
+      "positive_kind_counts": {
+        "ball_ground": 20
+      }
+    },
+    {
+      "phase": "drone_wall",
+      "passed": true,
+      "covered": 16,
+      "positive_kind_counts": {
+        "drone_wall": 32
+      }
+    },
+    {
+      "phase": "drone_ground",
+      "passed": true,
+      "covered": 16,
+      "positive_kind_counts": {
+        "drone_ground": 16
+      }
+    }
+  ],
+  "aligned_trials": [
+    {
+      "phase": "cap",
+      "passed": true,
+      "covered": 16,
+      "positive_kind_counts": {
+        "cap": 16
+      }
+    },
+    {
+      "phase": "non_cap",
+      "passed": true,
+      "covered": 16,
+      "positive_kind_counts": {
+        "non_cap": 16
+      }
+    },
+    {
+      "phase": "ball_body",
+      "passed": true,
+      "covered": 16,
+      "positive_kind_counts": {
+        "ball_body": 16
+      }
+    },
+    {
+      "phase": "wall",
+      "passed": true,
+      "covered": 16,
+      "positive_kind_counts": {
+        "wall": 16
+      }
+    },
+    {
+      "phase": "ball_ground",
+      "passed": true,
+      "covered": 16,
+      "positive_kind_counts": {
+        "ball_ground": 20
+      }
+    },
+    {
+      "phase": "drone_wall",
+      "passed": true,
+      "covered": 16,
+      "positive_kind_counts": {
+        "drone_wall": 32
+      }
+    },
+    {
+      "phase": "drone_ground",
+      "passed": true,
+      "covered": 16,
+      "positive_kind_counts": {
+        "drone_ground": 16
+      }
+    }
+  ],
+  "overlay": {
+    "enabled": true,
+    "collider_z_offset": 0.028000000000000004,
+    "visual_top_z": 0.083,
+    "physical_top_z": 0.083,
+    "note": "Collider translation only; auto COM/inertia must be revalidated"
+  },
+  "bat_physics_mass_kg": 0.0010000000474974513,
+  "bat_physics_com_local": [
+    [
+      0.0,
+      0.0,
+      0.02800000086426735
+    ]
+  ],
+  "bat_physics_inertia": [
+    1.6315001403199858e-06,
+    0.0,
+    0.0,
+    0.0,
+    1.6315001403199858e-06,
+    0.0,
+    0.0,
+    0.0,
+    1.249999513674993e-06
+  ],
+  "signed_coefficient_example": {
+    "coefficient": -0.15030637383460999,
+    "normal": [
+      -0.0,
+      -0.0,
+      -1.0000004768371582
+    ],
+    "aggregate": [
+      0.0,
+      0.0,
+      0.15030644834041595
+    ],
+    "ball_gravity_corrected_vertical_impulse": 0.15030644030441284,
+    "relative_error": 5.346413032381196e-08
+  },
+  "unmatched_gpu_slots_ignored": 38,
+  "scope": "112 controlled collision-family fixtures, not learned wall-return performance. Original body-disabled policy metrics do not validate modified geometry."
+}
