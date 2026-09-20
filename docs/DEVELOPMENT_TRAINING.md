@@ -39,3 +39,9 @@ smoke-01: 16 environments, 2 updates, 2,048 frames, 47 cap credits/21 illegal/38
 Legacy collector terminal stats show zeros for illegal reasons despite direct contacts; they are explicitly unvalidated. New direct terminal records are captured in the environment before reset. In resume-01 batches, collector done counts equal direct episode records (75 and 60); illegal reasons are 71 and 55, totaling exactly 126 direct illegal contacts. Boundary counts are 4 and 5. Reports retain both fields for diagnosis. No sustained-success claim follows from training statistics.
 
 All 17 existing archive/event contract tests pass. Lazy/eager fixed evaluation arrays and per-scenario outcomes agree exactly (docs/aligned-readback-comparison.json). Aligned policy development baseline remains 46/100 five-cap successes until an independent fixed-roster evaluation proves otherwise.
+
+## First longer aligned training interruption
+
+aligned-juggle-dev-001 terminates with a strict ledger error after 76 completed updates (622,592 additional frames): PERSIST without FOUND for environment 113 ball/rotor_1. Last durable checkpoint is update 75 at 33,480,704 lineage frames; update 76 and the unfinished rollout are not in that checkpoint. Preserve this failed run when accounting total development compute. There is no claim that all 100 requested updates finished.
+
+The error does not establish its cause. Router diagnostics now include physics progress, reads since each environment reset and active pairs. No ledger acceptance rule was relaxed. aligned-juggle-dev-002 resumes the durable checkpoint with these diagnostics and new physics episodes; a separate frozen-roster evaluation tests the durable checkpoint. Episode-reset manifold persistence remains a hypothesis to verify, not an implemented exception.

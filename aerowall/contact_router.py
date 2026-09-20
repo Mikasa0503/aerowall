@@ -18,6 +18,7 @@ class WallContactRouter:
         from omni.isaac.core.prims import RigidPrimView
         from omni.physx import get_physx_simulation_interface
         self.eager_gpu=eager_gpu
+        self.reads_since_reset=[0]*base.num_envs
         self.base=base;self.interface=get_physx_simulation_interface();self.batch=RallyBatch(base.num_envs)
         stage=omni.usd.get_context().get_stage();owners=[]
         for prim in stage.Traverse():
@@ -57,7 +58,9 @@ class WallContactRouter:
                 self.routes[tuple(sorted((path,self.ground)))]=(i,si,1,Kind.DRONE_GROUND)
 
     def reset(self,indices):
+        indices=list(indices)
         self.batch.reset(indices)
+        for i in indices:self.reads_since_reset[i]=0
 
     def read(self):
         from pxr import PhysicsSchemaTools
@@ -103,11 +106,15 @@ class WallContactRouter:
             if kind==Kind.WALL and samples:
                 x=float(self.base.envs_positions[i,0])+self.base.wall_front
                 eligible=all(abs(s['point'][0]-x)<.01 and abs(s['normal'][0])>.99 for s in samples)
-            impact=self.batch.ledgers[i].observe(pair,edge,kind,magnitude,point,eligible)
+            try:
+                impact=self.batch.ledgers[i].observe(pair,edge,kind,magnitude,point,eligible)
+            except RuntimeError as exc:
+                raise RuntimeError(f'{exc}; env={i}, reads_since_reset={self.reads_since_reset[i]}, progress={float(self.base.progress_buf[i])}, current_edge={edge}, impulse={magnitude}, active_pairs={self.batch.ledgers[i].active}') from exc
             if impact is not None:impacts[i].append(impact)
             events.append({'env_id':i,'pair':pair,'edge':edge,'kind':kind.value,'points':samples,'credited':impact is not None,'target_eligible':eligible,'point_source':point_source})
         unmatched=[(si,slot) for si,slots in enumerate(data) for slot,samples in enumerate(slots) if samples and (si,slot) not in observed] if self.eager_gpu else []
         self.gpu_queries_this_step=len(data)
         self.unmatched_gpu_scan_performed=self.eager_gpu
         self.unmatched_gpu_slots=unmatched # Diagnostic stale buffers, never score without current lifecycle headers.
+        self.reads_since_reset=[v+1 for v in self.reads_since_reset]
         return impacts,events
