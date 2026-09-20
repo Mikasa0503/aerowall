@@ -15,8 +15,8 @@ ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 
 
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',type=Path,required=True);p.add_argument('--dt',type=float,default=.02);a=p.parse_args()
-    assert a.dt in (.02,.01,.005)
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',type=Path,required=True);p.add_argument('--dt',type=float,default=.02);p.add_argument('--matched-initial-state',action='store_true');p.add_argument('--ccd',action='store_true');a=p.parse_args()
+    assert a.dt in (.02,.01,.005,.0025,.00125)
     a.output.parent.mkdir(parents=True,exist_ok=True)
     report={'status':'initializing','pid':os.getpid(),'scope':'tilted free-body bat launch fixture; no trained wall return',
             'script_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
@@ -39,7 +39,7 @@ def main():
         from omni_drones.utils.torch import euler_to_quaternion,quat_rotate
         from omni.physx.bindings._physx import SETTING_DISABLE_CONTACT_PROCESSING
         import carb.settings
-        with contact_reporting_before_initialization(enable_body_collisions=True):base=WallContactScene(cfg,headless=True)
+        with contact_reporting_before_initialization(enable_body_collisions=True,enable_ccd=a.ccd):base=WallContactScene(cfg,headless=True)
         carb.settings.get_settings().set_bool(SETTING_DISABLE_CONTACT_PROCESSING,False)
         router=WallContactRouter(base,eager_gpu=False);base.set_seed(20260921);base.reset()
         n=16;device=base.device
@@ -48,14 +48,33 @@ def main():
         dp=base.envs_positions[:,None,:].clone();dp[...,2]+=4.
         zero=torch.zeros(n,1,6,device=device)
         base.drone.set_world_poses(dp,quat);base.drone.set_velocities(zero)
-        park=dp.clone();park[...,0]-=1.5;base.ball.set_world_poses(park,quat);base.ball.set_velocities(zero)
-        base.sim.step(render=False) # Initialize articulated transforms and clear old manifolds.
-        router.reset(range(n))
-        bat=router.bats.get_world_poses()[0][router.bat_order][:,None,:]
+        if a.matched_initial_state:
+            # The pinned Air fixed bat joint has zero translation relative to
+            # root. No warmup integrates a dt-dependent fall before the trial.
+            bat=dp.clone()
+            router.reset(range(n))
+        else:
+            park=dp.clone();park[...,0]-=1.5;base.ball.set_world_poses(park,quat);base.ball.set_velocities(zero)
+            base.sim.step(render=False)
+            router.reset(range(n))
+            bat=router.bats.get_world_poses()[0][router.bat_order][:,None,:]
         ball=bat+normal*(.083+float(base.ball_radius)+.06)
         velocity=zero.clone();velocity[...,:3]=-8.*normal
         base.ball.set_world_poses(ball,quat);base.ball.set_velocities(velocity)
+        initial_state={
+            'drone_position':base.drone.get_world_poses()[0].cpu().tolist(),
+            'drone_quaternion':base.drone.get_world_poses()[1].cpu().tolist(),
+            'drone_velocity':base.drone.get_velocities().cpu().tolist(),
+            'joint_positions':base.drone._view.get_joint_positions().cpu().tolist(),
+            'joint_velocities':base.drone._view.get_joint_velocities().cpu().tolist(),
+            'ball_position':base.ball.get_world_poses()[0].cpu().tolist(),
+            'ball_velocity':base.ball.get_velocities().cpu().tolist(),
+            'ball_restitution':base.current_restitution.cpu().tolist()}
         events=[];trajectories=[];first_cap={};first_wall={}
+        import omni.usd
+        stage=omni.usd.get_context().get_stage()
+        ccd_flags={path:stage.GetPrimAtPath(path).GetAttribute(attr).Get() for path,attr in [('/physicsScene','physxScene:enableCCD'),('/World/envs/env_0/ball','physxRigidBody:enableCCD'),('/World/envs/env_0/Air_0/bat','physxRigidBody:enableCCD')]}
+        record(initial_state=initial_state,matched_initial_state=a.matched_initial_state,ccd_requested=a.ccd,ccd_flags=ccd_flags)
         record(status='running',tilt_degrees=angles.cpu().tolist(),initial_ball_position=ball.cpu().tolist(),initial_ball_velocity=velocity.cpu().tolist(),no_control=True,dt=base.dt)
         for step in range(round(2./base.dt)):
             before=base.ball.get_velocities().clone();base.sim.step(render=False)

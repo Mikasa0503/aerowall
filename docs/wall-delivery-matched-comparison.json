@@ -1,0 +1,644 @@
+{
+  "status": "passed",
+  "scope": "Matched fixture initial states and observed outcomes; not trained return success",
+  "runs": [
+    {
+      "run": "runs/wall-delivery-matched-dt020-01.json",
+      "dt": 0.02,
+      "ccd": false,
+      "initial_state_max_abs_differences": {
+        "drone_position": 0.0,
+        "drone_quaternion": 0.0,
+        "drone_velocity": 0.0,
+        "joint_positions": 0.0,
+        "joint_velocities": 0.0,
+        "ball_position": 0.0,
+        "ball_velocity": 0.0,
+        "ball_restitution": 0.0
+      },
+      "first_cap_count": 0,
+      "cap_then_wall": 0,
+      "wall_before_failure": 0,
+      "full_rallies": 0,
+      "cap_outgoing_velocities": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "failure_reasons": [
+        "ball_body",
+        "ball_body",
+        "ball_body",
+        "ball_body",
+        "ball_body",
+        "ball_body",
+        "ball_body",
+        "ball_body",
+        "ball_body",
+        "ball_body",
+        "ball_body",
+        "ball_body",
+        "ball_body",
+        "ball_body",
+        "ball_body",
+        "ball_body"
+      ]
+    },
+    {
+      "run": "runs/wall-delivery-matched-dt010-01.json",
+      "dt": 0.01,
+      "ccd": false,
+      "initial_state_max_abs_differences": {
+        "drone_position": 0.0,
+        "drone_quaternion": 0.0,
+        "drone_velocity": 0.0,
+        "joint_positions": 0.0,
+        "joint_velocities": 0.0,
+        "ball_position": 0.0,
+        "ball_velocity": 0.0,
+        "ball_restitution": 0.0
+      },
+      "first_cap_count": 16,
+      "cap_then_wall": 16,
+      "wall_before_failure": 14,
+      "full_rallies": 0,
+      "cap_outgoing_velocities": [
+        [
+          2.325385093688965,
+          -6.444957278972652e-08,
+          6.192741870880127
+        ],
+        [
+          2.652472972869873,
+          1.43665516816327e-07,
+          6.368889808654785
+        ],
+        [
+          2.8643267154693604,
+          -2.4566832124151006e-08,
+          6.237183094024658
+        ],
+        [
+          3.0714547634124756,
+          -1.2390576387133478e-07,
+          6.101207733154297
+        ],
+        [
+          3.2322936058044434,
+          8.1026442444454e-08,
+          5.882859706878662
+        ],
+        [
+          3.556689500808716,
+          -1.261492030835143e-07,
+          5.964171409606934
+        ],
+        [
+          3.535891532897949,
+          -8.919541016894073e-08,
+          5.46240758895874
+        ],
+        [
+          3.9425103664398193,
+          1.9936756245897413e-07,
+          5.648803234100342
+        ],
+        [
+          3.9125096797943115,
+          2.3403649151987338e-07,
+          5.188913345336914
+        ],
+        [
+          3.917222738265991,
+          3.362125369221758e-07,
+          4.817615032196045
+        ],
+        [
+          4.287790298461914,
+          5.750163722950674e-07,
+          4.913784027099609
+        ],
+        [
+          4.401430130004883,
+          1.1639098573823503e-07,
+          4.692082405090332
+        ],
+        [
+          4.411042213439941,
+          -1.5297635158617595e-08,
+          4.371567249298096
+        ],
+        [
+          4.826644420623779,
+          1.0677125317215541e-07,
+          4.464831352233887
+        ],
+        [
+          4.626693248748779,
+          3.6139123693601505e-08,
+          3.9696898460388184
+        ],
+        [
+          5.29017972946167,
+          -3.1373659226119344e-07,
+          4.242787837982178
+        ]
+      ],
+      "failure_reasons": [
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground"
+      ]
+    },
+    {
+      "run": "runs/wall-delivery-matched-dt005-01.json",
+      "dt": 0.005,
+      "ccd": false,
+      "initial_state_max_abs_differences": {
+        "drone_position": 0.0,
+        "drone_quaternion": 0.0,
+        "drone_velocity": 0.0,
+        "joint_positions": 0.0,
+        "joint_velocities": 0.0,
+        "ball_position": 0.0,
+        "ball_velocity": 0.0,
+        "ball_restitution": 0.0
+      },
+      "first_cap_count": 16,
+      "cap_then_wall": 16,
+      "wall_before_failure": 14,
+      "full_rallies": 0,
+      "cap_outgoing_velocities": [
+        [
+          2.325338840484619,
+          -4.96763554735935e-08,
+          6.241667747497559
+        ],
+        [
+          2.6684908866882324,
+          1.4817307203429664e-07,
+          6.457606315612793
+        ],
+        [
+          2.877687692642212,
+          -2.3252169967236114e-08,
+          6.3162407875061035
+        ],
+        [
+          3.0816617012023926,
+          -1.2000191418337636e-07,
+          6.171199321746826
+        ],
+        [
+          3.237025737762451,
+          8.648314775427934e-08,
+          5.940808296203613
+        ],
+        [
+          3.583191394805908,
+          -1.2659144488225138e-07,
+          6.059124946594238
+        ],
+        [
+          3.535832166671753,
+          -8.785816163481286e-08,
+          5.511363506317139
+        ],
+        [
+          3.9617369174957275,
+          2.1349413259486028e-07,
+          5.72636604309082
+        ],
+        [
+          3.9124553203582764,
+          2.1274271944093925e-07,
+          5.237883567810059
+        ],
+        [
+          3.9172377586364746,
+          3.440130740273162e-07,
+          4.8666887283325195
+        ],
+        [
+          4.287740230560303,
+          5.749927254328213e-07,
+          4.962777614593506
+        ],
+        [
+          4.401394844055176,
+          1.163855287700244e-07,
+          4.74109411239624
+        ],
+        [
+          4.411088466644287,
+          -1.5297434430294743e-08,
+          4.420662879943848
+        ],
+        [
+          4.826626777648926,
+          1.0810013861828338e-07,
+          4.513869285583496
+        ],
+        [
+          4.626742362976074,
+          3.613697785453951e-08,
+          4.0187883377075195
+        ],
+        [
+          5.299047946929932,
+          -3.139755904157937e-07,
+          4.299276828765869
+        ]
+      ],
+      "failure_reasons": [
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground"
+      ]
+    },
+    {
+      "run": "runs/wall-delivery-matched-dt0025-01.json",
+      "dt": 0.0025,
+      "ccd": false,
+      "initial_state_max_abs_differences": {
+        "drone_position": 0.0,
+        "drone_quaternion": 0.0,
+        "drone_velocity": 0.0,
+        "joint_positions": 0.0,
+        "joint_velocities": 0.0,
+        "ball_position": 0.0,
+        "ball_velocity": 0.0,
+        "ball_restitution": 0.0
+      },
+      "first_cap_count": 16,
+      "cap_then_wall": 16,
+      "wall_before_failure": 14,
+      "full_rallies": 0,
+      "cap_outgoing_velocities": [
+        [
+          2.324974298477173,
+          -5.107918354951835e-08,
+          6.289717674255371
+        ],
+        [
+          2.668382167816162,
+          1.45612986557353e-07,
+          6.506377220153809
+        ],
+        [
+          2.876084089279175,
+          -2.3273488025665756e-08,
+          6.361692428588867
+        ],
+        [
+          3.081334352493286,
+          -1.242330540662806e-07,
+          6.2195658683776855
+        ],
+        [
+          3.2381691932678223,
+          8.119175021192859e-08,
+          5.992007732391357
+        ],
+        [
+          3.5830576419830322,
+          -1.2260589699053526e-07,
+          6.107927322387695
+        ],
+        [
+          3.5368354320526123,
+          -1.0130043648359788e-07,
+          5.562007904052734
+        ],
+        [
+          3.959538221359253,
+          2.0548483803395357e-07,
+          5.772160530090332
+        ],
+        [
+          3.913538694381714,
+          2.343365821388943e-07,
+          5.288421630859375
+        ],
+        [
+          3.9180190563201904,
+          3.340167040732922e-07,
+          4.916738033294678
+        ],
+        [
+          4.288954257965088,
+          8.529760862074909e-07,
+          5.013272762298584
+        ],
+        [
+          4.402548789978027,
+          1.1654090315005305e-07,
+          4.791426658630371
+        ],
+        [
+          4.411950588226318,
+          -1.499127399995359e-08,
+          4.4706196784973145
+        ],
+        [
+          4.825894832611084,
+          1.2826751571992645e-07,
+          4.562211513519287
+        ],
+        [
+          4.626187324523926,
+          3.618059807308782e-08,
+          4.067335605621338
+        ],
+        [
+          5.301028728485107,
+          -3.19840040674535e-07,
+          4.349986553192139
+        ]
+      ],
+      "failure_reasons": [
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground"
+      ]
+    },
+    {
+      "run": "runs/wall-delivery-matched-dt00125-01.json",
+      "dt": 0.00125,
+      "ccd": false,
+      "initial_state_max_abs_differences": {
+        "drone_position": 0.0,
+        "drone_quaternion": 0.0,
+        "drone_velocity": 0.0,
+        "joint_positions": 0.0,
+        "joint_velocities": 0.0,
+        "ball_position": 0.0,
+        "ball_velocity": 0.0,
+        "ball_restitution": 0.0
+      },
+      "first_cap_count": 16,
+      "cap_then_wall": 16,
+      "wall_before_failure": 14,
+      "full_rallies": 0,
+      "cap_outgoing_velocities": [
+        [
+          2.324955940246582,
+          -5.1413792334642494e-08,
+          6.3019328117370605
+        ],
+        [
+          2.666959762573242,
+          1.483263503132548e-07,
+          6.515125274658203
+        ],
+        [
+          2.8760597705841064,
+          -2.361539230832932e-08,
+          6.373895168304443
+        ],
+        [
+          3.0813045501708984,
+          -1.2559901563236053e-07,
+          6.231772422790527
+        ],
+        [
+          3.2381396293640137,
+          7.983954475321298e-08,
+          6.004215717315674
+        ],
+        [
+          3.583010196685791,
+          -1.2123014414555655e-07,
+          6.120119571685791
+        ],
+        [
+          3.536783218383789,
+          -8.930657457995039e-08,
+          5.5742082595825195
+        ],
+        [
+          3.959505796432495,
+          1.986384745578107e-07,
+          5.7843732833862305
+        ],
+        [
+          3.911787509918213,
+          2.3962320483406074e-07,
+          5.298279285430908
+        ],
+        [
+          3.9164860248565674,
+          3.3396241860828013e-07,
+          4.9270339012146
+        ],
+        [
+          4.288924217224121,
+          5.117685759614687e-07,
+          5.025489807128906
+        ],
+        [
+          4.402512550354004,
+          1.271346690145947e-07,
+          4.803653717041016
+        ],
+        [
+          4.41194486618042,
+          -1.5317295876116077e-08,
+          4.482851505279541
+        ],
+        [
+          4.825860023498535,
+          1.0955967155723556e-07,
+          4.5744404792785645
+        ],
+        [
+          4.627536296844482,
+          3.586049146520054e-08,
+          4.080817699432373
+        ],
+        [
+          5.298398971557617,
+          -3.1571698855259456e-07,
+          4.360043525695801
+        ]
+      ],
+      "failure_reasons": [
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground",
+        "drone_ground"
+      ]
+    },
+    {
+      "run": "runs/wall-delivery-matched-ccd-dt020-01.json",
+      "dt": 0.02,
+      "ccd": true,
+      "initial_state_max_abs_differences": {
+        "drone_position": 0.0,
+        "drone_quaternion": 0.0,
+        "drone_velocity": 0.0,
+        "joint_positions": 0.0,
+        "joint_velocities": 0.0,
+        "ball_position": 0.0,
+        "ball_velocity": 0.0,
+        "ball_restitution": 0.0
+      },
+      "first_cap_count": 0,
+      "cap_then_wall": 0,
+      "wall_before_failure": 0,
+      "full_rallies": 0,
+      "cap_outgoing_velocities": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "failure_reasons": [
+        "ball_body",
+        "ball_body",
+        "ball_body",
+        "ball_body",
+        "ball_body",
+        "ball_body",
+        "ball_body",
+        "ball_body",
+        "ball_body",
+        "ball_body",
+        "ball_body",
+        "ball_body",
+        "ball_body",
+        "ball_body",
+        "ball_body",
+        "ball_body"
+      ]
+    }
+  ],
+  "adjacent_comparisons": [
+    {
+      "from": "runs/wall-delivery-matched-dt020-01.json",
+      "to": "runs/wall-delivery-matched-dt010-01.json",
+      "paired_wall_cases": 13,
+      "max_wall_contact_point_difference_m": 4.398410266336343,
+      "paired_cap_cases": 0,
+      "max_outgoing_vector_difference_mps": null,
+      "max_ball_position_difference_at_0_1s_m": 0.3189041474112874,
+      "note": "Post-impact discrete samples differ in sampling time; this is not an instantaneous rebound or complete convergence proof."
+    },
+    {
+      "from": "runs/wall-delivery-matched-dt010-01.json",
+      "to": "runs/wall-delivery-matched-dt005-01.json",
+      "paired_wall_cases": 16,
+      "max_wall_contact_point_difference_m": 0.1118478775024414,
+      "paired_cap_cases": 16,
+      "max_outgoing_vector_difference_mps": 0.09858257742541458,
+      "max_ball_position_difference_at_0_1s_m": 0.04369658755297366,
+      "note": "Post-impact discrete samples differ in sampling time; this is not an instantaneous rebound or complete convergence proof."
+    },
+    {
+      "from": "runs/wall-delivery-matched-dt005-01.json",
+      "to": "runs/wall-delivery-matched-dt0025-01.json",
+      "paired_wall_cases": 16,
+      "max_wall_contact_point_difference_m": 0.07915306091308594,
+      "paired_cap_cases": 16,
+      "max_outgoing_vector_difference_mps": 0.051212203198414304,
+      "max_ball_position_difference_at_0_1s_m": 0.057374993892678916,
+      "note": "Post-impact discrete samples differ in sampling time; this is not an instantaneous rebound or complete convergence proof."
+    },
+    {
+      "from": "runs/wall-delivery-matched-dt0025-01.json",
+      "to": "runs/wall-delivery-matched-dt00125-01.json",
+      "paired_wall_cases": 16,
+      "max_wall_contact_point_difference_m": 0.014513492584228516,
+      "paired_cap_cases": 16,
+      "max_outgoing_vector_difference_mps": 0.013549412527898786,
+      "max_ball_position_difference_at_0_1s_m": 0.009900025108070264,
+      "note": "Post-impact discrete samples differ in sampling time; this is not an instantaneous rebound or complete convergence proof."
+    },
+    {
+      "from": "runs/wall-delivery-matched-dt00125-01.json",
+      "to": "runs/wall-delivery-matched-ccd-dt020-01.json",
+      "paired_wall_cases": 13,
+      "max_wall_contact_point_difference_m": 4.518878721716116,
+      "paired_cap_cases": 0,
+      "max_outgoing_vector_difference_mps": null,
+      "max_ball_position_difference_at_0_1s_m": 0.41474124430549697,
+      "note": "Post-impact discrete samples differ in sampling time; this is not an instantaneous rebound or complete convergence proof."
+    }
+  ]
+}
