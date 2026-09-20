@@ -31,7 +31,9 @@ def main():
     parser.add_argument('--save-every', type=int, default=50)
     parser.add_argument('--resume', type=Path)
     parser.add_argument('--initialize-policy', type=Path, help='Transfer weights only; prior frames remain in the budget')
+    parser.add_argument('--physics-dt',type=float,default=.02)
     args = parser.parse_args()
+    assert args.physics_dt in (.02,.01,.005,.0025,.00125)
     if min(args.updates, args.save_every) < 1 or not 16 <= args.num_envs <= 512:
         parser.error('Require positive update/save counts and 16–512 environments')
     assert not (args.resume and args.initialize_policy), 'Choose resume or transfer, not both'
@@ -62,6 +64,7 @@ def main():
         with initialize_config_dir(version_base=None, config_dir=str(UPSTREAM / 'cfg')):
             cfg = compose(config_name='train', overrides=overrides)
         OmegaConf.resolve(cfg); OmegaConf.set_struct(cfg, False)
+        cfg.sim.dt=args.physics_dt;cfg.sim.substeps=round(.02/args.physics_dt)
         cfg.wall_fixture = {'center':[2.5,0.,3.], 'dimensions':[.2,4.,6.], 'restitution':.8, 'align_cap_to_visual_top':True}
         # This run's actual budget overrides the author shell's two-billion cap.
         frames_per_batch = args.num_envs * int(cfg.algo.train_every)
@@ -88,8 +91,11 @@ def main():
         with contact_reporting_before_initialization(enable_body_collisions=True):
             base = AlignedJuggle(cfg, headless=True)
         carb.settings.get_settings().set_bool(SETTING_DISABLE_CONTACT_PROCESSING, False)
-        controller = PID_controller_flightmare(cfg.sim.dt, base.drone.params, base.device).to(base.device)
+        controller = PID_controller_flightmare(.02, base.drone.params, base.device).to(base.device)
+        controller_calls = 0
         def finite_output(module, inputs, output):
+            nonlocal controller_calls
+            controller_calls += 1
             assert torch.isfinite(output).all(), 'Non-finite controller output before upstream cleanup'
         controller.register_forward_hook(finite_output)
         env = TransformedEnv(base, Compose(InitTracker(), ResetSafePIDRateController(controller))).train()
@@ -118,7 +124,7 @@ def main():
         checkpoint_dir.mkdir(parents=True, exist_ok=False)
         metric_path = args.output.with_suffix('.metrics.jsonl')
         started = time.monotonic()
-        record(status='training', num_envs=base.num_envs, frames_per_batch=frames_per_batch,
+        record(status='training', physics_dt=args.physics_dt, policy_dt=.02, physics_substeps=base.substeps, num_envs=base.num_envs, frames_per_batch=frames_per_batch,
                prior_environment_frames=prior_frames, learning_config_hash=config_hash,
                budget_this_run=args.updates * frames_per_batch, metrics=str(metric_path), checkpoints=str(checkpoint_dir))
         for index, data in enumerate(collector):
@@ -134,13 +140,15 @@ def main():
                 for key in ['return', 'episode_len', 'num_true_hits', 'wrong_hit', 'ball_too_low', 'drone_too_low']:
                     value = data['next', 'stats', key][done]
                     stats[key] = float(value.mean().item())
+            assert controller_calls == base.contact_totals['policy_steps']
+            assert base.contact_totals['physics_steps'] == controller_calls * base.substeps
             completed = index + 1
             frames = prior_frames + int(collector._frames)
             row = {'update_this_run': completed, 'total_updates': policy.n_updates,
                    'environment_frames': frames, 'completed_episodes': episodes,
                    'legacy_collector_stats_unvalidated': stats,
                    'terminal_episodes': list(base.completed_episodes), 'metrics': info,
-                   'elapsed_seconds': time.monotonic() - started, 'rollout_fps': collector._fps, 'contact_totals': dict(base.contact_totals)}
+                   'elapsed_seconds': time.monotonic() - started, 'rollout_fps': collector._fps, 'controller_calls': controller_calls, 'contact_totals': dict(base.contact_totals)}
             with metric_path.open('a') as handle:
                 handle.write(json.dumps(row) + '\n')
             base.completed_episodes.clear()

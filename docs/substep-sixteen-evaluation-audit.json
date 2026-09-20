@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "evaluation": "runs/aligned-contact-eval-substep16-01.json",
+  "checks": {
+    "controller_equals_policy": true,
+    "physics_clock": true,
+    "ten_second_limit": true,
+    "event_clocks": true,
+    "no_credit_on_illegal_physics_step": true,
+    "episode_counts_match": true
+  },
+  "timing": {
+    "controller_calls": 500,
+    "policy_steps": 500,
+    "physics_steps": 8000,
+    "policy_dt": 0.02,
+    "physics_dt": 0.00125
+  },
+  "event_count": 13508,
+  "legal_credits": 2157,
+  "scope": "Clock and event/statistics consistency only; contact geometry and physical fidelity have separate fixtures."
+}

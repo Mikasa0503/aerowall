@@ -1,0 +1,30 @@
+{
+  "old_run": "aligned-contact-eval-trained-03",
+  "new_run": "aligned-contact-eval-substep1-02",
+  "outcomes_equal": true,
+  "trajectory_arrays_equal": {
+    "drone_position": true,
+    "drone_quaternion_wxyz": true,
+    "drone_velocity": true,
+    "ball_position": true,
+    "ball_velocity": true,
+    "bat_position": true,
+    "bat_quaternion_wxyz": true,
+    "bat_velocity": true,
+    "action": true,
+    "active_before": true,
+    "bat_normal": true,
+    "dt": true
+  },
+  "added_metadata_keys": [
+    "physics_dt"
+  ],
+  "timing_audit": {
+    "controller_calls": 500,
+    "policy_steps": 500,
+    "physics_steps": 500,
+    "policy_dt": 0.02,
+    "physics_dt": 0.02
+  },
+  "status": "passed"
+}

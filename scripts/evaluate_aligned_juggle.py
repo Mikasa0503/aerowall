@@ -28,13 +28,17 @@ def main():
     parser.add_argument('--seed', type=int, default=20260921)
     parser.add_argument('--lazy-contacts',action='store_true',help='Read GPU buffers only when a current pair header lacks valid CPU points')
     parser.add_argument('--contact-task', action='store_true', help='Use actual-contact curriculum boundaries, removing legacy hit cooldown termination')
+    parser.add_argument('--physics-dt',type=float,default=.02)
     args = parser.parse_args()
+    assert args.physics_dt in (.02,.01,.005,.0025,.00125)
+    assert args.contact_task or args.physics_dt == .02
     args.output.parent.mkdir(parents=True, exist_ok=True)
     report = {'status': 'initializing', 'pid': os.getpid(), 'scope': '100 frozen development scenarios; original checkpoint on body-enabled aligned WallContactScene',
               'checkpoint': str(args.checkpoint), 'checkpoint_sha256': hashlib.sha256(args.checkpoint.read_bytes()).hexdigest(),
               'script_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
               'classifier_sha256': hashlib.sha256((ROOT/'scripts/contact_geometry.py').read_bytes()).hexdigest(),
-              'formal_success_gate_validated': False}
+              'formal_success_gate_validated': False,
+              'source_hashes':{name:hashlib.sha256((ROOT/name).read_bytes()).hexdigest() for name in ['aerowall/envs/aligned_juggle.py','aerowall/contact_router.py','aerowall/rally_events.py','scripts/runtime_adapters.py']}}
     def record(**values):
         report.update(values)
         temporary = args.output.with_suffix('.tmp'); temporary.write_text(json.dumps(report, indent=2)+'\n'); temporary.replace(args.output)
@@ -49,6 +53,8 @@ def main():
         cfg = OmegaConf.load(args.config)
         cfg.task.env.num_envs = 100; cfg.env.num_envs = 100
         cfg.wall_fixture={'center':[2.5,0.,3.],'dimensions':[.2,4.,6.],'restitution':.8,'align_cap_to_visual_top':True}
+        cfg.sim.dt=args.physics_dt;cfg.sim.substeps=round(.02/args.physics_dt)
+        cfg.record_contact_kinematics=args.contact_task
         cfg.headless = True; cfg.wandb.mode = 'disabled'; cfg.seed = args.seed
         sys.argv = [sys.argv[0], '--portable', '--portable-root', str(ROOT / '.cache/kit')]
         app = init_simulation_app(cfg)
@@ -76,10 +82,17 @@ def main():
             else:
                 base = WallContactScene(cfg,headless=True)
         router=base.router if args.contact_task else WallContactRouter(base,eager_gpu=not args.lazy_contacts)
-        record(episode_rule='physical_contact_curriculum' if args.contact_task else 'legacy_upstream')
+        record(physics_dt=args.physics_dt,policy_dt=.02,physics_substeps=cfg.sim.substeps,episode_rule='physical_contact_curriculum' if args.contact_task else 'legacy_upstream')
         record(contact_readback='lazy_current_pairs' if args.lazy_contacts else 'eager_all_pairs',bat_overlay=base.bat_overlay,body_collisions_enabled=True,wall_fixture=OmegaConf.to_container(cfg.wall_fixture,resolve=True),
                scope_note=('Physical-contact curriculum boundaries' if args.contact_task else 'Original SingleJuggle boundaries')+'; not WallRally policy evaluation')
-        controller = PID_controller_flightmare(cfg.sim.dt, base.drone.params, base.device).to(base.device)
+        controller = PID_controller_flightmare(.02, base.drone.params, base.device).to(base.device)
+        assert abs(float(controller.dt)-.02)<1e-9 and abs(base.drone.dt-args.physics_dt)<1e-9
+        controller_calls = 0
+        def count_controller(module, inputs, output):
+            nonlocal controller_calls
+            controller_calls += 1
+            assert torch.isfinite(output).all()
+        controller.register_forward_hook(count_controller)
         env = TransformedEnv(base, Compose(InitTracker(), ResetSafePIDRateController(controller))).eval()
         policy = MAPPOPolicy(cfg.algo, agent_spec=env.agent_spec['drone'], device=base.device)
         payload = torch.load(args.checkpoint, map_location=base.device)
@@ -149,25 +162,27 @@ def main():
                 com = after['bat_position'] + quat_rotate(after['bat_quaternion_wxyz'], com_local)
                 illegal = {}
                 impacts,routed=(base.last_impacts,base.last_events) if args.contact_task else router.read()
-                gpu_queries+=router.gpu_queries_this_step
+                gpu_queries+=base.action_gpu_queries if args.contact_task else router.gpu_queries_this_step
                 for index,rows in enumerate(impacts):
                     bad=sorted({row.kind.value for row in rows if row.kind in ILLEGAL})
                     if bad:illegal[index]=bad[0]
+                if args.contact_task:
+                    illegal={i:reason for i,reason in enumerate(base.action_failure_reason) if reason is not None}
                 for event0 in routed:
                     index=event0['env_id']
                     if not bool(active_before[index]):continue
                     actors=list(event0['pair']);ball=f'/World/envs/env_{index}/ball';bat=f'/World/envs/env_{index}/Air_0/bat'
                     ball_bat=set(actors)=={ball,bat};new_entry=event0['edge']=='found'
                     points0=event0['points'];top=event0['kind']=='cap' and bool(points0)
-                    credited_now=top and event0['credited'] and index not in illegal
+                    credited_now=event0['curriculum_cap_credit'] if args.contact_task else top and event0['credited'] and index not in illegal
                     if ball_bat and new_entry:ball_bat_entries[index]+=1
                     if credited_now:top_entries[index]+=1
-                    event={**event0,'step':step,'time':(step+1)*base.dt,'scenario_id':index,
+                    event={**event0,'step':step,'time':step*.02+event0.get('physics_time_offset',.02),'scenario_id':index,
                            'type':'ContactEventType.CONTACT_'+event0['edge'].upper(),
                            'actor0':actors[0],'actor1':actors[1],'new_entry':new_entry,
                            'impulse_norm':sum(p['impulse'] for p in points0),
                            'credited_top_impact':credited_now,'provisional_top_contact':top,
-                           'same_step_illegal_priority':index in illegal}
+                           'same_step_illegal_priority':event0.get('physics_step_illegal_priority',index in illegal), 'policy_interval_has_illegal_contact':index in illegal, 'policy_step':step, 'physics_step':step*cfg.sim.substeps+event0.get('physics_substep',0)}
                     if points0:
                         point_world=torch.tensor(points0[0]['point'],device=base.device)
                         point_velocity=after['bat_velocity'][index,:3]+torch.cross(after['bat_velocity'][index,3:],point_world-com[index],dim=0)
@@ -175,6 +190,8 @@ def main():
                                      bat_contact_point_velocity=point_velocity.cpu().tolist(),
                                      ball_velocity_before=before['ball_velocity'][index].cpu().tolist(),
                                      ball_velocity_after=after['ball_velocity'][index].cpu().tolist())
+                        if args.contact_task:
+                            for key in ['ball_velocity_before','ball_velocity_after','bat_normal','bat_contact_point_velocity']:event[key]=event0[key]
                     event_file.write(json.dumps(event)+'\n');events.append(event)
                 done = nxt['done'].flatten()
                 for index in range(100):
@@ -196,8 +213,12 @@ def main():
                     router.reset(reset_ids)
                 else: td = nxt
                 if (step+1)%100 == 0: record(completed_steps=step+1,completed_scenarios=int(finished.sum()))
+        if args.contact_task:
+            assert controller_calls == base.contact_totals['policy_steps'] == len(trajectories)
+            assert base.contact_totals['physics_steps'] == controller_calls * base.substeps
+            record(timing_audit={'controller_calls':controller_calls, 'policy_steps':len(trajectories), 'physics_steps':base.contact_totals['physics_steps'], 'policy_dt':.02, 'physics_dt':args.physics_dt},reset_reentries=router.reset_reentries)
         trajectory_path = args.output.with_suffix('.trajectory.npz')
-        np.savez_compressed(trajectory_path, **{k:np.stack([row[k] for row in trajectories]) for k in trajectories[0]}, dt=base.dt)
+        np.savez_compressed(trajectory_path, **{k:np.stack([row[k] for row in trajectories]) for k in trajectories[0]}, dt=.02,physics_dt=args.physics_dt)
         args.output.with_suffix('.outcomes.json').write_text(json.dumps(outcomes,indent=2)+'\n')
         record(status='passed',evaluation_elapsed_seconds=time.perf_counter()-evaluation_started,gpu_contact_buffer_queries=gpu_queries, completed_scenarios=int(finished.sum()), steps=len(trajectories), outcomes=outcomes,
                ball_bat_entry_distribution=ball_bat_entries, provisional_top_entry_distribution=top_entries,

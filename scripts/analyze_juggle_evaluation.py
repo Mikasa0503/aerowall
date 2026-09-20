@@ -23,7 +23,7 @@ next_hit=hits[1] if len(hits)>1 else None
 if next_hit is not None:n=min(n,next_hit['step']+3)
 t=np.arange(1,n+1)*dt
 cycle_label='next cap impact observed' if next_hit is not None else 'no return observed before episode ended'
-first_departure=next((e for e in events if e['scenario_id']==index and 'CONTACT_LOST' in e['type'] and first is not None and e['step']>first and next_hit is not None and e['step']<next_hit['step'] and {e['actor0'],e['actor1']}=={hits[0]['actor0'],hits[0]['actor1']}),None)
+first_departure=next((e for e in events if e['scenario_id']==index and 'CONTACT_LOST' in e['type'] and first is not None and e['time']>hits[0]['time'] and next_hit is not None and e['time']<next_hit['time'] and {e['actor0'],e['actor1']}=={hits[0]['actor0'],hits[0]['actor1']}),None)
 ball=z['ball_position'][:n,index]; drone=z['drone_position'][:n,index]
 vz=z['ball_velocity'][:n,index,2]
 apex=next((k for k in range(first+1,n) if vz[k]<=0),n-1) if first is not None else n-1
@@ -39,7 +39,9 @@ for j,name in enumerate('xyz'):
 axes[1,0].set_ylabel('Unit normal');axes[1,1].set_ylabel('Angular velocity (rad/s)')
 for ax in axes.flat:
  if first is not None:
-  for left,right,color in [(0,first*dt,'#edf2fa'),(first*dt,(first+1)*dt,'#ffb56b'),((first+1)*dt,(apex+1)*dt,'#e6f4df'),((apex+1)*dt,n*dt,'#f7e8ed')]:
+  contact_time=hits[0]['time']
+  departure_time=first_departure['time'] if first_departure else contact_time+r.get('physics_dt',dt)
+  for left,right,color in [(0,contact_time,'#edf2fa'),(contact_time,departure_time,'#ffb56b'),(departure_time,(apex+1)*dt,'#e6f4df'),((apex+1)*dt,n*dt,'#f7e8ed')]:
    ax.axvspan(left,right,color=color,alpha=.7)
   for hit in hits:
    if hit['step']<n:ax.axvline(hit['time'],color='#b6591a',ls=':',lw=.8)
@@ -57,6 +59,10 @@ summary={'checkpoint':r['checkpoint'],'checkpoint_sha256':r['checkpoint_sha256']
          'provisional_top_entry_distribution':dict(collections.Counter(r['provisional_top_entry_distribution'])),
          'five_physical_ball_bat_rate':sum(v>=5 for v in r['ball_bat_entry_distribution'])/100,
          'failure_flags':dict(reasons),'selected_top_events':hits,
+         'policy_sample_dt':dt,'physics_dt':r.get('physics_dt',dt),
+         'first_contact_time':None if not hits else hits[0]['time'],
+         'first_departure_time':None if first_departure is None else first_departure['time'],
+         'five_legal_cap_rate':sum(v>=5 for v in r['provisional_top_entry_distribution'])/100,
          'first_contact_step':first,'first_post_contact_apex_step':apex,
          'episode_time_limit':bool(selected['upstream_stats'].get('truncated',0)),
          'contact_to_next_contact_seconds':None if next_hit is None else next_hit['time']-hits[0]['time'],
