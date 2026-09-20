@@ -1,0 +1,13 @@
+{
+  "checkpoint_sha256": "6176a4b4ba1b470155821e2d85360d5e63ced9596f519f3ed0763d03757c2e0e",
+  "scenario_sha256": "4d50654f01f737f05e4afdb9a9c9a96b9bb1bbda02dca6dc8182522e32ac6cab",
+  "seed_count": 1,
+  "scenario_count": 100,
+  "five_cap_impacts": 95,
+  "episode_time_limits": 95,
+  "completed_return_intervals": 1382,
+  "return_interval_median": 0.64,
+  "return_interval_min": 0.5999999999999996,
+  "return_interval_max": 0.8,
+  "warning": "completed inter-contact flight intervals, not hover convergence; final unrecovered intervals are censored by timeout/failure"
+}

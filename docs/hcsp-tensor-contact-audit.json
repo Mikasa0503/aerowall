@@ -1,0 +1,124 @@
+{
+  "sample_count": 13,
+  "max_relative_normal_momentum_error": 0.021285920709813236,
+  "samples": [
+    {
+      "step": 48,
+      "env_id": 3,
+      "agent_id": 0,
+      "normal_impulse": 0.0437319278717041,
+      "momentum_normal_component": 0.04373190696650068,
+      "relative_error": 4.780306846715273e-07,
+      "closest_endpoint_ball_center_distance": 0.11128904074704886
+    },
+    {
+      "step": 50,
+      "env_id": 1,
+      "agent_id": 0,
+      "normal_impulse": 0.0453978069126606,
+      "momentum_normal_component": 0.0453977827814599,
+      "relative_error": 5.31549921427068e-07,
+      "closest_endpoint_ball_center_distance": 0.10645739857723974
+    },
+    {
+      "step": 52,
+      "env_id": 9,
+      "agent_id": 0,
+      "normal_impulse": 0.04539718106389046,
+      "momentum_normal_component": 0.04544037901320522,
+      "relative_error": 0.0009515557640895186,
+      "closest_endpoint_ball_center_distance": 0.025255488304303846
+    },
+    {
+      "step": 54,
+      "env_id": 4,
+      "agent_id": 0,
+      "normal_impulse": 0.050211284309625626,
+      "momentum_normal_component": 0.050211259386709055,
+      "relative_error": 4.963608661574157e-07,
+      "closest_endpoint_ball_center_distance": 0.04087667225494216
+    },
+    {
+      "step": 54,
+      "env_id": 6,
+      "agent_id": 0,
+      "normal_impulse": 0.046403512358665466,
+      "momentum_normal_component": 0.04640347572070954,
+      "relative_error": 7.89551352123558e-07,
+      "closest_endpoint_ball_center_distance": 0.10079233007907795
+    },
+    {
+      "step": 55,
+      "env_id": 10,
+      "agent_id": 0,
+      "normal_impulse": 0.05153614655137062,
+      "momentum_normal_component": 0.05043915222218883,
+      "relative_error": 0.021285920709813236,
+      "closest_endpoint_ball_center_distance": 0.01713251332202092
+    },
+    {
+      "step": 57,
+      "env_id": 7,
+      "agent_id": 0,
+      "normal_impulse": 0.05295427516102791,
+      "momentum_normal_component": 0.05295424891162983,
+      "relative_error": 4.956993179294578e-07,
+      "closest_endpoint_ball_center_distance": 0.11208285627818741
+    },
+    {
+      "step": 83,
+      "env_id": 12,
+      "agent_id": 1,
+      "normal_impulse": 0.05706855282187462,
+      "momentum_normal_component": 0.05706852288797967,
+      "relative_error": 5.245252151308352e-07,
+      "closest_endpoint_ball_center_distance": 0.08048062193998376
+    },
+    {
+      "step": 90,
+      "env_id": 1,
+      "agent_id": 1,
+      "normal_impulse": 0.053058262914419174,
+      "momentum_normal_component": 0.05300641584932485,
+      "relative_error": 0.0009771723054324954,
+      "closest_endpoint_ball_center_distance": 0.0085613060070979
+    },
+    {
+      "step": 91,
+      "env_id": 9,
+      "agent_id": 1,
+      "normal_impulse": 0.05593625083565712,
+      "momentum_normal_component": 0.05593626273394026,
+      "relative_error": 2.127114879118539e-07,
+      "closest_endpoint_ball_center_distance": 0.1112420580125249
+    },
+    {
+      "step": 92,
+      "env_id": 3,
+      "agent_id": 1,
+      "normal_impulse": 0.06061935052275658,
+      "momentum_normal_component": 0.06068069694608136,
+      "relative_error": 0.0010119940711300144,
+      "closest_endpoint_ball_center_distance": 0.08478487135758965
+    },
+    {
+      "step": 99,
+      "env_id": 6,
+      "agent_id": 1,
+      "normal_impulse": 0.03964482620358467,
+      "momentum_normal_component": 0.03964480720940075,
+      "relative_error": 4.791087700224006e-07,
+      "closest_endpoint_ball_center_distance": 0.08785734311982295
+    },
+    {
+      "step": 101,
+      "env_id": 2,
+      "agent_id": 1,
+      "normal_impulse": 0.03525499999523163,
+      "momentum_normal_component": 0.035254999852497644,
+      "relative_error": 4.048616774169735e-09,
+      "closest_endpoint_ball_center_distance": 0.0662968635046181
+    }
+  ],
+  "scope": "single normal-contact sample at active first-episode step; no claim to include tangential or unfiltered simultaneous contacts"
+}

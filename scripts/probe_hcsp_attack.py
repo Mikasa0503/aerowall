@@ -21,6 +21,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--hover',action='store_true',help='Replay Attack_hover policy chaining, including trained recovery')
+    parser.add_argument('--tensor-contacts',action='store_true',help='Read per-environment GPU contact buffers as a diagnostic')
     args=parser.parse_args()
     args.output.parent.mkdir(parents=True,exist_ok=True)
     report={'status':'initializing','pid':os.getpid(),'scope':'HCSP Attack reference replay; original PRT, not CTBR',
@@ -91,6 +92,17 @@ def main():
                                'normal':list(data[h.contact_data_offset+j].normal),
                                'impulse':list(data[h.contact_data_offset+j].impulse)} for j in range(h.num_contact_data)]})
         callback_subscription=interface.subscribe_contact_report_events(contact_callback)
+        tensor_views=[];tensor_samples=[]
+        if args.tensor_contacts:
+            from omni.isaac.core.prims.rigid_contact_view import RigidContactView
+            for index in range(16):
+                view=RigidContactView(f'/World/envs/env_{index}/ball',
+                    [f'/World/envs/env_{index}/Iris_{j}/base_link' for j in range(2)],
+                    name=f'reference_ball_contacts_{index}',prepare_contact_sensors=False,
+                    disable_stablization=False,apply_rigid_body_api=False,max_contact_count=32)
+                view.initialize()
+                assert view.num_shapes==1 and view.num_filters==2
+                tensor_views.append(view)
         env.set_seed(20260921)
         with torch.no_grad():td=env.reset()
         body_com_local=base.drone.base_link.get_coms()[0].reshape(16,2,3)
@@ -116,6 +128,25 @@ def main():
                         'ball_velocity':base.ball.get_velocities().clone()}
                 assert all(torch.isfinite(v).all() for v in values.values()),'Nonfinite HCSP state'
                 frames.append({**{k:v.cpu().numpy() for k,v in values.items()},**{f'action_{k}':v for k,v in action_data.items()},**{f'phase_before_{k}':v for k,v in phase_before.items()},'active_before':active.cpu().numpy()})
+                for env_id,view in enumerate(tensor_views):
+                    impulses,positions,normals,separations,counts,starts=view.get_contact_force_data(dt=1.0)
+                    assert impulses.device.type=='cuda' and positions.device.type=='cuda'
+                    assert int(counts.sum())<32, 'Tensor contact buffer may be saturated'
+                    for agent_id in range(2):
+                        count=int(counts[0,agent_id]);start=int(starts[0,agent_id])
+                        for contact in range(start,start+count):
+                            magnitude=float(impulses[contact].item())
+                            if abs(magnitude)<1e-8:continue
+                            assert torch.isfinite(positions[contact]).all() and .9<float(normals[contact].norm())<1.1
+                            rotation=torch.cross(body_vel[env_id,agent_id,3:],positions[contact]-body_com[env_id,agent_id],dim=0)
+                            tensor_samples.append({'step':step,'env_id':env_id,'agent_id':agent_id,
+                                'first_episode_active':bool(active[env_id]),'normal_impulse':magnitude,
+                                'position':positions[contact].cpu().tolist(),'normal':normals[contact].cpu().tolist(),
+                                'separation':float(separations[contact].item()),
+                                'body_normal':body_normal[env_id,agent_id].cpu().tolist(),
+                                'translation_velocity':body_vel[env_id,agent_id,:3].cpu().tolist(),
+                                'rotational_velocity':rotation.cpu().tolist(),
+                                'contact_point_velocity':(body_vel[env_id,agent_id,:3]+rotation).cpu().tolist()})
                 headers,data=interface.get_contact_report()
                 for h in headers:
                     row={'step':step,'time':(step+1)*base.dt,'type':str(h.type),
@@ -152,6 +183,8 @@ def main():
         trajectory=args.output.with_suffix('.trajectory.npz')
         np.savez_compressed(trajectory,**{k:np.stack([v[k] for v in frames]) for k in frames[0]},dt=base.dt)
         args.output.with_suffix('.events.json').write_text(json.dumps(events,indent=2)+'\n')
+        args.output.with_suffix('.tensor-contacts.json').write_text(json.dumps(tensor_samples,indent=2)+'\n')
+        record(tensor_contact_points=len(tensor_samples),tensor_readback_enabled=args.tensor_contacts)
         args.output.with_suffix('.callback-events.json').write_text(json.dumps(callback_reports,indent=2)+'\n')
         record(callback_event_count=len(callback_reports),callback_positive_impulse_points=sum(sum(x*x for x in p['impulse'])>1e-12 for e in callback_reports for p in e['points']))
         record(status='passed',outcomes=outcomes,completed_scenarios=int(finished.sum()),steps=len(frames),

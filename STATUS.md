@@ -1,5 +1,16 @@
 # AeroWall 执行状态
 
+## 当前状态：2026-09-21 01:41（优先于下方历史记录）
+
+- 本轮为实质进展：13,107,200 转换中间模型在相同 100 个开发初始场景中，95 场达到至少 5 次有效拍面冲量。95 场均运行到 500 步/10 秒时间限额并完成 15–16 次击球；达到垫球次数的 80% 开发目标。证据 runs/singlejuggle-eval-004.json。仅一个训练种子、原始 SingleJuggle 基线，不是完整壁球验收。
+- 该报告旧 reason 字段将到时也称 upstream_termination，但 stats.truncated=1 正确；分析按实际截断标记处理，评测脚本已修正未来输出。没有把时间截断称为控制失败。
+- 已导出成熟中间模型接回图 artifacts/juggle-13m-cycle.png/.json；场景 47 首次至第二次击球 0.72 秒，接触离开到接回 0.68 秒。1,382 个已完成接回间隔中位数 0.64 秒；这是含球飞行的接回周期，不是悬停恢复收敛时间。
+- 旋转接触几何试验 geometry-04 全部通过：16 环境、四类表面、初始 pitch rate ±2 rad/s、倾角 ±0.7 rad。geometry-03 五个侧面入射先撞旋翼，覆盖不足；修改受控入射距离并加入初始刚体接触点速度后完成侧面覆盖，没有改写运行中的球路。
+- HCSP Attack、Attack_hover 原始 Iris/PRT checkpoint 已独立重放，未训练或混入 CTBR。Attack_hover 16 场中上游 Att_hit 标记 3 场，GPU 有效攻击者身体接触 6 场；完整前空翻与稳定恢复尚未确认。Receive/Pass、Set/Hover 仍待重放。
+- HCSP CPU get_contact_report 与 callback 均有无效零值身体接触点；已用原生 GPU RigidContactView 读到 15 个有效点。显式保持 disable_stablization=False，未改变求解器或用 CPU 物理替代。13 个单接触有效样本的法向动量一致性最大残差 2.13%；保留切向/同时接触范围限制。证据 runs/hcsp-attack-hover-reference-03.json、docs/hcsp-tensor-contact-audit.json，后续 WallRally 身体接触应复用已验证的 GPU 读数。
+- 当前只有原续训任务存活：singlejuggle-dev-002，PID 2215742，任务句柄 33143，最新核实累计第 800 次更新、26,214,400 转换；总目标 1,000 更新、32,768,000 转换。其余本轮评测与参考重放均已结束。恢复时先查现有任务，不重复启动。
+- 下一步：完成续训并按已冻结场景复评，补 Receive/Pass、Set 及恢复分析，准备 WallRally 的 GPU 接触状态机和受控单次击墙接回。三方法三种子正式比较、消融、演示均未完成。
+
 ## 当前状态：2026-09-21 01:12（优先于下方历史记录）
 
 - 首批持续训练完成：singlejuggle-dev-001，100 更新、3,276,800 转换、295.432 秒训练循环，吞吐约 11,092 次/秒；最后 checkpoint frames-000003276800.pt。
