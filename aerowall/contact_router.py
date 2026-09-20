@@ -14,21 +14,24 @@ from aerowall.rally_events import Kind,RallyBatch
 class WallContactRouter:
     def __init__(self,base,eager_gpu=True):
         import omni.usd
-        from pxr import UsdPhysics,UsdGeom
+        from pxr import UsdPhysics,UsdGeom,Usd
         from omni.isaac.core.prims import RigidPrimView
         from omni.physx import get_physx_simulation_interface
         self.eager_gpu=eager_gpu
         self.reads_since_reset=[0]*base.num_envs
         self.reset_reentries=0
         self.base=base;self.interface=get_physx_simulation_interface();self.batch=RallyBatch(base.num_envs)
-        stage=omni.usd.get_context().get_stage();owners=[]
+        stage=omni.usd.get_context().get_stage();owners=[];self.owner_radii={}
+        from aerowall.collider_bounds import collider_owner_radius
         for prim in stage.Traverse():
             path=str(prim.GetPath())
             if path.startswith('/World/envs/env_0/Air_0/') and prim.HasAPI(UsdPhysics.CollisionAPI) and UsdPhysics.CollisionAPI(prim).GetCollisionEnabledAttr().Get():
                 owner=prim
                 while owner and not owner.HasAPI(UsdPhysics.RigidBodyAPI):owner=owner.GetParent()
                 if not owner:raise RuntimeError(f'Collider without a rigid-body owner: {path}')
-                owners.append(str(owner.GetPath()).split('/Air_0/')[1])
+                name=str(owner.GetPath()).split('/Air_0/')[1]
+                owners.append(name)
+                self.owner_radii[name]=collider_owner_radius(prim,owner)
         counts=Counter(owners)
         if not counts or any(v!=1 for v in counts.values()) or 'bat' not in counts:
             raise RuntimeError(f'Unsupported collider-owner layout: {counts}')
@@ -43,6 +46,13 @@ class WallContactRouter:
         self.radius=cylinder.GetRadiusAttr().Get()
         self.bats=RigidPrimView('/World/envs/env_*/Air_0/bat',name='wall_router_bats',reset_xform_properties=False);self.bats.initialize()
         self.bat_order=torch.tensor(sorted(range(base.num_envs),key=lambda j:int(re.search(r'/env_(\d+)/',self.bats.prim_paths[j]).group(1))),device=base.device)
+        self.owner_pose_views={}
+        for name in self.links:
+            view=self.bats if name=='bat' else RigidPrimView('/World/envs/env_*/Air_0/'+name,name='wall_router_pose_'+name,reset_xform_properties=False)
+            if name!='bat':view.initialize()
+            order=sorted(range(base.num_envs),key=lambda j:int(re.search(r'/env_(\d+)/',view.prim_paths[j]).group(1)))
+            self.owner_pose_views[name]=(view,order)
+        self.stale_reset_points=0
         self.sensors=[];self.routes={}
         for i in range(base.num_envs):
             root=f'/World/envs/env_{i}';ball=root+'/ball';wall=root+'/wall'
@@ -98,6 +108,25 @@ class WallContactRouter:
                     cpu_samples.append({'impulse':magnitude_cpu,'impulse_vector':impulse,'point':position,'normal':normal})
             samples=[] if edge=='lost' else cpu_samples if cpu_samples else points_for(si,slot)
             point_source='cpu_current_report' if cpu_samples else 'gpu_with_current_pair_header'
+            discarded=[];source_center=None;source_radius=None
+            if samples and self.reads_since_reset[i]==0:
+                source=self.sensors[si].source_path
+                if source.endswith('/ball'):
+                    center=self.base.ball.get_world_poses()[0][i,0]
+                    speed=float(self.base.ball.get_velocities()[i,0,:3].norm())
+                    source_radius=float(self.base.ball_radius)
+                else:
+                    name=source.split('/Air_0/')[1];view,order=self.owner_pose_views[name]
+                    center=view.get_world_poses()[0][order[i]]
+                    speed=float(view.get_velocities()[order[i],:3].norm())
+                    source_radius=self.owner_radii[name]
+                source_center=center.cpu().tolist()
+                limit=source_radius+.05+speed*self.base.sim.get_physics_dt()
+                fresh=[]
+                for sample in samples:
+                    distance=math.sqrt(sum((x-y)**2 for x,y in zip(sample['point'],source_center)))
+                    (fresh if distance<=limit else discarded).append(sample)
+                samples=fresh;self.stale_reset_points+=len(discarded)
             magnitude=sum(s['impulse'] for s in samples)
             point=tuple(sum(s['point'][j]*s['impulse'] for s in samples)/magnitude for j in range(3)) if magnitude else None
             eligible=True
@@ -114,7 +143,7 @@ class WallContactRouter:
             except RuntimeError as exc:
                 raise RuntimeError(f'{exc}; env={i}, reads_since_reset={self.reads_since_reset[i]}, progress={float(self.base.progress_buf[i])}, current_edge={edge}, impulse={magnitude}, active_pairs={self.batch.ledgers[i].active}') from exc
             if impact is not None:impacts[i].append(impact)
-            events.append({'env_id':i,'pair':pair,'edge':edge,'kind':kind.value,'points':samples,'credited':impact is not None,'target_eligible':eligible,'point_source':point_source,'episode_reset_reentry':epoch_entry})
+            events.append({'env_id':i,'pair':pair,'edge':edge,'kind':kind.value,'points':samples,'credited':impact is not None,'target_eligible':eligible,'point_source':point_source,'episode_reset_reentry':epoch_entry,'discarded_reset_points':discarded,'reset_source_center':source_center,'reset_source_radius':source_radius})
         unmatched=[(si,slot) for si,slots in enumerate(data) for slot,samples in enumerate(slots) if samples and (si,slot) not in observed] if self.eager_gpu else []
         self.gpu_queries_this_step=len(data)
         self.unmatched_gpu_scan_performed=self.eager_gpu

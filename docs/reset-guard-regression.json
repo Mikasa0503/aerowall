@@ -1,0 +1,19 @@
+{
+  "outcomes_identical": true,
+  "arrays_identical": {
+    "drone_position": true,
+    "drone_quaternion_wxyz": true,
+    "drone_velocity": true,
+    "ball_position": true,
+    "ball_velocity": true,
+    "bat_position": true,
+    "bat_quaternion_wxyz": true,
+    "bat_velocity": true,
+    "action": true,
+    "active_before": true,
+    "bat_normal": true,
+    "dt": true,
+    "physics_dt": true
+  },
+  "five_cap_rate": 0.96
+}

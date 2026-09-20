@@ -11,6 +11,7 @@ from aerowall.rally_events import Kind, ILLEGAL
 
 
 class AlignedJuggle(WallContactScene):
+    illegal_contact_kinds = ILLEGAL | {Kind.WALL}
     def __init__(self, cfg, headless=True):
         self.router = None
         super().__init__(cfg, headless=headless)
@@ -39,7 +40,14 @@ class AlignedJuggle(WallContactScene):
         finally:
             self.dt = physics_dt
 
+    def _begin_policy_step(self):
+        pass
+
+    def _after_physics_contacts(self, impacts, events, substep):
+        pass
+
     def _step(self, tensordict):
+        self._begin_policy_step()
         self.last_impacts = [[] for _ in range(self.num_envs)]
         self.last_events = []
         self.action_cap_counts = torch.zeros(self.num_envs, 1, device=self.device)
@@ -58,14 +66,14 @@ class AlignedJuggle(WallContactScene):
             self.sim.step(self._should_render(substep))
             impacts, events = self.router.read()
             self.action_gpu_queries += self.router.gpu_queries_this_step
-            bad = [any(x.kind in ILLEGAL or x.kind == Kind.WALL for x in row) for row in impacts]
+            bad = [any(x.kind in self.illegal_contact_kinds for x in row) for row in impacts]
             bad_t = torch.tensor(bad, device=self.device).unsqueeze(-1)
             cap = torch.tensor([any(x.kind == Kind.CAP for x in row) for row in impacts], device=self.device).unsqueeze(-1)
             legal = cap & ~bad_t & ~self.action_illegal
             self.action_cap_counts += legal.float()
             for i, failed in enumerate(bad):
                 if failed and self.action_failure_reason[i] is None:
-                    self.action_failure_reason[i] = sorted({x.kind.value for x in impacts[i] if x.kind in ILLEGAL or x.kind == Kind.WALL})[0]
+                    self.action_failure_reason[i] = sorted({x.kind.value for x in impacts[i] if x.kind in self.illegal_contact_kinds})[0]
             self.action_illegal |= bad_t
             for i, row in enumerate(impacts):
                 self.last_impacts[i].extend(row)
@@ -88,6 +96,7 @@ class AlignedJuggle(WallContactScene):
                     event.update(ball_velocity_before=before[i,0].cpu().tolist(),ball_velocity_after=after[i,0].cpu().tolist(),
                                  bat_normal=normal.cpu().tolist(),bat_contact_point_velocity=velocity.cpu().tolist())
             self.last_events.extend(events)
+            self._after_physics_contacts(impacts, events, substep)
         self.contact_totals['physics_steps'] += self.substeps
         self.contact_totals['policy_steps'] += 1
         self._post_sim_step(tensordict)
