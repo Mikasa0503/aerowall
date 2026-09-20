@@ -1,0 +1,114 @@
+[
+  {
+    "file": "checkpoint_att.pt",
+    "bytes": 498595,
+    "sha256": "b7d672651c210e0bd0aece73366327b4f5b7254c1cb83767137761484b94df57",
+    "pickle_globals": [
+      "__builtin__ set",
+      "collections OrderedDict",
+      "tensordict._td TensorDict",
+      "tensordict.nn.params TensorDictParams",
+      "tensordict.utils _StringOnlyDict",
+      "torch FloatStorage",
+      "torch Size",
+      "torch._utils _rebuild_parameter",
+      "torch._utils _rebuild_tensor_v2"
+    ]
+  },
+  {
+    "file": "checkpoint_att_hover.pt",
+    "bytes": 477859,
+    "sha256": "edb4d32dc5c0fa02dd528a86c0c24e1385ed763b9729cd7dc34a1977fe498fcb",
+    "pickle_globals": [
+      "__builtin__ set",
+      "collections OrderedDict",
+      "tensordict._td TensorDict",
+      "tensordict.nn.params TensorDictParams",
+      "tensordict.utils _StringOnlyDict",
+      "torch FloatStorage",
+      "torch Size",
+      "torch._utils _rebuild_parameter",
+      "torch._utils _rebuild_tensor_v2"
+    ]
+  },
+  {
+    "file": "checkpoint_secpass.pt",
+    "bytes": 494271,
+    "sha256": "297a6bcd06b00ce79f2dba96310c5e8a24622d9a6d3aab4a1f4ac87cd74920cb",
+    "pickle_globals": [
+      "__builtin__ set",
+      "collections OrderedDict",
+      "tensordict._td TensorDict",
+      "tensordict.nn.params TensorDictParams",
+      "tensordict.utils _StringOnlyDict",
+      "torch FloatStorage",
+      "torch Size",
+      "torch._utils _rebuild_parameter",
+      "torch._utils _rebuild_tensor_v2"
+    ]
+  },
+  {
+    "file": "checkpoint_secpass_hover.pt",
+    "bytes": 477859,
+    "sha256": "c8eadb8208295feb8d82831682f2d58c72dfd1d5048f64bc5766088e9972ca80",
+    "pickle_globals": [
+      "__builtin__ set",
+      "collections OrderedDict",
+      "tensordict._td TensorDict",
+      "tensordict.nn.params TensorDictParams",
+      "tensordict.utils _StringOnlyDict",
+      "torch FloatStorage",
+      "torch Size",
+      "torch._utils _rebuild_parameter",
+      "torch._utils _rebuild_tensor_v2"
+    ]
+  },
+  {
+    "file": "checkpoint_goto.pt",
+    "bytes": 477263,
+    "sha256": "f6422988390a97c9da8254af53914ec50763edba4778442c6188f30e66f56c14",
+    "pickle_globals": [
+      "__builtin__ set",
+      "collections OrderedDict",
+      "tensordict._td TensorDict",
+      "tensordict.nn.params TensorDictParams",
+      "tensordict.utils _StringOnlyDict",
+      "torch FloatStorage",
+      "torch Size",
+      "torch._utils _rebuild_parameter",
+      "torch._utils _rebuild_tensor_v2"
+    ]
+  },
+  {
+    "file": "checkpoint_firstpass_receive.pt",
+    "bytes": 1480414,
+    "sha256": "03baa6f0d3f38fc5aba1426e06f171a11132895609ae1e7f544cf79208701390",
+    "pickle_globals": [
+      "__builtin__ set",
+      "collections OrderedDict",
+      "tensordict._td TensorDict",
+      "tensordict.nn.params TensorDictParams",
+      "tensordict.utils _StringOnlyDict",
+      "torch FloatStorage",
+      "torch Size",
+      "torch._utils _rebuild_parameter",
+      "torch._utils _rebuild_tensor_v2"
+    ]
+  },
+  {
+    "file": "checkpoint_firstpass.pt",
+    "bytes": 498635,
+    "sha256": "d9a1423c4b16c971b8c92f65adcae76c88f38f7becc2437b11edfe9b59f42a23",
+    "pickle_globals": [
+      "__builtin__ set",
+      "collections OrderedDict",
+      "tensordict._td TensorDict",
+      "tensordict.nn.params TensorDictParams",
+      "tensordict.utils _StringOnlyDict",
+      "torch FloatStorage",
+      "torch Size",
+      "torch._utils _rebuild_parameter",
+      "torch._utils _rebuild_tensor_v2"
+    ]
+  }
+]
