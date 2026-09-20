@@ -39,7 +39,7 @@ class ContactLedger:
     threshold: float = 1e-6
     active: dict = field(default_factory=dict)
 
-    def observe(self, pair, edge, kind, impulse=0., point=None, target_eligible=True):
+    def observe(self, pair, edge, kind, impulse=0., point=None, target_eligible=True, *, episode_start=False):
         pair = tuple(sorted(pair))
         if len(pair) != 2 or pair[0] == pair[1]:
             raise ValueError('A contact must identify two different collider paths')
@@ -55,7 +55,12 @@ class ContactLedger:
             # Duplicate FOUND cannot renew an interval without a preceding LOST.
             self.active.setdefault(pair, False)
         elif pair not in self.active:
-            raise RuntimeError(f'PERSIST without observed FOUND: {pair}')
+            if not episode_start:
+                raise RuntimeError(f'PERSIST without observed FOUND: {pair}')
+            # Teleport/reset starts a new scoring epoch, while PhysX may retain
+            # the old manifold and report PERSIST on its first fetched step.
+            # This opens an uncredited interval, never an artificial impulse.
+            self.active[pair] = False
         if impulse <= self.threshold:
             return None
         if point is not None and (len(point) != 3 or not all(math.isfinite(v) for v in point)):

@@ -6,6 +6,18 @@ def cap():return Impact(Kind.CAP,('ball','bat'),1.,(0.,0.,1.))
 def wall(point=T,eligible=True):return Impact(Kind.WALL,('ball','wall'),1.,point,eligible)
 
 class RallyContract(unittest.TestCase):
+    def test_reset_epoch_persist_is_uncredited_until_positive_impulse(self):
+        from aerowall.rally_events import ContactLedger, Kind
+        ledger=ContactLedger();pair=('ball','bat')
+        self.assertIsNone(ledger.observe(pair,'persist',Kind.CAP,0.,episode_start=True))
+        self.assertIsNotNone(ledger.observe(pair,'persist',Kind.CAP,.1))
+        self.assertIsNone(ledger.observe(pair,'persist',Kind.CAP,.1))
+        ledger.observe(pair,'lost',Kind.CAP)
+        with self.assertRaises(RuntimeError):
+            ledger.observe(pair,'persist',Kind.CAP,.1)
+        ledger.reset()
+        self.assertIsNotNone(ledger.observe(pair,'persist',Kind.BALL_BODY,.1,episode_start=True))
+
     def test_chained_rallies_and_target_publication(self):
         s=RallyState()
         self.assertFalse(s.advance([wall()],T)['rally_completed'])

@@ -19,6 +19,7 @@ class WallContactRouter:
         from omni.physx import get_physx_simulation_interface
         self.eager_gpu=eager_gpu
         self.reads_since_reset=[0]*base.num_envs
+        self.reset_reentries=0
         self.base=base;self.interface=get_physx_simulation_interface();self.batch=RallyBatch(base.num_envs)
         stage=omni.usd.get_context().get_stage();owners=[]
         for prim in stage.Traverse():
@@ -106,12 +107,14 @@ class WallContactRouter:
             if kind==Kind.WALL and samples:
                 x=float(self.base.envs_positions[i,0])+self.base.wall_front
                 eligible=all(abs(s['point'][0]-x)<.01 and abs(s['normal'][0])>.99 for s in samples)
+            epoch_entry=edge=='persist' and pair not in self.batch.ledgers[i].active and self.reads_since_reset[i]==0
+            self.reset_reentries+=int(epoch_entry)
             try:
-                impact=self.batch.ledgers[i].observe(pair,edge,kind,magnitude,point,eligible)
+                impact=self.batch.ledgers[i].observe(pair,edge,kind,magnitude,point,eligible,episode_start=self.reads_since_reset[i]==0)
             except RuntimeError as exc:
                 raise RuntimeError(f'{exc}; env={i}, reads_since_reset={self.reads_since_reset[i]}, progress={float(self.base.progress_buf[i])}, current_edge={edge}, impulse={magnitude}, active_pairs={self.batch.ledgers[i].active}') from exc
             if impact is not None:impacts[i].append(impact)
-            events.append({'env_id':i,'pair':pair,'edge':edge,'kind':kind.value,'points':samples,'credited':impact is not None,'target_eligible':eligible,'point_source':point_source})
+            events.append({'env_id':i,'pair':pair,'edge':edge,'kind':kind.value,'points':samples,'credited':impact is not None,'target_eligible':eligible,'point_source':point_source,'episode_reset_reentry':epoch_entry})
         unmatched=[(si,slot) for si,slots in enumerate(data) for slot,samples in enumerate(slots) if samples and (si,slot) not in observed] if self.eager_gpu else []
         self.gpu_queries_this_step=len(data)
         self.unmatched_gpu_scan_performed=self.eager_gpu

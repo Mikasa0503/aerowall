@@ -40,7 +40,7 @@ def main():
               'seed': args.seed, 'updates_requested_this_run': args.updates, 'performance_claim': False,
               'upstream_commit': subprocess.check_output(['git', '-C', str(UPSTREAM), 'rev-parse', 'HEAD'], text=True).strip(),
               'source_hashes': {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
-                                for p in [Path(__file__), ROOT / 'scripts/runtime_adapters.py', ROOT / 'scripts/python.sh', ROOT / 'aerowall/envs/aligned_juggle.py', ROOT / 'aerowall/contact_router.py']}}
+                                for p in [Path(__file__), ROOT / 'scripts/runtime_adapters.py', ROOT / 'scripts/python.sh', ROOT / 'aerowall/envs/aligned_juggle.py', ROOT / 'aerowall/contact_router.py', ROOT / 'aerowall/rally_events.py']}}
     def record(**values):
         report.update(values)
         tmp = args.output.with_suffix('.tmp'); tmp.write_text(json.dumps(report, indent=2) + '\n'); tmp.replace(args.output)

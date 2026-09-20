@@ -27,6 +27,7 @@ def main():
     parser.add_argument('--scenarios', type=Path, required=True)
     parser.add_argument('--seed', type=int, default=20260921)
     parser.add_argument('--lazy-contacts',action='store_true',help='Read GPU buffers only when a current pair header lacks valid CPU points')
+    parser.add_argument('--contact-task', action='store_true', help='Use actual-contact curriculum boundaries, removing legacy hit cooldown termination')
     args = parser.parse_args()
     args.output.parent.mkdir(parents=True, exist_ok=True)
     report = {'status': 'initializing', 'pid': os.getpid(), 'scope': '100 frozen development scenarios; original checkpoint on body-enabled aligned WallContactScene',
@@ -69,10 +70,15 @@ def main():
         from aerowall.contact_router import WallContactRouter
         from aerowall.rally_events import Kind,ILLEGAL
         with contact_reporting_before_initialization(enable_body_collisions=True):
-            base = WallContactScene(cfg,headless=True)
-        router=WallContactRouter(base,eager_gpu=not args.lazy_contacts)
+            if args.contact_task:
+                from aerowall.envs.aligned_juggle import AlignedJuggle
+                base = AlignedJuggle(cfg,headless=True)
+            else:
+                base = WallContactScene(cfg,headless=True)
+        router=base.router if args.contact_task else WallContactRouter(base,eager_gpu=not args.lazy_contacts)
+        record(episode_rule='physical_contact_curriculum' if args.contact_task else 'legacy_upstream')
         record(contact_readback='lazy_current_pairs' if args.lazy_contacts else 'eager_all_pairs',bat_overlay=base.bat_overlay,body_collisions_enabled=True,wall_fixture=OmegaConf.to_container(cfg.wall_fixture,resolve=True),
-               scope_note='Original SingleJuggle episode boundaries retained; this is not WallRally policy evaluation')
+               scope_note=('Physical-contact curriculum boundaries' if args.contact_task else 'Original SingleJuggle boundaries')+'; not WallRally policy evaluation')
         controller = PID_controller_flightmare(cfg.sim.dt, base.drone.params, base.device).to(base.device)
         env = TransformedEnv(base, Compose(InitTracker(), ResetSafePIDRateController(controller))).eval()
         policy = MAPPOPolicy(cfg.algo, agent_spec=env.agent_spec['drone'], device=base.device)
@@ -142,7 +148,7 @@ def main():
                 normal = quat_rotate(after['bat_quaternion_wxyz'], torch.tensor([0.,0.,1.],device=base.device).expand(100,3))
                 com = after['bat_position'] + quat_rotate(after['bat_quaternion_wxyz'], com_local)
                 illegal = {}
-                impacts,routed=router.read()
+                impacts,routed=(base.last_impacts,base.last_events) if args.contact_task else router.read()
                 gpu_queries+=router.gpu_queries_this_step
                 for index,rows in enumerate(impacts):
                     bad=sorted({row.kind.value for row in rows if row.kind in ILLEGAL})
@@ -173,8 +179,8 @@ def main():
                 done = nxt['done'].flatten()
                 for index in range(100):
                     if bool(active_before[index]) and (bool(done[index]) or index in illegal or step+1 == base.max_episode_length):
-                        is_truncated = bool(nxt['stats','truncated'][index].flatten()[0] > 0)
-                        reason = illegal.get(index,'time_limit' if is_truncated or not bool(done[index]) else 'upstream_termination')
+                        is_truncated = bool(nxt['truncated'][index].flatten()[0])
+                        reason = illegal.get(index,'time_limit' if is_truncated or not bool(done[index]) else 'boundary' if args.contact_task else 'upstream_termination')
                         outcomes[index] = {'scenario_id':index,'steps':step+1,'reason':reason,'truncated':is_truncated,
                                            'ball_bat_entries':ball_bat_entries[index],'provisional_top_entries':top_entries[index],
                                            'upstream_stats':{k:float(nxt['stats',k][index].flatten()[0]) for k in ['num_true_hits','wrong_hit','ball_too_low','ball_too_high','ball_too_far','drone_too_low','drone_too_high','truncated']}}
@@ -198,7 +204,7 @@ def main():
                provisional_five_top_contact_rate=sum(v>=5 for v in top_entries)/100,
                raw_events=str(event_path),trajectory=str(trajectory_path),
                trajectory_sha256=hashlib.sha256(trajectory_path.read_bytes()).hexdigest(),
-               note='Aligned body-enabled juggling only. Same initial roster, original checkpoint, original upstream episode limits. Not formal WallRally success.')
+               note='Aligned body-enabled juggling only. Same initial roster; episode rule recorded explicitly. Not formal WallRally success.')
         return 0
     except Exception as error:
         record(status='failed',error=repr(error),traceback=traceback.format_exc()); return 1

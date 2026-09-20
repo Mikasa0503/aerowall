@@ -28,7 +28,8 @@ class AlignedJuggle(WallContactScene):
             self.contact_totals['resets'] += len(env_ids)
 
     def _compute_reward_and_done(self):
-        impacts, _ = self.router.read()
+        impacts, events = self.router.read()
+        self.last_impacts, self.last_events = impacts, events
         illegal = torch.tensor([any(v.kind in ILLEGAL or v.kind == Kind.WALL for v in row)
                                 for row in impacts], device=self.device).unsqueeze(-1)
         cap = torch.tensor([any(v.kind == Kind.CAP for v in row) for row in impacts],
@@ -63,6 +64,7 @@ class AlignedJuggle(WallContactScene):
                 'reason': 'illegal_contact' if bool(illegal[i]) else 'boundary' if bool(terminated[i]) else 'time_limit'})
         self.contact_totals['legal_cap'] += int(cap.sum())
         self.contact_totals['illegal'] += int(illegal.sum())
+        self.contact_totals['reset_reentries'] = self.router.reset_reentries
         self.contact_totals['gpu_queries'] += self.router.gpu_queries_this_step
         return TensorDict({'stats': self.stats.clone(), 'agents': {'reward': reward.unsqueeze(-1)}, 'done': done,
                            'terminated': terminated, 'truncated': truncated}, self.num_envs)
