@@ -1,0 +1,19 @@
+{
+  "source_report": "runs/wall-contact-events-01.json",
+  "status": "passed",
+  "source_report_sha256": "4e466b87dfcfc5a24ba6700f2e541fd1f14b2595ba2253200f52c748a0e48fcd",
+  "source_events_sha256": "e5d8d4b7bfeaed060c3ce599198f8d52d660b83d2e416c5049deffce31a7f0ca",
+  "module_sha256": {
+    "aerowall/rally_events.py": "6f4b2ee7a41192b5fd37a220767686f740fdcd34abf4e4706a02167886a86d5d",
+    "aerowall/gpu_contacts.py": "b55ead611cfd0e95ee9534b6378ef056435856d639a776a492e3011dd425b872",
+    "scripts/probe_wall_contact_events.py": "bee06ba87e142fd6b645d74f75fe8d81f9733e85071607f2694884db75df61e9",
+    "tests/test_rally_events.py": "d2a717fda7bf6a3b3ff666a37397c1eb9736bb4262d8719ab6ccad05b6e19f23"
+  },
+  "gpu_positive_sample_count": 16,
+  "distinct_wall_credits": 16,
+  "maximum_front_plane_position_error_m": 1.4901161138336505e-09,
+  "cpu_invalid_normal_points": 61,
+  "all_contacts_departed": true,
+  "false_rallies": 0,
+  "scope": "Recorded native 16-sphere/16-wall fixture with original ball dimensions and solver settings; no physical bat or trained wall return"
+}

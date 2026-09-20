@@ -1,0 +1,15 @@
+# WallRally contact and rally semantics
+
+Scope: implement the plan's event contract without choosing a reward, attitude constraint or training curriculum before the remaining action-analysis gate. The production environment will retain JuggleRL dynamics and CTBR. These modules do not change physics.
+
+Alternatives considered: fixed-step cooldowns cannot distinguish sustained and renewed contacts; a GPU impulse threshold alone can split an intermittent manifold into false hits. Use PhysX pair FOUND/PERSIST/LOST as the lifecycle and validated positive contact impulse/geometry as qualification. The GPU contact view supplies valid points where CPU fields are invalid; physical pair identity must be retained. The first positive legal impulse in a lifecycle earns at most one credit. Illegal impacts are still inspected after a previous legal impulse in the same lifecycle.
+
+State: WAIT_BAT -> TO_WALL -> TO_BAT -> TO_WALL. The last cap hit completes the previous rally and starts the next. A second cap hit before a wall starts a new candidate and breaks the consecutive-rally streak. A second wall before the next bat invalidates the candidate and returns to WAIT_BAT. A wall without a preceding legal bat is not a rally. Completed totals remain separate from consecutive and maximum streaks.
+
+A target miss does not terminate the episode. Physical rally streak and target-joint streak are separate. Wall contact position is compared with the target active immediately before the wall event. The target sequence advances once per distinct wall impulse, even if the candidate was invalid. The next bat closes the candidate using the saved target hit/error of that wall, never the newly published target.
+
+Input events are grouped by one physics step. Illegal impacts terminate before any same-step score. Out-of-bounds and numerical failure are explicit terminal reasons. A timeout is a separate truncation; a genuine failure at the limit takes precedence. Positive bat and wall impulses, or multiple distinct bat/wall intervals within one sample, have ambiguous within-step order: invalidate the chain and record the ambiguity rather than invent a successful order. No flip/tilt termination is introduced.
+
+Selective reset clears only the selected state, event ledger, target index, counters and history. Pair paths are canonicalized so collider ordering cannot change identity. Unexpected PERSIST without FOUND is surfaced as a sensing error instead of silently joining an old episode's contact to a new one.
+
+Validation: table-driven state transitions and adversarial event sequences, positive impulse delayed until PERSIST, duplicate FOUND/PERSIST and LOST handling, illegal contact after a credited cap, target publication timing, same-frame ordering ambiguity, selective reset, and timeout/failure precedence. Replaying existing actual SingleJuggle contacts must earn zero wall rallies; wall-only fixture reports cannot earn rallies. These are event-contract tests, not evidence of a learned wall-return policy. Full live GPU sensing, body collisions, resets and sustained WallRally physics still need integration tests before training.
