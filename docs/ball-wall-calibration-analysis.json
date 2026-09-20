@@ -1,0 +1,32 @@
+{
+  "0.02": {
+    "count": 1000,
+    "unique_cases": 1000,
+    "contacts": [
+      1
+    ],
+    "effective_range": [
+      0.7255546890833868,
+      0.8747668670861891
+    ],
+    "slope": 0.49980608377276975,
+    "intercept": 0.4001169321163454,
+    "max_error_from_average_materials": 0.001310189068740808,
+    "max_energy_growth": 0.0
+  },
+  "0.01": {
+    "count": 1000,
+    "unique_cases": 1000,
+    "contacts": [
+      1
+    ],
+    "effective_range": [
+      0.7255538034937271,
+      0.874766568946373
+    ],
+    "slope": 0.5000000151121481,
+    "intercept": 0.400000442460432,
+    "max_error_from_average_materials": 1.8276573708897459e-06,
+    "max_energy_growth": 0.0
+  }
+}

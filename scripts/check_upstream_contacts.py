@@ -4,6 +4,7 @@ State placement is a test fixture, never a policy success trajectory. Bodies mov
 only through PhysX between fixture initialization and measurements.
 """
 import re
+import itertools
 import torch
 from contextlib import contextmanager
 
@@ -119,35 +120,48 @@ def check_contacts(env, base, record):
                       unexpected_cross_environment_contacts=cross_events)
         record(contact_checks=report)
 
-        # Two original balls from different environments deliberately cross in
-        # the same world-space location. Their filtered collision must not react.
-        center = base.envs_positions[0] + torch.tensor([2., 0., 3.], device=base.device)
-        pair_pos = torch.stack([center + torch.tensor([-.15, 0., 0.], device=base.device),
-                                center + torch.tensor([.15, 0., 0.], device=base.device)])[:, None, :]
-        pair_vel = torch.zeros(2, 1, 6, device=base.device)
-        pair_vel[0, 0, 0], pair_vel[1, 0, 0] = 2., -2.
-        indices = torch.tensor([0, 1], device=base.device)
-        base.ball.set_world_poses(pair_pos, quat[:2], indices)
-        base.ball.set_velocities(pair_vel, indices)
-        phase = 'cross_environment_pair'
-        pair_frames = []
-        for step_index in range(10):
-            physics_step()
-            pos = base.ball.get_world_poses()[0][:2].clone()
-            vel = base.ball.get_velocities()[:2].clone()
-            pair_frames.append({'step': step_index, 'pos': pos.cpu().tolist(),
-                                'vel': vel.cpu().tolist(),
-                                'center_distance': float(torch.linalg.norm(pos[0] - pos[1]).item())})
-        pair_contacts = [e for e in events if e['phase'] == phase and
-                         {e['actor0'], e['actor1']} == {'/World/envs/env_0/ball', '/World/envs/env_1/ball'}]
-        crossed = pair_frames[-1]['pos'][0][0][0] > pair_frames[-1]['pos'][1][0][0]
-        overlap_opportunity = min(f['center_distance'] for f in pair_frames) < 2 * base.ball_radius
-        vx_error = max(abs(f['vel'][0][0][0] - 2.) + abs(f['vel'][1][0][0] + 2.) for f in pair_frames)
-        report.update(pair_frames=pair_frames, pair_contact_events=pair_contacts,
-                      crossed=crossed, overlap_opportunity=overlap_opportunity,
-                      pair_vx_error=vx_error, contact_events=events)
-        report['passed'] = (len(bat_envs) == base.num_envs and all(reversal) and not cross_events and not callback_errors
-                            and crossed and overlap_opportunity and vx_error < 1e-5 and not pair_contacts)
+        # Exhaust all original ball pairs across environments. Each pair is
+        # initialized to intersect; no state is overwritten during its flight.
+        pair_results = []
+        for first, second in itertools.combinations(range(base.num_envs), 2):
+            parked = base.envs_positions[:, None, :].clone()
+            parked[..., 0] += 100.
+            parked[..., 2] = 3.
+            base.ball.set_world_poses(parked, quat)
+            base.ball.set_velocities(torch.zeros(base.num_envs, 1, 6, device=base.device))
+            center = base.envs_positions[0] + torch.tensor([2., 0., 3.], device=base.device)
+            pair_pos = torch.stack([center + torch.tensor([-.15, 0., 0.], device=base.device),
+                                    center + torch.tensor([.15, 0., 0.], device=base.device)])[:, None, :]
+            pair_vel = torch.zeros(2, 1, 6, device=base.device)
+            pair_vel[0, 0, 0], pair_vel[1, 0, 0] = 2., -2.
+            indices = torch.tensor([first, second], device=base.device)
+            base.ball.set_world_poses(pair_pos, quat[:2], indices)
+            base.ball.set_velocities(pair_vel, indices)
+            phase = f'cross_environment_pair_{first}_{second}'
+            pair_frames = []
+            for step_index in range(10):
+                physics_step()
+                pos = base.ball.get_world_poses()[0][indices].clone()
+                vel = base.ball.get_velocities()[indices].clone()
+                pair_frames.append({'step': step_index, 'pos': pos.cpu().tolist(),
+                                    'vel': vel.cpu().tolist(),
+                                    'center_distance': float(torch.linalg.norm(pos[0] - pos[1]).item())})
+            paths = {f'/World/envs/env_{first}/ball', f'/World/envs/env_{second}/ball'}
+            pair_contacts = [e for e in events if e['phase'] == phase and
+                             {e['actor0'], e['actor1']} == paths]
+            crossed = pair_frames[-1]['pos'][0][0][0] > pair_frames[-1]['pos'][1][0][0]
+            overlap = min(f['center_distance'] for f in pair_frames) < 2 * base.ball_radius
+            vx_error = max(abs(f['vel'][0][0][0] - 2.) + abs(f['vel'][1][0][0] + 2.) for f in pair_frames)
+            pair_results.append({'env_ids': [first, second], 'frames': pair_frames,
+                                 'contact_events': pair_contacts, 'crossed': crossed,
+                                 'overlap_opportunity': overlap, 'vx_error': vx_error,
+                                 'passed': crossed and overlap and vx_error < 1e-5 and not pair_contacts})
+        report.update(cross_environment_pair_checks=pair_results,
+                      tested_pair_count=len(pair_results), contact_events=events,
+                      isolation_scope='all original ball-ball environment pairs; other body types not exhaustively tested')
+        report['passed'] = (len(bat_envs) == base.num_envs and all(reversal) and not cross_events
+                            and not callback_errors and len(pair_results) == base.num_envs * (base.num_envs - 1) // 2
+                            and all(row['passed'] for row in pair_results))
         record(contact_checks=report)
         return report
     finally:
