@@ -110,5 +110,69 @@
       "torch._utils _rebuild_parameter",
       "torch._utils _rebuild_tensor_v2"
     ]
+  },
+  {
+    "file": "checkpoint_serve.pt",
+    "bytes": 500047,
+    "sha256": "00abfa3d44f1b5ec47a89c445666051a464bec848ee02f57b4f7004e2a548b14",
+    "pickle_globals": [
+      "__builtin__ set",
+      "collections OrderedDict",
+      "tensordict._td TensorDict",
+      "tensordict.nn.params TensorDictParams",
+      "tensordict.utils _StringOnlyDict",
+      "torch FloatStorage",
+      "torch Size",
+      "torch._utils _rebuild_parameter",
+      "torch._utils _rebuild_tensor_v2"
+    ]
+  },
+  {
+    "file": "checkpoint_serve_hover.pt",
+    "bytes": 477821,
+    "sha256": "f9c2e99b7a75b837bf2c31d63a209ee719b6df36d073791513c439053920a0fe",
+    "pickle_globals": [
+      "__builtin__ set",
+      "collections OrderedDict",
+      "tensordict._td TensorDict",
+      "tensordict.nn.params TensorDictParams",
+      "tensordict.utils _StringOnlyDict",
+      "torch FloatStorage",
+      "torch Size",
+      "torch._utils _rebuild_parameter",
+      "torch._utils _rebuild_tensor_v2"
+    ]
+  },
+  {
+    "file": "checkpoint_firstpass_receive_hover.pt",
+    "bytes": 1432084,
+    "sha256": "8609fb161f0f85f0613057eb609481639ddcf0473fde42ed800e6e434cb0bd2b",
+    "pickle_globals": [
+      "__builtin__ set",
+      "collections OrderedDict",
+      "tensordict._td TensorDict",
+      "tensordict.nn.params TensorDictParams",
+      "tensordict.utils _StringOnlyDict",
+      "torch FloatStorage",
+      "torch Size",
+      "torch._utils _rebuild_parameter",
+      "torch._utils _rebuild_tensor_v2"
+    ]
+  },
+  {
+    "file": "checkpoint_firstpass_hover.pt",
+    "bytes": 478497,
+    "sha256": "26e97bc5415588c77223c73c37b39a7ff69d12a70233236cf6cb03bb5dc1bc8f",
+    "pickle_globals": [
+      "__builtin__ set",
+      "collections OrderedDict",
+      "tensordict._td TensorDict",
+      "tensordict.nn.params TensorDictParams",
+      "tensordict.utils _StringOnlyDict",
+      "torch FloatStorage",
+      "torch Size",
+      "torch._utils _rebuild_parameter",
+      "torch._utils _rebuild_tensor_v2"
+    ]
   }
 ]

@@ -1,0 +1,286 @@
+{
+  "sample_count": 31,
+  "max_relative_normal_momentum_error": 0.24017046837643746,
+  "samples": [
+    {
+      "step": 32,
+      "env_id": 12,
+      "agent_id": 0,
+      "normal_impulse": 0.0758897215127945,
+      "momentum_normal_component": 0.07588971581560346,
+      "relative_error": 7.507197186667769e-08,
+      "closest_endpoint_ball_center_distance": 0.09186773955633062
+    },
+    {
+      "step": 33,
+      "env_id": 6,
+      "agent_id": 0,
+      "normal_impulse": 0.07128887623548508,
+      "momentum_normal_component": 0.07129173867350824,
+      "relative_error": 4.015266019498339e-05,
+      "closest_endpoint_ball_center_distance": 0.05676196670675976
+    },
+    {
+      "step": 33,
+      "env_id": 10,
+      "agent_id": 0,
+      "normal_impulse": 0.07096245139837265,
+      "momentum_normal_component": 0.07097039682823168,
+      "relative_error": 0.0001119666767771044,
+      "closest_endpoint_ball_center_distance": 0.004514742996492559
+    },
+    {
+      "step": 33,
+      "env_id": 11,
+      "agent_id": 0,
+      "normal_impulse": 0.07028407603502274,
+      "momentum_normal_component": 0.07028405420038217,
+      "relative_error": 3.1066269629750994e-07,
+      "closest_endpoint_ball_center_distance": 0.04454348501147399
+    },
+    {
+      "step": 34,
+      "env_id": 0,
+      "agent_id": 0,
+      "normal_impulse": 0.07183337211608887,
+      "momentum_normal_component": 0.07183334622647784,
+      "relative_error": 3.604120238517356e-07,
+      "closest_endpoint_ball_center_distance": 0.012686511925876897
+    },
+    {
+      "step": 34,
+      "env_id": 8,
+      "agent_id": 0,
+      "normal_impulse": 0.07347230613231659,
+      "momentum_normal_component": 0.0734723058490207,
+      "relative_error": 3.855818629663925e-09,
+      "closest_endpoint_ball_center_distance": 0.02756526141849438
+    },
+    {
+      "step": 34,
+      "env_id": 15,
+      "agent_id": 0,
+      "normal_impulse": 0.07316417992115021,
+      "momentum_normal_component": 0.07317658187616581,
+      "relative_error": 0.00016950856319266066,
+      "closest_endpoint_ball_center_distance": 0.0075573359190159095
+    },
+    {
+      "step": 35,
+      "env_id": 1,
+      "agent_id": 0,
+      "normal_impulse": 0.07347851991653442,
+      "momentum_normal_component": 0.07343580345136758,
+      "relative_error": 0.0005813462929760982,
+      "closest_endpoint_ball_center_distance": 8.844011779304222e-06
+    },
+    {
+      "step": 35,
+      "env_id": 2,
+      "agent_id": 0,
+      "normal_impulse": 0.07632173597812653,
+      "momentum_normal_component": 0.07632172907441089,
+      "relative_error": 9.045543254945745e-08,
+      "closest_endpoint_ball_center_distance": 0.02572030796527476
+    },
+    {
+      "step": 35,
+      "env_id": 3,
+      "agent_id": 0,
+      "normal_impulse": 0.0755138024687767,
+      "momentum_normal_component": 0.07551376040115255,
+      "relative_error": 5.570852317420988e-07,
+      "closest_endpoint_ball_center_distance": 0.02599105912014641
+    },
+    {
+      "step": 35,
+      "env_id": 7,
+      "agent_id": 0,
+      "normal_impulse": 0.07277314364910126,
+      "momentum_normal_component": 0.07275957442981092,
+      "relative_error": 0.00018645916075536208,
+      "closest_endpoint_ball_center_distance": 0.016675377223495675
+    },
+    {
+      "step": 35,
+      "env_id": 9,
+      "agent_id": 0,
+      "normal_impulse": 0.0737791508436203,
+      "momentum_normal_component": 0.0737810027791787,
+      "relative_error": 2.5101069031425686e-05,
+      "closest_endpoint_ball_center_distance": 0.033877349750873
+    },
+    {
+      "step": 35,
+      "env_id": 14,
+      "agent_id": 0,
+      "normal_impulse": 0.07528145611286163,
+      "momentum_normal_component": 0.07528142435376674,
+      "relative_error": 4.218714214028799e-07,
+      "closest_endpoint_ball_center_distance": 0.04156113690728587
+    },
+    {
+      "step": 37,
+      "env_id": 4,
+      "agent_id": 0,
+      "normal_impulse": 0.07702663540840149,
+      "momentum_normal_component": 0.07705318163223754,
+      "relative_error": 0.00034463693883679287,
+      "closest_endpoint_ball_center_distance": 0.006844102289586784
+    },
+    {
+      "step": 37,
+      "env_id": 5,
+      "agent_id": 0,
+      "normal_impulse": 0.07627228647470474,
+      "momentum_normal_component": 0.07619082768236088,
+      "relative_error": 0.001067999873989342,
+      "closest_endpoint_ball_center_distance": 0.008327204568130093
+    },
+    {
+      "step": 37,
+      "env_id": 13,
+      "agent_id": 0,
+      "normal_impulse": 0.07630603015422821,
+      "momentum_normal_component": 0.07627551298931806,
+      "relative_error": 0.00039993123542750287,
+      "closest_endpoint_ball_center_distance": 0.02865416061091453
+    },
+    {
+      "step": 86,
+      "env_id": 11,
+      "agent_id": 1,
+      "normal_impulse": 0.07221812009811401,
+      "momentum_normal_component": 0.08956277982734387,
+      "relative_error": 0.24017046837643746,
+      "closest_endpoint_ball_center_distance": 0.042213083587952144
+    },
+    {
+      "step": 90,
+      "env_id": 10,
+      "agent_id": 1,
+      "normal_impulse": 0.09347761422395706,
+      "momentum_normal_component": 0.09347757868512503,
+      "relative_error": 3.8018548424713594e-07,
+      "closest_endpoint_ball_center_distance": 0.045328911819214335
+    },
+    {
+      "step": 91,
+      "env_id": 9,
+      "agent_id": 1,
+      "normal_impulse": 0.09323526918888092,
+      "momentum_normal_component": 0.0933874102667767,
+      "relative_error": 0.0016317974862877927,
+      "closest_endpoint_ball_center_distance": 0.0023264844664556187
+    },
+    {
+      "step": 92,
+      "env_id": 1,
+      "agent_id": 1,
+      "normal_impulse": 0.08895273506641388,
+      "momentum_normal_component": 0.0889526673768006,
+      "relative_error": 7.609615738638725e-07,
+      "closest_endpoint_ball_center_distance": 0.09130268714176959
+    },
+    {
+      "step": 92,
+      "env_id": 2,
+      "agent_id": 1,
+      "normal_impulse": 0.08876504749059677,
+      "momentum_normal_component": 0.0887650214677373,
+      "relative_error": 2.931656119180322e-07,
+      "closest_endpoint_ball_center_distance": 0.05370904396294633
+    },
+    {
+      "step": 93,
+      "env_id": 8,
+      "agent_id": 1,
+      "normal_impulse": 0.09082058817148209,
+      "momentum_normal_component": 0.090820574985126,
+      "relative_error": 1.4519126506294003e-07,
+      "closest_endpoint_ball_center_distance": 0.04429035191799252
+    },
+    {
+      "step": 94,
+      "env_id": 15,
+      "agent_id": 1,
+      "normal_impulse": 0.08784264326095581,
+      "momentum_normal_component": 0.08803994203299154,
+      "relative_error": 0.002246047758941023,
+      "closest_endpoint_ball_center_distance": 0.03958098622868385
+    },
+    {
+      "step": 95,
+      "env_id": 0,
+      "agent_id": 1,
+      "normal_impulse": 0.08823639154434204,
+      "momentum_normal_component": 0.08840386279402647,
+      "relative_error": 0.0018979838902440588,
+      "closest_endpoint_ball_center_distance": 0.015864331542784226
+    },
+    {
+      "step": 95,
+      "env_id": 6,
+      "agent_id": 1,
+      "normal_impulse": 0.08628369867801666,
+      "momentum_normal_component": 0.08628367173719963,
+      "relative_error": 3.122353057222978e-07,
+      "closest_endpoint_ball_center_distance": 0.05233515443445806
+    },
+    {
+      "step": 97,
+      "env_id": 14,
+      "agent_id": 1,
+      "normal_impulse": 0.08789584040641785,
+      "momentum_normal_component": 0.08802688506734963,
+      "relative_error": 0.0014909085609267345,
+      "closest_endpoint_ball_center_distance": 0.044110570873594934
+    },
+    {
+      "step": 98,
+      "env_id": 3,
+      "agent_id": 1,
+      "normal_impulse": 0.08907206356525421,
+      "momentum_normal_component": 0.08739287410807474,
+      "relative_error": 0.018852032724596055,
+      "closest_endpoint_ball_center_distance": 0.05582067498480655
+    },
+    {
+      "step": 98,
+      "env_id": 13,
+      "agent_id": 1,
+      "normal_impulse": 0.08787709474563599,
+      "momentum_normal_component": 0.08787709896939679,
+      "relative_error": 4.806441100123664e-08,
+      "closest_endpoint_ball_center_distance": 0.06964846381672324
+    },
+    {
+      "step": 101,
+      "env_id": 4,
+      "agent_id": 1,
+      "normal_impulse": 0.08802136033773422,
+      "momentum_normal_component": 0.08751766609626628,
+      "relative_error": 0.005722409191760823,
+      "closest_endpoint_ball_center_distance": 0.03973752901877647
+    },
+    {
+      "step": 102,
+      "env_id": 5,
+      "agent_id": 1,
+      "normal_impulse": 0.08496885001659393,
+      "momentum_normal_component": 0.08497527537324727,
+      "relative_error": 7.562014375952335e-05,
+      "closest_endpoint_ball_center_distance": 0.005732536712555085
+    },
+    {
+      "step": 103,
+      "env_id": 12,
+      "agent_id": 1,
+      "normal_impulse": 0.08231031894683838,
+      "momentum_normal_component": 0.0823102727610676,
+      "relative_error": 5.611176261768243e-07,
+      "closest_endpoint_ball_center_distance": 0.05944819044648451
+    }
+  ],
+  "scope": "single normal-contact sample at active first-episode step; no claim to include tangential or unfiltered simultaneous contacts"
+}

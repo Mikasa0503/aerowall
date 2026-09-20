@@ -1,0 +1,133 @@
+{
+  "sample_count": 14,
+  "max_relative_normal_momentum_error": 0.023049880658917377,
+  "samples": [
+    {
+      "step": 49,
+      "env_id": 10,
+      "agent_id": 0,
+      "normal_impulse": 0.04425465315580368,
+      "momentum_normal_component": 0.043234588681960624,
+      "relative_error": 0.023049880658917377,
+      "closest_endpoint_ball_center_distance": 0.03359163751008488
+    },
+    {
+      "step": 50,
+      "env_id": 5,
+      "agent_id": 0,
+      "normal_impulse": 0.04827502742409706,
+      "momentum_normal_component": 0.048244271184205934,
+      "relative_error": 0.0006371045555486372,
+      "closest_endpoint_ball_center_distance": 0.011670212666524567
+    },
+    {
+      "step": 51,
+      "env_id": 2,
+      "agent_id": 0,
+      "normal_impulse": 0.04805563762784004,
+      "momentum_normal_component": 0.047089133031676375,
+      "relative_error": 0.02011220002216228,
+      "closest_endpoint_ball_center_distance": 0.021820029392282662
+    },
+    {
+      "step": 53,
+      "env_id": 7,
+      "agent_id": 0,
+      "normal_impulse": 0.048173949122428894,
+      "momentum_normal_component": 0.048156688884911036,
+      "relative_error": 0.00035828986064631374,
+      "closest_endpoint_ball_center_distance": 0.03434156150535734
+    },
+    {
+      "step": 53,
+      "env_id": 13,
+      "agent_id": 0,
+      "normal_impulse": 0.04869585484266281,
+      "momentum_normal_component": 0.04869583265650756,
+      "relative_error": 4.5560664916794615e-07,
+      "closest_endpoint_ball_center_distance": 0.08490419540630921
+    },
+    {
+      "step": 54,
+      "env_id": 3,
+      "agent_id": 0,
+      "normal_impulse": 0.04867899790406227,
+      "momentum_normal_component": 0.04867900239737131,
+      "relative_error": 9.230487953349189e-08,
+      "closest_endpoint_ball_center_distance": 0.11325410834185716
+    },
+    {
+      "step": 54,
+      "env_id": 11,
+      "agent_id": 0,
+      "normal_impulse": 0.0472341813147068,
+      "momentum_normal_component": 0.04725301776085212,
+      "relative_error": 0.0003987884540607349,
+      "closest_endpoint_ball_center_distance": 0.07658713179207839
+    },
+    {
+      "step": 55,
+      "env_id": 1,
+      "agent_id": 0,
+      "normal_impulse": 0.05475907400250435,
+      "momentum_normal_component": 0.054759059908790195,
+      "relative_error": 2.573767802102983e-07,
+      "closest_endpoint_ball_center_distance": 0.09978073597314739
+    },
+    {
+      "step": 55,
+      "env_id": 9,
+      "agent_id": 0,
+      "normal_impulse": 0.049308087676763535,
+      "momentum_normal_component": 0.04933751883398745,
+      "relative_error": 0.0005968829579612203,
+      "closest_endpoint_ball_center_distance": 0.030703467304591833
+    },
+    {
+      "step": 57,
+      "env_id": 15,
+      "agent_id": 0,
+      "normal_impulse": 0.05443069338798523,
+      "momentum_normal_component": 0.054430679349003926,
+      "relative_error": 2.5792398424533745e-07,
+      "closest_endpoint_ball_center_distance": 0.09689926424494005
+    },
+    {
+      "step": 58,
+      "env_id": 4,
+      "agent_id": 0,
+      "normal_impulse": 0.053258806467056274,
+      "momentum_normal_component": 0.05325879082945175,
+      "relative_error": 2.936153767067601e-07,
+      "closest_endpoint_ball_center_distance": 0.06339248555238386
+    },
+    {
+      "step": 58,
+      "env_id": 8,
+      "agent_id": 0,
+      "normal_impulse": 0.036928970366716385,
+      "momentum_normal_component": 0.036928961741850994,
+      "relative_error": 2.3355282602463966e-07,
+      "closest_endpoint_ball_center_distance": 0.11528886792306678
+    },
+    {
+      "step": 59,
+      "env_id": 6,
+      "agent_id": 0,
+      "normal_impulse": 0.0021006253082305193,
+      "momentum_normal_component": 0.002100628515925841,
+      "relative_error": 1.5270192685160677e-06,
+      "closest_endpoint_ball_center_distance": 0.10347739261315599
+    },
+    {
+      "step": 59,
+      "env_id": 12,
+      "agent_id": 0,
+      "normal_impulse": 0.05117550119757652,
+      "momentum_normal_component": 0.051049366293750086,
+      "relative_error": 0.002464751704911696,
+      "closest_endpoint_ball_center_distance": 0.025212287907341216
+    }
+  ],
+  "scope": "single normal-contact sample at active first-episode step; no claim to include tangential or unfiltered simultaneous contacts"
+}

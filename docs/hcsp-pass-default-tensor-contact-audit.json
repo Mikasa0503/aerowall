@@ -1,0 +1,388 @@
+{
+  "single_pair_candidate_count": 13,
+  "max_relative_normal_momentum_error_single_pair_candidates": 7.83967755350024e-07,
+  "sample_count": 27,
+  "max_relative_normal_momentum_error": 0.028268174423917127,
+  "samples": [
+    {
+      "step": 50,
+      "env_id": 1,
+      "agent_id": 0,
+      "normal_impulse": 0.04828069731593132,
+      "momentum_normal_component": 0.0482806863866269,
+      "relative_error": 2.2637006148229698e-07,
+      "closest_endpoint_ball_center_distance": 0.0977258697374187,
+      "other_reported_ball_pairs": [],
+      "single_pair_candidate": true
+    },
+    {
+      "step": 50,
+      "env_id": 3,
+      "agent_id": 0,
+      "normal_impulse": 0.048372771590948105,
+      "momentum_normal_component": 0.04838971153383753,
+      "relative_error": 0.0003501958298497978,
+      "closest_endpoint_ball_center_distance": 0.02857456575678088,
+      "other_reported_ball_pairs": [
+        [
+          "/World/envs/env_3/Iris_0/rotor_1",
+          "/World/envs/env_3/ball"
+        ]
+      ],
+      "single_pair_candidate": false
+    },
+    {
+      "step": 50,
+      "env_id": 8,
+      "agent_id": 0,
+      "normal_impulse": 0.05053861811757088,
+      "momentum_normal_component": 0.050472750500280494,
+      "relative_error": 0.0013033125903274818,
+      "closest_endpoint_ball_center_distance": 0.02736379273225747,
+      "other_reported_ball_pairs": [
+        [
+          "/World/envs/env_8/Iris_0/rotor_3",
+          "/World/envs/env_8/ball"
+        ]
+      ],
+      "single_pair_candidate": false
+    },
+    {
+      "step": 50,
+      "env_id": 10,
+      "agent_id": 0,
+      "normal_impulse": 0.042853716760873795,
+      "momentum_normal_component": 0.04285372261287896,
+      "relative_error": 1.3655770391700222e-07,
+      "closest_endpoint_ball_center_distance": 0.08198451055710687,
+      "other_reported_ball_pairs": [],
+      "single_pair_candidate": true
+    },
+    {
+      "step": 51,
+      "env_id": 6,
+      "agent_id": 0,
+      "normal_impulse": 0.046676233410835266,
+      "momentum_normal_component": 0.04667619681817333,
+      "relative_error": 7.83967755350024e-07,
+      "closest_endpoint_ball_center_distance": 0.05702946140404618,
+      "other_reported_ball_pairs": [],
+      "single_pair_candidate": true
+    },
+    {
+      "step": 51,
+      "env_id": 9,
+      "agent_id": 0,
+      "normal_impulse": 0.04188835993409157,
+      "momentum_normal_component": 0.041888359061372095,
+      "relative_error": 2.0834414965171348e-08,
+      "closest_endpoint_ball_center_distance": 0.07376812352806227,
+      "other_reported_ball_pairs": [],
+      "single_pair_candidate": true
+    },
+    {
+      "step": 52,
+      "env_id": 12,
+      "agent_id": 0,
+      "normal_impulse": 0.0519503653049469,
+      "momentum_normal_component": 0.05189026141616876,
+      "relative_error": 0.0011569483376167309,
+      "closest_endpoint_ball_center_distance": 0.01044558030136791,
+      "other_reported_ball_pairs": [
+        [
+          "/World/envs/env_12/Iris_0/rotor_3",
+          "/World/envs/env_12/ball"
+        ]
+      ],
+      "single_pair_candidate": false
+    },
+    {
+      "step": 54,
+      "env_id": 14,
+      "agent_id": 0,
+      "normal_impulse": 0.05575580894947052,
+      "momentum_normal_component": 0.05575577464827076,
+      "relative_error": 6.152040551251731e-07,
+      "closest_endpoint_ball_center_distance": 0.11504783008333778,
+      "other_reported_ball_pairs": [],
+      "single_pair_candidate": true
+    },
+    {
+      "step": 55,
+      "env_id": 15,
+      "agent_id": 0,
+      "normal_impulse": 0.04795733466744423,
+      "momentum_normal_component": 0.04660166836615875,
+      "relative_error": 0.028268174423917127,
+      "closest_endpoint_ball_center_distance": 0.029670059447623968,
+      "other_reported_ball_pairs": [
+        [
+          "/World/envs/env_15/Iris_0/rotor_2",
+          "/World/envs/env_15/ball"
+        ]
+      ],
+      "single_pair_candidate": false
+    },
+    {
+      "step": 56,
+      "env_id": 4,
+      "agent_id": 0,
+      "normal_impulse": 0.05337715521454811,
+      "momentum_normal_component": 0.05340523205674465,
+      "relative_error": 0.0005260085908228429,
+      "closest_endpoint_ball_center_distance": 0.05051130881210568,
+      "other_reported_ball_pairs": [
+        [
+          "/World/envs/env_4/Iris_0/rotor_1",
+          "/World/envs/env_4/ball"
+        ]
+      ],
+      "single_pair_candidate": false
+    },
+    {
+      "step": 56,
+      "env_id": 7,
+      "agent_id": 0,
+      "normal_impulse": 0.04582006484270096,
+      "momentum_normal_component": 0.0457869102838135,
+      "relative_error": 0.0007235816667059806,
+      "closest_endpoint_ball_center_distance": 0.05629731608959188,
+      "other_reported_ball_pairs": [
+        [
+          "/World/envs/env_7/Iris_0/rotor_1",
+          "/World/envs/env_7/ball"
+        ],
+        [
+          "/World/envs/env_7/Iris_0/rotor_2",
+          "/World/envs/env_7/ball"
+        ]
+      ],
+      "single_pair_candidate": false
+    },
+    {
+      "step": 57,
+      "env_id": 0,
+      "agent_id": 0,
+      "normal_impulse": 0.04998350888490677,
+      "momentum_normal_component": 0.04996437901101417,
+      "relative_error": 0.00038272370866650754,
+      "closest_endpoint_ball_center_distance": 0.014450293791851669,
+      "other_reported_ball_pairs": [
+        [
+          "/World/envs/env_0/Iris_0/rotor_1",
+          "/World/envs/env_0/ball"
+        ],
+        [
+          "/World/envs/env_0/Iris_0/rotor_2",
+          "/World/envs/env_0/ball"
+        ]
+      ],
+      "single_pair_candidate": false
+    },
+    {
+      "step": 57,
+      "env_id": 2,
+      "agent_id": 0,
+      "normal_impulse": 0.051246415823698044,
+      "momentum_normal_component": 0.051216709536051355,
+      "relative_error": 0.0005796754205969545,
+      "closest_endpoint_ball_center_distance": 0.01790360930992911,
+      "other_reported_ball_pairs": [
+        [
+          "/World/envs/env_2/Iris_0/rotor_1",
+          "/World/envs/env_2/ball"
+        ],
+        [
+          "/World/envs/env_2/Iris_0/rotor_2",
+          "/World/envs/env_2/ball"
+        ]
+      ],
+      "single_pair_candidate": false
+    },
+    {
+      "step": 57,
+      "env_id": 11,
+      "agent_id": 0,
+      "normal_impulse": 0.05493579059839249,
+      "momentum_normal_component": 0.0549357605452157,
+      "relative_error": 5.470600579347502e-07,
+      "closest_endpoint_ball_center_distance": 0.09295808088482968,
+      "other_reported_ball_pairs": [],
+      "single_pair_candidate": true
+    },
+    {
+      "step": 58,
+      "env_id": 13,
+      "agent_id": 0,
+      "normal_impulse": 0.04956108331680298,
+      "momentum_normal_component": 0.049561051468684926,
+      "relative_error": 6.426033476494964e-07,
+      "closest_endpoint_ball_center_distance": 0.11290446897905314,
+      "other_reported_ball_pairs": [],
+      "single_pair_candidate": true
+    },
+    {
+      "step": 89,
+      "env_id": 9,
+      "agent_id": 1,
+      "normal_impulse": 0.053315822035074234,
+      "momentum_normal_component": 0.05331581176484781,
+      "relative_error": 1.92629993015754e-07,
+      "closest_endpoint_ball_center_distance": 0.10752271497472088,
+      "other_reported_ball_pairs": [],
+      "single_pair_candidate": true
+    },
+    {
+      "step": 92,
+      "env_id": 10,
+      "agent_id": 1,
+      "normal_impulse": 0.05675307661294937,
+      "momentum_normal_component": 0.05671775420422829,
+      "relative_error": 0.0006223875572768962,
+      "closest_endpoint_ball_center_distance": 0.030863540991108444,
+      "other_reported_ball_pairs": [
+        [
+          "/World/envs/env_10/Iris_1/rotor_0",
+          "/World/envs/env_10/ball"
+        ]
+      ],
+      "single_pair_candidate": false
+    },
+    {
+      "step": 96,
+      "env_id": 0,
+      "agent_id": 1,
+      "normal_impulse": 0.053081195801496506,
+      "momentum_normal_component": 0.05308115774869971,
+      "relative_error": 7.16879042021436e-07,
+      "closest_endpoint_ball_center_distance": 0.06140062544337536,
+      "other_reported_ball_pairs": [],
+      "single_pair_candidate": true
+    },
+    {
+      "step": 96,
+      "env_id": 3,
+      "agent_id": 1,
+      "normal_impulse": 0.05601688474416733,
+      "momentum_normal_component": 0.056016883083092384,
+      "relative_error": 2.965311176880668e-08,
+      "closest_endpoint_ball_center_distance": 0.11207493432110718,
+      "other_reported_ball_pairs": [],
+      "single_pair_candidate": true
+    },
+    {
+      "step": 97,
+      "env_id": 2,
+      "agent_id": 1,
+      "normal_impulse": 0.05456900969147682,
+      "momentum_normal_component": 0.05454728968618273,
+      "relative_error": 0.00039802821082690214,
+      "closest_endpoint_ball_center_distance": 0.043760947556512816,
+      "other_reported_ball_pairs": [
+        [
+          "/World/envs/env_2/Iris_1/rotor_2",
+          "/World/envs/env_2/ball"
+        ]
+      ],
+      "single_pair_candidate": false
+    },
+    {
+      "step": 97,
+      "env_id": 15,
+      "agent_id": 1,
+      "normal_impulse": 0.05667084455490112,
+      "momentum_normal_component": 0.056707315179414144,
+      "relative_error": 0.0006435518086851466,
+      "closest_endpoint_ball_center_distance": 0.0020224035540805808,
+      "other_reported_ball_pairs": [
+        [
+          "/World/envs/env_15/Iris_1/rotor_1",
+          "/World/envs/env_15/ball"
+        ]
+      ],
+      "single_pair_candidate": false
+    },
+    {
+      "step": 98,
+      "env_id": 6,
+      "agent_id": 1,
+      "normal_impulse": 0.05012289807200432,
+      "momentum_normal_component": 0.0501229163228803,
+      "relative_error": 3.641225205672987e-07,
+      "closest_endpoint_ball_center_distance": 0.02958275315985634,
+      "other_reported_ball_pairs": [],
+      "single_pair_candidate": true
+    },
+    {
+      "step": 139,
+      "env_id": 9,
+      "agent_id": 2,
+      "normal_impulse": 0.07779426127672195,
+      "momentum_normal_component": 0.07779422767667828,
+      "relative_error": 4.3190902679052925e-07,
+      "closest_endpoint_ball_center_distance": 0.022535934458705383,
+      "other_reported_ball_pairs": [],
+      "single_pair_candidate": true
+    },
+    {
+      "step": 145,
+      "env_id": 10,
+      "agent_id": 2,
+      "normal_impulse": 0.07870320975780487,
+      "momentum_normal_component": 0.07870321811337687,
+      "relative_error": 1.0616558109763593e-07,
+      "closest_endpoint_ball_center_distance": 0.06014028349274993,
+      "other_reported_ball_pairs": [],
+      "single_pair_candidate": true
+    },
+    {
+      "step": 145,
+      "env_id": 15,
+      "agent_id": 2,
+      "normal_impulse": 0.0828223004937172,
+      "momentum_normal_component": 0.08276356330458524,
+      "relative_error": 0.0007091953348531426,
+      "closest_endpoint_ball_center_distance": 0.005499195836307961,
+      "other_reported_ball_pairs": [
+        [
+          "/World/envs/env_15/Iris_2/rotor_1",
+          "/World/envs/env_15/ball"
+        ]
+      ],
+      "single_pair_candidate": false
+    },
+    {
+      "step": 157,
+      "env_id": 2,
+      "agent_id": 2,
+      "normal_impulse": 0.07909432798624039,
+      "momentum_normal_component": 0.07912601608289153,
+      "relative_error": 0.0004006367770980994,
+      "closest_endpoint_ball_center_distance": 0.025240257685611757,
+      "other_reported_ball_pairs": [
+        [
+          "/World/envs/env_2/Iris_2/rotor_1",
+          "/World/envs/env_2/ball"
+        ]
+      ],
+      "single_pair_candidate": false
+    },
+    {
+      "step": 159,
+      "env_id": 0,
+      "agent_id": 2,
+      "normal_impulse": 0.07568008452653885,
+      "momentum_normal_component": 0.07568008426637941,
+      "relative_error": 3.437620838938338e-09,
+      "closest_endpoint_ball_center_distance": 0.034081478622854246,
+      "other_reported_ball_pairs": [
+        [
+          "/World/envs/env_0/Iris_2/rotor_1",
+          "/World/envs/env_0/ball"
+        ]
+      ],
+      "single_pair_candidate": false
+    }
+  ],
+  "scope": "Raw error retains all steps with one GPU base-link sample. Candidate subset excludes other simultaneous ball pairs reported by CPU headers; missing headers and tangential forces remain outside this audit."
+}

@@ -1,0 +1,331 @@
+{
+  "initial_state_distribution": "upstream default reset (diagnostic change)",
+  "task": "Pass_hover",
+  "role": "FirstPass",
+  "agent_index": 2,
+  "dt": 0.02,
+  "source_report": "runs/hcsp-pass-hover-default-reference-01.json",
+  "source_commit": "009961b8f5702dd0c1c943cef0e01e09dfcd138d",
+  "trajectory_sha256": "ab13438323cad1ab21e9012a1f28a90ee254bdc9a5f6cb43a97018433ed75c43",
+  "sample_count": 5,
+  "scenario_count": 5,
+  "scope": "Positive normal-impulse GPU ball/base-link samples in first episodes. HCSP visual bat is not a separate physical bat; these are not AeroWall legal-cap credits.",
+  "timing": "Ball velocities bracket one simulation step, not instantaneous collision limits; body contact-point velocity uses the sampled post-step COM and angular velocity.",
+  "samples": [
+    {
+      "step": 139,
+      "env_id": 9,
+      "agent_id": 2,
+      "first_episode_active": true,
+      "normal_impulse": -0.07779426127672195,
+      "position": [
+        -3.421788454055786,
+        -7.4296040534973145,
+        1.6162101030349731
+      ],
+      "normal": [
+        0.5108956098556519,
+        0.20444001257419586,
+        -0.8349786996841431
+      ],
+      "separation": -0.07746406644582748,
+      "body_normal": [
+        -0.5042418837547302,
+        -0.21258845925331116,
+        0.836986243724823
+      ],
+      "translation_velocity": [
+        -0.8826754093170166,
+        -1.8474757671356201,
+        -1.6889113187789917
+      ],
+      "rotational_velocity": [
+        0.01588531769812107,
+        -0.028285417705774307,
+        0.014759090729057789
+      ],
+      "contact_point_velocity": [
+        -0.8667901158332825,
+        -1.8757611513137817,
+        -1.6741522550582886
+      ],
+      "sample_before_time_s": 2.7800000000000002,
+      "sample_after_time_s": 2.8000000000000003,
+      "ball_velocity_before": [
+        5.79587984085083,
+        2.24768328666687,
+        -6.723937511444092
+      ],
+      "ball_velocity_after": [
+        -2.1530697345733643,
+        -0.9331688284873962,
+        6.071174144744873
+      ],
+      "body_angular_velocity_after": [
+        0.30755749344825745,
+        0.32099592685699463,
+        0.28415408730506897
+      ],
+      "body_com_after": [
+        -3.405808687210083,
+        -7.460914134979248,
+        1.539005994796753
+      ],
+      "linear_speed": 2.65418613346278,
+      "rotation_contribution_speed": 0.035640411505886524,
+      "contact_point_speed": 2.6594342960112836
+    },
+    {
+      "step": 145,
+      "env_id": 10,
+      "agent_id": 2,
+      "first_episode_active": true,
+      "normal_impulse": -0.07870320975780487,
+      "position": [
+        -3.3207616806030273,
+        8.709197044372559,
+        1.994429349899292
+      ],
+      "normal": [
+        0.5253661870956421,
+        0.34863483905792236,
+        -0.7761727571487427
+      ],
+      "separation": -0.03638897091150284,
+      "body_normal": [
+        -0.5255542993545532,
+        -0.36162829399108887,
+        0.7700762748718262
+      ],
+      "translation_velocity": [
+        -0.7198132276535034,
+        -0.37903574109077454,
+        -1.6416079998016357
+      ],
+      "rotational_velocity": [
+        0.001070627593435347,
+        -0.04377472773194313,
+        -0.023445503786206245
+      ],
+      "contact_point_velocity": [
+        -0.7187426090240479,
+        -0.42281046509742737,
+        -1.6650534868240356
+      ],
+      "sample_before_time_s": 2.9,
+      "sample_after_time_s": 2.92,
+      "ball_velocity_before": [
+        5.948894023895264,
+        2.911442756652832,
+        -6.715376853942871
+      ],
+      "ball_velocity_after": [
+        -2.320706605911255,
+        -2.5762932300567627,
+        5.305882453918457
+      ],
+      "body_angular_velocity_after": [
+        0.5579627752304077,
+        -0.2246762365102768,
+        0.4449685215950012
+      ],
+      "body_com_after": [
+        -3.296391248703003,
+        8.741403579711914,
+        1.9354099035263062
+      ],
+      "linear_speed": 1.832123358494704,
+      "rotation_contribution_speed": 0.04966955485243035,
+      "contact_point_speed": 1.8621929925245335
+    },
+    {
+      "step": 145,
+      "env_id": 15,
+      "agent_id": 2,
+      "first_episode_active": true,
+      "normal_impulse": -0.0828223004937172,
+      "position": [
+        -18.975175857543945,
+        23.555511474609375,
+        1.403169870376587
+      ],
+      "normal": [
+        0.4665818512439728,
+        0.3503372073173523,
+        -0.8121362924575806
+      ],
+      "separation": -0.10549957305192947,
+      "body_normal": [
+        -0.45551109313964844,
+        -0.36132320761680603,
+        0.8136063814163208
+      ],
+      "translation_velocity": [
+        -1.739915370941162,
+        -0.7350513339042664,
+        -1.8220103979110718
+      ],
+      "rotational_velocity": [
+        0.0009079646551981568,
+        -0.06235598772764206,
+        0.04495405778288841
+      ],
+      "contact_point_velocity": [
+        -1.7390073537826538,
+        -0.797407329082489,
+        -1.777056336402893
+      ],
+      "sample_before_time_s": 2.9,
+      "sample_after_time_s": 2.92,
+      "ball_velocity_before": [
+        5.55194091796875,
+        3.269360303878784,
+        -6.903592586517334
+      ],
+      "ball_velocity_after": [
+        -1.876418948173523,
+        -2.5353338718414307,
+        6.51020622253418
+      ],
+      "body_angular_velocity_after": [
+        0.38352710008621216,
+        0.3724122643470764,
+        0.5088285207748413
+      ],
+      "body_com_after": [
+        -18.87105369567871,
+        23.539403915405273,
+        1.3787239789962769
+      ],
+      "linear_speed": 2.62437189658932,
+      "rotation_contribution_speed": 0.07687627017781369,
+      "contact_point_speed": 2.611117432773618
+    },
+    {
+      "step": 157,
+      "env_id": 2,
+      "agent_id": 2,
+      "first_episode_active": true,
+      "normal_impulse": -0.07909432798624039,
+      "position": [
+        25.93370819091797,
+        9.149316787719727,
+        1.8459413051605225
+      ],
+      "normal": [
+        0.42666715383529663,
+        0.4108935594558716,
+        -0.8056806325912476
+      ],
+      "separation": -0.07475967705249786,
+      "body_normal": [
+        -0.4197213649749756,
+        -0.4148476719856262,
+        0.8073011636734009
+      ],
+      "translation_velocity": [
+        -1.8867058753967285,
+        -0.07920462638139725,
+        -1.8917170763015747
+      ],
+      "rotational_velocity": [
+        0.010970144532620907,
+        -0.020969361066818237,
+        0.01706990972161293
+      ],
+      "contact_point_velocity": [
+        -1.8757357597351074,
+        -0.10017398744821548,
+        -1.8746471405029297
+      ],
+      "sample_before_time_s": 3.14,
+      "sample_after_time_s": 3.16,
+      "ball_velocity_before": [
+        4.793395042419434,
+        3.0970048904418945,
+        -7.374904155731201
+      ],
+      "ball_velocity_after": [
+        -1.6484782695770264,
+        -3.249211072921753,
+        5.422937393188477
+      ],
+      "body_angular_velocity_after": [
+        0.09383289515972137,
+        0.2456599622964859,
+        0.2414759248495102
+      ],
+      "body_com_after": [
+        25.998477935791016,
+        9.136969566345215,
+        1.7891485691070557
+      ],
+      "linear_speed": 2.6729246023537083,
+      "rotation_contribution_speed": 0.02917944469178947,
+      "contact_point_speed": 2.653812610096298
+    },
+    {
+      "step": 159,
+      "env_id": 0,
+      "agent_id": 2,
+      "first_episode_active": true,
+      "normal_impulse": -0.07568008452653885,
+      "position": [
+        25.558631896972656,
+        -20.887123107910156,
+        1.850096344947815
+      ],
+      "normal": [
+        0.3751932382583618,
+        0.3750894069671631,
+        -0.8476661443710327
+      ],
+      "separation": -0.13495030999183655,
+      "body_normal": [
+        -0.35950276255607605,
+        -0.37709304690361023,
+        0.8535563349723816
+      ],
+      "translation_velocity": [
+        -2.2919671535491943,
+        -0.30431610345840454,
+        -2.0277955532073975
+      ],
+      "rotational_velocity": [
+        0.04976080730557442,
+        -0.0014586132019758224,
+        0.013042029924690723
+      ],
+      "contact_point_velocity": [
+        -2.242206335067749,
+        -0.3057747185230255,
+        -2.014753580093384
+      ],
+      "sample_before_time_s": 3.18,
+      "sample_after_time_s": 3.2,
+      "ball_velocity_before": [
+        4.350070953369141,
+        2.574958086013794,
+        -7.463155269622803
+      ],
+      "ball_velocity_after": [
+        -1.3288605213165283,
+        -3.1024014949798584,
+        5.170934677124023
+      ],
+      "body_angular_velocity_after": [
+        -0.09313249588012695,
+        0.7004169225692749,
+        0.4336737096309662
+      ],
+      "body_com_after": [
+        25.578805923461914,
+        -20.898807525634766,
+        1.7718172073364258
+      ],
+      "linear_speed": 3.0753335639211885,
+      "rotation_contribution_speed": 0.05146221954727579,
+      "contact_point_speed": 3.0298876903286183
+    }
+  ]
+}
