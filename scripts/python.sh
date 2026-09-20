@@ -61,5 +61,9 @@ else
     }
     export PYTHONPATH="$(runtime_paths_only "$PYTHONPATH")"
     export LD_LIBRARY_PATH="$(runtime_paths_only "$LD_LIBRARY_PATH")"
+    # Importing upstream Torch before Kit can load Ubuntu's older libstdc++.
+    # The isolated Python sqlite/ICU stack needs its own newer C++ ABI.
+    # Pin only this library, without exposing all Conda libraries to Kit.
+    export LD_PRELOAD="$CONDA_PREFIX/lib/libstdc++.so.6"
 fi
 exec "$CONDA_PREFIX/bin/python" "$@"

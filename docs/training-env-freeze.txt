@@ -1,0 +1,67 @@
+antlr4-python3-runtime==4.9.3
+appdirs==1.4.4
+attrs==23.1.0
+av==12.3.0
+botocore==1.29.63
+certifi==2026.7.22
+charset-normalizer==3.5.1
+click==8.5.0
+cloudpickle==2.2.1
+contourpy==1.3.2
+cycler==0.12.1
+decorator==4.4.2
+docker-pycreds==0.4.0
+einops==0.7.0
+Farama-Notifications==0.0.6
+filterpy==1.4.5
+fonttools==4.65.0
+gitdb==4.0.12
+GitPython==3.1.62
+gymnasium==0.29.0
+h5py==3.9.0
+hidapi==0.14.0
+hydra-core==1.3.2
+idna==3.20
+imageio==2.31.6
+imageio-ffmpeg==0.6.0
+jmespath==1.1.0
+kiwisolver==1.5.1
+matplotlib==3.7.1
+moviepy==1.0.3
+ninja==1.11.1.1
+numpy==1.23.5
+omegaconf==2.3.0
+-e git+https://github.com/thu-uav/JuggleRL_train.git@7ff6efb499e53b16dbaa024f2397f1101c7614ad#egg=omni_drones
+-e git+https://github.com/zrz-sh/orbit.git@bca680a9ebdcddd8f4d70bd7c65efa94f9d45946#egg=omni_isaac_orbit&subdirectory=../../../third_party/orbit/source/extensions/omni.isaac.orbit
+packaging @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_packaging_1785888127/work
+pandas==1.5.3
+Pillow==10.0.1
+plotly==5.18.0
+prettytable==3.3.0
+proglog==0.1.12
+protobuf==4.25.9
+psutil==7.2.2
+pydantic==1.10.13
+pyglet==1.5.27
+pyparsing==3.3.2
+python-dateutil==2.9.0.post0
+pytz==2026.3.post1
+PyYAML==6.0.3
+requests==2.34.2
+scipy==1.10.1
+sentry-sdk==2.69.2
+setproctitle==1.3.3
+six==1.17.0
+smmap==5.0.3
+tenacity==9.1.4
+-e git+https://github.com/zrz-sh/tensordict.git@a8c5397a81cf37b9b985d8a85180ab52f60af54a#egg=tensordict&subdirectory=../../../third_party/tensordict
+toml==0.10.2
+tomli==2.0.1
+-e git+https://github.com/zrz-sh/rl.git@aacf134a1451891fc71edc05d1c1d4296a7937cd#egg=torchrl&subdirectory=../../../third_party/rl
+tqdm==4.66.1
+trimesh==3.23.5
+typing_extensions==4.7.1
+urllib3==1.26.18
+usd-core==23.2
+wandb==0.16.6
+wcwidth==0.8.4
