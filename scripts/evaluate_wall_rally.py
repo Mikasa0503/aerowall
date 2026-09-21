@@ -31,7 +31,7 @@ def main():
               'scenario_sha256': sha(a.scenarios), 'config_sha256': sha(a.config),
               'source_hashes': {name: sha(ROOT/name) for name in ['scripts/evaluate_wall_rally.py', 'aerowall/envs/wall_rally.py',
                   'aerowall/envs/aligned_juggle.py', 'aerowall/contact_router.py', 'aerowall/collider_bounds.py',
-                  'aerowall/rally_events.py', 'aerowall/learning/wall_policy.py', 'aerowall/learning/phase_recovery.py', 'aerowall/learning/recovery_controller.py', 'scripts/runtime_adapters.py', 'scripts/source_evidence.py']}}
+                  'aerowall/rally_events.py', 'aerowall/learning/wall_policy.py', 'aerowall/learning/phase_recovery.py', 'aerowall/learning/recovery_skill_policy.py', 'aerowall/learning/recovery_controller.py', 'scripts/runtime_adapters.py', 'scripts/source_evidence.py']}}
     a.output.parent.mkdir(parents=True, exist_ok=True)
     def record(**values):
         report.update(values)
@@ -66,8 +66,15 @@ def main():
         carb.settings.get_settings().set_bool(SETTING_DISABLE_CONTACT_PROCESSING, False)
         controller = PID_controller_flightmare(.02, base.drone.params, base.device).to(base.device)
         env = TransformedEnv(base, Compose(InitTracker(), ResetSafePIDRateController(controller))).eval()
-        policy = WallMAPPOPolicy(cfg.algo, agent_spec=env.agent_spec['drone'], device=base.device)
         payload = torch.load(a.checkpoint, map_location=base.device)
+        skill_policy='frozen_launch_params' in payload['policy']
+        policy_class=WallMAPPOPolicy
+        if skill_policy:
+            assert not a.initialize_juggle and not a.recovery_controller, 'Skill checkpoint uses its own learned recovery routing'
+            from aerowall.learning.recovery_skill_policy import RecoverySkillPolicy
+            policy_class=RecoverySkillPolicy
+            record(controller_mode='hierarchical_learned_recovery_skill')
+        policy = policy_class(cfg.algo, agent_spec=env.agent_spec['drone'], device=base.device)
         if a.initialize_juggle:
             policy.initialize_juggle_actor(payload)
             record(actor_transfer_audit=policy.audit_juggle_actor(payload), wall_training_updates=0)
@@ -110,7 +117,7 @@ def main():
                 actor_observation = td['agents','observation'].detach().clone()
                 assert actor_observation.shape == (n,1,43) and torch.isfinite(actor_observation).all()
                 policy(td, deterministic=True)
-                controlled=torch.zeros(n,dtype=torch.bool,device=base.device)
+                controlled=td[policy.mask_key].flatten().clone() if skill_policy else torch.zeros(n,dtype=torch.bool,device=base.device)
                 if recovery is not None:
                     current=snapshot()
                     outbound=torch.tensor([s.phase=='to_wall' for s in base.router.batch.states],device=base.device)
