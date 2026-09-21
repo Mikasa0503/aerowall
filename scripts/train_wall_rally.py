@@ -30,6 +30,7 @@ def main():
     parser.add_argument('--seed', type=int, default=0)
     parser.add_argument('--save-every', type=int, default=50)
     parser.add_argument('--resume', type=Path)
+    parser.add_argument('--reference-kl-coef',type=float,default=0.,help='Differentiable current-to-frozen-reference KL actor loss; single actor execution')
     parser.add_argument('--recovery-skill',action='store_true',help='Freeze launch actor; train post-launch recovery actor only')
     parser.add_argument('--initialize-policy', type=Path, help='Transfer weights only; prior frames remain in the budget')
     parser.add_argument('--physics-dt',type=float,default=.0025)
@@ -39,13 +40,15 @@ def main():
     assert args.physics_dt in (.02,.01,.005,.0025,.00125)
     if min(args.updates, args.save_every) < 1 or not 16 <= args.num_envs <= 512:
         parser.error('Require positive update/save counts and 16–512 environments')
+    assert args.reference_kl_coef>=0 and math.isfinite(args.reference_kl_coef)
+    assert not (args.reference_kl_coef and args.recovery_skill)
     assert not (args.resume and args.initialize_policy), 'Choose resume or transfer, not both'
     args.output.parent.mkdir(parents=True, exist_ok=True)
     report = {'status': 'initializing', 'pid': os.getpid(), 'phase': 'development_wall_rally',
               'seed': args.seed, 'updates_requested_this_run': args.updates, 'performance_claim': False,
               'upstream_commit': subprocess.check_output(['git', '-C', str(UPSTREAM), 'rev-parse', 'HEAD'], text=True).strip(),
               'source_hashes': {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
-                                for p in [Path(__file__), ROOT / 'scripts/runtime_adapters.py', ROOT / 'scripts/source_evidence.py', ROOT / 'scripts/python.sh', ROOT / 'aerowall/envs/aligned_juggle.py', ROOT / 'aerowall/contact_router.py', ROOT / 'aerowall/rally_events.py', ROOT / 'aerowall/envs/wall_rally.py', ROOT / 'aerowall/learning/wall_policy.py', ROOT / 'aerowall/learning/phase_recovery.py', ROOT / 'aerowall/learning/return_reference.py', ROOT / 'aerowall/learning/recovery_skill_policy.py', ROOT / 'aerowall/collider_bounds.py', args.wall_config]}}
+                                for p in [Path(__file__), ROOT / 'scripts/runtime_adapters.py', ROOT / 'scripts/source_evidence.py', ROOT / 'scripts/python.sh', ROOT / 'aerowall/envs/aligned_juggle.py', ROOT / 'aerowall/contact_router.py', ROOT / 'aerowall/rally_events.py', ROOT / 'aerowall/envs/wall_rally.py', ROOT / 'aerowall/learning/wall_policy.py', ROOT / 'aerowall/learning/reference_policy.py', ROOT / 'aerowall/learning/skill_distillation.py', ROOT / 'aerowall/learning/phase_recovery.py', ROOT / 'aerowall/learning/return_reference.py', ROOT / 'aerowall/learning/recovery_skill_policy.py', ROOT / 'aerowall/collider_bounds.py', args.wall_config]}}
     def record(**values):
         report.update(values)
         tmp = args.output.with_suffix('.tmp'); tmp.write_text(json.dumps(report, indent=2) + '\n'); tmp.replace(args.output)
@@ -72,6 +75,9 @@ def main():
         cfg.sim.dt=args.physics_dt;cfg.sim.substeps=round(.02/args.physics_dt)
         wall_cfg=OmegaConf.load(args.wall_config)
         cfg.wall_fixture=wall_cfg.wall_fixture;cfg.wall_task=wall_cfg.wall_task
+        if args.reference_kl_coef:
+            cfg.algo.reference_kl_coef=args.reference_kl_coef
+            cfg.algo.actor.output_dist_params=True
         # This run's actual budget overrides the author shell's two-billion cap.
         frames_per_batch = args.num_envs * int(cfg.algo.train_every)
         cfg.total_frames = args.updates * frames_per_batch
@@ -108,12 +114,16 @@ def main():
         env = TransformedEnv(base, Compose(InitTracker(), ResetSafePIDRateController(controller))).train()
         env.set_seed(args.seed)
         policy_class=WallMAPPOPolicy
+        if args.reference_kl_coef:
+            assert args.initialize_policy or args.resume
+            from aerowall.learning.reference_policy import ReferenceWallPolicy
+            policy_class=ReferenceWallPolicy
         if args.recovery_skill:
             from aerowall.learning.recovery_skill_policy import RecoverySkillPolicy
             policy_class=RecoverySkillPolicy
             assert args.initialize_policy or args.resume, 'Recovery skill needs a frozen launch source'
         policy = policy_class(cfg.algo, agent_spec=env.agent_spec['drone'], device=base.device)
-        record(policy_mode='frozen_launch_learned_recovery' if args.recovery_skill else 'single_wall_actor')
+        record(policy_mode='reference_regularized_single_actor' if args.reference_kl_coef else ('frozen_launch_learned_recovery' if args.recovery_skill else 'single_wall_actor'),reference_kl_coef=args.reference_kl_coef)
         prior_frames = 0
         if args.initialize_policy:
             loaded = torch.load(args.initialize_policy, map_location=base.device)
@@ -128,12 +138,14 @@ def main():
                 audit=policy.audit_wall_actor(loaded)
             record(actor_transfer_audit=audit,source_actor_width=source_width,prior_checkpoint_updates=loaded.get('n_updates'))
             if args.recovery_skill:policy.initialize_launch_actor(loaded)
+            if args.reference_kl_coef:policy.initialize_reference()
             prior_frames = loaded['environment_frames']
             record(initialize_policy=str(args.initialize_policy), initialize_policy_sha256=hashlib.sha256(args.initialize_policy.read_bytes()).hexdigest(), transfer_semantics='Actor-only initialization: 24-feature Juggle actor extended or compatible 43-feature Wall actor copied; new critic, value normalizer, optimizers; prior frames counted; update counter starts fresh')
         if args.resume:
             loaded = torch.load(args.resume, map_location=base.device)
             assert not loaded.get('requires_actor_only_initialization', False), \
                 'This actor-only checkpoint has no PPO continuation state; use --initialize-policy'
+            assert ('reference_actor_params' in loaded['policy'])==bool(args.reference_kl_coef), 'Resume changes reference regularization'
             assert ('frozen_launch_params' in loaded['policy'])==args.recovery_skill, 'Resume changes skill routing'
             assert loaded['learning_config_hash'] == config_hash, 'Resume changes the learning configuration'
             policy.load_state_dict(loaded['policy'])
@@ -143,6 +155,8 @@ def main():
             torch.set_rng_state(loaded['torch_rng'].cpu())
             torch.cuda.set_rng_state_all([v.cpu() for v in loaded['cuda_rng']])
             record(resume=str(args.resume), resume_semantics='learning/RNG state restored; new physics episodes')
+        if args.reference_kl_coef:
+            reference_before=policy.reference_params.clone()
         verify_sources(ROOT, report['source_hashes'])
         record(initialization_source_consistency=True)
         collector = SyncDataCollector(env, policy=policy, frames_per_batch=frames_per_batch,
@@ -173,6 +187,9 @@ def main():
                 frozen_source=loaded['policy']['frozen_launch_params'] if args.resume else loaded['policy']['actor_params']
                 assert all(torch.equal(v,frozen_source[k]) for k,v in policy.frozen_launch_params.items(True,True)), 'Frozen launch actor changed'
 
+            if args.reference_kl_coef:
+                assert all(torch.equal(v,reference_before[k]) for k,v in policy.reference_params.items(True,True)), 'Reference actor changed'
+                assert not any(v.requires_grad for v in policy.reference_params.values(True,True))
             assert all(math.isfinite(v) for v in info.values()), 'Non-finite learning metric'
             done = data['next', 'done'].squeeze(-1)
             episodes = int(done.sum().item())
@@ -218,6 +235,16 @@ def main():
             assert torch.equal(original[policy.act_name],replay[policy.act_name])
             assert torch.equal(original[policy.mask_key],replay[policy.mask_key])
             record(skill_checkpoint_actions_exact=True,frozen_launch_unchanged=True)
+        if args.reference_kl_coef:
+            restored=policy_class(cfg.algo,agent_spec=env.agent_spec['drone'],device=base.device)
+            restored.load_state_dict(torch.load(path,map_location=base.device)['policy'])
+            sample=data[:,0].to_tensordict()
+            with torch.no_grad():
+                original=policy(sample.clone(),deterministic=True)
+                replay=restored(sample.clone(),deterministic=True)
+            assert torch.equal(original[policy.act_name],replay[policy.act_name])
+            assert all(torch.equal(v,restored.reference_params[k]) for k,v in reference_before.items(True,True))
+            record(reference_unchanged=True,reference_checkpoint_actions_exact=True)
         record(status='passed', budget_completed=True, environment_frames=frames,
                frames_this_run=int(collector._frames), elapsed_training_seconds=time.monotonic()-started,
                scope='Training budget completed; no learned wall-return success claim')
