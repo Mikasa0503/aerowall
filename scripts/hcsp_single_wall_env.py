@@ -36,6 +36,13 @@ class SingleBodyRoles:
         role=torch.where((h[:,0]==3)|(h[:,0]==4),2,role)
         role=torch.where(~o.is_rally,2,role)
         o.executed_role=role
+        # Codes: FP goto/pass/hover/serve/serve-hover, Set goto/hit/hover,
+        # Attack goto/hit/hover. Record the actually applied branch.
+        skill=torch.where(h[:,0]<=2,0,torch.where(h[:,0]<=4,1,2))
+        skill=torch.where(role==3,torch.where(h[:,1]==0,5,torch.where(h[:,1]==1,6,7)),skill)
+        skill=torch.where(role==4,torch.where(h[:,2]==0,8,torch.where(h[:,2]<=2,9,10)),skill)
+        skill=torch.where(~o.is_rally,torch.where(o.serve_step==0,3,4),skill)
+        o.executed_skill=skill
         o.executed_action=actions[torch.arange(o.num_envs,device=o.device),role].unsqueeze(1).clone()
         effort=self.real.apply_action(o.executed_action)
         return effort.expand(-1,6)
@@ -60,6 +67,10 @@ class HCSPSingleWall(Coselfplay_Phase_one):
         assert self.physical_drone.n==1
         self.executed_role=torch.full((self.num_envs,),2,device=self.device,dtype=torch.long)
         self.executed_action=torch.zeros(self.num_envs,1,4,device=self.device)
+        self.executed_skill=torch.zeros(self.num_envs,device=self.device,dtype=torch.long)
+        self.contact_points=[]
+        self.global_step=-1
+        self.episode_index=torch.zeros(self.num_envs,device=self.device,dtype=torch.long)
         self.wall_views=[]
         for idx in range(self.num_envs):
             view=RigidContactView(f'/World/envs/env_{idx}/ball',
@@ -86,14 +97,34 @@ class HCSPSingleWall(Coselfplay_Phase_one):
         self.serve_turn[env_ids]=False;self.ball_side[env_ids]=False;self.last_hit_side[env_ids]=True
         self.ball_last_vel[env_ids]=0;self.ball_init_vel[env_ids]=0
         if hasattr(self,'phase'):
+            self.episode_index[env_ids]+=1
             self.phase[env_ids]=0;self.wall_returns[env_ids]=0;self.contact_live[env_ids]=False
     def _step(self,td):
+        self.global_step+=1
         self._pre_sim_step(td)
         self.sim.step(self._should_render(0));self._post_sim_step(td);self.progress_buf+=1
         # Refresh physical state before observations and event bookkeeping.
         self.physical_drone.get_state()
         impulses=torch.stack([v.get_contact_force_matrix(dt=1.)[0].norm(dim=-1) for v in self.wall_views])
         live=impulses>1e-8;entry=live&~self.contact_live
+        from hcsp.utils.torch import quat_rotate_inverse
+        body_pos,body_quat=self.physical_drone.base_link.get_world_poses()
+        for idx,view in enumerate(self.wall_views):
+            if not live[idx].any():continue
+            magnitudes,points,normals,separations,counts,starts=view.get_contact_force_data(dt=1.)
+            assert int(counts.sum())<32
+            for kind in (0,1):
+                start=int(starts[0,kind]);count=int(counts[0,kind])
+                for ci in range(start,start+count):
+                    if abs(float(magnitudes[ci]))<=1e-8:continue
+                    q=body_quat[idx,0];pos=body_pos[idx,0]
+                    point_local=quat_rotate_inverse(q[None],(points[ci]-pos)[None])[0]
+                    normal_local=quat_rotate_inverse(q[None],normals[ci][None])[0]
+                    self.contact_points.append({'env':idx,'step':int(self.progress_buf[idx])-1,'global_step':self.global_step,'episode':int(self.episode_index[idx]),'kind':kind,
+                        'impulse':float(magnitudes[ci]),'position':points[ci].cpu().tolist(),
+                        'normal':normals[ci].cpu().tolist(),'body_local_point':point_local.cpu().tolist(),
+                        'body_local_normal':normal_local.cpu().tolist(),
+                        'ball_body_delta':(self.ball.get_world_poses()[0][idx,0]-pos).cpu().tolist()})
         self.contact_live=live;self.contact_impulse=impulses;self.contact_entry=entry
         body=entry[:,0];wall=entry[:,1];ambiguous=body&wall
         self.wall_returns+=(body&(self.phase==2)&~ambiguous).long()

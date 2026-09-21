@@ -1,0 +1,8 @@
+{
+  "instrumentation_ball_max_difference": 0.0,
+  "instrumentation_physical_drone_max_difference": 0.0,
+  "after_wall_steps": 1850,
+  "multiple_high_level_hitting_roles_steps": 1101,
+  "initial_ball_identical": true,
+  "initial_drone_identical": true
+}

@@ -87,7 +87,7 @@ def main():
         record(deterministic_low_level=a.deterministic,deterministic_high_level=True,dt=base.dt,
                contact_filters_drone_name=base.drone.name,independent_contacts=a.contacts)
         active=torch.ones(a.num_envs,dtype=torch.bool,device=base.device)
-        outcomes=[];trace={'ball':[],'drone':[],'high':[],'active':[],'hits':[],'ball_velocity':[],'executed_high':[],'physical_drone':[],'executed_role':[],'executed_action':[],'contact_impulse':[],'contact_entry':[],'wall_returns':[]}
+        outcomes=[];trace={'ball':[],'drone':[],'high':[],'active':[],'hits':[],'ball_velocity':[],'executed_high':[],'physical_drone':[],'executed_skill':[],'executed_role':[],'executed_action':[],'contact_impulse':[],'contact_entry':[],'wall_returns':[]}
         with torch.no_grad():
             td=env.reset()
             record(initial_ball=(base.ball.get_world_poses()[0]-base.envs_positions[:,None,:]).cpu().tolist(),initial_drone=base.physical_drone.get_state().cpu().tolist(),wall={'center':[0,0,4],'size':[0.2,8,8]})
@@ -114,7 +114,7 @@ def main():
                             if abs(impulse)<=1e-8:continue
                             contacts.append({'env':idx,'step':step,'agent':agent,'impulse':impulse,
                                 'position':positions[ci].cpu().tolist(),'normal':normals[ci].cpu().tolist()})
-                for key,value in [('physical_drone',base.physical_drone.get_state()),('executed_role',base.executed_role),('executed_action',base.executed_action),('contact_impulse',base.contact_impulse),('contact_entry',base.contact_entry),('wall_returns',base.wall_returns)]:
+                for key,value in [('physical_drone',base.physical_drone.get_state()),('executed_skill',base.executed_skill),('executed_role',base.executed_role),('executed_action',base.executed_action),('contact_impulse',base.contact_impulse),('contact_entry',base.contact_entry),('wall_returns',base.wall_returns)]:
                     trace[key].append(value.cpu().numpy().copy())
                 done=nxt['done'].flatten()
                 for idx in torch.nonzero(active & (done | (step+1==a.steps))).flatten().tolist():
@@ -125,7 +125,7 @@ def main():
                 else:td=nxt
                 if step%100==0:print(f'step={step} active={active.sum().item()}',flush=True)
         trajectory=a.output.with_suffix('.npz');np.savez_compressed(trajectory,**{k:np.stack(v) for k,v in trace.items()})
-        record(status='passed',contacts=contacts,outcomes=outcomes,trajectory=str(trajectory),trajectory_sha256=hashlib.sha256(trajectory.read_bytes()).hexdigest(),steps=step+1)
+        record(status='passed',contact_points=base.contact_points,env_origins=base.envs_positions.cpu().tolist(),contacts=contacts,outcomes=outcomes,trajectory=str(trajectory),trajectory_sha256=hashlib.sha256(trajectory.read_bytes()).hexdigest(),steps=step+1)
     except BaseException:
         record(status='failed',error=traceback.format_exc());raise
     finally:
