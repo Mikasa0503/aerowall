@@ -132,6 +132,53 @@
         "aerowall/learning/wall_policy.py": "b4d089a51a2130b9d47db8a62f1e52eac49a4395d72c8e47faea0da4ce8d426f",
         "scripts/runtime_adapters.py": "0e18ec93b743cd2c9c6401bcada5c14830856310408a1b0e2430825c89c724fc"
       }
+    },
+    {
+      "evaluation": "runs/wall-launch-eval-25-01.json",
+      "report_sha256": "8ea7edf831d13634d13b284aed5e409341862a9d04a635948809f3821074d79e",
+      "checkpoint": "checkpoints/wall-launch-dev-001/frames-000032972800.pt",
+      "checkpoint_sha256": "dbad2d2c21268d96c3fa141d089e2040cd5afc18bb80811dff6df0245718957f",
+      "trained_frames": 32972800,
+      "scenarios": 100,
+      "one_rally_scenarios": 0,
+      "ten_rally_streak_scenarios": 0,
+      "wall_contact_scenarios": 12,
+      "legal_cap_contacts": 1137,
+      "reasons": {
+        "out_of_bounds": 14,
+        "time_limit": 68,
+        "drone_ground": 12,
+        "ball_body": 3,
+        "non_cap": 3
+      },
+      "outgoing_velocity_quantiles_10_50_90_xyz": [
+        [
+          -0.058903592824935916,
+          -0.08756029307842254,
+          2.8573226928710938
+        ],
+        [
+          0.011143799871206284,
+          0.004844763781875372,
+          3.040499687194824
+        ],
+        [
+          0.20069428086280822,
+          0.09497046172618864,
+          3.3016761779785155
+        ]
+      ],
+      "forward_over_1m_s": 16,
+      "source_hashes": {
+        "scripts/evaluate_wall_rally.py": "507edab5883f369ca1d54f6393e418144cdae4dbbdac5b84bcb390d3a58758e0",
+        "aerowall/envs/wall_rally.py": "026e70fd865339e4e622fd15d69091170b7cbe87987ae4a66910a220a9470b0d",
+        "aerowall/envs/aligned_juggle.py": "2847a8ca7ecb22bf397c9d5a89e9c4108cd07cce452c193a98b364fdafe840e1",
+        "aerowall/contact_router.py": "a27f017d8910d1c0e8deb44de1fbaa70e2c3e4d62761aa2581b216fa4bdb9adf",
+        "aerowall/collider_bounds.py": "c405f2b8718a7f9a8306286e178db8ba71c4cc0c48cf28ab67f659d30322854e",
+        "aerowall/rally_events.py": "1cec19671edf4c7e2421940a03396bbbf9dce3ee4ef6e8bd0d1aa98d94d27f22",
+        "aerowall/learning/wall_policy.py": "b4d089a51a2130b9d47db8a62f1e52eac49a4395d72c8e47faea0da4ce8d426f",
+        "scripts/runtime_adapters.py": "0e18ec93b743cd2c9c6401bcada5c14830856310408a1b0e2430825c89c724fc"
+      }
     }
   ]
 }
