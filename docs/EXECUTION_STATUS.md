@@ -22,6 +22,8 @@
 
 更新：单策略转移训练已完成 25 次更新且退出/报告通过，训练中 0/4754 个结束 episode 接回，不能称为改善；固定评测 `single-recovery-transfer-eval-25-01` 已启动。第 75 次的两项恢复补评仍在运行。
 
+最新：上述三项评测均已完成并审计。第 75 次固定回位/预测参考各 1/100 接回；单策略转移为 0/100，碰墙 26/100。当前这批 GPU 训练与评测均结束。下一步验证把已有两分支在新训练状态上的动作分布拟合到单个 actor，再继续完整回合学习；尚未实施，不计为完成结果。
+
 主要证据：`ball-wall-calibration-02.json`、`aligned-contact-eval-original-substep8-01.json`、`aligned-contact-eval-original-substep16-01.json`、`recurrent-wall-probe-04.json`；最新恢复/估计器/GRU 细节分别见同目录《AeroWall恢复技能检查》《AeroWall弹性估计器检查》《AeroWall循环策略检查》。所有开发对照的失败与来源预算均保留，不称为快速适应或算法优越性证明。
 
 以下为历史阶段记录，其“尚未实现/当前进程”等描述只对各自记录时刻成立。
