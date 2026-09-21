@@ -51,12 +51,18 @@ for row in rows:
         uncompared['wall_kinematics_wrong_sign']+=1;continue
     reference=-vout/vin;error=abs(row['ratio']-reference)
     row['audit_only_microstep_ratio']=reference;row['absolute_ratio_error']=error;errors.append(error)
+wall_ids={o['scenario_id'] for o in r['outcomes'] if o['wall_hits']>0}
+estimated_ids=set(torch.nonzero(e.samples>0).flatten().tolist())
 result={'status':'passed','evaluation':str(a.evaluation),
         'evaluation_sha256':hashlib.sha256(a.evaluation.read_bytes()).hexdigest(),
+        'replay_source_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         'estimator_source_sha256':hashlib.sha256((Path(__file__).resolve().parents[1]/'aerowall/learning/restitution_estimator.py').read_bytes()).hexdigest(),
         'scope':'Offline observable-history estimator replay; no learned estimator policy or randomized-wall validation',
         'velocity_delay_steps':delay,'scored_observations':int(active.sum()),
-        'diagnostic_counts':dict(counts),'episodes_with_estimate':int((e.samples>0).sum()),
+        'diagnostic_counts':dict(counts),'episodes_with_estimate':len(estimated_ids),
+        'all_scored_episodes':len(r['outcomes']),'episodes_without_estimate':len(r['outcomes'])-len(estimated_ids),
+        'wall_contact_scenarios':len(wall_ids),'wall_scenarios_without_estimate':sorted(wall_ids-estimated_ids),
+        'pending_at_episode_end':torch.nonzero(e.pending>=0).flatten().tolist(),
         'sample_support_caveat':'count/(count+1) is heuristic support, not a calibrated probability',
         'microstep_comparisons':len(errors),'uncompared':dict(uncompared),
         'maximum_absolute_ratio_error':max(errors) if errors else None,

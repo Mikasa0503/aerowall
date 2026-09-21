@@ -1,0 +1,235 @@
+task:
+  env:
+    num_envs: 128
+    env_spacing: 8
+    max_episode_length: 500
+    min_episode_length: 50
+  sim:
+    dt: 0.02
+    substeps: 1
+    gravity:
+    - 0
+    - 0
+    - -9.81
+    replicate_physics: false
+    use_flatcache: true
+    use_gpu_pipeline: true
+    device: cuda:0
+    solver_type: 1
+    use_gpu: true
+    bounce_threshold_velocity: 0.2
+    friction_offset_threshold: 0.04
+    friction_correlation_distance: 0.025
+    enable_stabilization: true
+    gpu_max_rigid_contact_count: 524288
+    gpu_max_rigid_patch_count: 163840
+    gpu_found_lost_pairs_capacity: 4194304
+    gpu_found_lost_aggregate_pairs_capacity: 33554432
+    gpu_total_aggregate_pairs_capacity: 4194304
+    gpu_max_soft_body_contacts: 1048576
+    gpu_max_particle_contacts: 1048576
+    gpu_heap_capacity: 67108864
+    gpu_temp_buffer_capacity: 16777216
+    gpu_max_num_partitions: 8
+  name: SingleJuggle
+  ball_mass: 0.0472
+  ball_radius: 0.04
+  drone_model: air
+  force_sensor: false
+  time_encoding: false
+  action_transform: PIDrate_FM
+  use_action_error_order2: false
+  reward_action_smoothness_weight: 2.0
+  on_the_spot: false
+  use_eval: false
+  hit_random_vel: false
+  use_obs_noise: false
+  true_hit_step_gap: 30
+  drone_vel_latent_step: 0
+  ball_linear_vel_latent_step: 2
+  use_pos_xy_penalty: true
+  pos_xy_penalty_weight: 1.0
+  use_pos_z_penalty: true
+  pos_z_penalty_weight: 0.2
+  use_distance_clip: false
+  min_distance_clip: 0.2
+  use_center_hit_reward: true
+  center_hit_reward_weight: 10.0
+  center_hit_reward_scale: 5.0
+  use_spin_reward: false
+  reward_spin_weight: 1.0
+  use_hit_distance_penalty: false
+  hit_distance_penalty_weight: 0.5
+  use_velocity_penalty: false
+  velocity_penalty_weight: 1.0
+  use_yaw_penalty: true
+  yaw_penalty_weight: 10.0
+  use_attitude_penalty: false
+  attitude_penalty_weight: 10.0
+  max_attitude_angle: 5.0
+  use_ball_height_reward: true
+  target_ball_height: 1.6
+  use_restitution_randomization: true
+  restitution_range:
+  - 0.7
+  - 1.0
+  base_restitution: 0.8
+  hit_random_vel_prob: 0.1
+  stats:
+    complete_reward_stats: true
+algo:
+  name: mappo
+  train_every: 64
+  num_minibatches: 16
+  ppo_epochs: 4
+  clip_param: 0.1
+  entropy_coef: 0.0
+  gae_lambda: 0.95
+  gamma: 0.995
+  max_grad_norm: 10.0
+  normalize_advantages: true
+  share_actor: true
+  critic_input: state
+  agent_name: null
+  actor:
+    lr: 0.0005
+    lr_scheduler: null
+    lr_scheduler_kwargs: null
+    hidden_units:
+    - 256
+    - 256
+    - 256
+    layer_norm: true
+    weight_decay: 0.0
+    gain: 0.01
+    vision_encoder: MobileNetV3Small
+    attn_encoder: PartialAttentionEncoder
+    use_orthogonal: true
+    create_dist_func: default
+    output_dist_params: true
+  critic:
+    num_critics: 1
+    value_norm:
+      class: ValueNorm1
+      kwargs:
+        beta: 0.995
+    lr: 0.0005
+    lr_scheduler: null
+    lr_scheduler_kwargs: null
+    hidden_units:
+    - 256
+    - 256
+    - 256
+    layer_norm: true
+    weight_decay: 0.0
+    gain: 0.01
+    use_huber_loss: true
+    huber_delta: 10
+    vision_encoder: MobileNetV3Small
+    attn_encoder: PartialAttentionEncoder
+    use_feature_normalization: true
+    use_orthogonal: true
+headless: true
+sim:
+  dt: 0.0025
+  substeps: 8
+  gravity:
+  - 0
+  - 0
+  - -9.81
+  replicate_physics: false
+  use_flatcache: true
+  use_gpu_pipeline: true
+  device: cuda:0
+  solver_type: 1
+  use_gpu: true
+  bounce_threshold_velocity: 0.2
+  friction_offset_threshold: 0.04
+  friction_correlation_distance: 0.025
+  enable_stabilization: true
+  gpu_max_rigid_contact_count: 524288
+  gpu_max_rigid_patch_count: 163840
+  gpu_found_lost_pairs_capacity: 4194304
+  gpu_found_lost_aggregate_pairs_capacity: 33554432
+  gpu_total_aggregate_pairs_capacity: 4194304
+  gpu_max_soft_body_contacts: 1048576
+  gpu_max_particle_contacts: 1048576
+  gpu_heap_capacity: 67108864
+  gpu_temp_buffer_capacity: 16777216
+  gpu_max_num_partitions: 8
+env:
+  num_envs: 128
+  env_spacing: 8
+  max_episode_length: 500
+  min_episode_length: 50
+total_frames: 819200
+max_iters: -1
+eval_interval: -1
+save_interval: 200
+seed: 0
+only_eval: false
+only_eval_one_traj: false
+eval_type: false
+use_debug_policy: false
+policy_checkpoint_path: null
+use_local_usd: true
+viewer:
+  resolution:
+  - 960
+  - 720
+  eye:
+  - 7.0
+  - 0.0
+  - 5.0
+  lookat:
+  - 0.0
+  - 0.0
+  - 0.0
+run_name_suffix: null
+wandb:
+  group: SingleJuggle
+  run_name: binary_
+  job_type: train
+  entity: JJJJJllll
+  project: SingleJuggle
+  mode: disabled
+  run_id: null
+  monitor_gym: true
+  tags: null
+wall_fixture:
+  center:
+  - 1.0
+  - 0.0
+  - 3.0
+  dimensions:
+  - 0.2
+  - 4.0
+  - 6.0
+  restitution: 0.8
+  align_cap_to_visual_top: true
+wall_task:
+  targets_yz:
+  - - 0.0
+    - 1.8
+  target_radius: 0.35
+  bounds_low:
+  - -2.5
+  - -1.8
+  - 0.08
+  bounds_high:
+  - 1.1
+  - 1.8
+  - 5.5
+  outbound_leg_reward: 25.0
+  rally_reward: 100.0
+  target_reward: 20.0
+  failure_penalty: 20.0
+  launch_reward: 3.0
+  launch_mode: velocity_curriculum
+  launch_flight_time: 0.35
+  launch_velocity_scale:
+  - 1.5
+  - 1.5
+  - 2.0
+  intercept_weight: 1.0
+  smoothness_weight: 0.05
