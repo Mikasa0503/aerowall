@@ -30,7 +30,7 @@ class WallRally(AlignedJuggle):
         self.wall_totals = {'rallies':0,'joint_rallies':0,'wall_hits':0,'episodes':0,'outbound_legs':0}
         self.recovery_stats = {'active_steps':0,'reward_sum':0.,'predicted_reference_steps':0,'home_fallback_steps':0}
         self.launch_stats = {'contacts':0,'positive':0,'negative':0,'shaping_sum':0.,'forward_velocity_sum':0.}
-        assert self.wall_spec.get('launch_mode','ballistic_point') in ('ballistic_point','velocity_curriculum')
+        assert self.wall_spec.get('launch_mode','ballistic_point') in ('ballistic_point','velocity_curriculum','self_return')
         if self.wall_spec.get('launch_mode') == 'velocity_curriculum':
             assert float(self.wall_spec.launch_flight_time)>0
             assert len(self.wall_spec.launch_velocity_scale)==3 and all(float(v)>0 for v in self.wall_spec.launch_velocity_scale)
@@ -116,7 +116,19 @@ class WallRally(AlignedJuggle):
                 predicted=predicted.clone();predicted[1]-=4.905*flight.square()
                 target_yz=self.targets[i,1:]-self.envs_positions[i,1:]
                 valid=(bv[i,0]>.1)&(flight>0)&(flight<2.)
-                if self.wall_spec.get('launch_mode', 'ballistic_point') == 'velocity_curriculum':
+                if self.wall_spec.get('launch_mode') == 'self_return':
+                    from aerowall.learning.self_return import self_return_velocity
+                    desired,reference_valid=self_return_velocity(
+                        bp[i],self.wall_front,float(self.cfg.task.ball_radius),
+                        self.wall_spec.return_contact_position,
+                        float(self.wall_spec.return_flight_time),
+                        float(self.wall_spec.recovery_restitution_prior))
+                    scale=torch.tensor(self.wall_spec.launch_velocity_scale,device=self.device)
+                    score=torch.exp(-.5*((bv[i]-desired)/scale).square().sum())
+                    vertical=bv[i].clone();vertical[0]=0.
+                    reference=torch.exp(-.5*((vertical-desired)/scale).square().sum())
+                    shaping=(score-reference)*reference_valid.float()
+                elif self.wall_spec.get('launch_mode', 'ballistic_point') == 'velocity_curriculum':
                     # Dense launch guidance at a real cap only. Subtract the
                     # same outgoing velocity with zero forward component, so
                     # vertical juggling alone cannot farm this shaping reward.
