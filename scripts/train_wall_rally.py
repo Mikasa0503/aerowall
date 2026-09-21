@@ -110,10 +110,18 @@ def main():
         prior_frames = 0
         if args.initialize_policy:
             loaded = torch.load(args.initialize_policy, map_location=base.device)
-            policy.initialize_juggle_actor(loaded)
-            record(actor_transfer_audit=policy.audit_juggle_actor(loaded))
+            source_width=loaded['policy']['actor_params']['module','encoder','0','weight'].shape[-1]
+            assert source_width in (24,43), 'Only known Juggle or Wall actor layouts are supported'
+            if source_width==24:
+                policy.initialize_juggle_actor(loaded)
+                audit=policy.audit_juggle_actor(loaded)
+            else:
+                assert 'aerowall/learning/wall_policy.py' in loaded['source_hashes'], 'Wall transfer requires recorded Wall policy source'
+                policy.initialize_wall_actor(loaded)
+                audit=policy.audit_wall_actor(loaded)
+            record(actor_transfer_audit=audit,source_actor_width=source_width,prior_checkpoint_updates=loaded.get('n_updates'))
             prior_frames = loaded['environment_frames']
-            record(initialize_policy=str(args.initialize_policy), initialize_policy_sha256=hashlib.sha256(args.initialize_policy.read_bytes()).hexdigest(), transfer_semantics='24-feature actor preserved through split normalization and zero padded input; new critic, value normalizer, optimizers; prior frames counted')
+            record(initialize_policy=str(args.initialize_policy), initialize_policy_sha256=hashlib.sha256(args.initialize_policy.read_bytes()).hexdigest(), transfer_semantics='Actor-only initialization: 24-feature Juggle actor extended or compatible 43-feature Wall actor copied; new critic, value normalizer, optimizers; prior frames counted; update counter starts fresh')
         if args.resume:
             loaded = torch.load(args.resume, map_location=base.device)
             assert loaded['learning_config_hash'] == config_hash, 'Resume changes the learning configuration'
