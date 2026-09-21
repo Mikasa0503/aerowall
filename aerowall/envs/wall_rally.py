@@ -25,6 +25,7 @@ class WallRally(AlignedJuggle):
         self.targets[:,1:] += self.target_sequence[0]
         self.reset_boundary_failures = []
         self.wall_totals = {'rallies':0,'joint_rallies':0,'wall_hits':0,'episodes':0,'outbound_legs':0}
+        self.recovery_stats = {'active_steps':0,'reward_sum':0.}
         self.launch_stats = {'contacts':0,'positive':0,'negative':0,'shaping_sum':0.,'forward_velocity_sum':0.}
         assert self.wall_spec.get('launch_mode','ballistic_point') in ('ballistic_point','velocity_curriculum')
         if self.wall_spec.get('launch_mode') == 'velocity_curriculum':
@@ -152,6 +153,17 @@ class WallRally(AlignedJuggle):
         dense=torch.exp(-2.*distance)*receiving.float()
         smooth=self.action_error_order1.reshape(self.num_envs,-1).mean(-1,keepdim=True)
         reward=self.event_reward+self.policy_dt*(float(self.wall_spec.intercept_weight)*dense-float(self.wall_spec.smoothness_weight)*smooth)
+        recovery_weight=float(self.wall_spec.get('phase_recovery_weight',0.))
+        if recovery_weight:
+            from aerowall.learning.phase_recovery import phase_recovery_score
+            phase=torch.tensor([{'wait_bat':0,'to_wall':1,'to_bat':2}[s.phase] for s in states],device=self.device)
+            target=torch.tensor(self.wall_spec.recovery_home_position,device=self.device)
+            score,enabled=phase_recovery_score(
+                self.drone.pos[:,0],self.drone.up[:,0,2],self.drone.get_velocities()[:,0,3:],
+                self.ball_linear_vel[:,0,0],phase,done.flatten(),target)
+            reward+=self.policy_dt*recovery_weight*score[:,None]
+            self.recovery_stats['active_steps']+=int(enabled.sum())
+            self.recovery_stats['reward_sum']+=float((self.policy_dt*recovery_weight*score).sum())
         self.ball_last_2_vel=self.ball_last_vel.clone();self.ball_last_vel=self.ball_linear_vel.clone();self.hited_mark.zero_()
         self.stats['return'].add_(reward);self.stats['episode_len'][:]=self.progress_buf[:,None]
         self.stats['num_true_hits'].add_(self.wall_cap_counts)

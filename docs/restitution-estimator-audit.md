@@ -22,3 +22,6 @@
 100 个 episode 中，41 个发生墙接触，38 个获得有效弹性估计，62 个全程没有估计。发生墙接触但未获得估计的场景为 26、65、68，其中 26、68 在 episode 结束前尚未等到延迟样本。38 个可对比估计的法向速度比与独立碰撞子步记录最大差 2.94e-8。该条件误差必须与全 episode 覆盖率同时报告，不能只用存活且有估计的样本证明鲁棒性。事件重建核验通过，接回仍为 0/100。
 
 证据为 `wall-delay-1-observation-audit.json`、`wall-delay-1-event-audit.json`、`restitution-estimator-real-delay-1-coverage.json`。两步延迟的实际仿真 `wall-delay-2-eval-01` 已启动，结果待核验。没有修改环境历史实现；一步延迟的实际记录已证明当前检查范围内时序正确。
+
+
+实际两步延迟评测 `wall-delay-2-eval-01` 已完成：7465 个计分输入的配置延迟时序核验通过（最初两步没有更早记录，明确排除）；事件重建核验通过，接回仍为 0/100。100 场中 63 场碰墙、60 场获得有效估计、40 场没有估计；碰墙但未估计的场景为 41、56、86，其中 41、86 在 episode 结束时仍等待延迟样本。60 个独立比较的最大绝对速度比差为 2.97e-8。延迟改变策略行为和轨迹，不能把碰墙场景数更多解释为估计器提升了控制性能。估计器仍是离线回放，未接入策略动作。证据见 `wall-delay-2-observation-audit.json`、`wall-delay-2-event-audit.json`、`restitution-estimator-real-delay-2.json`。
