@@ -27,6 +27,7 @@ def main():
     parser.add_argument('--default-pass-state',action='store_true',help='Diagnostic only: use upstream default reset instead of unavailable trained-state CSV distributions')
     parser.add_argument('--tensor-contacts',action='store_true',help='Read per-environment GPU contact buffers as a diagnostic')
     args=parser.parse_args()
+    assert args.same_side, 'Rearming test requires valid same-side initial states'
     assert args.skill=='set' and args.hover and args.tensor_contacts, 'First wall adapter covers Set+Hover with GPU contacts'
     weight_root=HCSP/'scripts/shell/checkpoint' if args.wall_source=='HCSP' else ROOT/'third_party/VolleyBots/checkpoints/hier'
     args.output.parent.mkdir(parents=True,exist_ok=True)
@@ -36,7 +37,7 @@ def main():
     def record(**values):
         report.update(values);tmp=args.output.with_suffix('.tmp');tmp.write_text(json.dumps(report,indent=2)+'\n');tmp.replace(args.output)
         print(json.dumps(values),flush=True)
-    app=None;record(weight_source=args.wall_source,wall_fixture={'center':[2.5,.5,4.],'dimensions':[8.,.2,8.],'restitution':.8},transfer_scope='Native Iris/PRT Set+Hover unchanged weights and observations; added physical wall. Original one-hit skill stopping retained. Not AeroWall legal-cap scoring.')
+    app=None;record(weight_source=args.wall_source,wall_fixture={'center':[2.5,.5,4.],'dimensions':[8.,.2,8.],'restitution':.8},transfer_scope='Native Iris/PRT Set+Hover unchanged weights and observations; added physical wall. After a GPU wall contact, rearm the existing Set observation/skill turn. No weight updates or physical state writes. Not AeroWall legal-cap scoring.')
     try:
         sys.path.insert(0,str(HCSP))
         import numpy as np
@@ -91,6 +92,17 @@ def main():
                     ground=self.ball_pos[...,2] <= self.ball_radius
                     result['terminated'] |= ground
                     result['done'] |= ground
+                if hasattr(self,'wall_transfer_views'):
+                    for i,view in enumerate(self.wall_transfer_views):
+                        # Same physical readback used in the saved contact evidence.
+                        force=view.get_contact_force_matrix(dt=1.)[0,-1]
+                        touching=bool(force.norm()>1e-8)
+                        if touching and not self.wall_transfer_touching[i]:
+                            self.SecPass_hit[i]=0.
+                            self.SecPass_turn[i]=1
+                            self.stats['SecPass_hit'][i]=0.
+                            self.wall_transfer_rearms+=1
+                        self.wall_transfer_touching[i]=touching
                 return result
         with contact_reporting_before_initialization():
             base=WallSetReference(cfg,headless=True)
@@ -150,6 +162,10 @@ def main():
                 view.initialize()
                 assert view.num_shapes==1 and view.num_filters==agent_count+1
                 tensor_views.append(view)
+        base.wall_transfer_views=tensor_views
+        base.wall_transfer_touching=[False]*16
+        base.wall_transfer_rearms=0
+        record(wall_rearm_enabled=True)
         env.set_seed(20260921)
         with torch.no_grad():td=env.reset()
         initial_ball=base.ball.get_world_poses()[0][:,0]-base.envs_positions
@@ -240,7 +256,7 @@ def main():
         np.savez_compressed(trajectory,**{k:np.stack([v[k] for v in frames]) for k in frames[0]},dt=base.dt)
         args.output.with_suffix('.events.json').write_text(json.dumps(events,indent=2)+'\n')
         args.output.with_suffix('.tensor-contacts.json').write_text(json.dumps(tensor_samples,indent=2)+'\n')
-        record(tensor_contact_points=len(tensor_samples),wall_positive_impulse_scenarios=sorted(set(x['env_id'] for x in tensor_samples if x.get('kind')=='wall' and x['first_episode_active'])),tensor_readback_enabled=args.tensor_contacts)
+        record(wall_rearm_count=base.wall_transfer_rearms,tensor_contact_points=len(tensor_samples),wall_positive_impulse_scenarios=sorted(set(x['env_id'] for x in tensor_samples if x.get('kind')=='wall' and x['first_episode_active'])),tensor_readback_enabled=args.tensor_contacts)
         args.output.with_suffix('.callback-events.json').write_text(json.dumps(callback_reports,indent=2)+'\n')
         record(callback_event_count=len(callback_reports),callback_positive_impulse_points=sum(sum(x*x for x in p['impulse'])>1e-12 for e in callback_reports for p in e['points']))
         record(status='passed',outcomes=outcomes,completed_scenarios=int(finished.sum()),steps=len(frames),
