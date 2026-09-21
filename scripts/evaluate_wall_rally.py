@@ -22,11 +22,12 @@ def main():
         p.add_argument('--'+name, type=Path, required=True)
     p.add_argument('--initialize-juggle', action='store_true', help='Evaluate the original actor before any WallRally updates')
     p.add_argument('--recovery-controller',action='store_true',help='Hybrid controller diagnostic after a real forward cap; not learned-policy evaluation')
+    p.add_argument('--recovery-guidance',choices=['pd','terminal'],default='pd')
     a = p.parse_args()
     sha = lambda path: hashlib.sha256(Path(path).read_bytes()).hexdigest()
     report = {'status': 'initializing', 'pid': os.getpid(), 'scope': 'frozen development serving episodes; not formal evaluation',
               'checkpoint': str(a.checkpoint), 'checkpoint_sha256': sha(a.checkpoint),
-              'controller_mode':'hybrid_ballistic_pd_recovery' if a.recovery_controller else 'learned_policy',
+              'controller_mode':'hybrid_ballistic_'+a.recovery_guidance+'_recovery' if a.recovery_controller else 'learned_policy',
               'scenario_sha256': sha(a.scenarios), 'config_sha256': sha(a.config),
               'source_hashes': {name: sha(ROOT/name) for name in ['scripts/evaluate_wall_rally.py', 'aerowall/envs/wall_rally.py',
                   'aerowall/envs/aligned_juggle.py', 'aerowall/contact_router.py', 'aerowall/collider_bounds.py',
@@ -78,7 +79,7 @@ def main():
         recovery=None
         if a.recovery_controller:
             from aerowall.learning.recovery_controller import RecoveryController
-            recovery=RecoveryController(n,base.device,base.wall_front,float(cfg.task.ball_radius))
+            recovery=RecoveryController(n,base.device,base.wall_front,float(cfg.task.ball_radius),guidance=a.recovery_guidance)
             record(controller_assumptions={'restitution_prior':.8,'drone_target_height':1.,'activation':'observable outbound phase and ball vx > 0.5 m/s',
                 'scope':'Learned launch followed by persistent model-based recovery; no physical-state writes; not a primary learned method'})
         def snapshot():

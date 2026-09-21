@@ -1,0 +1,44 @@
+{
+  "scope": "CPU module and actor protocol audit; not complete recurrent PPO or simulator validation",
+  "source_hashes": {
+    "modules/rnn.py": "d98f9328ce5cd95640aa1970f866fda0206d44b745beecd458695f871bd2079d",
+    "mappo.py": "151694a6c60895b1b800bde18f5598bab7c2f6dc4a80610c68b0430147a59aa0"
+  },
+  "documented_128_hidden_with_256_encoder_error": "The size of tensor a (128) must match the size of tensor b (256) at non-singleton dimension 1",
+  "equal_width_sequence_step_and_selected_reset_passed": true,
+  "rollout_return_count": 7,
+  "configured_actor_output_keys": [
+    "action",
+    "logp",
+    "entropy",
+    "actor_rnn_state",
+    "debug.action_loc",
+    "debug.action_scale"
+  ],
+  "rollout_fourth_return_is_none": true,
+  "rollout_fifth_return_shape": [
+    3,
+    256
+  ],
+  "adapter_sha256": "9c8a60a710b820cff2cbd140aca2f0d59f3c3472073cf34099adc3387cd039d7",
+  "project_adapter_checks": {
+    "identical_rollout_tensors": true,
+    "parameter_paths_and_references_preserved": true,
+    "hidden_state_field_routed": true,
+    "distribution_fields_routed": true,
+    "finite_gradient": true,
+    "optional_debug_fields": true
+  },
+  "sequence_replay_checks": {
+    "correct_input_hidden_max_logp_error": 0.0,
+    "poststep_hidden_max_logp_error": 0.3277897834777832,
+    "scope": "Module-level minibatch replay demonstrates required h_in/h_out separation; not a collector integration test"
+  },
+  "recurrent_ppo_ready": false,
+  "blockers": [
+    "Residual addition requires encoder and GRU hidden widths to match",
+    "Preserve input hidden state at root and output hidden state under next; do not overwrite training input with poststep state",
+    "Collector hidden-state carry and sequence-minibatch handling still require end-to-end validation"
+  ],
+  "status": "passed"
+}

@@ -7,7 +7,9 @@ import torch
 
 
 class RecoveryController:
-    def __init__(self, count, device, wall_front, ball_radius, bat_top=.083):
+    def __init__(self, count, device, wall_front, ball_radius, bat_top=.083, guidance='pd'):
+        assert guidance in ('pd','terminal')
+        self.guidance=guidance
         self.active=torch.zeros(count,dtype=torch.bool,device=device)
         self.wall_front=float(wall_front);self.ball_plane=self.wall_front-float(ball_radius)
         self.intercept_height=1.+float(bat_top)+float(ball_radius)
@@ -34,7 +36,13 @@ class RecoveryController:
         target[:,0]=torch.where(reflect,reflected_x,target[:,0])
         target[:,0].clamp_(-2.2,self.wall_front-.25);target[:,1].clamp_(-1.5,1.5);target[:,2]=1.
         acceleration=6.*(target-drone_position)-4.*drone_velocity[:,:3]
-        acceleration[:,:2].clamp_(-6.,6.);acceleration[:,2]=(acceleration[:,2]+g).clamp(2.,14.5)
+        if self.guidance=='terminal':
+            horizon=flight.clamp_min(.15)[:,None]
+            acceleration[:,:2]=6*(target[:,:2]-drone_position[:,:2])/horizon.square()-4*drone_velocity[:,:2]/horizon
+            acceleration[:,:2].clamp_(-8.,8.)
+        else:
+            acceleration[:,:2].clamp_(-6.,6.)
+        acceleration[:,2]=(acceleration[:,2]+g).clamp(2.,14.5)
         norm=acceleration.norm(dim=-1,keepdim=True).clamp_min(1e-6)
         desired_up=acceleration/norm
         w,x,y,z=quaternion.unbind(-1)

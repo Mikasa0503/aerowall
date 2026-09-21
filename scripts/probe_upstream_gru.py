@@ -72,8 +72,25 @@ assert len(actor(test_input,deterministic=True))==4
 assert len(actor(test_input,corrected[0],None,None,False,True))==4
 report['project_adapter_checks']={'identical_rollout_tensors':True,'parameter_paths_and_references_preserved':True,
     'hidden_state_field_routed':True,'distribution_fields_routed':True,'finite_gradient':True,'optional_debug_fields':True}
+actor.output_dist_params=True
+# A PPO sequence minibatch can start within an episode, so its initial state
+# must be h_in, not the h_out written by that step's rollout actor.
+sequence=torch.randn(3,5,256);state=torch.randn(3,256)
+initial_state=state.clone();states_out=[];actions=[];logps=[]
+for t in range(5):
+    out=actor(sequence[:,t],rnn_state=state,deterministic=True)
+    actions.append(out[0]);logps.append(out[1]);state=out[3];states_out.append(state)
+actions=torch.stack(actions,1);expected_logps=torch.stack(logps,1)
+good=actor(sequence,action=actions,rnn_state=initial_state,eval_action=True)[1]
+bad=actor(sequence,action=actions,rnn_state=states_out[0],eval_action=True)[1]
+good_error=float((good-expected_logps).abs().max());bad_error=float((bad-expected_logps).abs().max())
+assert good_error<1e-5 and bad_error>1e-4
+report['sequence_replay_checks']={'correct_input_hidden_max_logp_error':good_error,
+    'poststep_hidden_max_logp_error':bad_error,
+    'scope':'Module-level minibatch replay demonstrates required h_in/h_out separation; not a collector integration test'}
 report['recurrent_ppo_ready']=False
 report['blockers']=['Residual addition requires encoder and GRU hidden widths to match',
+                    'Preserve input hidden state at root and output hidden state under next; do not overwrite training input with poststep state',
                     'Collector hidden-state carry and sequence-minibatch handling still require end-to-end validation']
 report['status']='passed'
 a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report))

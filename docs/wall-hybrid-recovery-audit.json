@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "evaluation": "runs/wall-hybrid-recovery-01.json",
+  "event_clocks_match": true,
+  "scenarios": 100,
+  "rallies": 0,
+  "mismatches": [],
+  "scope": "Independent event-chain/count consistency, not an independent validation of collision geometry"
+}
