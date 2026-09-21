@@ -83,3 +83,5 @@
 两项最终模型评测已完成并通过进程/报告和独立事件审计。固定回位第 100 次更新：49/100 场碰墙、1/100 接回、174 次合法拍面接触；终止原因为 27 球碰机体、33 越界、24 无人机碰墙、16 非拍面。预测参考第 100 次更新：48/100 场碰墙、0/100 接回、173 次合法拍面接触；终止为 25 球碰机体、45 越界、12 无人机碰墙、16 非拍面、2 触地。分别低于各自第 50 次更新的 3/100、4/100，不能将预算完成称为性能改善。
 
 完整第 25/50/100 次对照保存在 `recovery-skill-comparison-100.json` 与 `predictive-recovery-comparison-100.json`，对应最终事件审计为 `recovery-skill-eval-100-audit.json`、`predictive-recovery-eval-100-audit.json`。两项第 75 次补评 `recovery-skill-eval-75-01`、`predictive-recovery-eval-75-01` 已启动。既有单策略训练使用此前已选的预测参考第 50 次 actor，不替换为退化的最终模型；仍待其自身完整评测。
+
+`single-recovery-transfer-dev-001` 已完成 25 次更新、新增 204800 步，累计 33996800 步，退出与报告通过。4754 个实际结束的训练 episode 中 405 场发生墙碰、0 场接回；终止原因为 2229 球碰机体、999 非拍面、1363 越界、77 无人机触地、86 无人机碰墙。证据为 `single-recovery-transfer-learning-25.json`。该负结果提示直接把恢复 actor 用于全部阶段可能损害迎球/出球，尚不能确认具体因果；`single-recovery-transfer-eval-25-01` 已启动相同 100 场景评测。两项第 75 次补评仍在运行。

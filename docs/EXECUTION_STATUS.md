@@ -20,6 +20,8 @@
 
 两项恢复对照已完成既定累计 100 次更新，退出/报告均通过，重载动作一致且冻结参数不变。最终固定评测与事件审计已完成：固定回位 1/100 接回、预测参考 0/100，均低于第 50 次的 3/100、4/100；未达到门槛。两项第 75 次 checkpoint 已启动补评。`single-recovery-transfer-dev-001` 已由身份校验的恢复进程在原对照结束后自动恢复，未重新初始化，继续使用此前选定的预测参考第 50 次 actor。运行状态需以 138 上报告和实际 PID 为准，不据本文重复启动。
 
+更新：单策略转移训练已完成 25 次更新且退出/报告通过，训练中 0/4754 个结束 episode 接回，不能称为改善；固定评测 `single-recovery-transfer-eval-25-01` 已启动。第 75 次的两项恢复补评仍在运行。
+
 主要证据：`ball-wall-calibration-02.json`、`aligned-contact-eval-original-substep8-01.json`、`aligned-contact-eval-original-substep16-01.json`、`recurrent-wall-probe-04.json`；最新恢复/估计器/GRU 细节分别见同目录《AeroWall恢复技能检查》《AeroWall弹性估计器检查》《AeroWall循环策略检查》。所有开发对照的失败与来源预算均保留，不称为快速适应或算法优越性证明。
 
 以下为历史阶段记录，其“尚未实现/当前进程”等描述只对各自记录时刻成立。
