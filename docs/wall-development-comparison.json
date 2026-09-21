@@ -1,0 +1,137 @@
+{
+  "scope": "100 identical first-serving development episodes; descriptive comparison, not three-seed or formal evidence",
+  "scenario_identity": {
+    "scenario_sha256": "4d50654f01f737f05e4afdb9a9c9a96b9bb1bbda02dca6dc8182522e32ac6cab",
+    "physics_dt": 0.0025,
+    "policy_dt": 0.02,
+    "episode_seconds": 10.0,
+    "wall_fixture": {
+      "center": [
+        1.0,
+        0.0,
+        3.0
+      ],
+      "dimensions": [
+        0.2,
+        4.0,
+        6.0
+      ],
+      "restitution": 0.8,
+      "align_cap_to_visual_top": true
+    },
+    "task": {
+      "targets_yz": [
+        [
+          0.0,
+          1.8
+        ]
+      ],
+      "target_radius": 0.35,
+      "bounds_low": [
+        -2.5,
+        -1.8,
+        0.08
+      ],
+      "bounds_high": [
+        1.1,
+        1.8,
+        5.5
+      ]
+    }
+  },
+  "results": [
+    {
+      "evaluation": "runs/wall-rally-eval-untrained-01.json",
+      "report_sha256": "aafa9854d45fd5434f160c06d31a63f250591878baa50b93d3516d71cc01e34e",
+      "checkpoint": "checkpoints/singlejuggle-dev-002/frames-000032768000.pt",
+      "checkpoint_sha256": "dd3de9a28764d91cb8fe99d3df7bd647d2a3d5224b22dfd9ecfc5860ae82ea57",
+      "trained_frames": 32768000,
+      "scenarios": 100,
+      "one_rally_scenarios": 0,
+      "ten_rally_streak_scenarios": 0,
+      "wall_contact_scenarios": 0,
+      "legal_cap_contacts": 1560,
+      "reasons": {
+        "time_limit": 95,
+        "ball_body": 3,
+        "out_of_bounds": 1,
+        "drone_wall": 1
+      },
+      "outgoing_velocity_quantiles_10_50_90_xyz": [
+        [
+          -0.06817075610160828,
+          -0.04357215389609337,
+          2.9063193082809446
+        ],
+        [
+          0.00017421793018002063,
+          0.0010724501335062087,
+          2.988761067390442
+        ],
+        [
+          0.04940046444535281,
+          0.12252925932407388,
+          3.1359312295913697
+        ]
+      ],
+      "forward_over_1m_s": 1,
+      "source_hashes": {
+        "scripts/evaluate_wall_rally.py": "507edab5883f369ca1d54f6393e418144cdae4dbbdac5b84bcb390d3a58758e0",
+        "aerowall/envs/wall_rally.py": "026e70fd865339e4e622fd15d69091170b7cbe87987ae4a66910a220a9470b0d",
+        "aerowall/envs/aligned_juggle.py": "2847a8ca7ecb22bf397c9d5a89e9c4108cd07cce452c193a98b364fdafe840e1",
+        "aerowall/contact_router.py": "a27f017d8910d1c0e8deb44de1fbaa70e2c3e4d62761aa2581b216fa4bdb9adf",
+        "aerowall/collider_bounds.py": "c405f2b8718a7f9a8306286e178db8ba71c4cc0c48cf28ab67f659d30322854e",
+        "aerowall/rally_events.py": "1cec19671edf4c7e2421940a03396bbbf9dce3ee4ef6e8bd0d1aa98d94d27f22",
+        "aerowall/learning/wall_policy.py": "b4d089a51a2130b9d47db8a62f1e52eac49a4395d72c8e47faea0da4ce8d426f",
+        "scripts/runtime_adapters.py": "0e18ec93b743cd2c9c6401bcada5c14830856310408a1b0e2430825c89c724fc"
+      }
+    },
+    {
+      "evaluation": "runs/wall-rally-eval-final-01.json",
+      "report_sha256": "f274ef5666b350e101ee311be12b5f9be08d68cc9cbb0a5fb46e1046c1642d02",
+      "checkpoint": "checkpoints/wall-rally-dev-001/frames-000032972800.pt",
+      "checkpoint_sha256": "ea2b94df886372d58b39a5bc37ca40565f978b7539c673382c516d16cd51822d",
+      "trained_frames": 32972800,
+      "scenarios": 100,
+      "one_rally_scenarios": 0,
+      "ten_rally_streak_scenarios": 0,
+      "wall_contact_scenarios": 5,
+      "legal_cap_contacts": 1357,
+      "reasons": {
+        "time_limit": 81,
+        "out_of_bounds": 11,
+        "ball_body": 6,
+        "drone_wall": 1,
+        "non_cap": 1
+      },
+      "outgoing_velocity_quantiles_10_50_90_xyz": [
+        [
+          -0.09035255014896393,
+          -0.026569200307130815,
+          2.7922130107879637
+        ],
+        [
+          -0.0003190796123817563,
+          0.0014429830480366945,
+          3.008983612060547
+        ],
+        [
+          0.09085788875818257,
+          0.18408720493316671,
+          3.24711537361145
+        ]
+      ],
+      "forward_over_1m_s": 3,
+      "source_hashes": {
+        "scripts/evaluate_wall_rally.py": "f03035f97a1f07e84c7200b99d3302ba17767c8631e8a854b9105b286274f095",
+        "aerowall/envs/wall_rally.py": "d24a669596174f1902282dace395ce5cc0a32625a453a01f21b36aca26e0c4b7",
+        "aerowall/envs/aligned_juggle.py": "2847a8ca7ecb22bf397c9d5a89e9c4108cd07cce452c193a98b364fdafe840e1",
+        "aerowall/contact_router.py": "a27f017d8910d1c0e8deb44de1fbaa70e2c3e4d62761aa2581b216fa4bdb9adf",
+        "aerowall/collider_bounds.py": "c405f2b8718a7f9a8306286e178db8ba71c4cc0c48cf28ab67f659d30322854e",
+        "aerowall/rally_events.py": "1cec19671edf4c7e2421940a03396bbbf9dce3ee4ef6e8bd0d1aa98d94d27f22",
+        "aerowall/learning/wall_policy.py": "b4d089a51a2130b9d47db8a62f1e52eac49a4395d72c8e47faea0da4ce8d426f",
+        "scripts/runtime_adapters.py": "0e18ec93b743cd2c9c6401bcada5c14830856310408a1b0e2430825c89c724fc"
+      }
+    }
+  ]
+}
