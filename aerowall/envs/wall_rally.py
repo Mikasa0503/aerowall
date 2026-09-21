@@ -16,6 +16,9 @@ class WallRally(AlignedJuggle):
 
     def __init__(self, cfg, headless=True):
         self.wall_spec = cfg.wall_task
+        assert self.wall_spec.get('recovery_reference','home') in ('home','ballistic')
+        if self.wall_spec.get('recovery_reference','home')=='ballistic':
+            assert cfg.task.get('ball_linear_vel_latent_step',0)==0, 'Ballistic reward reference requires zero-delay ball velocity until delay alignment is implemented'
         self.targets = None
         super().__init__(cfg, headless=headless)
         self.target_sequence = torch.tensor(self.wall_spec.targets_yz, device=self.device)
@@ -25,7 +28,7 @@ class WallRally(AlignedJuggle):
         self.targets[:,1:] += self.target_sequence[0]
         self.reset_boundary_failures = []
         self.wall_totals = {'rallies':0,'joint_rallies':0,'wall_hits':0,'episodes':0,'outbound_legs':0}
-        self.recovery_stats = {'active_steps':0,'reward_sum':0.}
+        self.recovery_stats = {'active_steps':0,'reward_sum':0.,'predicted_reference_steps':0,'home_fallback_steps':0}
         self.launch_stats = {'contacts':0,'positive':0,'negative':0,'shaping_sum':0.,'forward_velocity_sum':0.}
         assert self.wall_spec.get('launch_mode','ballistic_point') in ('ballistic_point','velocity_curriculum')
         if self.wall_spec.get('launch_mode') == 'velocity_curriculum':
@@ -64,6 +67,8 @@ class WallRally(AlignedJuggle):
         obs = torch.cat([td['agents','observation'],extra],dim=-1)
         time = (self.progress_buf/self.max_episode_length)[:,None].expand(n,4)
         td['agents','observation']=obs
+        if self.wall_spec.get('recovery_reference','home')=='ballistic':
+            self.recovery_actor_observation=obs[:,0].detach().clone()
         td['agents','state']=torch.cat([obs[:,0],time],dim=-1)
         return td
 
@@ -158,10 +163,20 @@ class WallRally(AlignedJuggle):
             from aerowall.learning.phase_recovery import phase_recovery_score
             phase=torch.tensor([{'wait_bat':0,'to_wall':1,'to_bat':2}[s.phase] for s in states],device=self.device)
             target=torch.tensor(self.wall_spec.recovery_home_position,device=self.device)
+            predicted_reference=None
+            if self.wall_spec.get('recovery_reference','home')=='ballistic':
+                from aerowall.learning.return_reference import recovery_target_from_observation
+                assert self.cfg.wall_fixture.align_cap_to_visual_top, 'Prediction height assumes aligned cap'
+                target,predicted_reference=recovery_target_from_observation(
+                    self.recovery_actor_observation,target,self.wall_spec.bounds_low,self.wall_spec.bounds_high,
+                    restitution=float(self.wall_spec.recovery_restitution_prior),ball_radius=float(self.cfg.task.ball_radius))
             score,enabled=phase_recovery_score(
                 self.drone.pos[:,0],self.drone.up[:,0,2],self.drone.get_velocities()[:,0,3:],
                 self.ball_linear_vel[:,0,0],phase,done.flatten(),target)
             reward+=self.policy_dt*recovery_weight*score[:,None]
+            if predicted_reference is not None:
+                self.recovery_stats['predicted_reference_steps']+=int((enabled&predicted_reference).sum())
+                self.recovery_stats['home_fallback_steps']+=int((enabled&~predicted_reference).sum())
             self.recovery_stats['active_steps']+=int(enabled.sum())
             self.recovery_stats['reward_sum']+=float((self.policy_dt*recovery_weight*score).sum())
         self.ball_last_2_vel=self.ball_last_vel.clone();self.ball_last_vel=self.ball_linear_vel.clone();self.hited_mark.zero_()

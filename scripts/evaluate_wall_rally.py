@@ -31,7 +31,7 @@ def main():
               'scenario_sha256': sha(a.scenarios), 'config_sha256': sha(a.config),
               'source_hashes': {name: sha(ROOT/name) for name in ['scripts/evaluate_wall_rally.py', 'aerowall/envs/wall_rally.py',
                   'aerowall/envs/aligned_juggle.py', 'aerowall/contact_router.py', 'aerowall/collider_bounds.py',
-                  'aerowall/rally_events.py', 'aerowall/learning/wall_policy.py', 'aerowall/learning/phase_recovery.py', 'aerowall/learning/recovery_skill_policy.py', 'aerowall/learning/recovery_controller.py', 'scripts/runtime_adapters.py', 'scripts/source_evidence.py']}}
+                  'aerowall/rally_events.py', 'aerowall/learning/wall_policy.py', 'aerowall/learning/phase_recovery.py', 'aerowall/learning/return_reference.py', 'aerowall/learning/recovery_skill_policy.py', 'aerowall/learning/recovery_controller.py', 'scripts/runtime_adapters.py', 'scripts/source_evidence.py']}}
     a.output.parent.mkdir(parents=True, exist_ok=True)
     def record(**values):
         report.update(values)

@@ -35,3 +35,27 @@ def predict_return_reference(observation, restitution=.8, ball_radius=.04,
     target=torch.where(valid.unsqueeze(-1),target,torch.zeros_like(target))
     time=torch.where(valid,time,torch.zeros_like(time))
     return target,time,valid,reflect&valid
+
+
+def recovery_target_from_observation(observation, home, bounds_low, bounds_high,
+                                     restitution=.8, ball_radius=.04, bat_top=.083,
+                                     wall_margin=.25, boundary_margin=.2):
+    """Choose a predicted receiving reference, with explicit fixed-home fallback.
+
+Margins only bound the reference point; they do not guarantee flight feasibility.
+The ball prediction is never clipped or fed back into physical state.
+"""
+    assert observation.ndim==2
+    home=torch.as_tensor(home,dtype=observation.dtype,device=observation.device)
+    low=torch.as_tensor(bounds_low,dtype=observation.dtype,device=observation.device)
+    high=torch.as_tensor(bounds_high,dtype=observation.dtype,device=observation.device)
+    predicted,time,valid,reflected=predict_return_reference(
+        observation,restitution,ball_radius,contact_height=float(home[2])+bat_top+ball_radius)
+    phase=observation[:,40:43].argmax(-1)
+    accepted=valid&((phase==2)|reflected)
+    accepted &= (predicted[:,0]>low[0]+boundary_margin)&(predicted[:,0]<observation[:,27]-wall_margin)
+    accepted &= (predicted[:,1]>low[1]+boundary_margin)&(predicted[:,1]<high[1]-boundary_margin)
+    target=predicted.clone();target[:,2]=home[2]
+    accepted &= ((target>low+boundary_margin)&(target<high-boundary_margin)).all(-1)
+    target=torch.where(accepted[:,None],target,home.expand_as(target))
+    return target,accepted
