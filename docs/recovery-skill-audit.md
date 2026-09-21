@@ -55,3 +55,7 @@
 上述初始化对照现已完成，退出、报告及独立事件链审计通过：49/100 场碰墙、2/100 场合法接回、188 次合法拍面接触、0 次目标联合回合。接回场景为 12、46，随后均因无人机碰墙终止，没有连续两次接回。全体终止原因为 33 场无人机碰墙、14 场越界、16 场无人机触地、16 场非拍面、21 场球碰机体；49 个碰墙场景中 39 场失高超过 0.3 米。与固定回位 0/100、预测参考 1/100 仅作开发描述，样本与训练来源差异不足以支持方法优劣结论。证据为 `juggle-recovery-diagnostic-audit.json`、`juggle-recovery-diagnostic-analysis.json`、`recovery-initialization-comparison.json`。
 
 此前启动失败的路径已定位：实际配置 `use_local_usd: true`，地面和 Air 模型均选择上游本地 USD；但 Orbit `utils/assets.py` 在模块导入时调用 `get_assets_root_path()` 探测远端根目录。尚未完成全部 USD 传递依赖的离线检查，不能声称运行完全离线。重试评测成功不能证明该网络依赖已消除。
+
+后续静态 USD 依赖检查已保存于 `local-scene-assets-inventory.json`：配置使用的地面和 Air USD、地面的三张纹理、运行时 core/Base 下的 OmniPBR.mdl 候选文件均存在，记录大小及 SHA-256；提取的 USD 引用未发现远程 URL。检查未展开 MDL 内部导入，也未证明实际材质解析器选择或扩展无网络访问，因此仍不是完整离线验证。此检查不下载、不修改资产或运行时。
+
+两支续训均已保存累计第 50 次更新 checkpoint（33792000 个累计环境步）。`recovery-skill-eval-50-01` 已启动固定 100 场景评测，预测参考的同预算 checkpoint 待随后评测，以减少与两项续训同时竞争资源。训练仍按原定总共 100 次更新推进。
