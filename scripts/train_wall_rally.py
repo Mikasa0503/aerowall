@@ -132,6 +132,8 @@ def main():
             record(initialize_policy=str(args.initialize_policy), initialize_policy_sha256=hashlib.sha256(args.initialize_policy.read_bytes()).hexdigest(), transfer_semantics='Actor-only initialization: 24-feature Juggle actor extended or compatible 43-feature Wall actor copied; new critic, value normalizer, optimizers; prior frames counted; update counter starts fresh')
         if args.resume:
             loaded = torch.load(args.resume, map_location=base.device)
+            assert not loaded.get('requires_actor_only_initialization', False), \
+                'This actor-only checkpoint has no PPO continuation state; use --initialize-policy'
             assert ('frozen_launch_params' in loaded['policy'])==args.recovery_skill, 'Resume changes skill routing'
             assert loaded['learning_config_hash'] == config_hash, 'Resume changes the learning configuration'
             policy.load_state_dict(loaded['policy'])
