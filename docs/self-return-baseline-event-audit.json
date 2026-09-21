@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "evaluation": "runs/skill-distillation-eval-01.json",
+  "event_clocks_match": true,
+  "scenarios": 100,
+  "rallies": 3,
+  "mismatches": [],
+  "scope": "Independent event-chain/count consistency, not an independent validation of collision geometry"
+}
