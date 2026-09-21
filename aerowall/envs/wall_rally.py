@@ -25,6 +25,11 @@ class WallRally(AlignedJuggle):
         self.targets[:,1:] += self.target_sequence[0]
         self.reset_boundary_failures = []
         self.wall_totals = {'rallies':0,'joint_rallies':0,'wall_hits':0,'episodes':0}
+        self.launch_stats = {'contacts':0,'positive':0,'negative':0,'shaping_sum':0.,'forward_velocity_sum':0.}
+        assert self.wall_spec.get('launch_mode','ballistic_point') in ('ballistic_point','velocity_curriculum')
+        if self.wall_spec.get('launch_mode') == 'velocity_curriculum':
+            assert float(self.wall_spec.launch_flight_time)>0
+            assert len(self.wall_spec.launch_velocity_scale)==3 and all(float(v)>0 for v in self.wall_spec.launch_velocity_scale)
 
     def _set_specs(self):
         super()._set_specs()
@@ -104,7 +109,27 @@ class WallRally(AlignedJuggle):
                 predicted=predicted.clone();predicted[1]-=4.905*flight.square()
                 target_yz=self.targets[i,1:]-self.envs_positions[i,1:]
                 valid=(bv[i,0]>.1)&(flight>0)&(flight<2.)
-                self.event_reward[i]+=float(self.wall_spec.launch_reward)*torch.exp(-2.*(predicted-target_yz).square().sum())*valid.float()
+                if self.wall_spec.get('launch_mode', 'ballistic_point') == 'velocity_curriculum':
+                    # Dense launch guidance at a real cap only. Subtract the
+                    # same outgoing velocity with zero forward component, so
+                    # vertical juggling alone cannot farm this shaping reward.
+                    flight_time=float(self.wall_spec.launch_flight_time)
+                    desired=(self.targets[i]-self.envs_positions[i]-bp[i])/flight_time
+                    desired=desired.clone();desired[2]+=4.905*flight_time
+                    scale=torch.tensor(self.wall_spec.launch_velocity_scale,device=self.device)
+                    score=torch.exp(-.5*((bv[i]-desired)/scale).square().sum())
+                    vertical=bv[i].clone();vertical[0]=0.
+                    reference=torch.exp(-.5*((vertical-desired)/scale).square().sum())
+                    shaping=score-reference
+                else:
+                    shaping=torch.exp(-2.*(predicted-target_yz).square().sum())*valid.float()
+                self.event_reward[i]+=float(self.wall_spec.launch_reward)*shaping
+                value=float(shaping)
+                self.launch_stats['contacts']+=1
+                self.launch_stats['positive']+=int(value>0)
+                self.launch_stats['negative']+=int(value<0)
+                self.launch_stats['shaping_sum']+=value
+                self.launch_stats['forward_velocity_sum']+=float(bv[i,0])
             count=result.get('publish_next_target',0)
             if count:
                 self.wall_totals['wall_hits']+=count

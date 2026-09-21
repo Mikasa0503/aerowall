@@ -152,7 +152,7 @@ def main():
             row = {'update_this_run': completed, 'total_updates': policy.n_updates,
                    'environment_frames': frames, 'completed_episodes': episodes,
                    'legacy_collector_stats_unvalidated': stats,
-                   'terminal_episodes': list(base.completed_episodes), 'metrics': info,
+                   'terminal_episodes': list(base.completed_episodes), 'metrics': info, 'launch_stats': dict(base.launch_stats),
                    'elapsed_seconds': time.monotonic() - started, 'rollout_fps': collector._fps, 'controller_calls': controller_calls, 'contact_totals': dict(base.contact_totals), 'wall_totals':dict(base.wall_totals), 'reset_boundary_failures':list(base.reset_boundary_failures)}
             with metric_path.open('a') as handle:
                 handle.write(json.dumps(row) + '\n')
