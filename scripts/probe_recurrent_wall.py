@@ -3,6 +3,7 @@ import argparse
 import hashlib
 import json
 import os
+import random
 from pathlib import Path
 import sys
 import traceback
@@ -23,6 +24,7 @@ def main():
         from source_evidence import snapshot_sources,verify_sources
         record(source_snapshot=snapshot_sources(ROOT,report['source_hashes'],a.output.with_suffix('.sources')))
         import torch
+        import numpy as np
         from omegaconf import OmegaConf
         from omni_drones import init_simulation_app
         cfg=OmegaConf.load(ROOT/'runs/wall-outbound-dev-001.yaml');OmegaConf.set_struct(cfg,False)
@@ -75,9 +77,14 @@ def main():
         checkpoint=directory/'frames-000000002048.pt'
         torch.save({'policy':policy.state_dict(),'actor_optimizer':policy.actor_opt.state_dict(),
                     'critic_optimizer':policy.critic_opt.state_dict(),'n_updates':policy.n_updates,
-                    'environment_frames':2048,'source_hashes':report['source_hashes']},checkpoint)
+                    'environment_frames':2048,'source_hashes':report['source_hashes'],
+                    'torch_rng':torch.get_rng_state(),'cuda_rng':torch.cuda.get_rng_state_all(),
+                    'numpy_rng':np.random.get_state(),'python_rng':random.getstate()},checkpoint)
         restored=RecurrentWallPolicy(cfg.algo,env.agent_spec['drone'],base.device)
-        restored.load_state_dict(torch.load(checkpoint,map_location=base.device)['policy'])
+        saved=torch.load(checkpoint,map_location=base.device)
+        restored.load_state_dict(saved['policy'])
+        restored.actor_opt.load_state_dict(saved['actor_optimizer']);restored.critic_opt.load_state_dict(saved['critic_optimizer'])
+        restored.n_updates=saved['n_updates']
         td=env.reset()
         with torch.no_grad():
             left=policy(td.clone(),deterministic=True);right=restored(td.clone(),deterministic=True)
@@ -86,9 +93,38 @@ def main():
         td=env.reset();td[key]=torch.randn_like(td[key]);before=td[key].clone()
         mask=torch.zeros(16,1,dtype=torch.bool,device=base.device);mask[0]=True;td['_reset']=mask
         reset=env.reset(td);assert not reset[key][0].any() and torch.equal(reset[key][1:],before[1:])
-        record(status='passed',frames=2048,updates=policy.n_updates,checkpoint=str(checkpoint),
+        def restore_rng():
+            torch.set_rng_state(saved['torch_rng'].cpu());torch.cuda.set_rng_state_all([v.cpu() for v in saved['cuda_rng']])
+            np.random.set_state(saved['numpy_rng']);random.setstate(saved['python_rng'])
+        # Reuse one stored rollout solely to compare the next optimizer update.
+        # This is not extra simulator interaction or a new trained checkpoint.
+        restore_rng();left_metrics=policy.train_op(data.clone())
+        restore_rng();right_metrics=restored.train_op(data.clone())
+        scalar_step_device_differences=[]
+        def compare(left,right,path='root'):
+            if isinstance(left,torch.Tensor):
+                if left.device!=right.device:
+                    assert path.endswith('/step') and left.ndim==right.ndim==0,('Unexpected state device difference',path)
+                    scalar_step_device_differences.append({'path':path,'original':str(left.device),'restored':str(right.device)})
+                    assert torch.equal(left.cpu(),right.cpu()),'Checkpoint scalar optimizer step differs'
+                else:assert torch.equal(left,right),'Checkpoint continuation tensor mismatch'
+            elif hasattr(left,'keys'):
+                assert set(left.keys())==set(right.keys())
+                for k in left.keys():compare(left[k],right[k],path+'/'+str(k))
+            elif isinstance(left,(list,tuple)):
+                assert len(left)==len(right)
+                for i,(x,y) in enumerate(zip(left,right)):compare(x,y,path+'/'+str(i))
+            else:assert left==right
+        compare(policy.state_dict(),restored.state_dict())
+        compare(policy.actor_opt.state_dict(),restored.actor_opt.state_dict())
+        compare(policy.critic_opt.state_dict(),restored.critic_opt.state_dict())
+        compare(left_metrics,right_metrics)
+        assert policy.n_updates==restored.n_updates==saved['n_updates']+1
+        record(status='passed',frames=2048,updates=saved['n_updates'],checkpoint=str(checkpoint),
                checkpoint_sha256=hashlib.sha256(checkpoint.read_bytes()).hexdigest(),
                hidden_carry_passed=True,selective_hidden_reset_passed=True,reload_action_and_hidden_exact=True,
+               optimizer_and_rng_continuation_exact=True,diagnostic_replayed_optimizer_updates=1,
+               scalar_adam_step_device_differences=scalar_step_device_differences,
                wall_totals=base.wall_totals,formal_comparison_ready=False)
         return 0
     except Exception as e:record(status='failed',error=repr(e),traceback=traceback.format_exc());return 1
