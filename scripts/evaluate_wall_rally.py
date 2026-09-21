@@ -97,12 +97,18 @@ def main():
         record(initialization_source_consistency=True)
         record(status='evaluating', initial_state_differences=delta, trained_frames=payload['environment_frames'],
                physics_dt=float(cfg.sim.dt), policy_dt=.02, episode_seconds=base.max_episode_length*.02,
-               wall_fixture=OmegaConf.to_container(cfg.wall_fixture), wall_task=OmegaConf.to_container(cfg.wall_task))
+               wall_fixture=OmegaConf.to_container(cfg.wall_fixture), wall_task=OmegaConf.to_container(cfg.wall_task),
+               actor_observation_record={'key':'actor_observation_before','width':43,'timing':'before policy and env.step; sample index times policy_dt',
+                   'drone_velocity_delay_steps':int(cfg.task.drone_vel_latent_step),
+                   'ball_velocity_delay_steps':int(cfg.task.ball_linear_vel_latent_step),
+                   'scope':'Exact actor input, distinct from poststep simulator trajectory states'})
         finished = torch.zeros(n, dtype=torch.bool, device=base.device)
         outcomes = [None]*n; trajectories = []; start = time.monotonic()
         with torch.no_grad(), a.output.with_suffix('.events.jsonl').open('w') as events:
             for step in range(base.max_episode_length):
                 active = ~finished.clone()
+                actor_observation = td['agents','observation'].detach().clone()
+                assert actor_observation.shape == (n,1,43) and torch.isfinite(actor_observation).all()
                 policy(td, deterministic=True)
                 controlled=torch.zeros(n,dtype=torch.bool,device=base.device)
                 if recovery is not None:
@@ -127,6 +133,7 @@ def main():
                     finished[i] = True
                 trajectories.append({**{k:v.cpu().numpy() for k,v in state.items()},
                     'action':action[:,0].cpu().numpy(), 'active_before':active.cpu().numpy(),
+                    'actor_observation_before':actor_observation[:,0].cpu().numpy(),
                     'target':base.targets.cpu().numpy().copy(),'recovery_controlled':controlled.cpu().numpy()})
                 base.completed_episodes.clear()
                 if (step+1) % 100 == 0:
