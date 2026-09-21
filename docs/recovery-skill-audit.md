@@ -32,4 +32,8 @@
 
 独立恢复技能 `recovery-skill-eval-25-01` 已完成固定 100 场景评测并通过进程/报告及独立事件链审计，实际启用分阶段 checkpoint 推理：48/100 场碰墙、0/100 接回、173 次合法拍面接触。结束原因为 52 场越界、8 场无人机碰墙、16 场非拍面接触、24 场球碰机体。48 个碰墙场景中，42 个出球后失高超过 0.3 米。相较同预算固定回位单策略的 32 场碰墙，分阶段策略保留了更多出球，但尚未改善接回。不能将训练期间的 13 次接回等同于固定评测成功率。
 
-预测参考独立恢复技能 `predictive-recovery-dev-001` 已完成 25 次更新、204800 新增环境步，进程与报告均通过；其同场景评测 `predictive-recovery-eval-25-01` 已启动，尚无结果。证据：`recovery-skill-eval-25-audit.json`、`recovery-skill-analysis-25.json`、`recovery-skill-comparison-25.json`。
+预测参考独立恢复技能 `predictive-recovery-dev-001` 已完成 25 次更新、204800 新增环境步，进程与报告均通过。证据：`recovery-skill-eval-25-audit.json`、`recovery-skill-analysis-25.json`、`recovery-skill-comparison-25.json`。
+
+首次预测参考评测 `predictive-recovery-eval-25-01` 在 Orbit 导入时因 Omniverse 资产根目录连接失败而退出，未进入物理评测。Kit 退出码为 0，但报告 failed，包装器正确判为失败。保留失败报告后，以相同 checkpoint/config 启动 `predictive-recovery-eval-25-02`。运行时已本地安装，Orbit 导入仍有云资产目录探测，不能称为完全离线。
+
+固定回位与预测参考分别启动 `recovery-skill-dev-002`、`predictive-recovery-dev-002`：各续训 75 次更新，新增 614400 步，连同前期共 819200 步；每 25 次保存检查点。配置不变，恢复学习/优化器/RNG 状态，物理 episode 重新开始。前 25 次训练分别记录 13、29 次接回，仅为训练统计，不代表固定评测成功率。
