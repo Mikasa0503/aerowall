@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "report_sha256": "a93052d2d722b7e7c9fdb5fa3a625b87e40af73093b2f23cc764c66ad1a48625",
+  "checked_active_steps": 3972,
+  "body_event_updates": 27,
+  "wall_event_rearms": 18,
+  "scope": "Discrete role memory and last hitter side match physical contact events; not contact legality"
+}

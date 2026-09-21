@@ -137,6 +137,16 @@ class HCSPSingleWall(Coselfplay_Phase_one):
         self.phase=torch.where(ambiguous,0,self.phase)
         self.racket_hit_ball.zero_();self.drone_hit_ball=torch.zeros_like(self.racket_hit_ball)
         self.drone_hit_ball[torch.arange(self.num_envs,device=self.device),self.executed_role]=body
+        if self.cfg.get('single_hit_memory',False):
+            # Scheduling uses physical body events; the separate geometry audit
+            # alone decides whether an event is a top-face candidate.
+            self.racket_hit_ball.copy_(self.drone_hit_ball)
+            self.update_already_hit_info()
+            for name,slot in [('Opp_SecPass',0),('Opp_Att',1),('FirstPass',2),('SecPass',3),('Att',4),('Opp_FirstPass',5)]:
+                event=self.drone_hit_ball[:,slot]
+                self.info[name+'_hit']=event[:,None]
+                setattr(self,name+'_last_hit_t',torch.where(event,self.progress_buf,getattr(self,name+'_last_hit_t')))
+            self.last_hit_side=torch.where(body,False,self.last_hit_side)
         # Contact is used only to rearm the wall task, never labelled a legal bat hit.
         self.serve_step+=body.long()
         self.is_rally|=wall

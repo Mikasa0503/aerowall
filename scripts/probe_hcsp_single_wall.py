@@ -14,6 +14,7 @@ def main():
     p.add_argument('--contacts',action='store_true')
     p.add_argument('--dt',type=float,default=0.01)
     p.add_argument('--priority',choices=['firstpass','set','attack'],default='firstpass')
+    p.add_argument('--hit-memory',action='store_true')
     a=p.parse_args();a.output=a.output.resolve();a.output.parent.mkdir(parents=True,exist_ok=True)
     report={'status':'initializing','pid':os.getpid(),'scope':'Single physical drone; HCSP role replication and arbitration adapter; physical wall','seed':a.seed}
     def record(**kw):
@@ -35,6 +36,7 @@ def main():
             cfg=compose(config_name='train_coselfplay_phase_one',overrides=overrides)
         OmegaConf.resolve(cfg);OmegaConf.set_struct(cfg,False)
         cfg.single_priority=a.priority
+        cfg.single_hit_memory=a.hit_memory
         OmegaConf.save(cfg,a.output.with_suffix('.yaml'))
         sys.argv=[sys.argv[0],'--portable','--portable-root',str(ROOT/'.cache/kit')]
         app=init_simulation_app(cfg)
@@ -49,7 +51,7 @@ def main():
             base=HCSPSingleWall(cfg,headless=True)
         assert base.physical_drone.n==1
         assert tuple(base.physical_drone.shape)==(a.num_envs,1)
-        record(priority=a.priority,physical_drone_shape=list(base.physical_drone.shape),adapter_sha256=hashlib.sha256((ROOT/'scripts/hcsp_single_wall_env.py').read_bytes()).hexdigest())
+        record(hit_memory=a.hit_memory,priority=a.priority,physical_drone_shape=list(base.physical_drone.shape),adapter_sha256=hashlib.sha256((ROOT/'scripts/hcsp_single_wall_env.py').read_bytes()).hexdigest())
         env=TransformedEnv(base,Compose(InitTracker())).eval()
         policy=PSROPolicy_coselfplay_phase_one(cfg.algo,agent_spec_dict=env.agent_spec,device=base.device,num_envs=a.num_envs)
         checkpoints=[]
@@ -89,7 +91,7 @@ def main():
         record(deterministic_low_level=a.deterministic,deterministic_high_level=True,dt=base.dt,
                contact_filters_drone_name=base.drone.name,independent_contacts=a.contacts)
         active=torch.ones(a.num_envs,dtype=torch.bool,device=base.device)
-        outcomes=[];trace={'ball':[],'drone':[],'high':[],'active':[],'hits':[],'ball_velocity':[],'executed_high':[],'physical_drone':[],'executed_skill':[],'executed_role':[],'executed_action':[],'contact_impulse':[],'contact_entry':[],'wall_returns':[]}
+        outcomes=[];trace={'ball':[],'drone':[],'high':[],'active':[],'hits':[],'ball_velocity':[],'executed_high':[],'physical_drone':[],'already_hit':[],'last_hit_side':[],'executed_skill':[],'executed_role':[],'executed_action':[],'contact_impulse':[],'contact_entry':[],'wall_returns':[]}
         with torch.no_grad():
             td=env.reset()
             record(initial_ball=(base.ball.get_world_poses()[0]-base.envs_positions[:,None,:]).cpu().tolist(),initial_drone=base.physical_drone.get_state().cpu().tolist(),wall={'center':[0,0,4],'size':[0.2,8,8]})
@@ -116,7 +118,7 @@ def main():
                             if abs(impulse)<=1e-8:continue
                             contacts.append({'env':idx,'step':step,'agent':agent,'impulse':impulse,
                                 'position':positions[ci].cpu().tolist(),'normal':normals[ci].cpu().tolist()})
-                for key,value in [('physical_drone',base.physical_drone.get_state()),('executed_skill',base.executed_skill),('executed_role',base.executed_role),('executed_action',base.executed_action),('contact_impulse',base.contact_impulse),('contact_entry',base.contact_entry),('wall_returns',base.wall_returns)]:
+                for key,value in [('physical_drone',base.physical_drone.get_state()),('already_hit',torch.cat([base.FirstPass_already_hit,base.SecPass_already_hit,base.Att_already_hit],dim=1)),('last_hit_side',base.last_hit_side),('executed_skill',base.executed_skill),('executed_role',base.executed_role),('executed_action',base.executed_action),('contact_impulse',base.contact_impulse),('contact_entry',base.contact_entry),('wall_returns',base.wall_returns)]:
                     trace[key].append(value.cpu().numpy().copy())
                 done=nxt['done'].flatten()
                 for idx in torch.nonzero(active & (done | (step+1==a.steps))).flatten().tolist():

@@ -1,0 +1,720 @@
+{
+  "status": "passed",
+  "scope": "Native IrisTest top-face contact candidates; not certified AeroWall bat legality",
+  "report_sha256": "3a50b070864eddf4632d7f22bde31aeb6539e3e0016521c7e05a2bcbd12b10e4",
+  "criterion": {
+    "normal_abs_z_min": 0.9,
+    "point_z_min": 0,
+    "box_xy_with_motion_tolerance": 0.255,
+    "wall_point_x": 0.1,
+    "wall_point_tolerance": 0.06
+  },
+  "top_face_return_candidates": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0
+  ],
+  "episodes_with_top_face_return_candidate": 3,
+  "executed_skill_steps": {
+    "FirstPass_goto": 0,
+    "FirstPass_pass": 1850,
+    "FirstPass_hover": 0,
+    "FirstPass_serve": 1056,
+    "FirstPass_serve_hover": 1069,
+    "SecPass_goto": 0,
+    "SecPass_hit": 0,
+    "SecPass_hover": 0,
+    "Att_goto": 0,
+    "Att_hit": 0,
+    "Att_hover": 0
+  },
+  "events": [
+    {
+      "env": 0,
+      "step": 63,
+      "body": true,
+      "wall": false,
+      "top_face_candidate": true,
+      "body_points": [
+        [
+          0.20248574018478394,
+          0.002652290742844343,
+          0.026829831302165985
+        ]
+      ],
+      "body_normals": [
+        [
+          -0.022864961996674538,
+          -0.0010357573628425598,
+          -0.9997376799583435
+        ]
+      ]
+    },
+    {
+      "env": 0,
+      "step": 132,
+      "body": false,
+      "wall": true,
+      "top_face_candidate": false,
+      "body_points": [],
+      "body_normals": []
+    },
+    {
+      "env": 0,
+      "step": 189,
+      "body": true,
+      "wall": false,
+      "top_face_candidate": false,
+      "body_points": [
+        [
+          -0.22286951541900635,
+          0.2380213886499405,
+          0.05637150630354881
+        ]
+      ],
+      "body_normals": [
+        [
+          0.6538936495780945,
+          -0.7565805315971375,
+          -0.0027050916105508804
+        ]
+      ]
+    },
+    {
+      "env": 1,
+      "step": 66,
+      "body": true,
+      "wall": false,
+      "top_face_candidate": true,
+      "body_points": [
+        [
+          0.18426565825939178,
+          0.04836553335189819,
+          0.027782246470451355
+        ]
+      ],
+      "body_normals": [
+        [
+          -0.020293235778808594,
+          0.00032485462725162506,
+          -0.9997939467430115
+        ]
+      ]
+    },
+    {
+      "env": 1,
+      "step": 133,
+      "body": false,
+      "wall": true,
+      "top_face_candidate": false,
+      "body_points": [],
+      "body_normals": []
+    },
+    {
+      "env": 1,
+      "step": 187,
+      "body": true,
+      "wall": false,
+      "top_face_candidate": true,
+      "body_points": [
+        [
+          -0.16898499429225922,
+          -0.06583945453166962,
+          0.06482680886983871
+        ]
+      ],
+      "body_normals": [
+        [
+          -0.009242832660675049,
+          -0.002642892301082611,
+          -0.9999537467956543
+        ]
+      ]
+    },
+    {
+      "env": 2,
+      "step": 65,
+      "body": true,
+      "wall": false,
+      "top_face_candidate": true,
+      "body_points": [
+        [
+          0.17169035971164703,
+          0.062140095978975296,
+          0.026999659836292267
+        ]
+      ],
+      "body_normals": [
+        [
+          -0.021841077134013176,
+          -0.0009850729256868362,
+          -0.9997605681419373
+        ]
+      ]
+    },
+    {
+      "env": 2,
+      "step": 129,
+      "body": false,
+      "wall": true,
+      "top_face_candidate": false,
+      "body_points": [],
+      "body_normals": []
+    },
+    {
+      "env": 3,
+      "step": 66,
+      "body": true,
+      "wall": false,
+      "top_face_candidate": true,
+      "body_points": [
+        [
+          0.17542193830013275,
+          -0.01631179451942444,
+          0.02921484224498272
+        ]
+      ],
+      "body_normals": [
+        [
+          -0.023176442831754684,
+          0.0032933801412582397,
+          -0.9997257590293884
+        ]
+      ]
+    },
+    {
+      "env": 3,
+      "step": 135,
+      "body": false,
+      "wall": true,
+      "top_face_candidate": false,
+      "body_points": [],
+      "body_normals": []
+    },
+    {
+      "env": 3,
+      "step": 189,
+      "body": true,
+      "wall": false,
+      "top_face_candidate": false,
+      "body_points": [
+        [
+          -0.2169826328754425,
+          0.0920228436589241,
+          0.06579194962978363
+        ]
+      ],
+      "body_normals": [
+        [
+          0.7366527318954468,
+          0.0005633337423205376,
+          -0.6762704849243164
+        ]
+      ]
+    },
+    {
+      "env": 4,
+      "step": 64,
+      "body": true,
+      "wall": false,
+      "top_face_candidate": true,
+      "body_points": [
+        [
+          0.1841031014919281,
+          0.06270279735326767,
+          0.027699686586856842
+        ]
+      ],
+      "body_normals": [
+        [
+          -0.021200617775321007,
+          0.0001966648269444704,
+          -0.9997749924659729
+        ]
+      ]
+    },
+    {
+      "env": 4,
+      "step": 133,
+      "body": false,
+      "wall": true,
+      "top_face_candidate": false,
+      "body_points": [],
+      "body_normals": []
+    },
+    {
+      "env": 5,
+      "step": 66,
+      "body": true,
+      "wall": false,
+      "top_face_candidate": true,
+      "body_points": [
+        [
+          0.170579195022583,
+          0.0738065242767334,
+          0.027853839099407196
+        ]
+      ],
+      "body_normals": [
+        [
+          -0.02018684707581997,
+          0.0008996352553367615,
+          -0.9997954368591309
+        ]
+      ]
+    },
+    {
+      "env": 5,
+      "step": 130,
+      "body": false,
+      "wall": true,
+      "top_face_candidate": false,
+      "body_points": [],
+      "body_normals": []
+    },
+    {
+      "env": 6,
+      "step": 65,
+      "body": true,
+      "wall": false,
+      "top_face_candidate": true,
+      "body_points": [
+        [
+          0.18469753861427307,
+          0.04930419102311134,
+          0.028880737721920013
+        ]
+      ],
+      "body_normals": [
+        [
+          -0.019691379740834236,
+          0.0007407236844301224,
+          -0.9998056292533875
+        ]
+      ]
+    },
+    {
+      "env": 6,
+      "step": 134,
+      "body": false,
+      "wall": true,
+      "top_face_candidate": false,
+      "body_points": [],
+      "body_normals": []
+    },
+    {
+      "env": 6,
+      "step": 188,
+      "body": true,
+      "wall": false,
+      "top_face_candidate": false,
+      "body_points": [
+        [
+          -0.21273621916770935,
+          0.04257623478770256,
+          -0.04364988952875137
+        ]
+      ],
+      "body_normals": [
+        [
+          0.9999995827674866,
+          0.00021573901176452637,
+          -0.0005214745178818703
+        ]
+      ]
+    },
+    {
+      "env": 7,
+      "step": 64,
+      "body": true,
+      "wall": false,
+      "top_face_candidate": true,
+      "body_points": [
+        [
+          0.19114884734153748,
+          0.08297906816005707,
+          0.02649957500398159
+        ]
+      ],
+      "body_normals": [
+        [
+          -0.022018220275640488,
+          -0.0006570310797542334,
+          -0.9997570514678955
+        ]
+      ]
+    },
+    {
+      "env": 7,
+      "step": 132,
+      "body": false,
+      "wall": true,
+      "top_face_candidate": false,
+      "body_points": [],
+      "body_normals": []
+    },
+    {
+      "env": 7,
+      "step": 190,
+      "body": true,
+      "wall": false,
+      "top_face_candidate": true,
+      "body_points": [
+        [
+          -0.004461516626179218,
+          -0.1920231282711029,
+          0.06372767686843872
+        ]
+      ],
+      "body_normals": [
+        [
+          -0.013440394774079323,
+          -0.0024560014717280865,
+          -0.9999062418937683
+        ]
+      ]
+    },
+    {
+      "env": 8,
+      "step": 65,
+      "body": true,
+      "wall": false,
+      "top_face_candidate": true,
+      "body_points": [
+        [
+          0.20593799650669098,
+          0.02355554699897766,
+          0.027004245668649673
+        ]
+      ],
+      "body_normals": [
+        [
+          -0.02151922509074211,
+          0.0010055582970380783,
+          -0.999767541885376
+        ]
+      ]
+    },
+    {
+      "env": 8,
+      "step": 132,
+      "body": false,
+      "wall": true,
+      "top_face_candidate": false,
+      "body_points": [],
+      "body_normals": []
+    },
+    {
+      "env": 9,
+      "step": 66,
+      "body": true,
+      "wall": false,
+      "top_face_candidate": true,
+      "body_points": [
+        [
+          0.1683628261089325,
+          0.07944434881210327,
+          0.02676290087401867
+        ]
+      ],
+      "body_normals": [
+        [
+          -0.02129986509680748,
+          -0.0005227811634540558,
+          -0.9997726678848267
+        ]
+      ]
+    },
+    {
+      "env": 9,
+      "step": 129,
+      "body": false,
+      "wall": true,
+      "top_face_candidate": false,
+      "body_points": [],
+      "body_normals": []
+    },
+    {
+      "env": 10,
+      "step": 66,
+      "body": true,
+      "wall": false,
+      "top_face_candidate": true,
+      "body_points": [
+        [
+          0.15484873950481415,
+          0.07998351752758026,
+          0.02715526521205902
+        ]
+      ],
+      "body_normals": [
+        [
+          -0.021106211468577385,
+          0.0007458943873643875,
+          -0.9997765421867371
+        ]
+      ]
+    },
+    {
+      "env": 10,
+      "step": 128,
+      "body": false,
+      "wall": true,
+      "top_face_candidate": false,
+      "body_points": [],
+      "body_normals": []
+    },
+    {
+      "env": 10,
+      "step": 178,
+      "body": true,
+      "wall": false,
+      "top_face_candidate": false,
+      "body_points": [
+        [
+          -0.21644705533981323,
+          0.15238216519355774,
+          0.06521844118833542
+        ]
+      ],
+      "body_normals": [
+        [
+          0.9998605847358704,
+          0.0016546137630939484,
+          -0.016576511785387993
+        ]
+      ]
+    },
+    {
+      "env": 11,
+      "step": 63,
+      "body": true,
+      "wall": false,
+      "top_face_candidate": true,
+      "body_points": [
+        [
+          0.16581475734710693,
+          0.15115241706371307,
+          0.026565197855234146
+        ]
+      ],
+      "body_normals": [
+        [
+          -0.02468745782971382,
+          -0.008750200271606445,
+          -0.9996567964553833
+        ]
+      ]
+    },
+    {
+      "env": 11,
+      "step": 134,
+      "body": false,
+      "wall": true,
+      "top_face_candidate": false,
+      "body_points": [],
+      "body_normals": []
+    },
+    {
+      "env": 12,
+      "step": 65,
+      "body": true,
+      "wall": false,
+      "top_face_candidate": true,
+      "body_points": [
+        [
+          0.22635027766227722,
+          -0.05320243164896965,
+          0.027822431176900864
+        ]
+      ],
+      "body_normals": [
+        [
+          -0.019193580374121666,
+          0.0020481664687395096,
+          -0.9998130798339844
+        ]
+      ]
+    },
+    {
+      "env": 12,
+      "step": 132,
+      "body": false,
+      "wall": true,
+      "top_face_candidate": false,
+      "body_points": [],
+      "body_normals": []
+    },
+    {
+      "env": 12,
+      "step": 184,
+      "body": true,
+      "wall": false,
+      "top_face_candidate": true,
+      "body_points": [
+        [
+          -0.20613443851470947,
+          0.042611125856637955,
+          0.0666869506239891
+        ]
+      ],
+      "body_normals": [
+        [
+          -0.013195322826504707,
+          -0.001034784596413374,
+          -0.9999123215675354
+        ]
+      ]
+    },
+    {
+      "env": 13,
+      "step": 64,
+      "body": true,
+      "wall": false,
+      "top_face_candidate": true,
+      "body_points": [
+        [
+          0.17546233534812927,
+          0.06750501692295074,
+          0.026866281405091286
+        ]
+      ],
+      "body_normals": [
+        [
+          -0.021796856075525284,
+          0.0010925375390797853,
+          -0.9997614622116089
+        ]
+      ]
+    },
+    {
+      "env": 13,
+      "step": 129,
+      "body": false,
+      "wall": true,
+      "top_face_candidate": false,
+      "body_points": [],
+      "body_normals": []
+    },
+    {
+      "env": 14,
+      "step": 64,
+      "body": true,
+      "wall": false,
+      "top_face_candidate": true,
+      "body_points": [
+        [
+          0.1829884648323059,
+          0.034578438848257065,
+          0.028791578486561775
+        ]
+      ],
+      "body_normals": [
+        [
+          -0.020111557096242905,
+          0.0009009921923279762,
+          -0.9997971653938293
+        ]
+      ]
+    },
+    {
+      "env": 14,
+      "step": 133,
+      "body": false,
+      "wall": true,
+      "top_face_candidate": false,
+      "body_points": [],
+      "body_normals": []
+    },
+    {
+      "env": 14,
+      "step": 186,
+      "body": true,
+      "wall": false,
+      "top_face_candidate": false,
+      "body_points": [
+        [
+          -0.21408209204673767,
+          -0.04404548928141594,
+          0.011190218850970268
+        ]
+      ],
+      "body_normals": [
+        [
+          0.9999836683273315,
+          -0.0005037449300289154,
+          -0.0056382641196250916
+        ]
+      ]
+    },
+    {
+      "env": 15,
+      "step": 68,
+      "body": true,
+      "wall": false,
+      "top_face_candidate": true,
+      "body_points": [
+        [
+          0.17367474734783173,
+          0.03516688197851181,
+          0.028796527534723282
+        ]
+      ],
+      "body_normals": [
+        [
+          -0.018899086862802505,
+          -0.00010396726429462433,
+          -0.9998211860656738
+        ]
+      ]
+    },
+    {
+      "env": 15,
+      "step": 134,
+      "body": false,
+      "wall": true,
+      "top_face_candidate": false,
+      "body_points": [],
+      "body_normals": []
+    },
+    {
+      "env": 15,
+      "step": 185,
+      "body": true,
+      "wall": false,
+      "top_face_candidate": false,
+      "body_points": [
+        [
+          -0.21234416961669922,
+          -0.12726207077503204,
+          0.02169393002986908
+        ]
+      ],
+      "body_normals": [
+        [
+          0.9999966621398926,
+          -0.0006680227816104889,
+          -0.002282187342643738
+        ]
+      ]
+    }
+  ],
+  "limitations": [
+    "Contact point transformed with end-step body pose; not exact impact pose.",
+    "Native box top is not the AeroWall legal bat cap.",
+    "Rotor contacts are not included in this base-link audit."
+  ]
+}

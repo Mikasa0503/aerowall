@@ -1,0 +1,420 @@
+{
+  "status": "passed",
+  "scope": "Single physical drone, full checkpoint library with explicit role/observation adapter; body-wall-body only",
+  "report_sha256": "a93052d2d722b7e7c9fdb5fa3a625b87e40af73093b2f23cc764c66ad1a48625",
+  "episodes": 16,
+  "episodes_body_contact": 16,
+  "episodes_wall_contact": 16,
+  "episodes_wall_return": 11,
+  "maximum_returns": 1,
+  "executed_role_steps": {
+    "2": 3972,
+    "3": 0,
+    "4": 0
+  },
+  "outcomes": [
+    {
+      "env": 0,
+      "body_entries": 2,
+      "wall_entries": 1,
+      "returns": 1,
+      "events": [
+        {
+          "step": 66,
+          "body": true,
+          "wall": false,
+          "role": 2
+        },
+        {
+          "step": 135,
+          "body": false,
+          "wall": true,
+          "role": 2
+        },
+        {
+          "step": 190,
+          "body": true,
+          "wall": false,
+          "role": 2
+        }
+      ]
+    },
+    {
+      "env": 1,
+      "body_entries": 2,
+      "wall_entries": 2,
+      "returns": 1,
+      "events": [
+        {
+          "step": 65,
+          "body": true,
+          "wall": false,
+          "role": 2
+        },
+        {
+          "step": 134,
+          "body": false,
+          "wall": true,
+          "role": 2
+        },
+        {
+          "step": 187,
+          "body": true,
+          "wall": false,
+          "role": 2
+        },
+        {
+          "step": 226,
+          "body": false,
+          "wall": true,
+          "role": 2
+        }
+      ]
+    },
+    {
+      "env": 2,
+      "body_entries": 1,
+      "wall_entries": 1,
+      "returns": 0,
+      "events": [
+        {
+          "step": 63,
+          "body": true,
+          "wall": false,
+          "role": 2
+        },
+        {
+          "step": 128,
+          "body": false,
+          "wall": true,
+          "role": 2
+        }
+      ]
+    },
+    {
+      "env": 3,
+      "body_entries": 2,
+      "wall_entries": 1,
+      "returns": 1,
+      "events": [
+        {
+          "step": 64,
+          "body": true,
+          "wall": false,
+          "role": 2
+        },
+        {
+          "step": 129,
+          "body": false,
+          "wall": true,
+          "role": 2
+        },
+        {
+          "step": 181,
+          "body": true,
+          "wall": false,
+          "role": 2
+        }
+      ]
+    },
+    {
+      "env": 4,
+      "body_entries": 2,
+      "wall_entries": 2,
+      "returns": 1,
+      "events": [
+        {
+          "step": 67,
+          "body": true,
+          "wall": false,
+          "role": 2
+        },
+        {
+          "step": 146,
+          "body": false,
+          "wall": true,
+          "role": 2
+        },
+        {
+          "step": 208,
+          "body": true,
+          "wall": false,
+          "role": 2
+        },
+        {
+          "step": 342,
+          "body": false,
+          "wall": true,
+          "role": 2
+        }
+      ]
+    },
+    {
+      "env": 5,
+      "body_entries": 1,
+      "wall_entries": 1,
+      "returns": 0,
+      "events": [
+        {
+          "step": 67,
+          "body": true,
+          "wall": false,
+          "role": 2
+        },
+        {
+          "step": 133,
+          "body": false,
+          "wall": true,
+          "role": 2
+        }
+      ]
+    },
+    {
+      "env": 6,
+      "body_entries": 2,
+      "wall_entries": 1,
+      "returns": 1,
+      "events": [
+        {
+          "step": 65,
+          "body": true,
+          "wall": false,
+          "role": 2
+        },
+        {
+          "step": 132,
+          "body": false,
+          "wall": true,
+          "role": 2
+        },
+        {
+          "step": 186,
+          "body": true,
+          "wall": false,
+          "role": 2
+        }
+      ]
+    },
+    {
+      "env": 7,
+      "body_entries": 2,
+      "wall_entries": 1,
+      "returns": 1,
+      "events": [
+        {
+          "step": 67,
+          "body": true,
+          "wall": false,
+          "role": 2
+        },
+        {
+          "step": 133,
+          "body": false,
+          "wall": true,
+          "role": 2
+        },
+        {
+          "step": 185,
+          "body": true,
+          "wall": false,
+          "role": 2
+        }
+      ]
+    },
+    {
+      "env": 8,
+      "body_entries": 1,
+      "wall_entries": 1,
+      "returns": 0,
+      "events": [
+        {
+          "step": 67,
+          "body": true,
+          "wall": false,
+          "role": 2
+        },
+        {
+          "step": 134,
+          "body": false,
+          "wall": true,
+          "role": 2
+        }
+      ]
+    },
+    {
+      "env": 9,
+      "body_entries": 2,
+      "wall_entries": 1,
+      "returns": 1,
+      "events": [
+        {
+          "step": 63,
+          "body": true,
+          "wall": false,
+          "role": 2
+        },
+        {
+          "step": 130,
+          "body": false,
+          "wall": true,
+          "role": 2
+        },
+        {
+          "step": 185,
+          "body": true,
+          "wall": false,
+          "role": 2
+        }
+      ]
+    },
+    {
+      "env": 10,
+      "body_entries": 1,
+      "wall_entries": 1,
+      "returns": 0,
+      "events": [
+        {
+          "step": 66,
+          "body": true,
+          "wall": false,
+          "role": 2
+        },
+        {
+          "step": 131,
+          "body": false,
+          "wall": true,
+          "role": 2
+        }
+      ]
+    },
+    {
+      "env": 11,
+      "body_entries": 2,
+      "wall_entries": 1,
+      "returns": 1,
+      "events": [
+        {
+          "step": 67,
+          "body": true,
+          "wall": false,
+          "role": 2
+        },
+        {
+          "step": 133,
+          "body": false,
+          "wall": true,
+          "role": 2
+        },
+        {
+          "step": 188,
+          "body": true,
+          "wall": false,
+          "role": 2
+        }
+      ]
+    },
+    {
+      "env": 12,
+      "body_entries": 1,
+      "wall_entries": 1,
+      "returns": 0,
+      "events": [
+        {
+          "step": 62,
+          "body": true,
+          "wall": false,
+          "role": 2
+        },
+        {
+          "step": 131,
+          "body": false,
+          "wall": true,
+          "role": 2
+        }
+      ]
+    },
+    {
+      "env": 13,
+      "body_entries": 2,
+      "wall_entries": 1,
+      "returns": 1,
+      "events": [
+        {
+          "step": 66,
+          "body": true,
+          "wall": false,
+          "role": 2
+        },
+        {
+          "step": 132,
+          "body": false,
+          "wall": true,
+          "role": 2
+        },
+        {
+          "step": 187,
+          "body": true,
+          "wall": false,
+          "role": 2
+        }
+      ]
+    },
+    {
+      "env": 14,
+      "body_entries": 2,
+      "wall_entries": 1,
+      "returns": 1,
+      "events": [
+        {
+          "step": 67,
+          "body": true,
+          "wall": false,
+          "role": 2
+        },
+        {
+          "step": 131,
+          "body": false,
+          "wall": true,
+          "role": 2
+        },
+        {
+          "step": 182,
+          "body": true,
+          "wall": false,
+          "role": 2
+        }
+      ]
+    },
+    {
+      "env": 15,
+      "body_entries": 2,
+      "wall_entries": 1,
+      "returns": 1,
+      "events": [
+        {
+          "step": 66,
+          "body": true,
+          "wall": false,
+          "role": 2
+        },
+        {
+          "step": 130,
+          "body": false,
+          "wall": true,
+          "role": 2
+        },
+        {
+          "step": 180,
+          "body": true,
+          "wall": false,
+          "role": 2
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Body contact is not yet classified as legal racket contact.",
+    "Single-body observation replication and role arbitration differ from original six-drone HCSP.",
+    "Only first episodes from this initial-state distribution; not a general capability claim."
+  ]
+}
