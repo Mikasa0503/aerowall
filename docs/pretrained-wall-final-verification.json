@@ -1,0 +1,61 @@
+{
+  "status": "passed",
+  "runs": [
+    {
+      "run": "volleybots-wall-native-01",
+      "report_sha256": "6c7958bf4575cc103ae90f772bfda73064a999706f8ea30672427547ec70cb77",
+      "exit_passed": true,
+      "trajectory_hash_verified": true,
+      "checkpoint_hashes_verified": true,
+      "audit_passed": true,
+      "pid_present": false,
+      "scenarios": 16,
+      "returns": 0
+    },
+    {
+      "run": "volleybots-wall-rearm-01",
+      "report_sha256": "6b18804408b5e005f3da575270103cedfc558709b9d7cebddcdaa7e0fec90aa6",
+      "exit_passed": true,
+      "trajectory_hash_verified": true,
+      "checkpoint_hashes_verified": true,
+      "audit_passed": true,
+      "pid_present": false,
+      "scenarios": 16,
+      "returns": 0
+    },
+    {
+      "run": "hcsp-receive-wall-native-01",
+      "report_sha256": "4a4f8f8b941f2829ca9fb502b77e9054d4b02f8e4075b24e73ca58ff81f5f404",
+      "exit_passed": true,
+      "trajectory_hash_verified": true,
+      "checkpoint_hashes_verified": true,
+      "audit_passed": true,
+      "pid_present": false,
+      "scenarios": 16,
+      "returns": 0
+    },
+    {
+      "run": "hcsp-receive-wall-rearm-01",
+      "report_sha256": "91de5a457736869d7ad4ae74edfbba999c9a480171a5db53717cc65b02c91bfe",
+      "exit_passed": true,
+      "trajectory_hash_verified": true,
+      "checkpoint_hashes_verified": true,
+      "audit_passed": true,
+      "pid_present": false,
+      "scenarios": 16,
+      "returns": 0
+    },
+    {
+      "run": "juggle-wall-transfer-round4-01",
+      "report_sha256": "7dd4b7c7f009d8f1e227be4f08ff9aaeed8924c19f65b7ade53ad72399f838b7",
+      "exit_passed": true,
+      "trajectory_hash_verified": true,
+      "checkpoint_hashes_verified": true,
+      "audit_passed": true,
+      "pid_present": false,
+      "scenarios": 100,
+      "returns": 0
+    }
+  ],
+  "scope": "Artifact consistency and terminal execution; individual audit scope limitations remain"
+}

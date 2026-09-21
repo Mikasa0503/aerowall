@@ -1,0 +1,25 @@
+{
+  "scope": "Sensitivity check includes terminal interval, which may be an upstream hover-hit termination rather than physical failure; still policy-step GPU samples, not substep completeness proof",
+  "results": [
+    {
+      "run": "volleybots-wall-native-01",
+      "inclusive_terminal_body_wall_body_candidates": 0,
+      "candidates": []
+    },
+    {
+      "run": "volleybots-wall-rearm-01",
+      "inclusive_terminal_body_wall_body_candidates": 0,
+      "candidates": []
+    },
+    {
+      "run": "hcsp-receive-wall-native-01",
+      "inclusive_terminal_body_wall_body_candidates": 0,
+      "candidates": []
+    },
+    {
+      "run": "hcsp-receive-wall-rearm-01",
+      "inclusive_terminal_body_wall_body_candidates": 0,
+      "candidates": []
+    }
+  ]
+}
