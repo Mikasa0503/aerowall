@@ -24,6 +24,8 @@
 
 最新：上述三项评测均已完成并审计。第 75 次固定回位/预测参考各 1/100 接回；单策略转移为 0/100，碰墙 26/100。当前这批 GPU 训练与评测均结束。下一步验证把已有两分支在新训练状态上的动作分布拟合到单个 actor，再继续完整回合学习；尚未实施，不计为完成结果。
 
+后续更新：单 actor 拟合路径现已实现，解析 KL/梯度检查及 2048 步原生短程采样、拟合、保存重载通过；尚无闭环任务成绩。已启动 65536 步新采样与 40 epoch 拟合的 `skill-distillation-dev-001`，详见《AeroWall单策略拟合检查》。
+
 主要证据：`ball-wall-calibration-02.json`、`aligned-contact-eval-original-substep8-01.json`、`aligned-contact-eval-original-substep16-01.json`、`recurrent-wall-probe-04.json`；最新恢复/估计器/GRU 细节分别见同目录《AeroWall恢复技能检查》《AeroWall弹性估计器检查》《AeroWall循环策略检查》。所有开发对照的失败与来源预算均保留，不称为快速适应或算法优越性证明。
 
 以下为历史阶段记录，其“尚未实现/当前进程”等描述只对各自记录时刻成立。
