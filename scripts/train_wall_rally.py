@@ -29,6 +29,7 @@ def main():
     parser.add_argument('--num-envs', type=int, default=512)
     parser.add_argument('--seed', type=int, default=0)
     parser.add_argument('--save-every', type=int, default=50)
+    parser.add_argument('--actor-learning-rate', type=float, help='Optional actor-only fine-tuning step size; critic retains upstream setting')
     parser.add_argument('--resume', type=Path)
     parser.add_argument('--reference-kl-coef',type=float,default=0.,help='Differentiable current-to-frozen-reference KL actor loss; single actor execution')
     parser.add_argument('--recovery-skill',action='store_true',help='Freeze launch actor; train post-launch recovery actor only')
@@ -41,6 +42,8 @@ def main():
     if min(args.updates, args.save_every) < 1 or not 16 <= args.num_envs <= 512:
         parser.error('Require positive update/save counts and 16–512 environments')
     assert args.reference_kl_coef>=0 and math.isfinite(args.reference_kl_coef)
+    if args.actor_learning_rate is not None:
+        assert math.isfinite(args.actor_learning_rate) and args.actor_learning_rate > 0
     assert not (args.reference_kl_coef and args.recovery_skill)
     assert not (args.resume and args.initialize_policy), 'Choose resume or transfer, not both'
     args.output.parent.mkdir(parents=True, exist_ok=True)
@@ -75,6 +78,8 @@ def main():
         cfg.sim.dt=args.physics_dt;cfg.sim.substeps=round(.02/args.physics_dt)
         wall_cfg=OmegaConf.load(args.wall_config)
         cfg.wall_fixture=wall_cfg.wall_fixture;cfg.wall_task=wall_cfg.wall_task
+        if args.actor_learning_rate is not None:
+            cfg.algo.actor.lr = args.actor_learning_rate
         if args.reference_kl_coef:
             cfg.algo.reference_kl_coef=args.reference_kl_coef
             cfg.algo.actor.output_dist_params=True

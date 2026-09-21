@@ -1,0 +1,36 @@
+{
+  "scope": "Descriptive first credited cap velocity and wall-without-return failure counts; does not establish causality or physical reachability",
+  "results": [
+    {
+      "evaluation": "runs/skill-distillation-eval-01.json",
+      "report_sha256": "6e22a1b98bf1b9c7a8b6d0c938917425bf137870c944102f7faa99f7e6a92e3a",
+      "events_sha256": "2ee713f2f7ef28de2cb9f58ee36eed7f209e8a7fc7b345a718ed72c677a2aef6",
+      "first_legal_contact_scenarios": 91,
+      "first_contact_vx_gt_point1": 48,
+      "first_contact_vz_gt4": 1,
+      "wall_but_no_rally_failure_reasons": {
+        "ball_body": 7,
+        "out_of_bounds": 18,
+        "drone_wall": 18,
+        "non_cap": 1,
+        "drone_ground": 1
+      }
+    },
+    {
+      "evaluation": "runs/self-return-eval-25-01.json",
+      "report_sha256": "44dce59c6f327ca648eaaa8f7ffd03815d2cba827100c5a6672dd9a58d295385",
+      "events_sha256": "925c3466bec8f792204bfcf33f3ec9a76a91b0e9e69768db99a99ed379b5ca6a",
+      "first_legal_contact_scenarios": 88,
+      "first_contact_vx_gt_point1": 35,
+      "first_contact_vz_gt4": 5,
+      "wall_but_no_rally_failure_reasons": {
+        "drone_ground": 4,
+        "drone_wall": 16,
+        "out_of_bounds": 16,
+        "ball_body": 9,
+        "non_cap": 0,
+        "time_limit": 0
+      }
+    }
+  ]
+}
