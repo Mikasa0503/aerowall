@@ -34,6 +34,10 @@ class SingleBodyRoles:
         role=torch.where((h[:,2]==1)|(h[:,2]==2),4,role)
         role=torch.where(h[:,1]==1,3,role)
         role=torch.where((h[:,0]==3)|(h[:,0]==4),2,role)
+        if o.cfg.get('single_priority','firstpass')=='set':
+            role=torch.where(h[:,1]==1,3,role)
+        elif o.cfg.get('single_priority','firstpass')=='attack':
+            role=torch.where((h[:,2]==1)|(h[:,2]==2),4,role)
         role=torch.where(~o.is_rally,2,role)
         o.executed_role=role
         # Codes: FP goto/pass/hover/serve/serve-hover, Set goto/hit/hover,

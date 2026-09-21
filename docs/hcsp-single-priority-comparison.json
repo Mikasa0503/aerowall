@@ -1,0 +1,76 @@
+{
+  "status": "passed",
+  "same_initial_states_and_weights": true,
+  "rows": [
+    {
+      "run": "hcsp-single-wall-contact-02",
+      "priority": "firstpass",
+      "episodes": 16,
+      "wall_contacts": 16,
+      "body_wall_body": 11,
+      "top_face_return_candidates": 7,
+      "maximum_body_wall_body_returns": 1,
+      "executed_skill_steps": {
+        "FirstPass_goto": 0,
+        "FirstPass_pass": 1700,
+        "FirstPass_hover": 134,
+        "FirstPass_serve": 1064,
+        "FirstPass_serve_hover": 1074,
+        "SecPass_goto": 0,
+        "SecPass_hit": 0,
+        "SecPass_hover": 0,
+        "Att_goto": 0,
+        "Att_hit": 0,
+        "Att_hover": 0
+      },
+      "report_sha256": "51c1196cfb9bb55c12fbe8b72fc208a416d2443461cc49a388647a8454872d0d"
+    },
+    {
+      "run": "hcsp-single-set-priority-01",
+      "priority": "set",
+      "episodes": 16,
+      "wall_contacts": 16,
+      "body_wall_body": 11,
+      "top_face_return_candidates": 7,
+      "maximum_body_wall_body_returns": 1,
+      "executed_skill_steps": {
+        "FirstPass_goto": 0,
+        "FirstPass_pass": 1143,
+        "FirstPass_hover": 134,
+        "FirstPass_serve": 1064,
+        "FirstPass_serve_hover": 1074,
+        "SecPass_goto": 0,
+        "SecPass_hit": 651,
+        "SecPass_hover": 0,
+        "Att_goto": 0,
+        "Att_hit": 0,
+        "Att_hover": 0
+      },
+      "report_sha256": "e01eaf7284c37cfa245058c428b438454c2bfa35ac1e6b11fa492e791cd85385"
+    },
+    {
+      "run": "hcsp-single-attack-priority-01",
+      "priority": "attack",
+      "episodes": 16,
+      "wall_contacts": 16,
+      "body_wall_body": 10,
+      "top_face_return_candidates": 4,
+      "maximum_body_wall_body_returns": 1,
+      "executed_skill_steps": {
+        "FirstPass_goto": 0,
+        "FirstPass_pass": 805,
+        "FirstPass_hover": 134,
+        "FirstPass_serve": 1064,
+        "FirstPass_serve_hover": 1074,
+        "SecPass_goto": 0,
+        "SecPass_hit": 0,
+        "SecPass_hover": 0,
+        "Att_goto": 0,
+        "Att_hit": 843,
+        "Att_hover": 0
+      },
+      "report_sha256": "e6e41675638fb6e74eac482e62a3ee14c90095d45d80215e1a45ff53259021ca"
+    }
+  ],
+  "scope": "Single-drone arbitration sensitivity; native-box top-face candidates, not formal bat legality"
+}

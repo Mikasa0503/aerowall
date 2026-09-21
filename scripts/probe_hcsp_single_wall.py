@@ -13,6 +13,7 @@ def main():
     p.add_argument('--deterministic',action='store_true')
     p.add_argument('--contacts',action='store_true')
     p.add_argument('--dt',type=float,default=0.01)
+    p.add_argument('--priority',choices=['firstpass','set','attack'],default='firstpass')
     a=p.parse_args();a.output=a.output.resolve();a.output.parent.mkdir(parents=True,exist_ok=True)
     report={'status':'initializing','pid':os.getpid(),'scope':'Single physical drone; HCSP role replication and arbitration adapter; physical wall','seed':a.seed}
     def record(**kw):
@@ -33,6 +34,7 @@ def main():
         with initialize_config_dir(version_base=None,config_dir=str(HCSP/'cfg')):
             cfg=compose(config_name='train_coselfplay_phase_one',overrides=overrides)
         OmegaConf.resolve(cfg);OmegaConf.set_struct(cfg,False)
+        cfg.single_priority=a.priority
         OmegaConf.save(cfg,a.output.with_suffix('.yaml'))
         sys.argv=[sys.argv[0],'--portable','--portable-root',str(ROOT/'.cache/kit')]
         app=init_simulation_app(cfg)
@@ -47,7 +49,7 @@ def main():
             base=HCSPSingleWall(cfg,headless=True)
         assert base.physical_drone.n==1
         assert tuple(base.physical_drone.shape)==(a.num_envs,1)
-        record(physical_drone_shape=list(base.physical_drone.shape),adapter_sha256=hashlib.sha256((ROOT/'scripts/hcsp_single_wall_env.py').read_bytes()).hexdigest())
+        record(priority=a.priority,physical_drone_shape=list(base.physical_drone.shape),adapter_sha256=hashlib.sha256((ROOT/'scripts/hcsp_single_wall_env.py').read_bytes()).hexdigest())
         env=TransformedEnv(base,Compose(InitTracker())).eval()
         policy=PSROPolicy_coselfplay_phase_one(cfg.algo,agent_spec_dict=env.agent_spec,device=base.device,num_envs=a.num_envs)
         checkpoints=[]
