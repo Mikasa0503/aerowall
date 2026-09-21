@@ -17,3 +17,13 @@
 新课程的 16 环境两次更新短训通过，18 项现有单元测试通过。`wall-launch-dev-001` 已启动：与前一轮同初始策略、同 128 环境和 204,800 步预算，新增记录 launch shaping 正负次数与向墙速度总和。其效果尚待真实评测，配置仍为开发版本。三方法三种子比较、正式评测、消融及演示仍未完成。
 
 证据文件：`wall-rally-dev-001.json`、`wall-rally-eval-early-01.json`、`wall-rally-eval-early-audit.json`、`wall-rally-eval-final-01.json`、`wall-rally-eval-final-audit.json`、`wall-launch-diagnosis.json`。服务器项目内保留对应日志、checkpoint、原始事件和轨迹。
+
+## 实际碰墙失败轨迹
+
+新增 `scripts/plot_wall_attempt.py`，从首次 episode 的保存轨迹和物理碰撞时刻生成出球—碰墙—后续运动图，不拼接重置。场景 71 在 1.470 秒合法击球，2.025 秒碰墙，2.060 秒结束，没有下一次合法接球。出球速度约为 [1.264, -2.585, 1.962] m/s；最终球位置约 [0.825, -1.806, 0.698] m，越过 y=-1.8 m 的侧边界。无人机同期并未越界。因此该场景还揭示了出球横向偏差，不能仅以“已经碰墙”说明完成正确送球。
+
+![实际碰墙失败轨迹](wall-attempt-scenario71.png)
+
+对应 `wall-attempt-scenario71.json` 保存微步接触法向、拍面接触点速度、碰前碰后球速及失败结果。图中的机身姿态曲线为策略步采样，碰撞时刻信息来自物理子步；两者采样频率不同。
+
+新增评测选项 `--initialize-juggle`，先验证原始 24 维策略到 43 维 actor 的输出等价，再评测零壁球更新的起点。`wall-rally-eval-untrained-01` 已启动，待核验终态。新课程训练仍在运行；第 16 次更新时累计 60 次碰墙、0 次完整接回，暂不作成功率改善结论。

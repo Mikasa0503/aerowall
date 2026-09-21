@@ -20,6 +20,7 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     for name in ['output', 'checkpoint', 'config', 'scenarios']:
         p.add_argument('--'+name, type=Path, required=True)
+    p.add_argument('--initialize-juggle', action='store_true', help='Evaluate the original actor before any WallRally updates')
     a = p.parse_args()
     sha = lambda path: hashlib.sha256(Path(path).read_bytes()).hexdigest()
     report = {'status': 'initializing', 'pid': os.getpid(), 'scope': 'frozen development serving episodes; not formal evaluation',
@@ -62,7 +63,12 @@ def main():
         env = TransformedEnv(base, Compose(InitTracker(), ResetSafePIDRateController(controller))).eval()
         policy = WallMAPPOPolicy(cfg.algo, agent_spec=env.agent_spec['drone'], device=base.device)
         payload = torch.load(a.checkpoint, map_location=base.device)
-        policy.load_state_dict(payload['policy']); policy.eval()
+        if a.initialize_juggle:
+            policy.initialize_juggle_actor(payload)
+            record(actor_transfer_audit=policy.audit_juggle_actor(payload), wall_training_updates=0)
+        else:
+            policy.load_state_dict(payload['policy'])
+        policy.eval()
         env.set_seed(roster['seed'])
         with torch.no_grad(): td = env.reset()
         def snapshot():
