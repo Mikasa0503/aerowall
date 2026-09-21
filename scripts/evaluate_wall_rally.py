@@ -28,7 +28,7 @@ def main():
               'scenario_sha256': sha(a.scenarios), 'config_sha256': sha(a.config),
               'source_hashes': {name: sha(ROOT/name) for name in ['scripts/evaluate_wall_rally.py', 'aerowall/envs/wall_rally.py',
                   'aerowall/envs/aligned_juggle.py', 'aerowall/contact_router.py', 'aerowall/collider_bounds.py',
-                  'aerowall/rally_events.py', 'aerowall/learning/wall_policy.py', 'scripts/runtime_adapters.py']}}
+                  'aerowall/rally_events.py', 'aerowall/learning/wall_policy.py', 'scripts/runtime_adapters.py', 'scripts/source_evidence.py']}}
     a.output.parent.mkdir(parents=True, exist_ok=True)
     def record(**values):
         report.update(values)
@@ -37,6 +37,8 @@ def main():
     app = None
     record()
     try:
+        from source_evidence import snapshot_sources, verify_sources
+        record(source_snapshot=snapshot_sources(ROOT, report['source_hashes'], a.output.with_suffix('.sources')))
         import numpy as np
         import torch
         from omegaconf import OmegaConf
@@ -82,6 +84,8 @@ def main():
         assert all(v <= 1e-6 for v in delta.values()), delta
         assert np.allclose(base.envs_positions.cpu().numpy(), roster['env_origins'], atol=1e-6, rtol=0)
         assert np.allclose(base.current_restitution.cpu().numpy(), roster['ball_material_restitution'], atol=1e-6, rtol=0)
+        verify_sources(ROOT, report['source_hashes'])
+        record(initialization_source_consistency=True)
         record(status='evaluating', initial_state_differences=delta, trained_frames=payload['environment_frames'],
                physics_dt=float(cfg.sim.dt), policy_dt=.02, episode_seconds=base.max_episode_length*.02,
                wall_fixture=OmegaConf.to_container(cfg.wall_fixture), wall_task=OmegaConf.to_container(cfg.wall_task))

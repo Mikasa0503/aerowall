@@ -44,7 +44,7 @@ def main():
               'seed': args.seed, 'updates_requested_this_run': args.updates, 'performance_claim': False,
               'upstream_commit': subprocess.check_output(['git', '-C', str(UPSTREAM), 'rev-parse', 'HEAD'], text=True).strip(),
               'source_hashes': {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
-                                for p in [Path(__file__), ROOT / 'scripts/runtime_adapters.py', ROOT / 'scripts/python.sh', ROOT / 'aerowall/envs/aligned_juggle.py', ROOT / 'aerowall/contact_router.py', ROOT / 'aerowall/rally_events.py', ROOT / 'aerowall/envs/wall_rally.py', ROOT / 'aerowall/learning/wall_policy.py', ROOT / 'aerowall/collider_bounds.py', args.wall_config]}}
+                                for p in [Path(__file__), ROOT / 'scripts/runtime_adapters.py', ROOT / 'scripts/source_evidence.py', ROOT / 'scripts/python.sh', ROOT / 'aerowall/envs/aligned_juggle.py', ROOT / 'aerowall/contact_router.py', ROOT / 'aerowall/rally_events.py', ROOT / 'aerowall/envs/wall_rally.py', ROOT / 'aerowall/learning/wall_policy.py', ROOT / 'aerowall/collider_bounds.py', args.wall_config]}}
     def record(**values):
         report.update(values)
         tmp = args.output.with_suffix('.tmp'); tmp.write_text(json.dumps(report, indent=2) + '\n'); tmp.replace(args.output)
@@ -52,6 +52,8 @@ def main():
     app = None
     record()
     try:
+        from source_evidence import snapshot_sources, verify_sources
+        record(source_snapshot=snapshot_sources(ROOT, report['source_hashes'], args.output.with_suffix('.sources')))
         import numpy as np
         import torch
         from hydra import compose, initialize_config_dir
@@ -122,6 +124,8 @@ def main():
             torch.set_rng_state(loaded['torch_rng'].cpu())
             torch.cuda.set_rng_state_all([v.cpu() for v in loaded['cuda_rng']])
             record(resume=str(args.resume), resume_semantics='learning/RNG state restored; new physics episodes')
+        verify_sources(ROOT, report['source_hashes'])
+        record(initialization_source_consistency=True)
         collector = SyncDataCollector(env, policy=policy, frames_per_batch=frames_per_batch,
                                       total_frames=(args.updates + 1) * frames_per_batch,
                                       device=base.device, return_same_td=True)
