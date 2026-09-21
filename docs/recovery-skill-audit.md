@@ -47,3 +47,5 @@
 唯一接回仍在场景 68：0.9325 秒出球、1.1575 秒碰墙、1.33 秒合法接回，接回后的球速为 [1.512668,2.375955,2.858325] 米/秒，1.6525 秒第二次碰墙，1.9925 秒越界终止。相比旧出球策略该场接回后球仍远离墙面，预测参考版确实再次送墙，但没有完成第二次接回。图为 `predictive-recovery-scene68.png`，对应审计/对照/恢复分析文件分别为 `predictive-recovery-eval-25-audit.json`、`predictive-recovery-comparison-25.json`、`predictive-recovery-analysis-25.json`。当前 1% 接回率远未达到 70% 门槛。
 
 本评测实际动作前的 2201 个恢复决策中，435 个采用有效预测参考，513 个弹道无效、935 个参考高度穿越发生在碰墙前、318 个落点越界。覆盖统计保存在 `predictive-recovery-reference-coverage-25.json`，不等同于动作后的训练奖励计数。两支相同预算续训仍在执行，后续依次评测保存的检查点。
+
+新增 `summarize_recovery_learning.py`，按每 25 次优化更新汇总实际结束 episode，验证跨续训的更新号连续、环境步数递增及终止记录数一致；不使用旧收集器代理统计。对仍增长的日志仅读取完整行，记录已读取字节前缀的哈希，末段明确标注不完整窗口。第一份快照中，固定回位前 25 次接回 13/3022，续训第 26–38 次 9/1536；预测参考前 25 次 29/2971，续训第 26–37 次 9/1388。窗口长度不同且采样来自变化中的策略，不能据此宣称预测参考稳定领先；两者训练接回率均不足 1%。证据为 `recovery-skill-learning-snapshot-01.json` 与 `predictive-recovery-learning-snapshot-01.json`。
