@@ -1,0 +1,54 @@
+{
+  "status": "passed",
+  "repositories_and_submodules": [
+    {
+      "path": "research/thu-uav/HCSP",
+      "commit": "009961b8f5702dd0c1c943cef0e01e09dfcd138d",
+      "fsck_exit": 0,
+      "working_tree_clean": true
+    },
+    {
+      "path": "research/thu-uav/HCSP/third-party/orbit",
+      "commit": "bca680a9ebdcddd8f4d70bd7c65efa94f9d45946",
+      "fsck_exit": 0,
+      "working_tree_clean": true
+    },
+    {
+      "path": "research/thu-uav/HCSP/third-party/rl",
+      "commit": "aacf134a1451891fc71edc05d1c1d4296a7937cd",
+      "fsck_exit": 0,
+      "working_tree_clean": true
+    },
+    {
+      "path": "research/thu-uav/HCSP/third-party/tensordict",
+      "commit": "a8c5397a81cf37b9b985d8a85180ab52f60af54a",
+      "fsck_exit": 0,
+      "working_tree_clean": true
+    },
+    {
+      "path": "research/thu-uav/SimpleFlight",
+      "commit": "f5ae8fc3689edc7c982e07cbfd587eeeab72f279",
+      "fsck_exit": 0,
+      "working_tree_clean": true
+    },
+    {
+      "path": "research/thu-uav/SimpleFlight/third_party/tensordict",
+      "commit": "5e6205c2be7ebc75d1d0199f76fe7ff11f71d770",
+      "fsck_exit": 0,
+      "working_tree_clean": true
+    },
+    {
+      "path": "research/thu-uav/SimpleFlight/third_party/torchrl",
+      "commit": "e39e70122600961d5830aa29027a073c0d721268",
+      "fsck_exit": 0,
+      "working_tree_clean": true
+    },
+    {
+      "path": "research/thu-uav/NeuralIMC",
+      "commit": "28b205d511089fbb402f9b0ee78c8931692195b5",
+      "fsck_exit": 0,
+      "working_tree_clean": true
+    }
+  ],
+  "scope": "Git object connectivity, exact pinned submodules and clean working trees on server 138"
+}

@@ -1,0 +1,49 @@
+{
+  "repositories": [
+    {
+      "name": "HCSP",
+      "url": "https://github.com/thu-uav/HCSP.git",
+      "commit": "009961b8f5702dd0c1c943cef0e01e09dfcd138d",
+      "submodules": [
+        "bca680a9ebdcddd8f4d70bd7c65efa94f9d45946 third-party/orbit (heads/main)",
+        " aacf134a1451891fc71edc05d1c1d4296a7937cd third-party/rl (heads/main)",
+        " a8c5397a81cf37b9b985d8a85180ab52f60af54a third-party/tensordict (heads/main)"
+      ],
+      "tracked_files": 220,
+      "license_sha256": "8d5bb214ab1010733bb1f6b91435b40c0f9255312bec99233e834cf8c63ddcf1",
+      "tracked_diff": "",
+      "local_path": "/Users/hugo/Documents/Codex/2026-09-20/new-chat-3/work/thu-uav/HCSP",
+      "server_path": "/home/public/Workspace/shy/Code/aerowall/research/thu-uav/HCSP"
+    },
+    {
+      "name": "SimpleFlight",
+      "url": "https://github.com/thu-uav/SimpleFlight.git",
+      "commit": "f5ae8fc3689edc7c982e07cbfd587eeeab72f279",
+      "submodules": [
+        "5e6205c2be7ebc75d1d0199f76fe7ff11f71d770 third_party/tensordict (5e6205c)",
+        " e39e70122600961d5830aa29027a073c0d721268 third_party/torchrl (e39e701)"
+      ],
+      "tracked_files": 179,
+      "license_sha256": "5b7ed6fd7d4d8d00e99ca3d29e9000ff15ba2bc3c4815aa4157ec8bbeaf618c2",
+      "tracked_diff": "",
+      "local_path": "/Users/hugo/Documents/Codex/2026-09-20/new-chat-3/work/thu-uav/SimpleFlight",
+      "server_path": "/home/public/Workspace/shy/Code/aerowall/research/thu-uav/SimpleFlight"
+    },
+    {
+      "name": "NeuralIMC",
+      "url": "https://github.com/thu-uav/NeuralIMC.git",
+      "commit": "28b205d511089fbb402f9b0ee78c8931692195b5",
+      "submodules": [],
+      "tracked_files": 121,
+      "license_sha256": "385ea5a21f748d9921200afafd262c4d3f0818dba58781629ac125580adf4610",
+      "tracked_diff": "",
+      "local_path": "/Users/hugo/Documents/Codex/2026-09-20/new-chat-3/work/thu-uav/NeuralIMC",
+      "server_path": "/home/public/Workspace/shy/Code/aerowall/research/thu-uav/NeuralIMC"
+    }
+  ],
+  "dependency_fetch_notes": {
+    "SimpleFlight/third_party/torchrl": "Original btx0424/rl URL unavailable. Exact pinned e39e70122600961d5830aa29027a073c0d721268 copied from HCSP rl git object database.",
+    "SimpleFlight/third_party/tensordict": "Exact pinned 5e6205c2be7ebc75d1d0199f76fe7ff11f71d770 fetched from https://github.com/pytorch/tensordict.git."
+  },
+  "scope": "Full git clones and recursively initialized pinned submodules; does not include externally hosted datasets, simulator binaries or untracked checkpoints."
+}
