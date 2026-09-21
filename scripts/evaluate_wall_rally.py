@@ -21,14 +21,16 @@ def main():
     for name in ['output', 'checkpoint', 'config', 'scenarios']:
         p.add_argument('--'+name, type=Path, required=True)
     p.add_argument('--initialize-juggle', action='store_true', help='Evaluate the original actor before any WallRally updates')
+    p.add_argument('--recovery-controller',action='store_true',help='Hybrid controller diagnostic after a real forward cap; not learned-policy evaluation')
     a = p.parse_args()
     sha = lambda path: hashlib.sha256(Path(path).read_bytes()).hexdigest()
     report = {'status': 'initializing', 'pid': os.getpid(), 'scope': 'frozen development serving episodes; not formal evaluation',
               'checkpoint': str(a.checkpoint), 'checkpoint_sha256': sha(a.checkpoint),
+              'controller_mode':'hybrid_ballistic_pd_recovery' if a.recovery_controller else 'learned_policy',
               'scenario_sha256': sha(a.scenarios), 'config_sha256': sha(a.config),
               'source_hashes': {name: sha(ROOT/name) for name in ['scripts/evaluate_wall_rally.py', 'aerowall/envs/wall_rally.py',
                   'aerowall/envs/aligned_juggle.py', 'aerowall/contact_router.py', 'aerowall/collider_bounds.py',
-                  'aerowall/rally_events.py', 'aerowall/learning/wall_policy.py', 'scripts/runtime_adapters.py', 'scripts/source_evidence.py']}}
+                  'aerowall/rally_events.py', 'aerowall/learning/wall_policy.py', 'aerowall/learning/recovery_controller.py', 'scripts/runtime_adapters.py', 'scripts/source_evidence.py']}}
     a.output.parent.mkdir(parents=True, exist_ok=True)
     def record(**values):
         report.update(values)
@@ -73,6 +75,12 @@ def main():
         policy.eval()
         env.set_seed(roster['seed'])
         with torch.no_grad(): td = env.reset()
+        recovery=None
+        if a.recovery_controller:
+            from aerowall.learning.recovery_controller import RecoveryController
+            recovery=RecoveryController(n,base.device,base.wall_front,float(cfg.task.ball_radius))
+            record(controller_assumptions={'restitution_prior':.8,'drone_target_height':1.,'activation':'observable outbound phase and ball vx > 0.5 m/s',
+                'scope':'Learned launch followed by persistent model-based recovery; no physical-state writes; not a primary learned method'})
         def snapshot():
             dp, dq = base.drone.get_world_poses()
             return {'drone_position': dp[:,0].clone(), 'drone_quaternion_wxyz': dq[:,0].clone(),
@@ -94,7 +102,15 @@ def main():
         with torch.no_grad(), a.output.with_suffix('.events.jsonl').open('w') as events:
             for step in range(base.max_episode_length):
                 active = ~finished.clone()
-                policy(td, deterministic=True); action = td['agents','action'].clone()
+                policy(td, deterministic=True)
+                controlled=torch.zeros(n,dtype=torch.bool,device=base.device)
+                if recovery is not None:
+                    current=snapshot()
+                    outbound=torch.tensor([s.phase=='to_wall' for s in base.router.batch.states],device=base.device)
+                    override,controlled=recovery.command(current['drone_position']-base.envs_positions,current['drone_quaternion_wxyz'],
+                        current['drone_velocity'],current['ball_position']-base.envs_positions,current['ball_velocity'],outbound)
+                    td['agents','action'][controlled,0]=override[controlled]
+                action = td['agents','action'].clone()
                 nxt = env.step(td)['next']; state = snapshot()
                 assert all(torch.isfinite(v).all() for v in state.values())
                 for event in base.last_events:
@@ -110,12 +126,13 @@ def main():
                     finished[i] = True
                 trajectories.append({**{k:v.cpu().numpy() for k,v in state.items()},
                     'action':action[:,0].cpu().numpy(), 'active_before':active.cpu().numpy(),
-                    'target':base.targets.cpu().numpy().copy()})
+                    'target':base.targets.cpu().numpy().copy(),'recovery_controlled':controlled.cpu().numpy()})
                 base.completed_episodes.clear()
                 if (step+1) % 100 == 0:
                     record(completed_policy_steps=step+1, completed_scenarios=int(finished.sum()))
                 if finished.all(): break
                 if done.any():
+                    if recovery is not None:recovery.reset(done)
                     nxt['_reset'] = nxt['done']; td = env.reset(nxt)
                 else: td = nxt
             assert finished.all(), 'Every first episode must reach a declared terminal or truncation'
@@ -126,6 +143,7 @@ def main():
         reasons = {}
         for row in outcomes: reasons[row['reason']] = reasons.get(row['reason'], 0)+1
         record(status='passed', outcomes=outcomes, completed_scenarios=n, elapsed_seconds=time.monotonic()-start,
+               recovery_diagnostic=None if recovery is None else {'activations_all_slots':recovery.activations,'controlled_steps_all_slots':recovery.control_steps},
                one_rally_rate=sum(r['rallies']>=1 for r in outcomes)/n,
                ten_consecutive_rally_rate=sum(r['max_streak']>=10 for r in outcomes)/n,
                reasons=reasons, trajectory=str(path), trajectory_sha256=sha(path),

@@ -24,6 +24,7 @@ for path in a.evaluation:
     for o in outcomes:reasons[o['reason']]=reasons.get(o['reason'],0)+1
     rows.append({'evaluation':str(path),'report_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),
                  'checkpoint':r['checkpoint'],'checkpoint_sha256':r['checkpoint_sha256'],
+                 'controller_mode':r.get('controller_mode','learned_policy'),
                  'trained_frames':r['trained_frames'],'scenarios':n,
                  'one_rally_scenarios':sum(o['rallies']>=1 for o in outcomes),
                  'ten_rally_streak_scenarios':sum(o['max_streak']>=10 for o in outcomes),
