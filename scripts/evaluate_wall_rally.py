@@ -21,6 +21,7 @@ def main():
     for name in ['output', 'checkpoint', 'config', 'scenarios']:
         p.add_argument('--'+name, type=Path, required=True)
     p.add_argument('--initialize-juggle', action='store_true', help='Evaluate the original actor before any WallRally updates')
+    p.add_argument('--recovery-juggle-source',type=Path,help='Diagnostic: replace only the skill recovery actor with the original 24-feature juggling actor')
     p.add_argument('--recovery-controller',action='store_true',help='Hybrid controller diagnostic after a real forward cap; not learned-policy evaluation')
     p.add_argument('--recovery-guidance',choices=['pd','terminal'],default='pd')
     a = p.parse_args()
@@ -80,6 +81,18 @@ def main():
             record(actor_transfer_audit=policy.audit_juggle_actor(payload), wall_training_updates=0)
         else:
             policy.load_state_dict(payload['policy'])
+        if a.recovery_juggle_source:
+            assert skill_policy and not a.initialize_juggle and not a.recovery_controller
+            juggle_payload=torch.load(a.recovery_juggle_source,map_location=base.device)
+            frozen_before=policy.frozen_launch_params.clone()
+            policy.initialize_juggle_actor(juggle_payload)
+            transfer_audit=policy.audit_juggle_actor(juggle_payload)
+            assert all(torch.equal(v,policy.frozen_launch_params[k]) for k,v in frozen_before.items(True,True))
+            record(controller_mode='hierarchical_pretrained_juggle_recovery_diagnostic',
+                   recovery_actor_source=str(a.recovery_juggle_source),recovery_actor_source_sha256=sha(a.recovery_juggle_source),
+                   recovery_actor_transfer_audit=transfer_audit,frozen_launch_after_override_exact=True,
+                   recovery_source_environment_frames=juggle_payload['environment_frames'],
+                   budget_caveat='Two-source inference diagnostic. trained_frames describes the base checkpoint; recovery actor replaced, with its own source frames recorded. Shared ancestry is not deduplicated; not an equal-budget primary-method comparison.')
         policy.eval()
         env.set_seed(roster['seed'])
         with torch.no_grad(): td = env.reset()
