@@ -1,0 +1,2053 @@
+{
+  "scope": "Approximate contact-position ballistic prediction using measured cap point and normal, restitution prior 0.8 and fixed contact height 1.123m; no physical reachability or performance claim",
+  "results": [
+    {
+      "evaluation": "skill-distillation-eval-01",
+      "first_forward_contacts": 64,
+      "reflection_before_contact_height": 29,
+      "bounded_return_reference": 15,
+      "rows": [
+        {
+          "scenario_id": 83,
+          "time_to_contact_height": 0.5665204192049814,
+          "time_to_wall": 0.94907997746106,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.5030772343264726,
+            -0.45363067749729935
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 41,
+          "time_to_contact_height": 0.3987612880161346,
+          "time_to_wall": 0.6605779326034557,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.5120918413759923,
+            -0.8998281042609576
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 90,
+          "time_to_contact_height": 0.6198039290064258,
+          "time_to_wall": 0.8514527245836032,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.6400374367692989,
+            0.2163360046558056
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 46,
+          "time_to_contact_height": 0.5544352713654818,
+          "time_to_wall": 0.5259602310379853,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.8241396344171381,
+            0.14375850545327756
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 88,
+          "time_to_contact_height": 0.34158971844227054,
+          "time_to_wall": 0.3512149802526512,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.8376266518242972,
+            -0.5207290599262382
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 79,
+          "time_to_contact_height": 0.6783581856506551,
+          "time_to_wall": 0.9410504571606265,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.633668477279391,
+            -0.6529990267122282
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 72,
+          "time_to_contact_height": 0.6585495985154569,
+          "time_to_wall": 1.0054096661797822,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.5857045349129227,
+            -0.13397801341945453
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 70,
+          "time_to_contact_height": 0.7334599566865345,
+          "time_to_wall": 0.6907882047472279,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.8185740630307041,
+            0.06985095239744822
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 93,
+          "time_to_contact_height": 0.6751965666296887,
+          "time_to_wall": 1.1335770808847718,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.5371785112370243,
+            0.18973668906713576
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 11,
+          "time_to_contact_height": 0.5604093307067366,
+          "time_to_wall": 0.44402495414372284,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.6830954168657026,
+            -0.7184016156408022
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 33,
+          "time_to_contact_height": 0.3599343633558296,
+          "time_to_wall": 0.529777762556981,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.5922206120223911,
+            -1.1297701321420066
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 67,
+          "time_to_contact_height": 0.3103852466638856,
+          "time_to_wall": 0.2861853537273546,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.8050958466933873,
+            -0.6872476594891044
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 65,
+          "time_to_contact_height": 0.759324331936523,
+          "time_to_wall": 1.0261136865237594,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.650188783928573,
+            -0.2453145697742723
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 45,
+          "time_to_contact_height": 0.6245533754342361,
+          "time_to_wall": 0.46360331998943255,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.623936905083382,
+            -0.6789789897678326
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 30,
+          "time_to_contact_height": 0.7243939341388204,
+          "time_to_wall": 1.207804246152472,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.5335261322875127,
+            -0.08698791129904543
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 61,
+          "time_to_contact_height": 0.5256683697235809,
+          "time_to_wall": 1.0546819426721712,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.35083753429107845,
+            -0.08840467647477002
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 52,
+          "time_to_contact_height": 0.5497731670430311,
+          "time_to_wall": 1.3495517614984058,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.26549004073434435,
+            0.06370006231125339
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 5,
+          "time_to_contact_height": 0.3798093912013838,
+          "time_to_wall": 0.2616954475804914,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.5989065197330056,
+            0.10773609039856064
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 57,
+          "time_to_contact_height": 0.3580283531400102,
+          "time_to_wall": 0.36449087871071917,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.8443874079394883,
+            0.011222168383851094
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 34,
+          "time_to_contact_height": 0.31289081357896026,
+          "time_to_wall": 0.2461933776003543,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.7001837518380543,
+            0.13257890601024547
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 58,
+          "time_to_contact_height": 0.4293787359952052,
+          "time_to_wall": 0.5267484044896574,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.6806816795321893,
+            -0.03658526421163763
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 63,
+          "time_to_contact_height": 0.3135643841286332,
+          "time_to_wall": 0.34388270315128033,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.787085621855386,
+            -0.05574339492609223
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 36,
+          "time_to_contact_height": 0.5349213445496979,
+          "time_to_wall": 0.5662744750382209,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.811247315229713,
+            0.06603034289233956
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 13,
+          "time_to_contact_height": 0.41114679602516874,
+          "time_to_wall": 0.4502682695681594,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.7797485990633951,
+            0.14144796467413867
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 51,
+          "time_to_contact_height": 0.5092724501314533,
+          "time_to_wall": 0.3747668349153161,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.6238814429420759,
+            0.37700203562127876
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 23,
+          "time_to_contact_height": 0.4746114987518893,
+          "time_to_wall": 0.43336641025140904,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.7954667155439297,
+            0.20208165939894998
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 68,
+          "time_to_contact_height": 0.39754869550912947,
+          "time_to_wall": 0.2411351545998331,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.4761159585127582,
+            0.23050414799721775
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 78,
+          "time_to_contact_height": 0.6168174212846649,
+          "time_to_wall": 0.5795984652804308,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.8257159994163764,
+            0.1669719608917543
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 10,
+          "time_to_contact_height": 0.6040716450977134,
+          "time_to_wall": 0.47688824064896285,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.7115152407700658,
+            0.08671053606705686
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 21,
+          "time_to_contact_height": 0.5106524488537181,
+          "time_to_wall": 0.40258627815864095,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.6733641324144397,
+            0.26198437010379605
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 38,
+          "time_to_contact_height": 0.5145074247943355,
+          "time_to_wall": 0.6219062099193883,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.7064841416568182,
+            0.13459218429464614
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 66,
+          "time_to_contact_height": 0.42907742305678603,
+          "time_to_wall": 0.2921337713477831,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.5532830283753377,
+            0.3463747711022049
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 9,
+          "time_to_contact_height": 0.533188287224333,
+          "time_to_wall": 0.34856051149164285,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.5546905079794145,
+            -0.24864370543163358
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 85,
+          "time_to_contact_height": 0.5621279831218086,
+          "time_to_wall": 0.35990507202441324,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.5526277167666565,
+            -0.017504897442740572
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 56,
+          "time_to_contact_height": 0.6483996952447061,
+          "time_to_wall": 1.1228213853706999,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.5069265597169883,
+            0.35716377895277074
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 86,
+          "time_to_contact_height": 0.487688407113927,
+          "time_to_wall": 0.34814097906765124,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.5921621386962796,
+            0.5129160315982112
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 16,
+          "time_to_contact_height": 0.6688813913030711,
+          "time_to_wall": 0.4091118933858216,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.502237115429895,
+            0.02760241506822933
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 42,
+          "time_to_contact_height": 0.46063948617953177,
+          "time_to_wall": 0.7295516583900572,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.45966127230892995,
+            0.3320641922113825
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 7,
+          "time_to_contact_height": 0.44315412042173785,
+          "time_to_wall": 0.1825118665932177,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.18119224626458974,
+            -0.20307314870083948
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 87,
+          "time_to_contact_height": 0.4778946284143845,
+          "time_to_wall": 0.3234958843699077,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.5917713496897585,
+            -0.5412945087163669
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 1,
+          "time_to_contact_height": 0.554135213810271,
+          "time_to_wall": 0.5705587925812082,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.8320749737101408,
+            0.5389696128878774
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 92,
+          "time_to_contact_height": 0.6643279923077339,
+          "time_to_wall": 0.915153256217795,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.6254739672926058,
+            0.21022953015214754
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 53,
+          "time_to_contact_height": 0.6358645778781514,
+          "time_to_wall": 0.3020052578762041,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.2866587300145619,
+            -0.06441259635517911
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 25,
+          "time_to_contact_height": 0.5557351123358163,
+          "time_to_wall": 0.5605775701203722,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.8525031151964654,
+            0.30541878872668893
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 15,
+          "time_to_contact_height": 0.5433203107400124,
+          "time_to_wall": 0.31957155340039683,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.452944537190695,
+            -0.4187203549362435
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 96,
+          "time_to_contact_height": 0.5997363613618832,
+          "time_to_wall": 0.6726014900233479,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.7754367572498282,
+            -0.2001569544757416
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 82,
+          "time_to_contact_height": 0.6151124859818903,
+          "time_to_wall": 1.386920950769011,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.3849427558625304,
+            0.1116330508625171
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 44,
+          "time_to_contact_height": 0.4368570627695269,
+          "time_to_wall": 0.7339144667776165,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.3874137297001554,
+            0.36972622607006267
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 31,
+          "time_to_contact_height": 0.3715004648300971,
+          "time_to_wall": 0.2709958852273728,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.6302708512777393,
+            -0.30706154832368016
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 89,
+          "time_to_contact_height": 0.5169137114709381,
+          "time_to_wall": 0.4491659016294965,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.7490420667220657,
+            0.11719252281650311
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 22,
+          "time_to_contact_height": 0.5909072136713844,
+          "time_to_wall": 0.5758123789745009,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.844071580546735,
+            -0.215256921419596
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 47,
+          "time_to_contact_height": 0.4003918437693018,
+          "time_to_wall": 0.39664667374987567,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.8524596994068038,
+            0.4937168848953555
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 28,
+          "time_to_contact_height": 0.4890334290876127,
+          "time_to_wall": 0.5790165606186753,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.690820449984235,
+            0.5773498248191093
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 98,
+          "time_to_contact_height": 0.4583735979553867,
+          "time_to_wall": 0.5794697770581898,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.6141390168711514,
+            0.5453606669393611
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 81,
+          "time_to_contact_height": 0.6106582440168478,
+          "time_to_wall": 1.941085683180195,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.18618179206257898,
+            0.20394439290213817
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 12,
+          "time_to_contact_height": 0.5390907643844983,
+          "time_to_wall": 0.6571425030358887,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.6946632838603545,
+            0.26260573839923607
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 97,
+          "time_to_contact_height": 0.5756224957563975,
+          "time_to_wall": 0.934169864553155,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.5252100368743605,
+            0.30705879586828755
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 60,
+          "time_to_contact_height": 0.5567834439358683,
+          "time_to_wall": 0.4089325453509836,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.6608372215714649,
+            0.015176617255112407
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 26,
+          "time_to_contact_height": 0.6328300422451318,
+          "time_to_wall": 1.281088797246675,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.4709419898233276,
+            0.39989921842941795
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 95,
+          "time_to_contact_height": 0.5358259961067504,
+          "time_to_wall": 0.4663413394026379,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.7712792692371631,
+            0.18201792534405592
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 50,
+          "time_to_contact_height": 0.6593371210850246,
+          "time_to_wall": 0.8469564797301401,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.7016661510108398,
+            0.20348379077361875
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 91,
+          "time_to_contact_height": 0.5166553413754154,
+          "time_to_wall": 0.3197307127025086,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.5104388395373711,
+            0.4867553510321734
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 6,
+          "time_to_contact_height": 0.5801498764015431,
+          "time_to_wall": 0.6831042334019227,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.7255712621942759,
+            0.24097603937335071
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 18,
+          "time_to_contact_height": 0.6114568337046281,
+          "time_to_wall": 0.7060880226801174,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.7693919018235981,
+            0.36160102898588364
+          ],
+          "reference_in_bounds": false
+        }
+      ]
+    },
+    {
+      "evaluation": "self-return-eval-25-01",
+      "first_forward_contacts": 68,
+      "reflection_before_contact_height": 34,
+      "bounded_return_reference": 18,
+      "rows": [
+        {
+          "scenario_id": 83,
+          "time_to_contact_height": 0.5316521064356124,
+          "time_to_wall": 0.8084604737309702,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.5559488395353935,
+            -0.5531886950231135
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 41,
+          "time_to_contact_height": 0.402560938917081,
+          "time_to_wall": 0.6042686007946442,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.5659849011906415,
+            -0.8679705928164285
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 90,
+          "time_to_contact_height": 0.5633737833588817,
+          "time_to_wall": 0.5047303806676781,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.7842512965349371,
+            0.2159076250729436
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 46,
+          "time_to_contact_height": 0.48116592670512887,
+          "time_to_wall": 0.38913395786574484,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.7022342507803491,
+            0.15643429447241444
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 14,
+          "time_to_contact_height": 0.46215617403215664,
+          "time_to_wall": 1.0959348045325974,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.3360124989884979,
+            1.007575935854162
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 62,
+          "time_to_contact_height": 0.634448749089197,
+          "time_to_wall": 1.5373435649306628,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.3812378596066595,
+            -0.8024206081564894
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 88,
+          "time_to_contact_height": 0.2685410724384262,
+          "time_to_wall": 0.31744506604545475,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.733572237936105,
+            -0.4185822498945916
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 7,
+          "time_to_contact_height": 0.7520321303367967,
+          "time_to_wall": 1.3648549601771807,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.488224239395074,
+            -0.05779902264190661
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 53,
+          "time_to_contact_height": 0.7448210519446455,
+          "time_to_wall": 0.9191172978165559,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.7032361599203929,
+            -0.43107946686382415
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 0,
+          "time_to_contact_height": 0.6062482303067334,
+          "time_to_wall": 0.9401903869643172,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.5416765490543999,
+            1.33492707379332
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 72,
+          "time_to_contact_height": 0.591116951866044,
+          "time_to_wall": 0.40764930004091443,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.5705703729453495,
+            -0.45240054286081277
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 79,
+          "time_to_contact_height": 0.5450693255462918,
+          "time_to_wall": 0.44737382071813764,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.7171034604742498,
+            -1.0376817277149817
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 70,
+          "time_to_contact_height": 0.62098216179655,
+          "time_to_wall": 0.3176192251815158,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.21291968364046598,
+            0.174125091754656
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 87,
+          "time_to_contact_height": 0.707613895933099,
+          "time_to_wall": 0.5864364851285423,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.7223072416448307,
+            0.16779100283382656
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 93,
+          "time_to_contact_height": 0.5907109665302008,
+          "time_to_wall": 0.3346145996989475,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.3649434020160275,
+            0.3617120006253689
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 3,
+          "time_to_contact_height": 0.766823040202435,
+          "time_to_wall": 0.8481966732618303,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.779501021591106,
+            -0.46707850439707194
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 48,
+          "time_to_contact_height": 0.6562855436368442,
+          "time_to_wall": 0.8330038316551226,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.6637349428208292,
+            -1.3040796006755138
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 31,
+          "time_to_contact_height": 0.7699426090677197,
+          "time_to_wall": 0.5933043072335071,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.6569973986484463,
+            0.6860287955806248
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 84,
+          "time_to_contact_height": 0.6942988224912515,
+          "time_to_wall": 0.9672121669388458,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.5989745244953606,
+            -1.1870564091260893
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 24,
+          "time_to_contact_height": 0.7093479878985063,
+          "time_to_wall": 0.5380007017044612,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.6478216622391988,
+            -1.3414945589050389
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 80,
+          "time_to_contact_height": 0.7093464551824615,
+          "time_to_wall": 0.6351036604566166,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.782076551830525,
+            -1.374228926061415
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 65,
+          "time_to_contact_height": 0.37942251089277745,
+          "time_to_wall": 0.2525637378446039,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.5291623381639825,
+            -0.5286808264631179
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 30,
+          "time_to_contact_height": 0.4737943181080727,
+          "time_to_wall": 0.27169402006883964,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.36498799133362936,
+            -0.39112186302371554
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 20,
+          "time_to_contact_height": 0.6783964405686156,
+          "time_to_wall": 0.5106943546463275,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.6427142965216761,
+            -1.3559027016266993
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 22,
+          "time_to_contact_height": 0.5548256168382069,
+          "time_to_wall": 0.3566303529076977,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.49123148542382805,
+            -0.8518601059029569
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 94,
+          "time_to_contact_height": 0.5966339168721952,
+          "time_to_wall": 1.0676637824219475,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.4928129844463424,
+            0.11311472969966704
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 75,
+          "time_to_contact_height": 0.5597961914775761,
+          "time_to_wall": 0.4413969995395466,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.6913839034725834,
+            -0.11231697432255422
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 34,
+          "time_to_contact_height": 0.5938021018847671,
+          "time_to_wall": 0.5723035472298443,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.8350572636164868,
+            -0.06608454098928776
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 9,
+          "time_to_contact_height": 0.6922670489659167,
+          "time_to_wall": 0.7618055956853137,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.7881377094749759,
+            -0.12664199553605235
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 15,
+          "time_to_contact_height": 0.6461524456775252,
+          "time_to_wall": 0.3123032628940905,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.2513528387609134,
+            -0.6144518183602967
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 96,
+          "time_to_contact_height": 0.6751288057163481,
+          "time_to_wall": 0.6179261155709547,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.8003529381174223,
+            -0.32813310554849273
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 69,
+          "time_to_contact_height": 0.5119125608809176,
+          "time_to_wall": 0.6765383915806883,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.5720838933712444,
+            0.6630560183357603
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 63,
+          "time_to_contact_height": 0.38047786920209536,
+          "time_to_wall": 0.3029055561074556,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.675243111520364,
+            -0.06714407010609413
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 5,
+          "time_to_contact_height": 0.46031646816772853,
+          "time_to_wall": 0.2669305362724743,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.42422793259530867,
+            -0.2939719053654332
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 40,
+          "time_to_contact_height": 0.646024927749827,
+          "time_to_wall": 0.4804042445477191,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.6096576283326174,
+            0.004577732826190305
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 58,
+          "time_to_contact_height": 0.5370630527330467,
+          "time_to_wall": 0.4333840375401892,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.6584677839060191,
+            0.3455435551372884
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 52,
+          "time_to_contact_height": 0.6323858095935894,
+          "time_to_wall": 2.185588911165651,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.03927256997901746,
+            -0.09826134492399549
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 59,
+          "time_to_contact_height": 0.5979309095800767,
+          "time_to_wall": 1.6087486901926544,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.11280862182189794,
+            0.4090982058900371
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 13,
+          "time_to_contact_height": 0.6588266536608983,
+          "time_to_wall": 1.0522128417299632,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.465565889825314,
+            0.3359808622847066
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 99,
+          "time_to_contact_height": 0.5170714737275273,
+          "time_to_wall": 0.5155897005281145,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.857408700901564,
+            0.5201930321224507
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 23,
+          "time_to_contact_height": 0.586511056788564,
+          "time_to_wall": 1.2871118527066183,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.377572427907113,
+            0.25409750655642066
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 32,
+          "time_to_contact_height": 0.690665464421308,
+          "time_to_wall": 0.7714162040992506,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.7849313785129013,
+            0.3238332869814089
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 60,
+          "time_to_contact_height": 0.5338696292037728,
+          "time_to_wall": 0.3101665786801845,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.427940629338837,
+            -0.23481030706517658
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 77,
+          "time_to_contact_height": 0.32411437192593934,
+          "time_to_wall": 0.5505456658650233,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.23146116554516083,
+            -0.13104781384897823
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 39,
+          "time_to_contact_height": 0.5018182646227851,
+          "time_to_wall": 0.4418844140037914,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.7715222997911391,
+            0.050935661172384794
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 78,
+          "time_to_contact_height": 0.33310042971677484,
+          "time_to_wall": 0.28005712350347295,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.7527318191136873,
+            0.00861212276997203
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 42,
+          "time_to_contact_height": 0.6211481120210077,
+          "time_to_wall": 1.5264015183135982,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.20976393800890417,
+            0.1468517282293367
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 36,
+          "time_to_contact_height": 0.7140590136025808,
+          "time_to_wall": 0.42213147838791837,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.4729568113019823,
+            0.14676167800792692
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 44,
+          "time_to_contact_height": 0.629222820613516,
+          "time_to_wall": 1.9827972768348485,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.01442944640044791,
+            0.0978121467144053
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 28,
+          "time_to_contact_height": 0.652800421299181,
+          "time_to_wall": 2.030467188563938,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.06793449769342891,
+            -0.046036624872164734
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 98,
+          "time_to_contact_height": 0.6712073267835122,
+          "time_to_wall": 2.0433949025928277,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            -0.0008136211376483793,
+            -0.16615985327710114
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 54,
+          "time_to_contact_height": 0.5082314329094881,
+          "time_to_wall": 0.41444965037152165,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.6967160799318879,
+            0.24303220681871776
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 1,
+          "time_to_contact_height": 0.6974557389102225,
+          "time_to_wall": 0.7415698604799454,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.7997961874364062,
+            0.1989200521139307
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 82,
+          "time_to_contact_height": 0.5852971637917286,
+          "time_to_wall": 0.4180534527142431,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.6603481307179158,
+            0.11413394491275869
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 50,
+          "time_to_contact_height": 0.6985672643633851,
+          "time_to_wall": 0.850538719378076,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.6761221606432395,
+            0.20346026565385672
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 81,
+          "time_to_contact_height": 0.5194591857747363,
+          "time_to_wall": 0.32789968343762405,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.5168023905055417,
+            0.05336187814274132
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 25,
+          "time_to_contact_height": 0.6647324021917861,
+          "time_to_wall": 1.2199967803052199,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.5250766301608092,
+            0.4771296792846585
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 18,
+          "time_to_contact_height": 0.695925080933289,
+          "time_to_wall": 0.9067796291941493,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.683099622409425,
+            0.39295816047220555
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 89,
+          "time_to_contact_height": 0.5796180965512202,
+          "time_to_wall": 0.3059440463519349,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.4504615781690874,
+            0.12098129041397843
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 86,
+          "time_to_contact_height": 0.7255423122359116,
+          "time_to_wall": 1.291797441070735,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.42906244390636317,
+            0.19326712127956458
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 56,
+          "time_to_contact_height": 0.7288139814510797,
+          "time_to_wall": 1.9010132345908002,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.2513879677036233,
+            0.21227377321113733
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 47,
+          "time_to_contact_height": 0.6893529150689225,
+          "time_to_wall": 0.39418351820285996,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.5405474243240932,
+            0.14826425194657172
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 2,
+          "time_to_contact_height": 0.6953039981395982,
+          "time_to_wall": 0.9985060777371862,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.5228582306777121,
+            0.19936360371635903
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 74,
+          "time_to_contact_height": 0.7084607970705129,
+          "time_to_wall": 1.6562622473559407,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.207499105092257,
+            0.1835543252931427
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 16,
+          "time_to_contact_height": 0.6891618819521016,
+          "time_to_wall": 0.7242044176474558,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.8058280536436568,
+            0.07859214641022028
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 68,
+          "time_to_contact_height": 0.4756679248532424,
+          "time_to_wall": 0.34235441984861,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.5127652180050755,
+            -0.2990171690762832
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 21,
+          "time_to_contact_height": 0.6101867055058785,
+          "time_to_wall": 0.4559106635847128,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.6019306465630294,
+            0.1452888214205683
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 51,
+          "time_to_contact_height": 0.6493915630213855,
+          "time_to_wall": 1.0672032867553758,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.47614925544631526,
+            0.4696698296775991
+          ],
+          "reference_in_bounds": false
+        }
+      ]
+    },
+    {
+      "evaluation": "self-return-eval-50-01",
+      "first_forward_contacts": 52,
+      "reflection_before_contact_height": 16,
+      "bounded_return_reference": 8,
+      "rows": [
+        {
+          "scenario_id": 83,
+          "time_to_contact_height": 0.5418752033774294,
+          "time_to_wall": 0.9304858252104572,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.48941037596965115,
+            -0.491895651211502
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 41,
+          "time_to_contact_height": 0.36347229426879485,
+          "time_to_wall": 0.6077605305449539,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.506035169195283,
+            -0.8194701803625173
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 90,
+          "time_to_contact_height": 0.47717492542062634,
+          "time_to_wall": 0.39496660710537135,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.7236816744687641,
+            0.251252550735125
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 46,
+          "time_to_contact_height": 0.35395071955774504,
+          "time_to_wall": 0.3255013323112829,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.801382676057908,
+            0.14119435168975203
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 14,
+          "time_to_contact_height": 0.4052219961198704,
+          "time_to_wall": 1.0799630513504548,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.29334397575376614,
+            0.9729546754344098
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 62,
+          "time_to_contact_height": 0.6001120636744791,
+          "time_to_wall": 1.2851926083560672,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.4249681439030776,
+            -0.8651410387210762
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 7,
+          "time_to_contact_height": 0.7422364274502676,
+          "time_to_wall": 1.6219185824133262,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.41081192839534025,
+            0.0753808297948627
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 0,
+          "time_to_contact_height": 0.6525983079222638,
+          "time_to_wall": 1.528239866524063,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.34724036231194294,
+            1.249076298440684
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 53,
+          "time_to_contact_height": 0.7204587377015734,
+          "time_to_wall": 0.7906813527971015,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.7864919949552871,
+            -0.5283587960609919
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 72,
+          "time_to_contact_height": 0.5564072389929317,
+          "time_to_wall": 0.39166856941222167,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.589292821750595,
+            -0.5034711593091418
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 79,
+          "time_to_contact_height": 0.553069781370001,
+          "time_to_wall": 0.5166623981846186,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.8139175065323798,
+            -1.0816108508662952
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 70,
+          "time_to_contact_height": 0.7148015903351017,
+          "time_to_wall": 0.46013974587274586,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.4865195840717294,
+            0.18317872009444708
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 19,
+          "time_to_contact_height": 0.7163592927004645,
+          "time_to_wall": 1.2317771939571693,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.49101478017908085,
+            -0.9969014891938208
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 93,
+          "time_to_contact_height": 0.6969901495545996,
+          "time_to_wall": 0.5837963854576701,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.7354017301347361,
+            0.34472106925374113
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 87,
+          "time_to_contact_height": 0.733293611785895,
+          "time_to_wall": 1.6313636446909137,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.40418439318386223,
+            0.2654900426645815
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 3,
+          "time_to_contact_height": 0.7713096484342304,
+          "time_to_wall": 1.1705251161034405,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.5742059996372478,
+            -0.35387643852926415
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 48,
+          "time_to_contact_height": 0.5432967314035154,
+          "time_to_wall": 0.8888020061691122,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.500182296348148,
+            -1.4002810258024225
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 84,
+          "time_to_contact_height": 0.6050956423891112,
+          "time_to_wall": 1.0470132175498033,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.4693613247954438,
+            -1.3885029024709714
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 80,
+          "time_to_contact_height": 0.6373707431872145,
+          "time_to_wall": 0.7815080675053544,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.7063761270861137,
+            -1.5832340619179328
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 24,
+          "time_to_contact_height": 0.6702414412717609,
+          "time_to_wall": 0.6870022402802392,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.8397052324691779,
+            -1.5250443990773326
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 45,
+          "time_to_contact_height": 0.3543617955526684,
+          "time_to_wall": 0.29052892129609253,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.7086731657220852,
+            -0.6618175918102569
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 65,
+          "time_to_contact_height": 0.4799011127056184,
+          "time_to_wall": 0.2987903675358663,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.46257140543704417,
+            -0.7950127152124207
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 30,
+          "time_to_contact_height": 0.5855706367930086,
+          "time_to_wall": 0.3384288463549704,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.3766009473071159,
+            -0.5417446093139275
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 20,
+          "time_to_contact_height": 0.6097632845401324,
+          "time_to_wall": 0.641672019333786,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.8189004506780833,
+            -1.5653058384491239
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 22,
+          "time_to_contact_height": 0.6863395189978873,
+          "time_to_wall": 0.5850716903732268,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.7456237910451208,
+            -0.8774074258011085
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 32,
+          "time_to_contact_height": 0.6640969357665253,
+          "time_to_wall": 1.5668565872631424,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.36279676609774814,
+            0.13486330922554635
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 95,
+          "time_to_contact_height": 0.48986470867423143,
+          "time_to_wall": 0.46183920923338173,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.8221538478599224,
+            -1.5432834322790505
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 31,
+          "time_to_contact_height": 0.5987801545907334,
+          "time_to_wall": 0.2822392129483408,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.17201653776428172,
+            0.4909181754053562
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 61,
+          "time_to_contact_height": 0.6719872517622866,
+          "time_to_wall": 1.7872723808169957,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.16977349854746088,
+            0.000565092188064182
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 57,
+          "time_to_contact_height": 0.6142822956328617,
+          "time_to_wall": 0.7773186679763059,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.6656364807711591,
+            0.056848608278488186
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 40,
+          "time_to_contact_height": 0.6959636616790068,
+          "time_to_wall": 0.6713864108370518,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.8340973942050336,
+            -0.0757750189680808
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 77,
+          "time_to_contact_height": 0.5574939929766954,
+          "time_to_wall": 0.6021111191848656,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.7454465977472338,
+            0.6456204568800037
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 81,
+          "time_to_contact_height": 0.595329443392703,
+          "time_to_wall": 2.6577863148691603,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            -0.21690554480049962,
+            0.595437339430854
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 35,
+          "time_to_contact_height": 0.5494483464767403,
+          "time_to_wall": 2.726857226788842,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            -0.4159193494105666,
+            0.16765033917183567
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 12,
+          "time_to_contact_height": 0.5851512947996217,
+          "time_to_wall": 2.760130594082561,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            -0.23534420940781925,
+            0.4583017185061064
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 98,
+          "time_to_contact_height": 0.721441423534716,
+          "time_to_wall": 1.18147593793105,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.4806504204515124,
+            0.6186227442439751
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 97,
+          "time_to_contact_height": 0.5922947200899373,
+          "time_to_wall": 1.4560072056653621,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.15295692913498865,
+            0.4180315060253444
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 2,
+          "time_to_contact_height": 0.7175339167597655,
+          "time_to_wall": 2.52453243739267,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            -0.1805008780009414,
+            0.3454522818047434
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 74,
+          "time_to_contact_height": 0.7159282366930327,
+          "time_to_wall": 2.4756040724298742,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            -0.21848982965673974,
+            0.27467324924815606
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 96,
+          "time_to_contact_height": 0.502017430021577,
+          "time_to_wall": 0.6662123275378345,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.5878423333096783,
+            0.12372872562219678
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 15,
+          "time_to_contact_height": 0.6893025830721058,
+          "time_to_wall": 2.5489182157148593,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            -0.18864056914893162,
+            0.34777873931395664
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 78,
+          "time_to_contact_height": 0.3554672467405882,
+          "time_to_wall": 0.49047056510147286,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.5782715857292603,
+            0.107325846248225
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 82,
+          "time_to_contact_height": 0.575984449529116,
+          "time_to_wall": 0.997796402326229,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.508540180767897,
+            0.6222079286725392
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 39,
+          "time_to_contact_height": 0.5301526046062017,
+          "time_to_wall": 1.7284290537802314,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.16384941460550675,
+            0.4611951465867265
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 16,
+          "time_to_contact_height": 0.44821247394433616,
+          "time_to_wall": 0.3066270730797304,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.47332930561044306,
+            0.2500547128425719
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 23,
+          "time_to_contact_height": 0.3853488273143216,
+          "time_to_wall": 0.641629362362382,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.4049829074199125,
+            0.20128852361255747
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 68,
+          "time_to_contact_height": 0.7110465515751644,
+          "time_to_wall": 0.5528752934254498,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.5989281848215549,
+            0.10956304163048101
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 38,
+          "time_to_contact_height": 0.39018961259680396,
+          "time_to_wall": 0.5938849911204162,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.4931356389921309,
+            0.18092253700992475
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 5,
+          "time_to_contact_height": 0.5092507919590029,
+          "time_to_wall": 0.3094358807210887,
+          "reflects_before_contact_height": true,
+          "predicted_xy": [
+            0.3527257861588926,
+            0.3561315027149806
+          ],
+          "reference_in_bounds": true
+        },
+        {
+          "scenario_id": 59,
+          "time_to_contact_height": 0.4470157519855903,
+          "time_to_wall": 0.5982499713384746,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            0.5849632764063724,
+            0.0729774465229096
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 44,
+          "time_to_contact_height": 0.6044352473387095,
+          "time_to_wall": 3.069969911145399,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            -0.5755258128694791,
+            0.18449802336666216
+          ],
+          "reference_in_bounds": false
+        },
+        {
+          "scenario_id": 28,
+          "time_to_contact_height": 0.6531955901130302,
+          "time_to_wall": 2.971419283708289,
+          "reflects_before_contact_height": false,
+          "predicted_xy": [
+            -0.38538508135112653,
+            0.27085336404476235
+          ],
+          "reference_in_bounds": false
+        }
+      ]
+    }
+  ]
+}
