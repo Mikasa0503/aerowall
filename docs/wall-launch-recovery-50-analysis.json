@@ -1,0 +1,67 @@
+{
+  "evaluation": "runs/wall-launch-eval-50-01.json",
+  "report_sha256": "663cacddc6a07171fc82218ca89d87457cbab8bbfb91e5803a8694d45036e739",
+  "scope": "Actual cap-to-terminal intervals for first wall encounters; policy-rate body states, microstep event times; no recovery success threshold",
+  "command_projection_caveat": "Poststep orientation multiplied by requested collective acceleration; diagnostic only, not measured thrust or force balance",
+  "analyzed_wall_scenarios": 2,
+  "ending_counts": {
+    "out_of_bounds": 2
+  },
+  "postlaunch_height_loss_over_0_3m": 2,
+  "rows": [
+    {
+      "scenario_id": 43,
+      "reason": "out_of_bounds",
+      "rallies": 0,
+      "cap_time": 0.3225,
+      "wall_time": 0.6825,
+      "terminal_time": 0.9325,
+      "wall_to_terminal_seconds": 0.25,
+      "sample_count": 30,
+      "last_preterminal_sample_time": 0.92,
+      "height_first_postcap_sample": 1.1163314580917358,
+      "height_last_prewall_sample": 0.9007006287574768,
+      "height_last_preterminal_sample": 0.20348398387432098,
+      "minimum_height": 0.20348398387432098,
+      "minimum_up_z": 0.5036500692367554,
+      "maximum_tilt_degrees": 59.758216857910156,
+      "maximum_angular_speed_rad_s": 4.7331085205078125,
+      "last_preterminal_vertical_speed": -3.649993419647217,
+      "median_commanded_collective_m_s2": 1.4998747110366821,
+      "median_poststep_vertical_command_projection_m_s2": 1.4925830364227295,
+      "fraction_samples_max_command_projection_below_gravity": 0.43333333333333335,
+      "launch_ball_velocity": [
+        2.1984846591949463,
+        -2.165569305419922,
+        1.1212401390075684
+      ]
+    },
+    {
+      "scenario_id": 71,
+      "reason": "out_of_bounds",
+      "rallies": 0,
+      "cap_time": 0.29500000000000004,
+      "wall_time": 0.5974999999999999,
+      "terminal_time": 0.8475,
+      "wall_to_terminal_seconds": 0.2500000000000001,
+      "sample_count": 28,
+      "last_preterminal_sample_time": 0.84,
+      "height_first_postcap_sample": 1.0398799180984497,
+      "height_last_prewall_sample": 0.9891458749771118,
+      "height_last_preterminal_sample": 0.429126501083374,
+      "minimum_height": 0.429126501083374,
+      "minimum_up_z": 0.5979058742523193,
+      "maximum_tilt_degrees": 53.279937744140625,
+      "maximum_angular_speed_rad_s": 4.746934413909912,
+      "last_preterminal_vertical_speed": -2.906440496444702,
+      "median_commanded_collective_m_s2": 0.49950355291366577,
+      "median_poststep_vertical_command_projection_m_s2": 0.4985884428024292,
+      "fraction_samples_max_command_projection_below_gravity": 0.39285714285714285,
+      "launch_ball_velocity": [
+        2.6235387325286865,
+        -1.8826980590820312,
+        0.7857410311698914
+      ]
+    }
+  ]
+}

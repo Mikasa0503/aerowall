@@ -2,6 +2,7 @@
   "evaluation": "runs/wall-launch-eval-25-01.json",
   "report_sha256": "8ea7edf831d13634d13b284aed5e409341862a9d04a635948809f3821074d79e",
   "scope": "Actual cap-to-terminal intervals for first wall encounters; policy-rate body states, microstep event times; no recovery success threshold",
+  "command_projection_caveat": "Poststep orientation multiplied by requested collective acceleration; diagnostic only, not measured thrust or force balance",
   "analyzed_wall_scenarios": 12,
   "ending_counts": {
     "out_of_bounds": 5,
@@ -27,6 +28,9 @@
       "maximum_tilt_degrees": 37.48878479003906,
       "maximum_angular_speed_rad_s": 5.025692939758301,
       "last_preterminal_vertical_speed": -1.5838321447372437,
+      "median_commanded_collective_m_s2": 4.875972270965576,
+      "median_poststep_vertical_command_projection_m_s2": 4.873865604400635,
+      "fraction_samples_max_command_projection_below_gravity": 0.0,
       "launch_ball_velocity": [
         2.214191436767578,
         1.0759940147399902,
@@ -51,6 +55,9 @@
       "maximum_tilt_degrees": 38.66020202636719,
       "maximum_angular_speed_rad_s": 4.520596027374268,
       "last_preterminal_vertical_speed": -3.637667655944824,
+      "median_commanded_collective_m_s2": 0.01595422625541687,
+      "median_poststep_vertical_command_projection_m_s2": 0.01476818136870861,
+      "fraction_samples_max_command_projection_below_gravity": 0.0,
       "launch_ball_velocity": [
         1.6958677768707275,
         0.7132428288459778,
@@ -75,6 +82,9 @@
       "maximum_tilt_degrees": 68.36116027832031,
       "maximum_angular_speed_rad_s": 5.202587127685547,
       "last_preterminal_vertical_speed": -3.208576202392578,
+      "median_commanded_collective_m_s2": 0.3370821475982666,
+      "median_poststep_vertical_command_projection_m_s2": 0.33089035749435425,
+      "fraction_samples_max_command_projection_below_gravity": 0.5483870967741935,
       "launch_ball_velocity": [
         2.1815216541290283,
         -1.2103341817855835,
@@ -99,6 +109,9 @@
       "maximum_tilt_degrees": 63.115623474121094,
       "maximum_angular_speed_rad_s": 4.966150760650635,
       "last_preterminal_vertical_speed": -2.8771986961364746,
+      "median_commanded_collective_m_s2": 1.71087646484375,
+      "median_poststep_vertical_command_projection_m_s2": 1.7071338891983032,
+      "fraction_samples_max_command_projection_below_gravity": 0.4827586206896552,
       "launch_ball_velocity": [
         2.57662296295166,
         -2.0025362968444824,
@@ -123,6 +136,9 @@
       "maximum_tilt_degrees": 88.4305419921875,
       "maximum_angular_speed_rad_s": 4.728786468505859,
       "last_preterminal_vertical_speed": -1.0154132843017578,
+      "median_commanded_collective_m_s2": 12.506281852722168,
+      "median_poststep_vertical_command_projection_m_s2": 9.881674766540527,
+      "fraction_samples_max_command_projection_below_gravity": 0.2682926829268293,
       "launch_ball_velocity": [
         1.8926541805267334,
         0.9486057162284851,
@@ -147,6 +163,9 @@
       "maximum_tilt_degrees": 47.711517333984375,
       "maximum_angular_speed_rad_s": 5.227127552032471,
       "last_preterminal_vertical_speed": -2.619720220565796,
+      "median_commanded_collective_m_s2": 0.008064508438110352,
+      "median_poststep_vertical_command_projection_m_s2": 0.006196476053446531,
+      "fraction_samples_max_command_projection_below_gravity": 0.0,
       "launch_ball_velocity": [
         2.0637331008911133,
         0.30174174904823303,
@@ -171,6 +190,9 @@
       "maximum_tilt_degrees": 33.68285369873047,
       "maximum_angular_speed_rad_s": 4.796847820281982,
       "last_preterminal_vertical_speed": -0.9638293981552124,
+      "median_commanded_collective_m_s2": 14.71579647064209,
+      "median_poststep_vertical_command_projection_m_s2": 12.30813217163086,
+      "fraction_samples_max_command_projection_below_gravity": 0.0,
       "launch_ball_velocity": [
         2.417656898498535,
         2.2683279514312744,
@@ -195,6 +217,9 @@
       "maximum_tilt_degrees": 41.30839538574219,
       "maximum_angular_speed_rad_s": 4.218007564544678,
       "last_preterminal_vertical_speed": -4.034216403961182,
+      "median_commanded_collective_m_s2": 0.01895606517791748,
+      "median_poststep_vertical_command_projection_m_s2": 0.016677329316735268,
+      "fraction_samples_max_command_projection_below_gravity": 0.0,
       "launch_ball_velocity": [
         2.1041786670684814,
         0.6954705119132996,
@@ -219,6 +244,9 @@
       "maximum_tilt_degrees": 65.6642074584961,
       "maximum_angular_speed_rad_s": 5.031881332397461,
       "last_preterminal_vertical_speed": -3.7059426307678223,
+      "median_commanded_collective_m_s2": 5.221889019012451,
+      "median_poststep_vertical_command_projection_m_s2": 4.156729221343994,
+      "fraction_samples_max_command_projection_below_gravity": 0.21951219512195122,
       "launch_ball_velocity": [
         1.016446828842163,
         -1.0804731845855713,
@@ -243,6 +271,9 @@
       "maximum_tilt_degrees": 55.55874252319336,
       "maximum_angular_speed_rad_s": 5.208680629730225,
       "last_preterminal_vertical_speed": -3.2964184284210205,
+      "median_commanded_collective_m_s2": 0.014495998620986938,
+      "median_poststep_vertical_command_projection_m_s2": 0.009029880166053772,
+      "fraction_samples_max_command_projection_below_gravity": 0.3333333333333333,
       "launch_ball_velocity": [
         1.9471768140792847,
         -0.3653911054134369,
@@ -267,6 +298,9 @@
       "maximum_tilt_degrees": 42.91883087158203,
       "maximum_angular_speed_rad_s": 5.261392116546631,
       "last_preterminal_vertical_speed": -2.504303455352783,
+      "median_commanded_collective_m_s2": 0.013752579689025879,
+      "median_poststep_vertical_command_projection_m_s2": 0.010514779016375542,
+      "fraction_samples_max_command_projection_below_gravity": 0.0,
       "launch_ball_velocity": [
         2.0428802967071533,
         -0.33423036336898804,
@@ -291,6 +325,9 @@
       "maximum_tilt_degrees": 45.06990051269531,
       "maximum_angular_speed_rad_s": 5.220187187194824,
       "last_preterminal_vertical_speed": -2.4272873401641846,
+      "median_commanded_collective_m_s2": 0.009567886590957642,
+      "median_poststep_vertical_command_projection_m_s2": 0.007838835939764977,
+      "fraction_samples_max_command_projection_below_gravity": 0.0,
       "launch_ball_velocity": [
         1.9513065814971924,
         0.3988335430622101,

@@ -34,6 +34,11 @@ for o in r['outcomes']:
     dv=z['drone_velocity'][mask,i];q=z['drone_quaternion_wxyz'][mask,i]
     nz=1-2*(q[:,1]**2+q[:,2]**2)
     angular=np.linalg.norm(dv[:,3:],axis=-1)
+    # Pinned PIDRateController_flightmare maps raw action through tanh and
+    # collective target = 7.5*(1+tanh(a)). This is commanded acceleration,
+    # not measured net force: rotor lag, mixing/clipping and mass differ.
+    collective=7.5*(1+np.tanh(z['action'][mask,i,3]))
+    command_projection=collective*nz
     prewall=indices[times[indices]<wall['time']]
     atwall=int(prewall[-1]) if len(prewall) else int(indices[0])
     wall_z=float(z['drone_position'][atwall,i,2]-origins[i,2])
@@ -46,9 +51,13 @@ for o in r['outcomes']:
                  'minimum_up_z':float(nz.min()),'maximum_tilt_degrees':float(np.degrees(np.arccos(np.clip(nz,-1,1))).max()),
                  'maximum_angular_speed_rad_s':float(angular.max()),
                  'last_preterminal_vertical_speed':float(dv[-1,2]),
+                 'median_commanded_collective_m_s2':float(np.median(collective)),
+                 'median_poststep_vertical_command_projection_m_s2':float(np.median(command_projection)),
+                 'fraction_samples_max_command_projection_below_gravity':float(np.mean(15*nz<9.81)),
                  'launch_ball_velocity':cap['ball_velocity_after'][:3]})
 result={'evaluation':str(a.evaluation),'report_sha256':hashlib.sha256(a.evaluation.read_bytes()).hexdigest(),
         'scope':'Actual cap-to-terminal intervals for first wall encounters; policy-rate body states, microstep event times; no recovery success threshold',
+        'command_projection_caveat':'Poststep orientation multiplied by requested collective acceleration; diagnostic only, not measured thrust or force balance',
         'analyzed_wall_scenarios':len(rows),'ending_counts':dict(Counter(x['reason'] for x in rows)),
         'postlaunch_height_loss_over_0_3m':sum(x['height_first_postcap_sample']-x['height_last_preterminal_sample']>.3 for x in rows),
         'rows':rows}

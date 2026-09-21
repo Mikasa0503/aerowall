@@ -24,7 +24,7 @@ class WallRally(AlignedJuggle):
         self.targets[:,0] += self.wall_front
         self.targets[:,1:] += self.target_sequence[0]
         self.reset_boundary_failures = []
-        self.wall_totals = {'rallies':0,'joint_rallies':0,'wall_hits':0,'episodes':0}
+        self.wall_totals = {'rallies':0,'joint_rallies':0,'wall_hits':0,'episodes':0,'outbound_legs':0}
         self.launch_stats = {'contacts':0,'positive':0,'negative':0,'shaping_sum':0.,'forward_velocity_sum':0.}
         assert self.wall_spec.get('launch_mode','ballistic_point') in ('ballistic_point','velocity_curriculum')
         if self.wall_spec.get('launch_mode') == 'velocity_curriculum':
@@ -84,6 +84,7 @@ class WallRally(AlignedJuggle):
         for i,rows in enumerate(impacts):
             state = self.router.batch.states[i]
             was_done = state.terminated or state.truncated
+            previous_phase = state.phase
             result = state.advance(rows,target_cpu[i],target_radius=float(self.wall_spec.target_radius),
                 failure='numerical_failure' if not finite_cpu[i] else 'out_of_bounds' if outside_cpu[i] else None,
                 time_limit=timeout and int(progress_cpu[i])+1>=self.max_episode_length)
@@ -132,6 +133,12 @@ class WallRally(AlignedJuggle):
                 self.launch_stats['forward_velocity_sum']+=float(bv[i,0])
             count=result.get('publish_next_target',0)
             if count:
+                # Curriculum credit for one genuine cap -> wall transition.
+                # Bare/double/ambiguous wall events do not receive this reward,
+                # and the episode continues for the full return attempt.
+                if count==1 and previous_phase=='to_wall' and state.phase=='to_bat' and not state.terminated:
+                    self.event_reward[i]+=float(self.wall_spec.get('outbound_leg_reward',0.))
+                    self.wall_totals['outbound_legs']+=1
                 self.wall_totals['wall_hits']+=count
                 self.targets[i,1:]=self.envs_positions[i,1:]+self.target_sequence[state.target_index%len(self.target_sequence)]
 

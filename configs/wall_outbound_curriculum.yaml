@@ -1,0 +1,21 @@
+# Development alternative, not frozen formal reward or evaluation definition.
+wall_fixture:
+  center: [1.0, 0.0, 3.0]
+  dimensions: [0.2, 4.0, 6.0]
+  restitution: 0.8
+  align_cap_to_visual_top: true
+wall_task:
+  targets_yz: [[0.0, 1.8]]
+  target_radius: 0.35
+  bounds_low: [-2.5, -1.8, 0.08]
+  bounds_high: [1.1, 1.8, 5.5]
+  outbound_leg_reward: 25.0
+  rally_reward: 100.0
+  target_reward: 20.0
+  failure_penalty: 20.0
+  launch_reward: 3.0
+  launch_mode: velocity_curriculum
+  launch_flight_time: 0.35
+  launch_velocity_scale: [1.5, 1.5, 2.0]
+  intercept_weight: 1.0
+  smoothness_weight: 0.05

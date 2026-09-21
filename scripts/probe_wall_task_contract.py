@@ -21,6 +21,7 @@ def main():
         cfg=OmegaConf.load(ROOT/'runs/singlejuggle-dev-001.yaml');OmegaConf.set_struct(cfg,False)
         w=OmegaConf.load(ROOT/'configs/wall_single_return.yaml');cfg.wall_fixture=w.wall_fixture;cfg.wall_task=w.wall_task
         cfg.wall_task.targets_yz=[[0.,1.8],[.4,2.1]]
+        cfg.wall_task.outbound_leg_reward=25.
         cfg.env.num_envs=cfg.task.env.num_envs=16;cfg.sim.dt=.0025;cfg.sim.substeps=8;cfg.headless=True
         sys.argv=[sys.argv[0],'--portable','--portable-root',str(ROOT/'.cache/kit')];app=init_simulation_app(cfg)
         from aerowall.envs.wall_rally import WallRally
@@ -50,6 +51,7 @@ def main():
             return env.step(td)['next']
         for _ in range(8):td=step(td)
         assert all(s.wall_hits==1 and s.target_index==1 and s.rallies==0 and not s.terminated for s in base.router.batch.states)
+        assert base.wall_totals['outbound_legs']==0, 'Bare wall contact received outbound-leg credit'
         expected=torch.tensor([base.wall_front,.4,2.1],device=base.device)
         assert torch.allclose(td['agents','observation'][:,0,33:36],expected.expand(16,3))
         base.progress_buf[:]=base.max_episode_length-1;td=step(td)
@@ -62,7 +64,7 @@ def main():
         assert not base.router.batch.states[0].terminated and not base.router.batch.states[0].truncated
         assert torch.allclose(base.targets[0]-base.envs_positions[0],torch.tensor([base.wall_front,0.,1.8],device=base.device))
         record(status='passed',observation_shape=[16,1,43],state_shape=[16,47],actual_wall_hits=16,false_rallies=0,
-               target_publication_passed=True,actor_restitution_read_isolation=True,timeout_separate=True,selective_reset_passed=True,
+               target_publication_passed=True,actor_restitution_read_isolation=True,timeout_separate=True,selective_reset_passed=True,bare_wall_outbound_credit_rejected=True,
                caveat='Hidden-parameter test checks observation dependency, not randomization of actual physics materials.')
         return 0
     except Exception as e:record(status='failed',error=repr(e),traceback=traceback.format_exc());return 1
