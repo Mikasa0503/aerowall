@@ -28,6 +28,8 @@
 
 最新：65536 步采样与 40 epoch 拟合已完成且退出/报告及重载检查通过；`skill-distillation-eval-01` 正在固定场景评测。留出动作均值 RMSE 为击球 0.01422、恢复 0.02223，但尚不能据此称为闭环性能改善。
 
+最新闭环证据：拟合单 actor 固定评测通过独立事件审计，48/100 场碰墙、3/100 接回，未达到 70% 门槛；比直接复制恢复 actor 的 26/100、0/100 保留更多行为，但不作为等预算优劣证明。已启动 `distilled-wall-ppo-dev-001`，从该单 actor 初始化、开放全阶段 PPO，128 环境、100 次更新，新增 819200 步，每 25 次保存。详见《AeroWall单策略拟合检查》。
+
 主要证据：`ball-wall-calibration-02.json`、`aligned-contact-eval-original-substep8-01.json`、`aligned-contact-eval-original-substep16-01.json`、`recurrent-wall-probe-04.json`；最新恢复/估计器/GRU 细节分别见同目录《AeroWall恢复技能检查》《AeroWall弹性估计器检查》《AeroWall循环策略检查》。所有开发对照的失败与来源预算均保留，不称为快速适应或算法优越性证明。
 
 以下为历史阶段记录，其“尚未实现/当前进程”等描述只对各自记录时刻成立。
