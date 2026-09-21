@@ -18,7 +18,7 @@
 
 当前关键瓶颈：两个恢复对照均有相同 37/100 场在恢复 actor 首次执行前失败，执行分支已与实际观测逐步核对。只训练冻结出球后的恢复分支无法修复这些已记录的前段失败，必须开放迎球与出球阶段的学习。
 
-正在执行的任务：`recovery-skill-dev-002`、`predictive-recovery-dev-002` 各完成既定累计 100 次更新；第 75 次 checkpoint 均已保存，尚待评测。`single-recovery-transfer-dev-001` 已通过初始化，因资源调度暂时挂起；身份校验的恢复进程会在两项对照结束后或最长等待 1200 秒后恢复。运行状态需以 138 上报告和实际 PID 为准，不据本文重复启动。
+两项恢复对照已完成既定累计 100 次更新，退出/报告均通过，重载动作一致且冻结参数不变。第 100 次模型的 `recovery-skill-eval-100-01`、`predictive-recovery-eval-100-01` 已启动，第 75 次 checkpoint 仍待补评。`single-recovery-transfer-dev-001` 已由身份校验的恢复进程在两项原对照结束后自动恢复，未重新初始化。运行状态需以 138 上报告和实际 PID 为准，不据本文重复启动。
 
 主要证据：`ball-wall-calibration-02.json`、`aligned-contact-eval-original-substep8-01.json`、`aligned-contact-eval-original-substep16-01.json`、`recurrent-wall-probe-04.json`；最新恢复/估计器/GRU 细节分别见同目录《AeroWall恢复技能检查》《AeroWall弹性估计器检查》《AeroWall循环策略检查》。所有开发对照的失败与来源预算均保留，不称为快速适应或算法优越性证明。
 
