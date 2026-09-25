@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "selected_solution": {
+    "name": "Frozen Launch + C350 rally controller",
+    "observation_version": "legacy",
+    "reward_version": "legacy",
+    "launch_checkpoint": {
+      "path": "checkpoints/launch-wall.pt",
+      "sha256": "1886527f2bb3f60f28d59c94882bee60eef5ee7af180d36aaeaff729b28aa40e"
+    },
+    "rally_checkpoint": {
+      "path": "checkpoints/c-u350.pt",
+      "sha256": "4e31d16bbe2f3cd82ee6d25a519ed3650b17b91f91a1d40391f9310f0407a659"
+    }
+  },
+  "formal_evaluation": {
+    "record": "docs/results/c350_formal_natural_128.json",
+    "seed": 3001,
+    "parallel_environments": 128,
+    "rallies_per_environment": 17,
+    "environments": 128,
+    "policy_horizon_steps": 1200,
+    "horizon_capped_environments": 128,
+    "safe10": 128,
+    "safe15": 128,
+    "physx_audited_legal_contacts": 2304,
+    "physx_corroborated_legal_contacts": 2304,
+    "physx_audited_wall_contacts": 2213,
+    "physx_corroborated_wall_contacts": 2213,
+    "original_report_sha256": "209830041823f972f96205315fa94f8ab4d8f2b5d1dfc112d3ff0316f931074f"
+  },
+  "presentation_evaluation": {
+    "record": "docs/results/c350_presentation_single_episode.json",
+    "seed": 5001,
+    "rallies": 25,
+    "policy_steps": 1840,
+    "termination": "ball_ground",
+    "physx_corroborated_legal_contacts": 26,
+    "physx_corroborated_wall_contacts": 26,
+    "original_report_sha256": "c9dd6ff64759662cded9a79bf65751058f3d435666878f6ddac19e5a62312374"
+  },
+  "scope_note": "Formal result is one seed with 128 parallel environments, each capped at 1200 policy steps; the presentation result is one selected episode. Neither is a multi-seed generalization study."
+}

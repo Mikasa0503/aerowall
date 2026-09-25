@@ -1,0 +1,108 @@
+{
+  "scope": "100 identical first-serving development episodes; descriptive comparison, not three-seed or formal evidence",
+  "scenario_identity": {
+    "scenario_sha256": "4d50654f01f737f05e4afdb9a9c9a96b9bb1bbda02dca6dc8182522e32ac6cab",
+    "physics_dt": 0.0025,
+    "policy_dt": 0.02,
+    "episode_seconds": 10.0,
+    "wall_fixture": {
+      "center": [
+        1.0,
+        0.0,
+        3.0
+      ],
+      "dimensions": [
+        0.2,
+        4.0,
+        6.0
+      ],
+      "restitution": 0.8,
+      "align_cap_to_visual_top": true
+    },
+    "task": {
+      "targets_yz": [
+        [
+          0.0,
+          1.8
+        ]
+      ],
+      "target_radius": 0.35,
+      "bounds_low": [
+        -2.5,
+        -1.8,
+        0.08
+      ],
+      "bounds_high": [
+        1.1,
+        1.8,
+        5.5
+      ]
+    }
+  },
+  "results": [
+    {
+      "evaluation": "runs/skill-distillation-eval-01.json",
+      "report_sha256": "6e22a1b98bf1b9c7a8b6d0c938917425bf137870c944102f7faa99f7e6a92e3a",
+      "checkpoint": "checkpoints/skill-distillation-dev-001/frames-000033857536.pt",
+      "checkpoint_sha256": "6877da1b25df0ca9fd34c16fcffcf88fa79e5e97037e495e9c091547074b5804",
+      "controller_mode": "learned_policy",
+      "trained_frames": 33857536,
+      "scenarios": 100,
+      "one_rally_scenarios": 3,
+      "two_rally_streak_scenarios": 0,
+      "total_rallies": 3,
+      "total_wall_hits": 49,
+      "rallies_mean": 0.03,
+      "streak_mean": 0.03,
+      "streak_median": 0.0,
+      "streak_max": 1,
+      "streak_histogram": {
+        "0": 97,
+        "1": 3
+      },
+      "ten_rally_streak_scenarios": 0,
+      "wall_contact_scenarios": 48,
+      "legal_cap_contacts": 173,
+      "reasons": {
+        "ball_body": 30,
+        "out_of_bounds": 32,
+        "drone_wall": 21,
+        "non_cap": 15,
+        "drone_ground": 2
+      },
+      "outgoing_velocity_quantiles_10_50_90_xyz": [
+        [
+          -0.1401978462934494,
+          -0.5998159766197205,
+          1.894641351699829
+        ],
+        [
+          0.23647838830947876,
+          0.15651459991931915,
+          2.9086668491363525
+        ],
+        [
+          2.1563802242279055,
+          0.4446567356586466,
+          3.5222705364227296
+        ]
+      ],
+      "forward_over_1m_s": 48,
+      "source_hashes": {
+        "scripts/evaluate_wall_rally.py": "eecd0c22f97c799216b388eb184724f51b354df4e91c815b33989468f6b0c6a7",
+        "aerowall/envs/wall_rally.py": "e3ecbe94fc3f983cffca24172d5408662079ffb274623d5729ce35af3103fb22",
+        "aerowall/envs/aligned_juggle.py": "2847a8ca7ecb22bf397c9d5a89e9c4108cd07cce452c193a98b364fdafe840e1",
+        "aerowall/contact_router.py": "a27f017d8910d1c0e8deb44de1fbaa70e2c3e4d62761aa2581b216fa4bdb9adf",
+        "aerowall/collider_bounds.py": "c405f2b8718a7f9a8306286e178db8ba71c4cc0c48cf28ab67f659d30322854e",
+        "aerowall/rally_events.py": "1cec19671edf4c7e2421940a03396bbbf9dce3ee4ef6e8bd0d1aa98d94d27f22",
+        "aerowall/learning/wall_policy.py": "35c4f4f8077dc3a4d6e2423c872802d8ed28dc4353f36c13aa542521cbf85574",
+        "aerowall/learning/phase_recovery.py": "20b657334f496871f21cc8a6edcd3dae3dae191b9ebf1cb3c4903c32f0233294",
+        "aerowall/learning/return_reference.py": "033d28ffea7a19143da57819e363f332da9c353b7bb656460644a4ecb714663d",
+        "aerowall/learning/recovery_skill_policy.py": "48e0e8f6770d0808bd30f9221b233377a76f686032bc0f47d1478fcde8a0eeee",
+        "aerowall/learning/recovery_controller.py": "f3b5e409892515976af52cd8d3111ce8b40d223d926e4a3390872ca1b78376cb",
+        "scripts/runtime_adapters.py": "0e18ec93b743cd2c9c6401bcada5c14830856310408a1b0e2430825c89c724fc",
+        "scripts/source_evidence.py": "2e90c7cb64fbfa2d165a7e99e916337827f5640593039fd95ddaac336675c252"
+      }
+    }
+  ]
+}

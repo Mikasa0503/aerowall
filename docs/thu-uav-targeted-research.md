@@ -6,7 +6,7 @@
 
 ## 下载与复现边界
 
-服务器研究目录：`/home/public/Workspace/shy/Code/aerowall/research/thu-uav/`。Mac 镜像保存在本任务 `work/thu-uav/`。完整 Git 仓库及锁定子模块均下载，不采用仅下载 README 或浅克隆的方式；外链数据、仿真运行时、未公开权重不属于 Git 下载范围。
+研究副本保存在本地隔离目录 `work/thu-uav/`。完整 Git 仓库及锁定子模块均下载，不采用仅下载 README 或浅克隆的方式；外链数据、仿真运行时、未公开权重不属于 Git 下载范围。
 
 | 项目 | 固定 commit | 依赖与权重 |
 | --- | --- | --- |
@@ -16,7 +16,7 @@
 
 三仓库根许可证均为 MIT，依赖各自保留许可证。完整版本记录见同目录《thu-uav源码版本清单.json》。未安装它们的依赖到当前训练环境，没有修改现有 third_party/HCSP。
 
-下载先尝试 138，Git 代理连接阻塞后中止了本次发起的三个 clone，改为 Mac 下载并同步。SimpleFlight 旧 SSH 子模块地址不能直接获取：TorchRL 从已下载 HCSP 的 Git 对象库取得同一锁定 commit `e39e701…`；TensorDict 从 pytorch/tensordict 获取同一 `5e6205c…`。没有用最新版替代锁定版本。
+下载先尝试远程 Linux 环境，Git 代理连接阻塞后中止了本次发起的三个 clone，改为 Mac 下载并同步。SimpleFlight 旧 SSH 子模块地址不能直接获取：TorchRL 从已下载 HCSP 的 Git 对象库取得同一锁定 commit `e39e701…`；TensorDict 从 pytorch/tensordict 获取同一 `5e6205c…`。没有用最新版替代锁定版本。
 
 ## HCSP：最优先研究技能衔接与微调约束
 
@@ -31,13 +31,13 @@
 - [环境中的 KL 惩罚](https://github.com/thu-uav/HCSP/blob/009961b8f5702dd0c1c943cef0e01e09dfcd138d/hcsp/envs/co_self_play/coselfplay_phase_one.py#L2337)
 - [实际启动配置](https://github.com/thu-uav/HCSP/blob/009961b8f5702dd0c1c943cef0e01e09dfcd138d/scripts/shell/coselfplay_phase_one.sh)
 
-**迁移判断。** AeroWall 已有同状态行为漂移证据，优先试“保留拟合单 actor 作为参考，对全阶段 PPO 添加可追踪的偏离约束”，保持单 actor 执行、CTBR 与真实碰撞。AeroWall 现有拟合损失是 KL(teacher || student)，方向与 HCSP 上述项不同，不能混称同一算法。参考约束只能帮助保留已有 3% 行为，不能保证达到 70%；仍须学习更好的完整回合。
+**迁移判断。** 历史 CTBR 训练路线已有同状态行为漂移证据，可在该独立路线评估可追踪的参考策略约束。当前 HCSP PRT wall-rally 直驱路线须单独报告，不能把 CTBR 的 fitted loss 或 actor 行为证据当作 PRT checkpoint 的接口证据。参考约束也不能保证达到目标比例，完整回合仍需独立评估。
 
 **待做实验。** 从相同拟合 checkpoint、seed、场景和新交互预算出发，对照无约束 PPO 与一种预先固定的参考约束；记录两阶段 KL、实际 actor 梯度、回合/目标命中、终止原因、每步奖励分解。若添加直接可微 KL loss，应明确为本项目变体，不冒充原 HCSP 环境奖励实现。必须确认参考参数与优化器分离，checkpoint 重载后参考不变，评价阶段不更新权重。
 
 ## SimpleFlight：控制与平滑奖励的条件，不是直接换策略
 
-**源码事实。** 默认 Track 为 Crazyflie、`PIDrate`、10 个未来参考点；train.py 的 `PIDrate` 与 `PIDrate_FM` 是不同控制器分支。当前 AeroWall 使用 Flightmare PID/CTBR，不能因为两者都称 CTBR 就交换动作尺度、惯性和控制增益。
+**源码事实。** 默认 Track 为 Crazyflie、`PIDrate`、10 个未来参考点；train.py 的 `PIDrate` 与 `PIDrate_FM` 是不同控制器分支。当前 AeroWall wall-rally 使用 HCSP PRT 四路直接 rotor command；JuggleRL 的 Flightmare PID/CTBR 属于独立控制链。若为 AeroWall 新增 CTBR，应单独匹配动作尺度、惯性和控制增益，不与现有 PRT checkpoint 混用。
 
 `track.py` 用轨迹相对位置、线速度、机体状态组成观测。未来点是已知目标轨迹，不是仿真器未来真实运动；壁球只能使用已发布目标或基于当前观测的预测参考。
 
@@ -51,7 +51,7 @@
 
 **迁移判断。** 适合参考预测回位目标、动作历史与控制响应诊断。避免全阶段提高直立/低 jerk 奖励：击球需要转向，增加此类奖励可能进一步偏好垫球。若做恢复期平滑课程，应记录实际随环境步变化的系数并按时间归一化。历史缓冲必须沿用本项目已验证的逐环境 reset，不能直接复制全 batch deque 的更新逻辑。
 
-**待做实验。** 在现有真实轨迹上先测出球/恢复期的 CTBR 饱和占比、角速度跟踪误差与恢复耗时，确认控制限制后才改增益或奖励。此时不增加额外大规模轨迹跟踪训练，也不换 Crazyflie 模型。
+**待做实验。** 若分析历史 CTBR 路线，在其真实轨迹上测出球/恢复期饱和占比、角速度跟踪误差与恢复耗时；当前 PRT wall-rally route 则追踪四路 rotor command、目标油门和实际推力。确认接口限制后才改增益或奖励。此时不增加额外大规模轨迹跟踪训练，也不换 Crazyflie 模型。
 
 ## NeuralIMC：一步预测误差反馈及其信息权限
 

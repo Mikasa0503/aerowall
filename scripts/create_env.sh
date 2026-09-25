@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
-CONDA=/home/public/Workspace/boweiy/mambaforge/bin/conda
-PREFIX="${AEROWALL_ENV:-/home/public/Workspace/boweiy/mambaforge/envs/aerowall}"
+CONDA="${AEROWALL_CONDA_BIN:-$(command -v conda || true)}"
+PREFIX="${AEROWALL_ENV:-$ROOT/.cache/envs/aerowall}"
+if [[ -z "$CONDA" || ! -x "$CONDA" ]]; then
+    echo "Conda executable not found; set AEROWALL_CONDA_BIN or add conda to PATH." >&2
+    exit 2
+fi
 export CONDA_PKGS_DIRS="$ROOT/.cache/conda/pkgs"
 export TMPDIR="$ROOT/.cache/tmp"
 export PYTHONNOUSERSITE=1
@@ -28,4 +32,6 @@ elif [[ -e "$PREFIX" ]]; then
 else
     "$CONDA" create --prefix "$PREFIX" --override-channels -c conda-forge python=3.10 pip -y
 fi
-"$CONDA" list --prefix "$PREFIX" --explicit > "$ROOT/docs/conda-linux-64-explicit.txt"
+ENV_RECORDS="$ROOT/runs/environment"
+mkdir -p "$ENV_RECORDS"
+"$CONDA" list --prefix "$PREFIX" --explicit > "$ENV_RECORDS/conda-linux-64-explicit.txt"

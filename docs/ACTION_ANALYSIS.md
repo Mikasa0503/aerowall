@@ -58,11 +58,11 @@ flowchart LR
 
 刚性固定拍面随机体转动。“水平安装”只限定机体坐标下安装姿态，不表示世界中永远水平。几何法向和碰撞对法向需区分，避免法向符号随物理接触对象顺序翻转。
 
-## AeroWall 的约束与尚未验证的设计
+## AeroWall 当前动作路径与后续设计
 
 - 垫球基线使用上游位置/高度设置；壁球任务改为目标条件准备与恢复，不设置全程小倾角或翻转即失败。
-- 第一版仍为单个带阶段输入的 CTBR 策略。学习课程使用真实击球后状态，不把 HCSP 的不同 PRT checkpoint 接到 CTBR 控制器上。
-- 先验证倾斜拍面向前上方送球并接回。更大姿态可由策略探索；前空翻不是预设轨迹或必须展示的动作。
+- 当前 AeroWall wall-rally evaluator/trainer 使用 HCSP PRT 四路直接 rotor command：`AeroWallSingleWallRallyEnv._pre_sim_step` 把 actor action 交给 `drone.apply_action`；上游 RotorGroup 限幅、映射目标油门并应用电机滞后。wall-rally route 只包裹 `InitTracker`，没有挂载 JuggleRL 的 `PIDRateController_flightmare`。
+- 若后续比较 CTBR，将建立独立 AeroWall action adapter 与等预算实验；当前 PRT actor/checkpoint 与直驱 rotor command 保持一致。
 - 恢复判据的距离、速度、姿态容差及持续时间须在开发集上依据可达性冻结。当前不预先设定会压制必要机动的姿态阈值。
 - 恢复统计同时给出失败/超时数量。只有顺利接回的片段不能证明完整恢复能力。
 

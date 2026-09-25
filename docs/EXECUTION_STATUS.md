@@ -1,11 +1,18 @@
 # AeroWall 执行状态
 
-## 最新决策：参考约束对照结束
+> **现行实施依据：** [HCSP 技能升级与能力保持实施计划](plans/2026-09-24-hcsp-skill-upgrade-implementation-plan.md)。Part 状态见 [Part 1–14 进度表](part1-14-progress.md)。
 
-参考约束 PPO 25 次更新完成并评测审计：43/100 碰墙、1/100 接回，低于初始化3/100。约束显著减少动作漂移但未解决任务，按预定标准停止追加此类微调。旧无约束100次训练亦已结束。本批无运行中的训练或评测。下一步转向构造性真实控制可达性试验；完整目标尚未实现。详情见《AeroWall参考约束对照》。
+## 最新状态：2026-09-25
 
+AeroWallRotorCommandResponseCounterfactualV1 已按预注册完成：同 seed 9524、同 12 个 frozen Launch handoff、同一 V6 Launch／Tanh Hit／C350 Recover，运行一个 fresh control 与八个 ±0.10 单 rotor command 处理，共 108 个自然续跑。每个处理完成 120 条早期 action override 记录；9 臂 post-reset physical/FSM state SHA256 相同，第一步 actor action 与来源／control 一致；每臂 12/12 首次机体接触均由 PhysX sidecar 对应核验，callback errors 为 0。
 
-## 最新核验摘要：恢复技能第 50 次更新评测后
+局部 world-y 速度规则通过了 rotor-1、rotor-2、rotor-3 的负向处理，三个都是 12/12 案朝 matched legal reference，速度效应绝对值中位数分别为 0.0361、0.0265、0.0253 m/s。Rotor-1／2 负向新增 3／2 案非法接触，按预注册规则拒绝候选使用；rotor-3 负向未新增安全或球越界失败，是唯一未被该安全规则排除的局部信号，但合法首触仍为 3/12（control 3/12）、径向误差只改善约 0.0012 m，平均 rallies 为 0。局部动作敏感性不等于任务提升或 P2 通过。
+
+复现记录显示 Torch、NumPy、CUDA RNG 指纹和九臂 post-reset state 相同，但 evaluator 没有 seed Python stdlib random，其指纹跨进程不同。该限制已写入报告；后续独立复核应显式 seed 所有 RNG 并使用未触碰的 case bank。
+
+正式 C350 保持；P2 gate=false，不训练、不晋升；P3–P6 继续 gated。详细结果见 [AeroWall rotor-command response 报告](aerowall-rotor-command-response-counterfactual-v1.md)、[预注册](plans/2026-09-25-aerowall-rotor-command-response-counterfactual-v1.md)、[机器分析](../artifacts/wall-skill-upgrade-v3/launch-diagnostics/reproducibility/aerowall-rotor-command-response-counterfactual-v1-analysis-s9524.json)，以及 [执行记录](wall-skill-upgrade-v3-execution.md)。
+
+## 历史核验摘要：恢复技能第 50 次更新评测后
 
 完整计划仍未完成。以下优先于后面的历史状态；当前仍处于单次击墙接回开发阶段，没有正式测试成绩。
 
@@ -23,7 +30,7 @@
 
 当前关键瓶颈：两个恢复对照均有相同 37/100 场在恢复 actor 首次执行前失败，执行分支已与实际观测逐步核对。只训练冻结出球后的恢复分支无法修复这些已记录的前段失败，必须开放迎球与出球阶段的学习。
 
-两项恢复对照已完成既定累计 100 次更新，退出/报告均通过，重载动作一致且冻结参数不变。最终固定评测与事件审计已完成：固定回位 1/100 接回、预测参考 0/100，均低于第 50 次的 3/100、4/100；未达到门槛。两项第 75 次 checkpoint 已启动补评。`single-recovery-transfer-dev-001` 已由身份校验的恢复进程在原对照结束后自动恢复，未重新初始化，继续使用此前选定的预测参考第 50 次 actor。运行状态需以 138 上报告和实际 PID 为准，不据本文重复启动。
+两项恢复对照已完成既定累计 100 次更新，退出/报告均通过，重载动作一致且冻结参数不变。最终固定评测与事件审计已完成：固定回位 1/100 接回、预测参考 0/100，均低于第 50 次的 3/100、4/100；未达到门槛。两项第 75 次 checkpoint 已启动补评。`single-recovery-transfer-dev-001` 已由身份校验的恢复进程在原对照结束后自动恢复，未重新初始化，继续使用此前选定的预测参考第 50 次 actor。运行状态需以 服务器报告和实际进程 为准，不据本文重复启动。
 
 更新：单策略转移训练已完成 25 次更新且退出/报告通过，训练中 0/4754 个结束 episode 接回，不能称为改善；固定评测 `single-recovery-transfer-eval-25-01` 已启动。第 75 次的两项恢复补评仍在运行。
 
@@ -55,7 +62,7 @@
 
 - 本轮为实质进展：新增项目 aerowall/rally_events.py，实现按 FOUND/PERSIST/LOST 生命周期去重的回合状态机。合法拍面—一次墙碰—下一次合法拍面才完成回合；区分物理回合与目标联合成功，墙碰后发布下一目标，最后一次拍面击球同时开启下个候选回合。
 - 明确处理重复拍面/墙碰、同一步顺序不明、非法接触优先、拍面滑向非拍面、选择性重置、终止与时间截断。没有增加倾角/翻转限制或提前定义奖励。
-- 九项规则测试在本机和 138 独立 Python 环境通过。真实 singlejuggle-eval-005 的 4,440 条接触记录重现原有 1,442 次拍面冲量，误计壁球回合为 0。证据 docs/rally-recording-audit.json。这是负对照，不能当作真实壁球成功。
+- 九项规则测试在本机和独立 Python 环境通过。真实 singlejuggle-eval-005 的 4,440 条接触记录重现原有 1,442 次拍面冲量，误计壁球回合为 0。证据 docs/rally-recording-audit.json。这是负对照，不能当作真实壁球成功。
 - 新增 GPU 接触点读取模块，保留原求解器设置，生命周期由 PhysX 接触对报告驱动。16 个原生球墙物理试验 wall-contact-events-01 均只产生一次墙碰记分，均有离开事件、反弹和有效前表面接触点；墙碰独立于拍面时，状态机没有计出回合。
 - 该试验 CPU 数据出现 61 个无效法向点；GPU 点落在墙前表面，适合继续验证目标位置计分。不能使用原先墙碰报告的 CPU 零坐标来判定命中目标。具体位置误差、模块/报告哈希见 docs/wall-contact-events-evidence.json。
 - GPU 读取当前每环境创建独立视图，尚未验证大规模吞吐。当前仅实现接触/规则模块，尚未集成为完整 WallRally 环境，也没有真实拍面—墙—拍面闭环成功或壁球训练结果。
@@ -108,7 +115,7 @@
 
 ## 当前状态：2026-09-21 00:43（优先于下方历史记录）
 
-- 已按项目隔离方式直接下载到 138：作者固定 README 链接、HTTPS 校验、SHA-256 留档、gzip 与 115,011 个归档条目审核通过。只解压到 AeroWall 的 third_party，未更改系统驱动、默认编译器或全局 shell。作者镜像没有独立官方校验值，因此来源真实性仍不能由这些检查证明。
+- 已按项目隔离方式直接下载到训练服务器：作者固定 README 链接、HTTPS 校验、SHA-256 留档、gzip 与 115,011 个归档条目审核通过。只解压到 AeroWall 的 third_party，未更改系统驱动、默认编译器或全局 shell。作者镜像没有独立官方校验值，因此来源真实性仍不能由这些检查证明。
 - 512 环境短 PPO 已通过：3 次更新、98,304 次环境转换，训练循环 8.492 秒，综合吞吐约 11,576 次/秒，checkpoint 重载动作误差 0。暂定开发并行规模 512；这不是持续垫球成功率。
 - 球墙标定通过：两种时间步 0.02/0.01 秒各 1,000 个相同条件，共 2,000 次物理撞击。均仅一次接触进入、无漏碰或错误配对、碰撞前后机械能未增长；反弹法向速度最大差异 0.151%。证据 runs/ball-wall-calibration-02.json 及分时间步逐次记录。
 - 实测墙材质 0.65–0.95 对应有效球墙恢复系数约 0.726–0.875，接近两材质恢复系数平均值。不能把材质范围当成有效范围；正式任务范围尚未冻结。
@@ -161,11 +168,11 @@
 
 ## 已验证
 
-- 项目：`/home/public/Workspace/shy/Code/aerowall`；独立 Python 3.10.21 环境：`/home/public/Workspace/boweiy/mambaforge/envs/aerowall`。
+- 项目：`.`；独立 Python 3.10.21 环境：`<AEROWALL_CONDA_ENV>`。
 - 三项上游及主干子模块固定版本，见 `docs/upstream-lock.json`；未导入或复用旧穿缝项目环境、代码或运行时。
 - JuggleRL 主干保持原样。动作分析已完成文献/源码准备，尚未完成实际 checkpoint 四阶段重放，见 `docs/ACTION_ANALYSIS.md`。
 - 已直接下载并隔离解压作者 README 链接的 Isaac Sim 包；没有修改系统驱动、默认编译器或全局 shell。
-- 138 上 8 项路径与解压保护测试通过。归档 115,011 个条目完整审核，无危险路径/链接/特殊文件，gzip 完整性通过；安全解压 115,009 个项目内条目。
+- Linux 环境上 8 项路径与解压保护测试通过。归档 115,011 个条目完整审核，无危险路径/链接/特殊文件，gzip 完整性通过；安全解压 115,009 个项目内条目。
 - 最小 GPU 物理测试 `runs/gate1-native-02.json` 通过：A100、Torch 2.0.1+cu118、GPU dynamics 开启、200 步、4 次反弹，CUDA 状态有限且在界内。此结果仅证明一个球和地面的最小物理路径，不能替代上游无人机、16 环境隔离、PPO 或渲染验收。
 - 运行时使用原版 `omni.isaac.sim.python.kit`。Kit 实际日志位于项目 `.cache/kit/logs/Kit/Isaac-Sim/2023.1/`。HOME 未改动；启动器移除了作者脚本加入的空搜索路径与项目外父目录，保持运行时内部库顺序。
 

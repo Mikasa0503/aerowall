@@ -3,7 +3,7 @@
 set -eo pipefail
 ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 export AEROWALL_ROOT="$ROOT"
-export CONDA_PREFIX="${AEROWALL_ENV:-/home/public/Workspace/boweiy/mambaforge/envs/aerowall}"
+export CONDA_PREFIX="${AEROWALL_ENV:-$ROOT/.cache/envs/aerowall}"
 export PATH="$CONDA_PREFIX/bin:/usr/bin:/bin"
 export PYTHONNOUSERSITE=1
 unset PYTHONPATH PYTHONHOME LD_PRELOAD LD_LIBRARY_PATH
@@ -41,6 +41,10 @@ else
         echo "Missing Isaac Sim runtime: $ISAACSIM_PATH/setup_conda_env.sh" >&2
         exit 21
     fi
+    # The runtime is commonly mounted into a project through a symlink. Resolve
+    # it before filtering the setup script's PYTHONPATH and library paths.
+    ISAACSIM_PATH="$(realpath -- "$ISAACSIM_PATH")"
+    export ISAACSIM_PATH
     # Preserve Isaac Sim's library and Python setup order, without upstream SSH DISPLAY changes.
     source "$ISAACSIM_PATH/setup_conda_env.sh"
     # This author archive adds empty and ../../../ entries. Keep the runtime's

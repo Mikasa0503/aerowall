@@ -1,0 +1,228 @@
+{
+  "schema_version": 3,
+  "experiment": "aerowall_skill_upgrade_v3",
+  "observation_version": "aerowall_goal_v1",
+  "reward_version": "legacy",
+  "source": {
+    "runtime_workspace": ".",
+    "hcsp_commit": "009961b8f5702dd0c1c943cef0e01e09dfcd138d",
+    "isaac_sim": "2023.1.0-hotfix.1",
+    "control_hz": 50,
+    "physics_dt_seconds": 0.0025,
+    "physics_substeps": 8,
+    "aerowall_framework": "AeroWall wall-volley skill framework; custom environment/policy/reward wrappers on pinned HCSP physics and MAPPO"
+  },
+  "baseline": {
+    "policy": "AeroWallLaunchRecoveryPolicy",
+    "route": [
+      "launch",
+      "c350_recovery"
+    ],
+    "observation_version": "legacy",
+    "reward_version": "legacy",
+    "case_mode": "fixed",
+    "horizon_steps": 600,
+    "termination_mode": "strict",
+    "initial_case_bank": {
+      "path": "configs/wall_cases/fixed-128-v1.json",
+      "sha256": "e65ab1ef8147a4f19e7c02ddd10546bc1be0d62ac090c697de3859f4d7616735"
+    },
+    "accepted_report": {
+      "path": "runs/v2-legacy-fixed-128.json",
+      "sha256": "a634b80819c809b70a3a957abe9a17e023e0c35bb8e6310ebc8ca1165cca2eaa",
+      "centered_prefix_rallies_mean": 8.0,
+      "safety_failure_rate": 0.0,
+      "physx_corroborated_ball_events": 1152,
+      "physx_corroborated_wall_events": 1152
+    },
+    "demo_protocol": {
+      "path": "docs/demo-acceptance-2026-09-23.md",
+      "presentation_rallies": 25,
+      "comparable_to_fixed_600_step_baseline": false
+    }
+  },
+  "checkpoints": {
+    "launch": {
+      "path": "checkpoints/launch-wall.pt",
+      "sha256": "1886527f2bb3f60f28d59c94882bee60eef5ee7af180d36aaeaff729b28aa40e",
+      "observation_version": "legacy",
+      "role": "formal_fixed_throw"
+    },
+    "c350_recovery": {
+      "path": "checkpoints/c-u350.pt",
+      "sha256": "4e31d16bbe2f3cd82ee6d25a519ed3650b17b91f91a1d40391f9310f0407a659",
+      "observation_version": "legacy",
+      "role": "formal_c350_recovery"
+    },
+    "experimental_intercept": {
+      "path": "runs/v2-intercept-event-u50-s6101.pt",
+      "sha256": "289b319b425ef3f425e54a5a0286e7e56acf849d3d5ea6ade8a1a3d8fa09ba22",
+      "observation_version": "relative_v2",
+      "promotion_status": "rejected; experimental source only"
+    },
+    "experimental_hit": {
+      "path": "runs/v2-hit-event-u50-s6101.pt",
+      "sha256": "1109fce0b28c5bc293cc4e145f626ac887846b816260328e0b835f47d99a8292",
+      "observation_version": "relative_v2",
+      "promotion_status": "rejected; experimental source only"
+    },
+    "experimental_recover": {
+      "path": "runs/v2-recover-event-u50-s6101.pt",
+      "sha256": "7110811cd15f236b896ceb9c3cf20bf876e3756ea7732fd82f705574a27de3da",
+      "observation_version": "relative_v2",
+      "promotion_status": "rejected; experimental source only"
+    }
+  },
+  "observation_versions": {
+    "legacy": "Existing 46-wide HCSP GoTo prefix and wall-task features; frozen checkpoints retain this meaning.",
+    "relative_v2": "Historical 46-wide view retained verbatim for checkpoint and report reproduction.",
+    "relative_v3": "Correct body-frame relative velocity; distinct semantic version despite the same width.",
+    "aerowall_goal_v1": "AeroWall's 48-wide extension: the unchanged 46 legacy features plus a normalized two-channel wall-goal command."
+  },
+  "reward_versions": [
+    "legacy",
+    "causal_v1",
+    "causal_v2",
+    "aerowall_causal_v3"
+  ],
+  "fsm": {
+    "hit_enter_seconds": 0.18,
+    "hit_exit_seconds": 0.22,
+    "min_dwell_steps": 2,
+    "physical_contact_priority": true,
+    "artificial_hit_owner": "hold until legal contact, expired crossing, or explicit failure"
+  },
+  "reset": {
+    "artificial_ratio": 0.7,
+    "retain_fixed_ratio": 0.0,
+    "randomized_incoming_ratio": 0.0,
+    "real_policy_prefix_ratio": 0.3,
+    "sampling_note": "70% of resets use legal artificial Hit starts. The other 30% start from the fixed canonical state and reach Hit by running the frozen formal launch/recovery prefix online; no stored state bank is used for this prefix."
+  },
+  "trajectory": {
+    "contact_height_m": 2.18,
+    "wall_x_m": 0.2,
+    "wall_y_bounds_m": [
+      -2.8,
+      2.8
+    ],
+    "wall_z_bounds_m": [
+      0.3,
+      7.7
+    ],
+    "restitution_x": 0.8,
+    "feasibility_is_diagnostic_only": true
+  },
+  "training": {
+    "pilot_seeds": [
+      6201
+    ],
+    "max_frames": 409600,
+    "save_every_updates": 10,
+    "num_envs": 128,
+    "reward_version": "legacy",
+    "fixed_incoming": true,
+    "fixed_initial_state": {
+      "drone_position_m": [
+        1.5,
+        0.0,
+        2.0
+      ],
+      "ball_position_m": [
+        1.5,
+        0.0,
+        4.8
+      ],
+      "ball_velocity_mps": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "wall_goal_y_bounds_m": [
+      -0.3,
+      0.3
+    ],
+    "wall_goal_z_bounds_m": [
+      3.8,
+      4.2
+    ],
+    "hit_actor_warmstart_ref": "c350_recovery",
+    "train_skill": "hit",
+    "start_after_gates": [
+      "T1",
+      "T2",
+      "T3",
+      "T4"
+    ],
+    "three_seed_expansion_requires_pilot_signal": true,
+    "case_mode": "train",
+    "launch_checkpoint_ref": "launch",
+    "recovery_checkpoint_ref": "c350_recovery",
+    "launch_observation_version": "legacy",
+    "recovery_observation_version": "legacy",
+    "skill_observation_version": "aerowall_goal_v1"
+  },
+  "evaluation": {
+    "horizon_steps": 600,
+    "termination_mode": "strict",
+    "fixed_bank": {
+      "path": "configs/wall_cases/fixed-128-v1.json",
+      "sha256": "e65ab1ef8147a4f19e7c02ddd10546bc1be0d62ac090c697de3859f4d7616735"
+    },
+    "training_bank": {
+      "path": "configs/wall_cases/train-128-v1.json",
+      "sha256": "b29e5f3f483fbb38cfbbd20bfe1b3d1a8d9bacfbe0e287d9880fd46f043c9172"
+    },
+    "development_challenge_banks": [
+      {
+        "path": "configs/wall_cases/heldout-128-v1.json",
+        "sha256": "963a887a4c48abac3d7e25771e38856426345b8ac73f852248fcdadef6643947"
+      },
+      {
+        "path": "configs/wall_cases/heldout-128-v2.json",
+        "sha256": "8fa2cacb6e9a030f5f52266b8d99aa3d2deb866f5099091ff67980bf74eac36f"
+      },
+      {
+        "path": "configs/wall_cases/heldout-128-v3.json",
+        "sha256": "ecec4fffdbff6439a1eda5ad904d76ecccd5b0826270149de9c70f4b6f709650"
+      },
+      {
+        "path": "configs/wall_cases/heldout-128-v4.json",
+        "sha256": "666709adb50f350161a51112695909fa0cf304d829685be41b35ae2f8cfe8f80"
+      }
+    ],
+    "final_frozen_test_bank": null,
+    "final_test_note": "Existing held-out banks have informed development; do not report them as a newly frozen final test.",
+    "num_envs": 128,
+    "seed": 123
+  },
+  "acceptance": {
+    "fixed_centered_prefix_rallies_drop_max": 1.0,
+    "drone_ground_rate_may_increase": false,
+    "drone_wall_rate_may_increase": false,
+    "illegal_contact_rate_may_increase": false,
+    "heldout_legal_second_hit_rate_must_improve": true,
+    "heldout_three_rally_rate_must_improve": true,
+    "all_scored_events_require_physx_audit": true,
+    "formal_training_seeds_required": 3
+  },
+  "skills": {
+    "launch": {
+      "checkpoint_ref": "launch",
+      "observation_version": "legacy",
+      "role": "frozen_formal_throw"
+    },
+    "hit": {
+      "checkpoint_ref": null,
+      "sha256": null,
+      "observation_version": "aerowall_goal_v1",
+      "role": "trainable"
+    },
+    "recover": {
+      "checkpoint_ref": "c350_recovery",
+      "observation_version": "legacy",
+      "role": "frozen_formal_c350"
+    }
+  }
+}

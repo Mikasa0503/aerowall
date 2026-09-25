@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "distribution": "AeroWallLateralInterceptV1",
+  "training_skill": "intercept",
+  "observation_version": "relative_v3",
+  "sampling": "independent_uniform_per_reset",
+  "ranges": {
+    "ball_position_y_m": [-0.85, 0.85],
+    "ball_velocity_y_mps": [-0.7, 0.7]
+  },
+  "retained_standard_training_ranges": {
+    "ball_position_x_m": [1.35, 1.65],
+    "ball_position_z_m": [4.3, 5.0],
+    "ball_velocity_x_mps": [-0.15, 0.15],
+    "ball_velocity_z_mps": [-0.25, 0.0],
+    "drone_position_x_m": [1.35, 1.65],
+    "drone_position_y_m": [-0.15, 0.15]
+  },
+  "notes": [
+    "Only lateral ball position and velocity ranges change; the existing RALLY train sampler supplies all other state fields.",
+    "Position and velocity are sampled independently, covering inward and outward lateral motion without replaying a held-out case bank.",
+    "This development distribution covers the previously observed v4 challenge range with margin; it is not the frozen final test set."
+  ]
+}

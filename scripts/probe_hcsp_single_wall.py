@@ -15,6 +15,7 @@ def main():
     p.add_argument('--dt',type=float,default=0.01)
     p.add_argument('--priority',choices=['firstpass','set','attack'],default='firstpass')
     p.add_argument('--hit-memory',action='store_true')
+    p.add_argument('--wall-x',type=float,default=0.)
     a=p.parse_args();a.output=a.output.resolve();a.output.parent.mkdir(parents=True,exist_ok=True)
     report={'status':'initializing','pid':os.getpid(),'scope':'Single physical drone; HCSP role replication and arbitration adapter; physical wall','seed':a.seed}
     def record(**kw):
@@ -37,6 +38,7 @@ def main():
         OmegaConf.resolve(cfg);OmegaConf.set_struct(cfg,False)
         cfg.single_priority=a.priority
         cfg.single_hit_memory=a.hit_memory
+        cfg.single_wall_x=a.wall_x
         OmegaConf.save(cfg,a.output.with_suffix('.yaml'))
         sys.argv=[sys.argv[0],'--portable','--portable-root',str(ROOT/'.cache/kit')]
         app=init_simulation_app(cfg)
@@ -94,7 +96,7 @@ def main():
         outcomes=[];trace={'ball':[],'drone':[],'high':[],'active':[],'hits':[],'ball_velocity':[],'executed_high':[],'physical_drone':[],'already_hit':[],'last_hit_side':[],'executed_skill':[],'executed_role':[],'executed_action':[],'contact_impulse':[],'contact_entry':[],'wall_returns':[]}
         with torch.no_grad():
             td=env.reset()
-            record(initial_ball=(base.ball.get_world_poses()[0]-base.envs_positions[:,None,:]).cpu().tolist(),initial_drone=base.physical_drone.get_state().cpu().tolist(),wall={'center':[0,0,4],'size':[0.2,8,8]})
+            record(initial_ball=(base.ball.get_world_poses()[0]-base.envs_positions[:,None,:]).cpu().tolist(),initial_drone=base.physical_drone.get_state().cpu().tolist(),wall={'center':[a.wall_x,0,4],'size':[0.2,8,8]})
             for step in range(a.steps):
                 td=policy(td,deterministic=a.deterministic)
                 trace['high'].append(td['agents','high_level_action'].cpu().numpy().copy())

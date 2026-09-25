@@ -64,7 +64,7 @@ class HCSPSingleWall(Coselfplay_Phase_one):
         self.physical_drone=self.drone
         self.drone=SingleBodyRoles(self.physical_drone,self)
         material=PhysicsMaterial('/World/Physics_Materials/single_wall_material',restitution=0.8,static_friction=0.,dynamic_friction=0.)
-        FixedCuboid('/World/envs/env_0/single_wall',position=np.array([0.,0.,4.]),scale=np.array([.2,8.,8.]),physics_material=material)
+        FixedCuboid('/World/envs/env_0/single_wall',position=np.array([self.cfg.get('single_wall_x',0.),0.,4.]),scale=np.array([.2,8.,8.]),physics_material=material)
         return paths
     def __init__(self,cfg,headless):
         super().__init__(cfg,headless)
@@ -157,7 +157,7 @@ class HCSPSingleWall(Coselfplay_Phase_one):
         out=self._compute_state_and_obs(is_step=True)
         bp=self.ball_pos[:,0];dp=self.physical_drone.pos[:,0]
         ground=(bp[:,2]<=self.ball_radius)|(dp[:,2]<.3)
-        bounds=(bp[:,0]<-.1)|(bp[:,0]>8)|(bp[:,1].abs()>4)|(bp[:,2]>8)|(dp[:,0]<.5)|(dp[:,0]>8)|(dp[:,1].abs()>4)
+        bounds=(bp[:,0]<self.cfg.get('single_wall_x',0.)-.1)|(bp[:,0]>8)|(bp[:,1].abs()>4)|(bp[:,2]>8)|(dp[:,0]<self.cfg.get('single_wall_x',0.)+.5)|(dp[:,0]>8)|(dp[:,1].abs()>4)
         terminated=(ground|bounds).unsqueeze(-1)
         truncated=(self.progress_buf>=self.max_episode_length).unsqueeze(-1)
         self.stats['episode_len']=self.progress_buf[:,None].float()

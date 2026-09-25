@@ -1,0 +1,133 @@
+{
+  "evaluation_seconds": 4922.890255309641,
+  "jobs": [
+    {
+      "evaluation_seed": 7101,
+      "name": "seed-6101-constant",
+      "returncode": 0,
+      "seconds": 175.66966722533107
+    },
+    {
+      "evaluation_seed": 7102,
+      "name": "seed-6101-constant",
+      "returncode": 0,
+      "seconds": 147.33889626711607
+    },
+    {
+      "evaluation_seed": 7103,
+      "name": "seed-6101-constant",
+      "returncode": 0,
+      "seconds": 152.21908638998866
+    },
+    {
+      "evaluation_seed": 7101,
+      "name": "seed-6101-center_band",
+      "returncode": 0,
+      "seconds": 251.44111730903387
+    },
+    {
+      "evaluation_seed": 7102,
+      "name": "seed-6101-center_band",
+      "returncode": 0,
+      "seconds": 250.0549209229648
+    },
+    {
+      "evaluation_seed": 7103,
+      "name": "seed-6101-center_band",
+      "returncode": 0,
+      "seconds": 292.89985543489456
+    },
+    {
+      "evaluation_seed": 7101,
+      "name": "seed-6102-constant",
+      "returncode": 0,
+      "seconds": 203.13746047392488
+    },
+    {
+      "evaluation_seed": 7102,
+      "name": "seed-6102-constant",
+      "returncode": 0,
+      "seconds": 205.6376609876752
+    },
+    {
+      "evaluation_seed": 7103,
+      "name": "seed-6102-constant",
+      "returncode": 0,
+      "seconds": 199.99284259602427
+    },
+    {
+      "evaluation_seed": 7101,
+      "name": "seed-6102-center_band",
+      "returncode": 0,
+      "seconds": 252.03503538668156
+    },
+    {
+      "evaluation_seed": 7102,
+      "name": "seed-6102-center_band",
+      "returncode": 0,
+      "seconds": 248.707550983876
+    },
+    {
+      "evaluation_seed": 7103,
+      "name": "seed-6102-center_band",
+      "returncode": 0,
+      "seconds": 251.4229896888137
+    },
+    {
+      "evaluation_seed": 7101,
+      "name": "seed-6103-constant",
+      "returncode": 0,
+      "seconds": 251.27980341762304
+    },
+    {
+      "evaluation_seed": 7102,
+      "name": "seed-6103-constant",
+      "returncode": 0,
+      "seconds": 247.47253715991974
+    },
+    {
+      "evaluation_seed": 7103,
+      "name": "seed-6103-constant",
+      "returncode": 0,
+      "seconds": 251.1868911087513
+    },
+    {
+      "evaluation_seed": 7101,
+      "name": "seed-6103-center_band",
+      "returncode": 0,
+      "seconds": 252.37603399530053
+    },
+    {
+      "evaluation_seed": 7102,
+      "name": "seed-6103-center_band",
+      "returncode": 0,
+      "seconds": 291.1742386035621
+    },
+    {
+      "evaluation_seed": 7103,
+      "name": "seed-6103-center_band",
+      "returncode": 0,
+      "seconds": 247.34720545634627
+    },
+    {
+      "evaluation_seed": 7101,
+      "name": "frozen-c350",
+      "returncode": 0,
+      "seconds": 250.42097920924425
+    },
+    {
+      "evaluation_seed": 7102,
+      "name": "frozen-c350",
+      "returncode": 0,
+      "seconds": 252.85010301321745
+    },
+    {
+      "evaluation_seed": 7103,
+      "name": "frozen-c350",
+      "returncode": 0,
+      "seconds": 248.22537967935205
+    }
+  ],
+  "spec_sha256": "9f77489242cc550366a8e8043b11ae3bfaeec61725fc9a886a327eebf62c9aa6",
+  "status": "evaluation_complete"
+}

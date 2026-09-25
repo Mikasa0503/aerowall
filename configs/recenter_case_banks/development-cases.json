@@ -1,0 +1,287 @@
+{
+  "cases": [
+    {
+      "case_id": "development-light-left-09",
+      "delay_seconds": 0.169607,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "development-light-right-05",
+      "delay_seconds": 0.1548595,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "development-light-left-07",
+      "delay_seconds": 0.1796427,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "development-light-left-00",
+      "delay_seconds": 0.1669145,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "development-light-right-03",
+      "delay_seconds": 0.1268343,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "development-medium-right-06",
+      "delay_seconds": 0.1750939,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "development-light-left-04",
+      "delay_seconds": 0.1960363,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "development-medium-left-07",
+      "delay_seconds": 0.1834749,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "development-light-right-02",
+      "delay_seconds": 0.1713395,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "development-medium-left-09",
+      "delay_seconds": 0.1330729,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "development-medium-left-00",
+      "delay_seconds": 0.157726,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "development-light-right-08",
+      "delay_seconds": 0.1500619,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "development-light-right-09",
+      "delay_seconds": 0.1939552,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "development-light-right-06",
+      "delay_seconds": 0.1728765,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "development-light-left-03",
+      "delay_seconds": 0.1720914,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "development-light-right-00",
+      "delay_seconds": 0.1402354,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "development-medium-right-03",
+      "delay_seconds": 0.1840903,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "development-medium-left-06",
+      "delay_seconds": 0.1308738,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "development-medium-right-05",
+      "delay_seconds": 0.1451459,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "development-medium-right-00",
+      "delay_seconds": 0.1374359,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "development-medium-left-05",
+      "delay_seconds": 0.1697225,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "development-medium-right-02",
+      "delay_seconds": 0.1429336,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "development-light-left-05",
+      "delay_seconds": 0.1674549,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "development-light-right-01",
+      "delay_seconds": 0.1321382,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "development-light-right-04",
+      "delay_seconds": 0.1943067,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "development-light-right-07",
+      "delay_seconds": 0.1482748,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "development-medium-left-03",
+      "delay_seconds": 0.1569238,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "development-medium-left-08",
+      "delay_seconds": 0.1867448,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "development-light-left-08",
+      "delay_seconds": 0.1702147,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "development-light-left-01",
+      "delay_seconds": 0.1489961,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "development-medium-right-07",
+      "delay_seconds": 0.1219296,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "development-light-left-02",
+      "delay_seconds": 0.1242156,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "development-medium-right-01",
+      "delay_seconds": 0.1951154,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "development-light-left-06",
+      "delay_seconds": 0.1655126,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "development-medium-right-09",
+      "delay_seconds": 0.1858153,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "development-medium-left-01",
+      "delay_seconds": 0.1403373,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "development-medium-right-04",
+      "delay_seconds": 0.1726665,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "development-medium-left-04",
+      "delay_seconds": 0.1399314,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "development-medium-right-08",
+      "delay_seconds": 0.1464517,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "development-medium-left-02",
+      "delay_seconds": 0.1767078,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    }
+  ],
+  "kind": "development",
+  "schema_version": 1,
+  "seed": 2001
+}

@@ -1,0 +1,15 @@
+{
+  "calibration_report_sha256": "37fbc3eee1d0664379baed98b185e6999e228c764802ded44c4bfa96fc175934",
+  "light_delta_vy": 0.25,
+  "medium_delta_vy": 0.5,
+  "rates": {
+    "0.25": 0.0,
+    "0.5": 0.0,
+    "0.75": 0.0,
+    "1.0": 0.0,
+    "1.25": 0.0,
+    "1.5": 0.0
+  },
+  "selection_method": "physical_severity_fallback",
+  "status": "selected"
+}

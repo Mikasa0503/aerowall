@@ -6,17 +6,32 @@ from pathlib import Path, PurePosixPath
 import posixpath
 import tarfile
 
-PREFIX = "home/chenyinuo/isaac-sim/isaac-sim-2023.1.0-hotfix.1"
+RUNTIME_PATH = ("isaac-sim", "isaac-sim-2023.1.0-hotfix.1")
 REQUIRED = {"setup_conda_env.sh", "setup_python_env.sh", "python.sh", "kit/kit"}
 
 
-def check_member(member):
+def discover_prefix(path):
+    """Find the single home-relative Isaac Sim root in an archive."""
+    prefixes = set()
+    with tarfile.open(path, "r|gz") as archive:
+        for member in archive:
+            parts = PurePosixPath(member.name.rstrip("/")).parts
+            if (len(parts) >= 4 and parts[0] == "home"
+                    and parts[1] not in ("", ".", "..")
+                    and parts[2:4] == RUNTIME_PATH):
+                prefixes.add("/".join(parts[:4]))
+    if len(prefixes) != 1:
+        raise ValueError(f"expected one home-relative runtime root, found {len(prefixes)}")
+    return prefixes.pop()
+
+
+def check_member(member, prefix):
     name = member.name.rstrip("/")
     parts = PurePosixPath(name).parts
     if name.startswith("/") or ".." in parts:
         return "absolute or parent-traversing member path"
-    if name != PREFIX and not name.startswith(PREFIX + "/"):
-        if member.isdir() and PREFIX.startswith(name + "/"):
+    if name != prefix and not name.startswith(prefix + "/"):
+        if member.isdir() and prefix.startswith(name + "/"):
             return None
         return "outside expected runtime root"
     if not (member.isfile() or member.isdir() or member.issym() or member.islnk()):
@@ -29,7 +44,7 @@ def check_member(member):
             return "absolute link target"
         resolved = posixpath.normpath(posixpath.join(posixpath.dirname(name), target)
                                      if member.issym() else target)
-        if resolved != PREFIX and not resolved.startswith(PREFIX + "/"):
+        if resolved != prefix and not resolved.startswith(prefix + "/"):
             return "link target escapes runtime root"
     return None
 
@@ -39,6 +54,14 @@ def audit(path):
     with gzip.open(path, "rb") as stream:
         while stream.read(8 * 1024 * 1024):
             pass
+    try:
+        prefix = discover_prefix(path)
+    except ValueError as error:
+        return {"archive": str(path), "gzip_integrity": "passed", "expected_prefix": None,
+                "members": 0, "unpacked_bytes": 0,
+                "problems": [{"path": "", "reason": str(error), "link": ""}],
+                "missing_required": sorted(REQUIRED), "path_layout_passed": False,
+                "authenticity": "not_proven_by_archive_checks", "execution": "not_performed"}
     found = set()
     count = 0
     unpacked_bytes = 0
@@ -47,12 +70,12 @@ def audit(path):
         for member in archive:
             count += 1
             unpacked_bytes += member.size
-            problem = check_member(member)
+            problem = check_member(member, prefix)
             if problem:
                 problems.append({"path": member.name, "reason": problem, "link": member.linkname})
-            if member.name.startswith(PREFIX + "/"):
-                found.add(member.name[len(PREFIX) + 1:])
-    return {"archive": str(path), "gzip_integrity": "passed", "expected_prefix": PREFIX,
+            if member.name.startswith(prefix + "/"):
+                found.add(member.name[len(prefix) + 1:])
+    return {"archive": str(path), "gzip_integrity": "passed", "expected_prefix": prefix,
             "members": count, "unpacked_bytes": unpacked_bytes, "problems": problems,
             "missing_required": sorted(REQUIRED - found),
             "path_layout_passed": not problems and REQUIRED <= found,

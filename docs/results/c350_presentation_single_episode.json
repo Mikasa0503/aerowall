@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "experiment": "C350 single-episode presentation run",
+  "status": "passed",
+  "protocol": "natural",
+  "stage": "RALLY",
+  "seed": 5001,
+  "parallel_environments": 1,
+  "policy_hz": 50,
+  "physics_dt_seconds": 0.0025,
+  "policy_horizon_steps": 4800,
+  "evaluation_config": "configs/c350_presentation_4800.json",
+  "evaluation_config_sha256": "6b825389fe864ddbef78e75f4aa7430b2d9fbdfb0ad74ced0f1008218f0526e1",
+  "checkpoint": "checkpoints/c-u350.pt",
+  "checkpoint_sha256": "4e31d16bbe2f3cd82ee6d25a519ed3650b17b91f91a1d40391f9310f0407a659",
+  "launch_checkpoint": "checkpoints/launch-wall.pt",
+  "launch_checkpoint_sha256": "1886527f2bb3f60f28d59c94882bee60eef5ee7af180d36aaeaff729b28aa40e",
+  "source_report_sha256": "c9dd6ff64759662cded9a79bf65751058f3d435666878f6ddac19e5a62312374",
+  "source_report_is_bundled": false,
+  "outcome": {
+    "env": 0,
+    "policy_steps": 1840,
+    "rallies": 25,
+    "max_streak": 25,
+    "caps": 26,
+    "walls": 26,
+    "failure": 1,
+    "failure_reason": "ball_ground",
+    "timed_out": false,
+    "safe10": true,
+    "safe15": true,
+    "contact_audit_passed": true
+  },
+  "contact_audit": {
+    "legal_events": 26,
+    "corroborated_events": 26,
+    "callback_errors": [],
+    "physical_reports": 1098,
+    "wall_events": 26,
+    "corroborated_wall_events": 26
+  },
+  "interpretation": "One presentation episode reached 25 rallies and ended on ball-ground contact at policy step 1840. This is a demonstration snapshot, not a reliability estimate."
+}

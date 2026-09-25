@@ -1,0 +1,707 @@
+{
+  "cases": [
+    {
+      "case_id": "formal-medium-left-09",
+      "delay_seconds": 0.1370264,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-medium-right-03",
+      "delay_seconds": 0.1509915,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-medium-right-07",
+      "delay_seconds": 0.1656934,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-medium-left-20",
+      "delay_seconds": 0.1824139,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-light-left-10",
+      "delay_seconds": 0.1682282,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-light-right-10",
+      "delay_seconds": 0.1267863,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-medium-left-21",
+      "delay_seconds": 0.1987845,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-light-left-01",
+      "delay_seconds": 0.1555297,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-medium-left-10",
+      "delay_seconds": 0.1478825,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-medium-left-11",
+      "delay_seconds": 0.1383869,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-light-right-20",
+      "delay_seconds": 0.181773,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-medium-left-22",
+      "delay_seconds": 0.1451608,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-light-right-22",
+      "delay_seconds": 0.1315669,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-medium-left-24",
+      "delay_seconds": 0.1727641,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-medium-right-16",
+      "delay_seconds": 0.1830322,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-medium-right-18",
+      "delay_seconds": 0.1818092,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-light-left-23",
+      "delay_seconds": 0.1949775,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-medium-right-02",
+      "delay_seconds": 0.1871996,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-medium-right-22",
+      "delay_seconds": 0.163903,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-light-right-23",
+      "delay_seconds": 0.1677375,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-light-right-04",
+      "delay_seconds": 0.1899929,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-light-right-02",
+      "delay_seconds": 0.1592312,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-light-right-06",
+      "delay_seconds": 0.1881329,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-medium-right-08",
+      "delay_seconds": 0.13595,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-medium-left-15",
+      "delay_seconds": 0.1580942,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-medium-right-09",
+      "delay_seconds": 0.1971241,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-medium-left-18",
+      "delay_seconds": 0.1449839,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-medium-left-00",
+      "delay_seconds": 0.1757793,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-medium-left-04",
+      "delay_seconds": 0.1331156,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-light-right-18",
+      "delay_seconds": 0.1414917,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-light-left-20",
+      "delay_seconds": 0.1965103,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-medium-left-07",
+      "delay_seconds": 0.1485373,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-medium-left-06",
+      "delay_seconds": 0.122283,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-light-right-21",
+      "delay_seconds": 0.1863051,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-medium-right-06",
+      "delay_seconds": 0.1828731,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-light-left-19",
+      "delay_seconds": 0.199264,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-light-left-04",
+      "delay_seconds": 0.1426382,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-light-right-14",
+      "delay_seconds": 0.1816193,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-light-right-15",
+      "delay_seconds": 0.1802518,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-light-right-13",
+      "delay_seconds": 0.1976744,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-medium-right-12",
+      "delay_seconds": 0.1856364,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-medium-left-05",
+      "delay_seconds": 0.1354693,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-medium-right-13",
+      "delay_seconds": 0.1337684,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-medium-right-11",
+      "delay_seconds": 0.1701231,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-medium-left-02",
+      "delay_seconds": 0.1683405,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-medium-right-23",
+      "delay_seconds": 0.1277966,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-medium-right-04",
+      "delay_seconds": 0.1545145,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-medium-left-23",
+      "delay_seconds": 0.1365013,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-medium-left-16",
+      "delay_seconds": 0.1308374,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-light-right-09",
+      "delay_seconds": 0.1280311,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-light-right-16",
+      "delay_seconds": 0.151419,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-light-left-12",
+      "delay_seconds": 0.1889542,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-light-right-11",
+      "delay_seconds": 0.1435773,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-light-left-00",
+      "delay_seconds": 0.1433099,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-light-left-16",
+      "delay_seconds": 0.174886,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-light-left-05",
+      "delay_seconds": 0.1741335,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-light-right-24",
+      "delay_seconds": 0.1337987,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-light-left-11",
+      "delay_seconds": 0.1495154,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-medium-left-19",
+      "delay_seconds": 0.1380545,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-light-right-12",
+      "delay_seconds": 0.1785083,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-medium-right-15",
+      "delay_seconds": 0.1311861,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-light-left-18",
+      "delay_seconds": 0.1554421,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-medium-left-12",
+      "delay_seconds": 0.1996345,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-medium-left-03",
+      "delay_seconds": 0.1643604,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-medium-left-13",
+      "delay_seconds": 0.1816931,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-light-left-15",
+      "delay_seconds": 0.1223123,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-medium-left-08",
+      "delay_seconds": 0.1693836,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-medium-right-10",
+      "delay_seconds": 0.1245584,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-medium-right-17",
+      "delay_seconds": 0.143822,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-light-right-17",
+      "delay_seconds": 0.1973793,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-light-left-07",
+      "delay_seconds": 0.1580672,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-medium-right-24",
+      "delay_seconds": 0.1912111,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-medium-right-20",
+      "delay_seconds": 0.1738026,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-light-left-08",
+      "delay_seconds": 0.1959455,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-light-left-22",
+      "delay_seconds": 0.1528168,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-light-left-13",
+      "delay_seconds": 0.1958002,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-light-left-24",
+      "delay_seconds": 0.1560804,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-medium-right-19",
+      "delay_seconds": 0.1222582,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-medium-right-00",
+      "delay_seconds": 0.1648207,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-light-right-08",
+      "delay_seconds": 0.1538195,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-light-right-07",
+      "delay_seconds": 0.1332425,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-light-right-01",
+      "delay_seconds": 0.1920053,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-light-left-21",
+      "delay_seconds": 0.1343618,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-medium-left-17",
+      "delay_seconds": 0.198169,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-light-right-19",
+      "delay_seconds": 0.1697431,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-light-left-17",
+      "delay_seconds": 0.1218871,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-medium-left-01",
+      "delay_seconds": 0.1496995,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-light-left-02",
+      "delay_seconds": 0.1481439,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-light-left-14",
+      "delay_seconds": 0.1719813,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-medium-right-05",
+      "delay_seconds": 0.1499776,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-light-right-00",
+      "delay_seconds": 0.1212233,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-medium-right-01",
+      "delay_seconds": 0.1679518,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-light-right-05",
+      "delay_seconds": 0.1791692,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-light-left-03",
+      "delay_seconds": 0.1394252,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-medium-left-14",
+      "delay_seconds": 0.1447532,
+      "delta_vy": -0.5,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-medium-right-21",
+      "delay_seconds": 0.1887858,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-medium-right-14",
+      "delay_seconds": 0.175558,
+      "delta_vy": 0.5,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-light-right-03",
+      "delay_seconds": 0.1467428,
+      "delta_vy": 0.25,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "formal-light-left-06",
+      "delay_seconds": 0.1942369,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "formal-light-left-09",
+      "delay_seconds": 0.1928209,
+      "delta_vy": -0.25,
+      "difficulty": "light",
+      "direction": "left"
+    }
+  ],
+  "kind": "formal",
+  "schema_version": 1,
+  "seed": 3001
+}

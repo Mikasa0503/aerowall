@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "reward_revision": 2,
+  "reward_logic_sha256": "0ec90fda95baec92cba313b0c37511a52ef820bfbd620b9aa1ba710f9312f1d7",
+  "hypothesis": "Scoring measured legal wall-contact position reduces lateral drift and increases the centered rally prefix.",
+  "training_seeds": [6101, 6102, 6103],
+  "evaluation_seeds": [7101, 7102, 7103],
+  "variants": ["constant", "center_band"],
+  "training_updates": 150,
+  "save_every_updates": 25,
+  "horizon_steps": 2400,
+  "evaluation_num_envs": 16,
+  "max_total_gpu_seconds": 28800,
+  "actor_checkpoint_sha256": "4e31d16bbe2f3cd82ee6d25a519ed3650b17b91f91a1d40391f9310f0407a659",
+  "launch_checkpoint_sha256": "1886527f2bb3f60f28d59c94882bee60eef5ee7af180d36aaeaff729b28aa40e"
+}

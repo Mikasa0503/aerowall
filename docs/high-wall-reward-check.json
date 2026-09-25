@@ -1,0 +1,49 @@
+{
+  "status": "passed",
+  "scope": "Exercise actual WallRally contact reward method without starting Isaac.\n\nMock only rigid-body IO; use the real event state machine and staged method.\nThis checks scoring semantics, not physics or policy performance.\n",
+  "source_sha256": "0ad55585f0ff02448f0111c01c8b247d1b15ada26314d0070d1fc53002b557ae",
+  "cases": [
+    {
+      "case": "high_front",
+      "reward": 15.0,
+      "rallies": 0,
+      "passed": true
+    },
+    {
+      "case": "low_front",
+      "reward": 0.0,
+      "rallies": 0,
+      "passed": true
+    },
+    {
+      "case": "side_or_back",
+      "reward": 0.0,
+      "rallies": 0,
+      "passed": true
+    },
+    {
+      "case": "bare_wall",
+      "reward": 0.0,
+      "rallies": 0,
+      "passed": true
+    },
+    {
+      "case": "double_wall",
+      "reward": 0.0,
+      "rallies": 0,
+      "passed": true
+    },
+    {
+      "case": "illegal_same_step",
+      "reward": -20.0,
+      "rallies": 0,
+      "passed": true
+    },
+    {
+      "case": "subsequent_real_cap",
+      "reward": 100.0,
+      "rallies": 1,
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,287 @@
+{
+  "cases": [
+    {
+      "case_id": "challenge-light-left-02",
+      "delay_seconds": 0.1726519,
+      "delta_vy": -3.0,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "challenge-light-left-01",
+      "delay_seconds": 0.1456554,
+      "delta_vy": -3.0,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "challenge-medium-left-08",
+      "delay_seconds": 0.1304629,
+      "delta_vy": -4.0,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "challenge-medium-right-02",
+      "delay_seconds": 0.183635,
+      "delta_vy": 4.0,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "challenge-medium-right-00",
+      "delay_seconds": 0.1914457,
+      "delta_vy": 4.0,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "challenge-light-left-06",
+      "delay_seconds": 0.177689,
+      "delta_vy": -3.0,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "challenge-medium-left-00",
+      "delay_seconds": 0.1670029,
+      "delta_vy": -4.0,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "challenge-medium-left-04",
+      "delay_seconds": 0.163795,
+      "delta_vy": -4.0,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "challenge-medium-right-06",
+      "delay_seconds": 0.1426958,
+      "delta_vy": 4.0,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "challenge-medium-right-03",
+      "delay_seconds": 0.1402125,
+      "delta_vy": 4.0,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "challenge-light-left-08",
+      "delay_seconds": 0.1720349,
+      "delta_vy": -3.0,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "challenge-light-right-05",
+      "delay_seconds": 0.1909119,
+      "delta_vy": 3.0,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "challenge-medium-right-04",
+      "delay_seconds": 0.1624741,
+      "delta_vy": 4.0,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "challenge-medium-left-02",
+      "delay_seconds": 0.1612677,
+      "delta_vy": -4.0,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "challenge-light-left-04",
+      "delay_seconds": 0.1745864,
+      "delta_vy": -3.0,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "challenge-medium-right-07",
+      "delay_seconds": 0.1689868,
+      "delta_vy": 4.0,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "challenge-light-right-01",
+      "delay_seconds": 0.1432115,
+      "delta_vy": 3.0,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "challenge-light-left-00",
+      "delay_seconds": 0.1293964,
+      "delta_vy": -3.0,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "challenge-light-right-00",
+      "delay_seconds": 0.1737241,
+      "delta_vy": 3.0,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "challenge-medium-left-06",
+      "delay_seconds": 0.188784,
+      "delta_vy": -4.0,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "challenge-light-left-05",
+      "delay_seconds": 0.1729752,
+      "delta_vy": -3.0,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "challenge-medium-right-05",
+      "delay_seconds": 0.1379092,
+      "delta_vy": 4.0,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "challenge-medium-right-01",
+      "delay_seconds": 0.1997564,
+      "delta_vy": 4.0,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "challenge-medium-left-05",
+      "delay_seconds": 0.1263002,
+      "delta_vy": -4.0,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "challenge-medium-left-01",
+      "delay_seconds": 0.1213948,
+      "delta_vy": -4.0,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "challenge-medium-left-03",
+      "delay_seconds": 0.1572856,
+      "delta_vy": -4.0,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "challenge-light-left-03",
+      "delay_seconds": 0.1497122,
+      "delta_vy": -3.0,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "challenge-light-right-08",
+      "delay_seconds": 0.1664474,
+      "delta_vy": 3.0,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "challenge-light-right-04",
+      "delay_seconds": 0.1765613,
+      "delta_vy": 3.0,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "challenge-light-right-06",
+      "delay_seconds": 0.1787004,
+      "delta_vy": 3.0,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "challenge-light-right-02",
+      "delay_seconds": 0.1391198,
+      "delta_vy": 3.0,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "challenge-light-left-07",
+      "delay_seconds": 0.1485565,
+      "delta_vy": -3.0,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "challenge-medium-left-09",
+      "delay_seconds": 0.1440063,
+      "delta_vy": -4.0,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "challenge-medium-right-08",
+      "delay_seconds": 0.130794,
+      "delta_vy": 4.0,
+      "difficulty": "medium",
+      "direction": "right"
+    },
+    {
+      "case_id": "challenge-light-left-09",
+      "delay_seconds": 0.13852,
+      "delta_vy": -3.0,
+      "difficulty": "light",
+      "direction": "left"
+    },
+    {
+      "case_id": "challenge-light-right-09",
+      "delay_seconds": 0.1305004,
+      "delta_vy": 3.0,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "challenge-light-right-07",
+      "delay_seconds": 0.1998714,
+      "delta_vy": 3.0,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "challenge-medium-left-07",
+      "delay_seconds": 0.1231872,
+      "delta_vy": -4.0,
+      "difficulty": "medium",
+      "direction": "left"
+    },
+    {
+      "case_id": "challenge-light-right-03",
+      "delay_seconds": 0.1862284,
+      "delta_vy": 3.0,
+      "difficulty": "light",
+      "direction": "right"
+    },
+    {
+      "case_id": "challenge-medium-right-09",
+      "delay_seconds": 0.1969548,
+      "delta_vy": 4.0,
+      "difficulty": "medium",
+      "direction": "right"
+    }
+  ],
+  "kind": "challenge",
+  "schema_version": 1,
+  "seed": 7001
+}

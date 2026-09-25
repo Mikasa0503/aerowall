@@ -11,9 +11,7 @@
       ],
       "tracked_files": 220,
       "license_sha256": "8d5bb214ab1010733bb1f6b91435b40c0f9255312bec99233e834cf8c63ddcf1",
-      "tracked_diff": "",
-      "local_path": "/Users/hugo/Documents/Codex/2026-09-20/new-chat-3/work/thu-uav/HCSP",
-      "server_path": "/home/public/Workspace/shy/Code/aerowall/research/thu-uav/HCSP"
+      "tracked_diff": ""
     },
     {
       "name": "SimpleFlight",
@@ -25,9 +23,7 @@
       ],
       "tracked_files": 179,
       "license_sha256": "5b7ed6fd7d4d8d00e99ca3d29e9000ff15ba2bc3c4815aa4157ec8bbeaf618c2",
-      "tracked_diff": "",
-      "local_path": "/Users/hugo/Documents/Codex/2026-09-20/new-chat-3/work/thu-uav/SimpleFlight",
-      "server_path": "/home/public/Workspace/shy/Code/aerowall/research/thu-uav/SimpleFlight"
+      "tracked_diff": ""
     },
     {
       "name": "NeuralIMC",
@@ -36,9 +32,7 @@
       "submodules": [],
       "tracked_files": 121,
       "license_sha256": "385ea5a21f748d9921200afafd262c4d3f0818dba58781629ac125580adf4610",
-      "tracked_diff": "",
-      "local_path": "/Users/hugo/Documents/Codex/2026-09-20/new-chat-3/work/thu-uav/NeuralIMC",
-      "server_path": "/home/public/Workspace/shy/Code/aerowall/research/thu-uav/NeuralIMC"
+      "tracked_diff": ""
     }
   ],
   "dependency_fetch_notes": {

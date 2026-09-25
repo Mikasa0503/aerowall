@@ -1,0 +1,1351 @@
+{
+  "cases": [
+    {
+      "case_id": "calibration-candidate_1p0-left-04",
+      "delay_seconds": 0.1276302,
+      "delta_vy": -1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-left-10",
+      "delay_seconds": 0.1624278,
+      "delta_vy": -1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-right-02",
+      "delay_seconds": 0.1401577,
+      "delta_vy": 0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-left-06",
+      "delay_seconds": 0.155742,
+      "delta_vy": -1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-right-15",
+      "delay_seconds": 0.1674287,
+      "delta_vy": 0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-left-10",
+      "delay_seconds": 0.1573568,
+      "delta_vy": -1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-left-09",
+      "delay_seconds": 0.16635,
+      "delta_vy": -0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-right-04",
+      "delay_seconds": 0.1797352,
+      "delta_vy": 1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-left-06",
+      "delay_seconds": 0.1898726,
+      "delta_vy": -0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-right-10",
+      "delay_seconds": 0.1615111,
+      "delta_vy": 0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-left-04",
+      "delay_seconds": 0.1573067,
+      "delta_vy": -1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-right-09",
+      "delay_seconds": 0.1902185,
+      "delta_vy": 0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-right-14",
+      "delay_seconds": 0.182726,
+      "delta_vy": 0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-right-06",
+      "delay_seconds": 0.1773898,
+      "delta_vy": 1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-left-12",
+      "delay_seconds": 0.1789647,
+      "delta_vy": -1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-left-01",
+      "delay_seconds": 0.1246901,
+      "delta_vy": -0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-left-01",
+      "delay_seconds": 0.1894794,
+      "delta_vy": -1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-right-06",
+      "delay_seconds": 0.1633887,
+      "delta_vy": 1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-left-07",
+      "delay_seconds": 0.1686235,
+      "delta_vy": -0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-left-00",
+      "delay_seconds": 0.1260226,
+      "delta_vy": -0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-right-11",
+      "delay_seconds": 0.1300949,
+      "delta_vy": 0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-left-12",
+      "delay_seconds": 0.166069,
+      "delta_vy": -1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-right-13",
+      "delay_seconds": 0.1913872,
+      "delta_vy": 1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-left-06",
+      "delay_seconds": 0.127706,
+      "delta_vy": -0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-right-02",
+      "delay_seconds": 0.1724618,
+      "delta_vy": 0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-left-13",
+      "delay_seconds": 0.196926,
+      "delta_vy": -1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-right-00",
+      "delay_seconds": 0.1374422,
+      "delta_vy": 0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-right-12",
+      "delay_seconds": 0.1294793,
+      "delta_vy": 1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-left-02",
+      "delay_seconds": 0.1579969,
+      "delta_vy": -0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-left-00",
+      "delay_seconds": 0.1302779,
+      "delta_vy": -0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-left-13",
+      "delay_seconds": 0.1286269,
+      "delta_vy": -0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-left-08",
+      "delay_seconds": 0.120453,
+      "delta_vy": -0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-right-00",
+      "delay_seconds": 0.1536554,
+      "delta_vy": 1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-right-07",
+      "delay_seconds": 0.1718647,
+      "delta_vy": 1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-left-02",
+      "delay_seconds": 0.1649141,
+      "delta_vy": -1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-right-11",
+      "delay_seconds": 0.1250419,
+      "delta_vy": 1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-right-11",
+      "delay_seconds": 0.1201772,
+      "delta_vy": 1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-left-00",
+      "delay_seconds": 0.1681763,
+      "delta_vy": -1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-right-08",
+      "delay_seconds": 0.1215193,
+      "delta_vy": 0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-right-03",
+      "delay_seconds": 0.1586064,
+      "delta_vy": 1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-left-08",
+      "delay_seconds": 0.1912207,
+      "delta_vy": -1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-right-04",
+      "delay_seconds": 0.1333727,
+      "delta_vy": 1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-right-04",
+      "delay_seconds": 0.1250775,
+      "delta_vy": 1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-right-02",
+      "delay_seconds": 0.1538054,
+      "delta_vy": 1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-right-15",
+      "delay_seconds": 0.169309,
+      "delta_vy": 1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-left-10",
+      "delay_seconds": 0.1813199,
+      "delta_vy": -0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-left-08",
+      "delay_seconds": 0.1379364,
+      "delta_vy": -0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-right-12",
+      "delay_seconds": 0.1303663,
+      "delta_vy": 0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-left-03",
+      "delay_seconds": 0.19712,
+      "delta_vy": -1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-left-14",
+      "delay_seconds": 0.1688816,
+      "delta_vy": -0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-right-03",
+      "delay_seconds": 0.1837891,
+      "delta_vy": 1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-left-14",
+      "delay_seconds": 0.178967,
+      "delta_vy": -0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-right-15",
+      "delay_seconds": 0.1402843,
+      "delta_vy": 0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-left-12",
+      "delay_seconds": 0.1943458,
+      "delta_vy": -0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-left-04",
+      "delay_seconds": 0.1273019,
+      "delta_vy": -0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-right-15",
+      "delay_seconds": 0.1442627,
+      "delta_vy": 1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-left-10",
+      "delay_seconds": 0.152074,
+      "delta_vy": -0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-right-09",
+      "delay_seconds": 0.1978867,
+      "delta_vy": 1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-right-00",
+      "delay_seconds": 0.1580099,
+      "delta_vy": 0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-left-04",
+      "delay_seconds": 0.16035,
+      "delta_vy": -1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-left-08",
+      "delay_seconds": 0.1619511,
+      "delta_vy": -1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-right-00",
+      "delay_seconds": 0.1937738,
+      "delta_vy": 0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-left-01",
+      "delay_seconds": 0.1297069,
+      "delta_vy": -0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-left-09",
+      "delay_seconds": 0.1375367,
+      "delta_vy": -1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-right-05",
+      "delay_seconds": 0.1512567,
+      "delta_vy": 0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-left-15",
+      "delay_seconds": 0.1238428,
+      "delta_vy": -1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-right-03",
+      "delay_seconds": 0.1364594,
+      "delta_vy": 1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-right-02",
+      "delay_seconds": 0.181728,
+      "delta_vy": 1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-left-15",
+      "delay_seconds": 0.162286,
+      "delta_vy": -0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-left-11",
+      "delay_seconds": 0.1623525,
+      "delta_vy": -1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-right-15",
+      "delay_seconds": 0.1243972,
+      "delta_vy": 0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-right-13",
+      "delay_seconds": 0.1814826,
+      "delta_vy": 0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-right-12",
+      "delay_seconds": 0.1347245,
+      "delta_vy": 0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-right-05",
+      "delay_seconds": 0.1292074,
+      "delta_vy": 0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-right-06",
+      "delay_seconds": 0.148234,
+      "delta_vy": 0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-left-06",
+      "delay_seconds": 0.1549109,
+      "delta_vy": -1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-right-01",
+      "delay_seconds": 0.1915962,
+      "delta_vy": 1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-left-11",
+      "delay_seconds": 0.137063,
+      "delta_vy": -1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-right-13",
+      "delay_seconds": 0.173645,
+      "delta_vy": 0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-right-13",
+      "delay_seconds": 0.189015,
+      "delta_vy": 0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-left-05",
+      "delay_seconds": 0.1862716,
+      "delta_vy": -0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-left-05",
+      "delay_seconds": 0.1892516,
+      "delta_vy": -1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-left-00",
+      "delay_seconds": 0.1906363,
+      "delta_vy": -1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-right-08",
+      "delay_seconds": 0.1232983,
+      "delta_vy": 0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-right-08",
+      "delay_seconds": 0.1554334,
+      "delta_vy": 1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-left-03",
+      "delay_seconds": 0.1910647,
+      "delta_vy": -1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-left-08",
+      "delay_seconds": 0.1675446,
+      "delta_vy": -1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-left-02",
+      "delay_seconds": 0.1808192,
+      "delta_vy": -0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-left-13",
+      "delay_seconds": 0.1297874,
+      "delta_vy": -1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-left-15",
+      "delay_seconds": 0.1766789,
+      "delta_vy": -0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-right-05",
+      "delay_seconds": 0.1392694,
+      "delta_vy": 1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-right-11",
+      "delay_seconds": 0.14875,
+      "delta_vy": 0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-left-11",
+      "delay_seconds": 0.1912524,
+      "delta_vy": -1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-left-09",
+      "delay_seconds": 0.1292809,
+      "delta_vy": -0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-right-15",
+      "delay_seconds": 0.1941016,
+      "delta_vy": 1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-left-09",
+      "delay_seconds": 0.1719221,
+      "delta_vy": -0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-right-13",
+      "delay_seconds": 0.1895124,
+      "delta_vy": 1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-right-09",
+      "delay_seconds": 0.1853405,
+      "delta_vy": 0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-left-12",
+      "delay_seconds": 0.1686234,
+      "delta_vy": -0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-left-00",
+      "delay_seconds": 0.1837321,
+      "delta_vy": -0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-right-02",
+      "delay_seconds": 0.1729234,
+      "delta_vy": 1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-right-09",
+      "delay_seconds": 0.1271368,
+      "delta_vy": 0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-left-01",
+      "delay_seconds": 0.1645188,
+      "delta_vy": -0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-right-06",
+      "delay_seconds": 0.1916024,
+      "delta_vy": 0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-left-09",
+      "delay_seconds": 0.1937467,
+      "delta_vy": -1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-left-14",
+      "delay_seconds": 0.1247847,
+      "delta_vy": -1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-left-15",
+      "delay_seconds": 0.1912064,
+      "delta_vy": -1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-left-05",
+      "delay_seconds": 0.1228386,
+      "delta_vy": -0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-left-13",
+      "delay_seconds": 0.1873811,
+      "delta_vy": -0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-right-05",
+      "delay_seconds": 0.1295609,
+      "delta_vy": 1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-right-04",
+      "delay_seconds": 0.1464124,
+      "delta_vy": 0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-left-04",
+      "delay_seconds": 0.1332915,
+      "delta_vy": -0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-left-07",
+      "delay_seconds": 0.1519431,
+      "delta_vy": -1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-left-03",
+      "delay_seconds": 0.1291589,
+      "delta_vy": -1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-left-04",
+      "delay_seconds": 0.1411738,
+      "delta_vy": -0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-left-06",
+      "delay_seconds": 0.189537,
+      "delta_vy": -1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-left-01",
+      "delay_seconds": 0.1405611,
+      "delta_vy": -1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-right-12",
+      "delay_seconds": 0.1558265,
+      "delta_vy": 1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-right-10",
+      "delay_seconds": 0.1250242,
+      "delta_vy": 1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-right-09",
+      "delay_seconds": 0.151223,
+      "delta_vy": 1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-left-10",
+      "delay_seconds": 0.1751383,
+      "delta_vy": -1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-right-06",
+      "delay_seconds": 0.1728798,
+      "delta_vy": 1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-right-04",
+      "delay_seconds": 0.1350034,
+      "delta_vy": 0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-right-07",
+      "delay_seconds": 0.1633121,
+      "delta_vy": 0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-right-12",
+      "delay_seconds": 0.1217103,
+      "delta_vy": 0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-left-03",
+      "delay_seconds": 0.144529,
+      "delta_vy": -0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-left-07",
+      "delay_seconds": 0.1920119,
+      "delta_vy": -0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-left-05",
+      "delay_seconds": 0.1768561,
+      "delta_vy": -1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-right-01",
+      "delay_seconds": 0.1600567,
+      "delta_vy": 1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-right-02",
+      "delay_seconds": 0.1496257,
+      "delta_vy": 0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-right-01",
+      "delay_seconds": 0.1230795,
+      "delta_vy": 0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-right-08",
+      "delay_seconds": 0.192052,
+      "delta_vy": 1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-right-07",
+      "delay_seconds": 0.1890556,
+      "delta_vy": 0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-left-03",
+      "delay_seconds": 0.1890163,
+      "delta_vy": -0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-left-09",
+      "delay_seconds": 0.1360836,
+      "delta_vy": -1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-right-05",
+      "delay_seconds": 0.1326085,
+      "delta_vy": 1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-right-13",
+      "delay_seconds": 0.1558434,
+      "delta_vy": 1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-left-06",
+      "delay_seconds": 0.1828717,
+      "delta_vy": -0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-right-00",
+      "delay_seconds": 0.1825499,
+      "delta_vy": 1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-right-04",
+      "delay_seconds": 0.1956989,
+      "delta_vy": 0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-right-05",
+      "delay_seconds": 0.1601582,
+      "delta_vy": 0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-right-06",
+      "delay_seconds": 0.1601944,
+      "delta_vy": 0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-left-15",
+      "delay_seconds": 0.167991,
+      "delta_vy": -1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-right-03",
+      "delay_seconds": 0.1789686,
+      "delta_vy": 0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-right-14",
+      "delay_seconds": 0.1873202,
+      "delta_vy": 0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-left-05",
+      "delay_seconds": 0.1921994,
+      "delta_vy": -0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-left-02",
+      "delay_seconds": 0.1914508,
+      "delta_vy": -1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-right-14",
+      "delay_seconds": 0.1706522,
+      "delta_vy": 1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-left-12",
+      "delay_seconds": 0.1277949,
+      "delta_vy": -1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-right-01",
+      "delay_seconds": 0.1827733,
+      "delta_vy": 0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-right-14",
+      "delay_seconds": 0.1576703,
+      "delta_vy": 1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-right-14",
+      "delay_seconds": 0.1403037,
+      "delta_vy": 0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-left-00",
+      "delay_seconds": 0.158721,
+      "delta_vy": -1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-left-14",
+      "delay_seconds": 0.1299266,
+      "delta_vy": -1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-right-09",
+      "delay_seconds": 0.1312244,
+      "delta_vy": 1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-left-13",
+      "delay_seconds": 0.1482231,
+      "delta_vy": -1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-left-07",
+      "delay_seconds": 0.1525344,
+      "delta_vy": -0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-right-07",
+      "delay_seconds": 0.1523334,
+      "delta_vy": 1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-left-03",
+      "delay_seconds": 0.1720115,
+      "delta_vy": -0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-left-02",
+      "delay_seconds": 0.1250176,
+      "delta_vy": -1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-left-07",
+      "delay_seconds": 0.139837,
+      "delta_vy": -1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-right-00",
+      "delay_seconds": 0.1777202,
+      "delta_vy": 1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-left-10",
+      "delay_seconds": 0.1361111,
+      "delta_vy": -0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-left-07",
+      "delay_seconds": 0.1300412,
+      "delta_vy": -1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-right-11",
+      "delay_seconds": 0.1424179,
+      "delta_vy": 1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-right-11",
+      "delay_seconds": 0.1525308,
+      "delta_vy": 0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-right-10",
+      "delay_seconds": 0.187611,
+      "delta_vy": 1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-left-11",
+      "delay_seconds": 0.1645736,
+      "delta_vy": -0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-right-03",
+      "delay_seconds": 0.1920925,
+      "delta_vy": 0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-left-11",
+      "delay_seconds": 0.1360467,
+      "delta_vy": -0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-right-10",
+      "delay_seconds": 0.1555693,
+      "delta_vy": 1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p0-right-12",
+      "delay_seconds": 0.1693444,
+      "delta_vy": 1.0,
+      "difficulty": "candidate_1p0",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-right-01",
+      "delay_seconds": 0.1362493,
+      "delta_vy": 1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-left-14",
+      "delay_seconds": 0.1630963,
+      "delta_vy": -0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-left-02",
+      "delay_seconds": 0.1513611,
+      "delta_vy": -0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-left-01",
+      "delay_seconds": 0.149703,
+      "delta_vy": -1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-left-08",
+      "delay_seconds": 0.1499578,
+      "delta_vy": -0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-right-07",
+      "delay_seconds": 0.1941087,
+      "delta_vy": 0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-right-07",
+      "delay_seconds": 0.1423712,
+      "delta_vy": 1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-left-12",
+      "delay_seconds": 0.1916345,
+      "delta_vy": -0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-left-14",
+      "delay_seconds": 0.1715965,
+      "delta_vy": -1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-right-01",
+      "delay_seconds": 0.1771951,
+      "delta_vy": 0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-right-14",
+      "delay_seconds": 0.1635471,
+      "delta_vy": 1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-right-03",
+      "delay_seconds": 0.1345782,
+      "delta_vy": 0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-right-08",
+      "delay_seconds": 0.1764939,
+      "delta_vy": 0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p5-left-15",
+      "delay_seconds": 0.1990671,
+      "delta_vy": -0.5,
+      "difficulty": "candidate_0p5",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_1p5-right-08",
+      "delay_seconds": 0.1757278,
+      "delta_vy": 1.5,
+      "difficulty": "candidate_1p5",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_1p25-left-05",
+      "delay_seconds": 0.1925037,
+      "delta_vy": -1.25,
+      "difficulty": "candidate_1p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-left-13",
+      "delay_seconds": 0.1240579,
+      "delta_vy": -0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "left"
+    },
+    {
+      "case_id": "calibration-candidate_0p75-right-10",
+      "delay_seconds": 0.1926907,
+      "delta_vy": 0.75,
+      "difficulty": "candidate_0p75",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-right-10",
+      "delay_seconds": 0.1709034,
+      "delta_vy": 0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "right"
+    },
+    {
+      "case_id": "calibration-candidate_0p25-left-11",
+      "delay_seconds": 0.1657689,
+      "delta_vy": -0.25,
+      "difficulty": "candidate_0p25",
+      "direction": "left"
+    }
+  ],
+  "kind": "calibration",
+  "schema_version": 1,
+  "seed": 1001
+}

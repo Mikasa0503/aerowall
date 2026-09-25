@@ -1,0 +1,63 @@
+{
+  "actor_checkpoint": "work/hcsp-wall-recenter-recovery/runs/recenter-recovery/c-u350.pt",
+  "jobs": [
+    {
+      "checkpoint_sha256": "d345ec6cf22326b3f9e7085bcaf1d6acf9914817370c88611c69db9e15e16557",
+      "initial_policy_sha256": "cb2925fab5753aaf01fe542851a39f1523785ca79367504e3db6af1acadf8faf",
+      "name": "seed-6101-constant",
+      "returncode": 0,
+      "seconds": 1051.2936398498714,
+      "status": "passed",
+      "updates_completed": 150
+    },
+    {
+      "checkpoint_sha256": "a1ee6b8b24e3353572f39b5f0e3221a82aeab5813ceea287924a6b20911be7e9",
+      "initial_policy_sha256": "cb2925fab5753aaf01fe542851a39f1523785ca79367504e3db6af1acadf8faf",
+      "name": "seed-6101-center_band",
+      "returncode": 0,
+      "seconds": 1057.3552805408835,
+      "status": "passed",
+      "updates_completed": 150
+    },
+    {
+      "checkpoint_sha256": "d65a92d0eb6f356f50712bc680e99b1c12062f9d0707e618b2a6721d8c2959ef",
+      "initial_policy_sha256": "db100769e8b1772004fe80e05864237d26b1dfdc2055d1cadcc1d8d68da57f49",
+      "name": "seed-6102-center_band",
+      "returncode": 0,
+      "seconds": 1056.9457548707724,
+      "status": "passed",
+      "updates_completed": 150
+    },
+    {
+      "checkpoint_sha256": "b40df5f976f2b6faba93cfb33da210e7c817436d700d264a8f6479ac2f63ff16",
+      "initial_policy_sha256": "db100769e8b1772004fe80e05864237d26b1dfdc2055d1cadcc1d8d68da57f49",
+      "name": "seed-6102-constant",
+      "returncode": 0,
+      "seconds": 1096.1294506900012,
+      "status": "passed",
+      "updates_completed": 150
+    },
+    {
+      "checkpoint_sha256": "db2aac729691abeb7a2a38e9cb528b243df73cd2637a1194389e8f9ad2ad2790",
+      "initial_policy_sha256": "bd0425b2a397fe410223c18f15e62aff44d18969d58ba07d15432a980761d886",
+      "name": "seed-6103-constant",
+      "returncode": 0,
+      "seconds": 1054.870271012187,
+      "status": "passed",
+      "updates_completed": 150
+    },
+    {
+      "checkpoint_sha256": "7d53075ac5bd41e383fb06947f681d0276e57ec72b86a591e2e5089af0f7a3f5",
+      "initial_policy_sha256": "bd0425b2a397fe410223c18f15e62aff44d18969d58ba07d15432a980761d886",
+      "name": "seed-6103-center_band",
+      "returncode": 0,
+      "seconds": 1071.4207183010876,
+      "status": "passed",
+      "updates_completed": 150
+    }
+  ],
+  "launch_checkpoint": "work/hcsp-wall-rl-checkout/runs/hcsp-wall-goal2-wall-train-01.pt",
+  "spec_sha256": "9f77489242cc550366a8e8043b11ae3bfaeec61725fc9a886a327eebf62c9aa6",
+  "status": "training_complete",
+  "total_gpu_seconds": 6388.015115264803
+}

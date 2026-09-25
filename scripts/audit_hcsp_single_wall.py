@@ -16,8 +16,9 @@ assert imp.shape==(*active.shape,2) and np.isfinite(imp).all()
 assert z['physical_drone'].shape[2]==1 and z['executed_action'].shape[2:]==(1,4)
 assert np.isfinite(z['physical_drone']).all() and np.isfinite(z['executed_action']).all()
 assert set(np.unique(z['executed_role'])).issubset({2,3,4})
-assert np.array(r['initial_ball'])[:,:,0].min()>.2
-assert np.array(r['initial_drone'])[:,:,0].min()>.6
+front=r['wall']['center'][0]+r['wall']['size'][0]/2
+assert np.array(r['initial_ball'])[:,:,0].min()>front+.1
+assert np.array(r['initial_drone'])[:,:,0].min()>front+.5
 outcomes=[]
 for env in range(active.shape[1]):
  phase=0;returns=0;body_count=0;wall_count=0;last=np.zeros(2,bool);events=[]

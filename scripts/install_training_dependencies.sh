@@ -20,4 +20,6 @@ for source in \
 done
 ./scripts/python.sh --plain scripts/prepare_assets.py
 ./scripts/python.sh -c 'import torch,tensordict,torchrl; print(torch.__version__,tensordict.__version__,torchrl.__version__)'
-./scripts/python.sh --plain -m pip freeze > docs/training-env-freeze.txt
+ENV_RECORDS="$ROOT/runs/environment"
+mkdir -p "$ENV_RECORDS"
+./scripts/python.sh --plain -m pip freeze > "$ENV_RECORDS/training-env-freeze.txt"

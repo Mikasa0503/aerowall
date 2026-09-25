@@ -50,5 +50,5 @@
       "working_tree_clean": true
     }
   ],
-  "scope": "Git object connectivity, exact pinned submodules and clean working trees on server 138"
+  "scope": "Git object connectivity, exact pinned submodules and clean working trees on the remote Linux server"
 }

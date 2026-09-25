@@ -6,21 +6,21 @@ from pathlib import Path
 import shutil
 import tarfile
 
-from audit_runtime_archive import PREFIX, REQUIRED, check_member
+from audit_runtime_archive import REQUIRED, check_member, discover_prefix
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def rebase(member):
-    problem = check_member(member)
+def rebase(member, prefix):
+    problem = check_member(member, prefix)
     if problem:
         raise ValueError(f"{member.name}: {problem}")
-    if not member.name.startswith(PREFIX + "/"):
+    if not member.name.startswith(prefix + "/"):
         return None
     member = copy.copy(member)
-    member.name = member.name[len(PREFIX) + 1:]
+    member.name = member.name[len(prefix) + 1:]
     if member.islnk():
-        member.linkname = member.linkname[len(PREFIX) + 1:]
+        member.linkname = member.linkname[len(prefix) + 1:]
     return member
 
 
@@ -33,6 +33,8 @@ def main():
     source = Path(download["path"]).resolve()
     assert source.parent == ROOT / ".cache/downloads"
     assert source.stat().st_size == download["bytes"]
+    prefix = discover_prefix(source)
+    assert prefix == audit["expected_prefix"], "Archive root changed after audit"
     digest = hashlib.sha256()
     with source.open("rb") as stream:
         for chunk in iter(lambda: stream.read(8 * 1024 * 1024), b""):
@@ -47,7 +49,7 @@ def main():
     count = 0
     with tarfile.open(source, "r|gz") as archive:
         for original in archive:
-            member = rebase(original)
+            member = rebase(original, prefix)
             if member is None:
                 continue
             if not member.isdir() and member.name in seen:

@@ -1,6 +1,5 @@
 antlr4-python3-runtime==4.9.3
 appdirs==1.4.4
-attrs==23.1.0
 av==12.3.0
 botocore==1.29.63
 certifi==2026.7.22
@@ -33,7 +32,7 @@ numpy==1.23.5
 omegaconf==2.3.0
 -e git+https://github.com/thu-uav/JuggleRL_train.git@7ff6efb499e53b16dbaa024f2397f1101c7614ad#egg=omni_drones
 -e git+https://github.com/zrz-sh/orbit.git@bca680a9ebdcddd8f4d70bd7c65efa94f9d45946#egg=omni_isaac_orbit&subdirectory=../../../third_party/orbit/source/extensions/omni.isaac.orbit
-packaging @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_packaging_1785888127/work
+packaging==26.3
 pandas==1.5.3
 Pillow==10.0.1
 plotly==5.18.0
@@ -43,13 +42,13 @@ protobuf==4.25.9
 psutil==7.2.2
 pydantic==1.10.13
 pyglet==1.5.27
-pyparsing==3.3.2
+pyparsing==3.3.3
 python-dateutil==2.9.0.post0
-pytz==2026.3.post1
+pytz==2026.4
 PyYAML==6.0.3
 requests==2.34.2
 scipy==1.10.1
-sentry-sdk==2.69.2
+sentry-sdk==2.70.0
 setproctitle==1.3.3
 six==1.17.0
 smmap==5.0.3
@@ -60,8 +59,8 @@ tomli==2.0.1
 -e git+https://github.com/zrz-sh/rl.git@aacf134a1451891fc71edc05d1c1d4296a7937cd#egg=torchrl&subdirectory=../../../third_party/rl
 tqdm==4.66.1
 trimesh==3.23.5
-typing_extensions==4.7.1
+typing_extensions==4.16.0
 urllib3==1.26.18
 usd-core==23.2
 wandb==0.16.6
-wcwidth==0.8.4
+wcwidth==0.9.1
